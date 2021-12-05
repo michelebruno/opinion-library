@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/abuse/",
+    "result": {"data":{"entity":{"name":"abuse","countNomask":32},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"7f43c75e-ef37-5b72-82b2-ebb4b34de9a1","name":"abuse","__params":{"name":"abuse"}}},
+    "staticQueryHashes": []}

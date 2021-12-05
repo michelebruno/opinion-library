@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/home/",
+    "result": {"data":{"entity":{"name":"home","countNomask":42},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"75aeaba6-1302-5d09-b5b5-03e16703ace8","name":"home","__params":{"name":"home"}}},
+    "staticQueryHashes": []}

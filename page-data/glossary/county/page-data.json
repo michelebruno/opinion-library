@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/county/",
+    "result": {"data":{"entity":{"name":"county","countNomask":15},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"faab934f-79c3-545a-aa3d-12a53a904484","name":"county","__params":{"name":"county"}}},
+    "staticQueryHashes": []}

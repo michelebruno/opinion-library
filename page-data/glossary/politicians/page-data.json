@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/politicians/",
+    "result": {"data":{"entity":{"name":"politicians","countNomask":14},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"a1586cb8-dafa-59e5-9a1c-2d15949efcad","name":"politicians","__params":{"name":"politicians"}}},
+    "staticQueryHashes": []}

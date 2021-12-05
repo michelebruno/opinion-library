@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/age/",
+    "result": {"data":{"entity":{"name":"age","countNomask":25},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"eb2f1f33-5eaf-533a-8efb-0291ebee1b79","name":"age","__params":{"name":"age"}}},
+    "staticQueryHashes": []}

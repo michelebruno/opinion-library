@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/place/",
+    "result": {"data":{"entity":{"name":"place","countNomask":31},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"75a44a60-3ac4-5e0a-b835-7afbc8f3a61e","name":"place","__params":{"name":"place"}}},
+    "staticQueryHashes": []}

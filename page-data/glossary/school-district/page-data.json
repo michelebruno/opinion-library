@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/school-district/",
+    "result": {"data":{"entity":{"name":"school district","countNomask":14},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"022bbc53-33b0-545c-ba3d-8a5a8314e0e1","name":"school district","__params":{"name":"school-district"}}},
+    "staticQueryHashes": []}

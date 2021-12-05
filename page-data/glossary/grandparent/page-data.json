@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/grandparent/",
+    "result": {"data":{"entity":{"name":"grandparent","countNomask":0},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"4fcb7b74-5925-5c8a-8d85-012c8412d8ca","name":"grandparent","__params":{"name":"grandparent"}}},
+    "staticQueryHashes": []}

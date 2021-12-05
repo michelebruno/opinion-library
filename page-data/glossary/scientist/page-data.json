@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/scientist/",
+    "result": {"data":{"entity":{"name":"scientist","countNomask":0},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"f5ff59fe-bb0d-5c1c-8d05-72fe8af7cb79","name":"scientist","__params":{"name":"scientist"}}},
+    "staticQueryHashes": []}

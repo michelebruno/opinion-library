@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/infections/",
+    "result": {"data":{"entity":{"name":"infections","countNomask":37},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"2bc43d62-4ed8-55a7-8475-20f0a00c5968","name":"infections","__params":{"name":"infections"}}},
+    "staticQueryHashes": []}

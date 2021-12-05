@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/classrooms/",
+    "result": {"data":{"entity":{"name":"classrooms","countNomask":24},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"f3ef82ca-3e26-57c9-b77c-637d2ec802ce","name":"classrooms","__params":{"name":"classrooms"}}},
+    "staticQueryHashes": []}

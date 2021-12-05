@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/issue/",
+    "result": {"data":{"entity":{"name":"issue","countNomask":22},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"37b658f8-7cfa-520a-8ec6-08f2a6bda2d3","name":"issue","__params":{"name":"issue"}}},
+    "staticQueryHashes": []}

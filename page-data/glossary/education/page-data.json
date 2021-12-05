@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/education/",
+    "result": {"data":{"entity":{"name":"education","countNomask":53},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"5f676c65-843a-5a9d-9a27-dfbb5f2a36e5","name":"education","__params":{"name":"education"}}},
+    "staticQueryHashes": []}

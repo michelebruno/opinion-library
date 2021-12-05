@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/faculty/",
+    "result": {"data":{"entity":{"name":"faculty","countNomask":0},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"f86aeb5a-e1f3-5beb-8885-e88c5cca8f2d","name":"faculty","__params":{"name":"faculty"}}},
+    "staticQueryHashes": []}

@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/vaccination/",
+    "result": {"data":{"entity":{"name":"vaccination","countNomask":0},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"f6360ccd-a55c-54a4-9db1-3ae71134d9f9","name":"vaccination","__params":{"name":"vaccination"}}},
+    "staticQueryHashes": []}

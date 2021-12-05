@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/opinion/",
+    "result": {"data":{"entity":{"name":"opinion","countNomask":20},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"b2b81f78-3c15-5a86-b409-a27028a727d3","name":"opinion","__params":{"name":"opinion"}}},
+    "staticQueryHashes": []}

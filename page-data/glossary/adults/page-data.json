@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/adults/",
+    "result": {"data":{"entity":{"name":"adults","countNomask":64},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"ffca5d72-c18a-50d5-b1ac-aec8399b85dd","name":"adults","__params":{"name":"adults"}}},
+    "staticQueryHashes": []}

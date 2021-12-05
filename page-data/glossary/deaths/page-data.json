@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/deaths/",
+    "result": {"data":{"entity":{"name":"deaths","countNomask":0},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"100d1caf-0286-5898-bfc8-c7a5be7bff3b","name":"deaths","__params":{"name":"deaths"}}},
+    "staticQueryHashes": []}

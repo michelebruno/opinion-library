@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/healthcare-workers/",
+    "result": {"data":{"entity":{"name":"healthcare workers","countNomask":0},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"95bc81ec-e5c7-5969-a3c6-9244162fabc4","name":"healthcare workers","__params":{"name":"healthcare-workers"}}},
+    "staticQueryHashes": []}

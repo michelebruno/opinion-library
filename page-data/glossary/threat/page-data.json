@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/threat/",
+    "result": {"data":{"entity":{"name":"threat","countNomask":18},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"ff279823-ab3e-58f8-b074-adf29174bfcf","name":"threat","__params":{"name":"threat"}}},
+    "staticQueryHashes": []}

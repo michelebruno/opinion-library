@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
+    "path": "/glossary/disease/",
+    "result": {"data":{"entity":{"name":"disease","countNomask":31},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"af7c05eb-73e0-5533-9f7e-4c48dbb026f2","name":"disease","__params":{"name":"disease"}}},
+    "staticQueryHashes": []}
