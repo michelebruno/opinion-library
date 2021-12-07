@@ -598,7 +598,7 @@ type Query {
     sheetsDistribuzione(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, nomask: IntQueryOperatorInput, nomaskDelta: FloatQueryOperatorInput, nomask__: FloatQueryOperatorInput, parent: NodeFilterInput, promaks__: FloatQueryOperatorInput, promask: IntQueryOperatorInput, promaskDelta: FloatQueryOperatorInput, secondWord: StringQueryOperatorInput, summedPercentage: FloatQueryOperatorInput, word: StringQueryOperatorInput): SheetsDistribuzione
     sheetsEstratti(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, extracted: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, origin: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, petitionSlug: StringQueryOperatorInput, role: StringQueryOperatorInput, scelto: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput, word: StringQueryOperatorInput): SheetsEstratti
     sheetsPetitions(children: NodeFilterListInput, country: StringQueryOperatorInput, date: DateQueryOperatorInput, description: StringQueryOperatorInput, id: StringQueryOperatorInput, imgUrl: StringQueryOperatorInput, internal: InternalFilterInput, link: StringQueryOperatorInput, originalLocale: StringQueryOperatorInput, pageViews: StringQueryOperatorInput, parent: NodeFilterInput, shareCountTotal: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput, signatures: StringQueryOperatorInput, slug: StringQueryOperatorInput, sponsored: StringQueryOperatorInput, tagRawNames: StringQueryOperatorInput, tagSlugs: StringQueryOperatorInput, tags: StringQueryOperatorInput, targets: StringQueryOperatorInput, title: StringQueryOperatorInput, user: StringQueryOperatorInput, userId: StringQueryOperatorInput, verifiedVictory: StringQueryOperatorInput, victory: StringQueryOperatorInput): SheetsPetitions
-    sheetsScatter(children: NodeFilterListInput, countNomask: IntQueryOperatorInput, countPromask: IntQueryOperatorInput, deltaNomask: FloatQueryOperatorInput, deltaPromask: FloatQueryOperatorInput, gatsbyPath: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, name: StringQueryOperatorInput, normalizedNomask: FloatQueryOperatorInput, normalizedPromask: FloatQueryOperatorInput, parent: NodeFilterInput, percentageBoth: FloatQueryOperatorInput, percentageNomask: FloatQueryOperatorInput, percentagePromask: FloatQueryOperatorInput): SheetsScatter
+    sheetsScatter(children: NodeFilterListInput, countNomask: IntQueryOperatorInput, countPromask: IntQueryOperatorInput, deltaNomask: FloatQueryOperatorInput, deltaPromask: FloatQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, name: StringQueryOperatorInput, normalizedNomask: FloatQueryOperatorInput, normalizedPromask: FloatQueryOperatorInput, parent: NodeFilterInput, percentageBoth: FloatQueryOperatorInput, percentageNomask: FloatQueryOperatorInput, percentagePromask: FloatQueryOperatorInput, scelta: StringQueryOperatorInput): SheetsScatter
     sheetsScelti(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, role: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput, source: StringQueryOperatorInput, word: StringQueryOperatorInput): SheetsScelti
     sheetsSelezionatiVaccine(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, no: StringQueryOperatorInput, parent: NodeFilterInput, pro: StringQueryOperatorInput): SheetsSelezionatiVaccine
     sheetsUnmask(children: NodeFilterListInput, country: StringQueryOperatorInput, date: DateQueryOperatorInput, description: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, pageViews: StringQueryOperatorInput, parent: NodeFilterInput, shareCountTotal: StringQueryOperatorInput, signatures: StringQueryOperatorInput, sponsored: StringQueryOperatorInput, tagRawNames: StringQueryOperatorInput, tagSlugs: StringQueryOperatorInput, tags: StringQueryOperatorInput, targets: StringQueryOperatorInput, title: StringQueryOperatorInput, user: StringQueryOperatorInput, userId: StringQueryOperatorInput, verifiedVictory: StringQueryOperatorInput, victory: StringQueryOperatorInput): SheetsUnmask
@@ -857,6 +857,7 @@ type SheetsEstratti implements Node {
     role: String
     scelto: String
     sheetsId: String
+    splitted: [String]
     word: String
 }
 
@@ -967,7 +968,6 @@ type SheetsScatter implements Node {
     countPromask: Int
     deltaNomask: Float
     deltaPromask: Float
-    gatsbyPath(filePath: String): String
     id: ID!
     internal: Internal!
     name: String
@@ -977,6 +977,7 @@ type SheetsScatter implements Node {
     percentageBoth: Float
     percentageNomask: Float
     percentagePromask: Float
+    scelta: String
 }
 
 type SheetsScatterConnection {
@@ -2771,7 +2772,6 @@ enum SheetsScatterFieldsEnum {
     countPromask
     deltaNomask
     deltaPromask
-    gatsbyPath @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
     id
     internal___content
     internal___contentDigest
@@ -2825,6 +2825,7 @@ enum SheetsScatterFieldsEnum {
     percentageBoth
     percentageNomask
     percentagePromask
+    scelta
 }
 
 enum SheetsSceltiFieldsEnum {
@@ -4123,7 +4124,6 @@ input SheetsScatterFilterInput {
     countPromask: IntQueryOperatorInput
     deltaNomask: FloatQueryOperatorInput
     deltaPromask: FloatQueryOperatorInput
-    gatsbyPath: StringQueryOperatorInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
     name: StringQueryOperatorInput
@@ -4133,6 +4133,7 @@ input SheetsScatterFilterInput {
     percentageBoth: FloatQueryOperatorInput
     percentageNomask: FloatQueryOperatorInput
     percentagePromask: FloatQueryOperatorInput
+    scelta: StringQueryOperatorInput
 }
 
 input SheetsScatterSortInput {

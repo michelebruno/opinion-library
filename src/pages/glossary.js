@@ -1,5 +1,5 @@
-import React, {useEffect, useMemo, useState} from "react";
-import {graphql, Link} from "gatsby";
+import React, {useEffect, useState} from "react";
+import {graphql} from "gatsby";
 import Layout from "../components/Layout";
 import classNames from "classnames";
 import Comment from "../components/Comment";
@@ -8,7 +8,6 @@ import Comment from "../components/Comment";
 function MaskometerGrid({chosen, words, distribution, comments}) {
     const [collapse, setCollapse] = useState(false)
 
-    const reHighlighter = new RegExp(`(${words.nodes.map(w => w.name).join('|')})`, 'gi')
     const [secondWord, setSecondWord] = useState()
 
     useEffect(() => {
@@ -83,7 +82,7 @@ function MaskometerGrid({chosen, words, distribution, comments}) {
                                 {comments
                                     .filter(({origin: o}) => origin === o)
                                     .map(
-                                        ({extracted, ...c}) => <Comment regex={reHighlighter} key={c.id}
+                                        ({extracted, ...c}) => <Comment key={c.id}
                                                                         extracted={extracted}
                                                                         word={chosen.current}
                                                                         secondWord={secondWord} {...c} />
@@ -119,7 +118,9 @@ export default function Glgaossary({data: {words, distribution, allComments}}) {
                     Glossary
                 </h1>
                 <ul>
-                    {words.nodes.map(({name, link}) => <li
+                    {words.nodes
+                        .filter(i => i.scelta === 'x')
+                        .map(({name, link}) => <li
                         key={name}
                         onMouseEnter={() => setChosen(
                             c => ({current: c.current, next: name})
@@ -149,8 +150,8 @@ export const query = graphql`query Glossary {
     words: allSheetsScatter(limit: 20){
         nodes{
             name
-            link : gatsbyPath(filePath: "/glossary/{SheetsScatter.name}")
-        }
+            scelta
+         }
     }
     distribution: allSheetsDistribuzione {
         nodes {

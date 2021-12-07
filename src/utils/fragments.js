@@ -8,7 +8,7 @@ export const commentFragment = graphql`fragment CommentFragment on SheetsEstratt
     likes
     petitionLink
     author
-    extracted
+    splitted
     id
     commentableId
 
