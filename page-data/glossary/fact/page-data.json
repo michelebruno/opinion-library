@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
-    "path": "/glossary/fact/",
-    "result": {"data":{"entity":{"name":"fact","countNomask":39},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"7afc3edb-a8ea-55bf-9b3e-6989b9ff4484","name":"fact","__params":{"name":"fact"}}},
-    "staticQueryHashes": []}

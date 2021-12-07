@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
-    "path": "/glossary/employees/",
-    "result": {"data":{"entity":{"name":"employees","countNomask":0},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"6579d8c5-9ecb-56ed-a03e-551210449bdd","name":"employees","__params":{"name":"employees"}}},
-    "staticQueryHashes": []}

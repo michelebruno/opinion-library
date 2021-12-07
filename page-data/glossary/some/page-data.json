@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
-    "path": "/glossary/some/",
-    "result": {"data":{"entity":{"name":"some","countNomask":15},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"0de22ca7-faa7-56db-880c-d5a13ca2cedd","name":"some","__params":{"name":"some"}}},
-    "staticQueryHashes": []}

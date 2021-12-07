@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
-    "path": "/glossary/doctor/",
-    "result": {"data":{"entity":{"name":"doctor","countNomask":33},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"39f579da-ba47-55b1-a09c-1e2199b042d1","name":"doctor","__params":{"name":"doctor"}}},
-    "staticQueryHashes": []}

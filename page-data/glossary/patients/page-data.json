@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
-    "path": "/glossary/patients/",
-    "result": {"data":{"entity":{"name":"patients","countNomask":0},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"4c1a071c-fc28-55bb-a3af-e153476dcfba","name":"patients","__params":{"name":"patients"}}},
-    "staticQueryHashes": []}

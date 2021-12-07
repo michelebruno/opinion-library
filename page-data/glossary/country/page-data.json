@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
-    "path": "/glossary/country/",
-    "result": {"data":{"entity":{"name":"country","countNomask":54},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"d6c30b97-5d1e-5098-80dd-eb49e17b1e73","name":"country","__params":{"name":"country"}}},
-    "staticQueryHashes": []}

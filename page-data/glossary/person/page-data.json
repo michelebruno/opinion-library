@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
-    "path": "/glossary/person/",
-    "result": {"data":{"entity":{"name":"person","countNomask":49},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"d446eaa7-059c-59c4-b07d-c771ba6bf62b","name":"person","__params":{"name":"person"}}},
-    "staticQueryHashes": []}

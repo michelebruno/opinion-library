@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---src-pages-glossary-sheets-scatter-name-js",
-    "path": "/glossary/customers/",
-    "result": {"data":{"entity":{"name":"customers","countNomask":0},"comments":{"nodes":[]},"related":{"nodes":[]}},"pageContext":{"id":"ea436c51-64f8-55c3-bc53-c5565d4bf834","name":"customers","__params":{"name":"customers"}}},
-    "staticQueryHashes": []}
