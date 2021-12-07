@@ -9,7 +9,7 @@ export default function Layout({children, className, container, wrapperClassName
         <Helmet>
             <body style={{'overscroll-behavior-y': 'none'}} className="bg-black text-white rel"></body>
         </Helmet>
-        <nav className={"sticky top-0 py-16 px-8 flex w-full uppercase justify-between text-xl"}>
+        <nav className={"sticky top-0 py-8 px-8 flex w-full uppercase justify-between text-2xl"}>
             <Link to={"/"}>
                 WW
             </Link>
