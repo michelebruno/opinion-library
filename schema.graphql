@@ -594,9 +594,9 @@ type Query {
     mdx(body: StringQueryOperatorInput, children: NodeFilterListInput, excerpt: StringQueryOperatorInput, fileAbsolutePath: StringQueryOperatorInput, frontmatter: MdxFrontmatterFilterInput, headings: MdxHeadingMdxFilterListInput, html: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, mdxAST: JSONQueryOperatorInput, parent: NodeFilterInput, rawBody: StringQueryOperatorInput, slug: StringQueryOperatorInput, tableOfContents: JSONQueryOperatorInput, timeToRead: IntQueryOperatorInput, wordCount: MdxWordCountFilterInput): Mdx
     sheetsArchivioVaccine(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, descr: StringQueryOperatorInput, extracted: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, origin: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, petitionSlug: StringQueryOperatorInput, role: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput, word: StringQueryOperatorInput): SheetsArchivioVaccine
     sheetsCommentiPromask(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, petitionSlug: StringQueryOperatorInput, role: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput): SheetsCommentiPromask
-    sheetsCommentiUnmask(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, kids: StringQueryOperatorInput, likes: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, petitionSlug: StringQueryOperatorInput, role: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput): SheetsCommentiUnmask
+    sheetsCommentiUnmask(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, petitionSlug: StringQueryOperatorInput, role: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput): SheetsCommentiUnmask
     sheetsDistribuzione(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, nomask: IntQueryOperatorInput, nomaskDelta: FloatQueryOperatorInput, nomask__: FloatQueryOperatorInput, parent: NodeFilterInput, promaks__: FloatQueryOperatorInput, promask: IntQueryOperatorInput, promaskDelta: FloatQueryOperatorInput, secondWord: StringQueryOperatorInput, summedPercentage: FloatQueryOperatorInput, word: StringQueryOperatorInput): SheetsDistribuzione
-    sheetsEstratti(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, extracted: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, origin: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, petitionSlug: StringQueryOperatorInput, role: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput, word: StringQueryOperatorInput): SheetsEstratti
+    sheetsEstratti(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, extracted: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, origin: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, petitionSlug: StringQueryOperatorInput, role: StringQueryOperatorInput, scelto: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput, word: StringQueryOperatorInput): SheetsEstratti
     sheetsPetitions(children: NodeFilterListInput, country: StringQueryOperatorInput, date: DateQueryOperatorInput, description: StringQueryOperatorInput, id: StringQueryOperatorInput, imgUrl: StringQueryOperatorInput, internal: InternalFilterInput, link: StringQueryOperatorInput, originalLocale: StringQueryOperatorInput, pageViews: StringQueryOperatorInput, parent: NodeFilterInput, shareCountTotal: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput, signatures: StringQueryOperatorInput, slug: StringQueryOperatorInput, sponsored: StringQueryOperatorInput, tagRawNames: StringQueryOperatorInput, tagSlugs: StringQueryOperatorInput, tags: StringQueryOperatorInput, targets: StringQueryOperatorInput, title: StringQueryOperatorInput, user: StringQueryOperatorInput, userId: StringQueryOperatorInput, verifiedVictory: StringQueryOperatorInput, victory: StringQueryOperatorInput): SheetsPetitions
     sheetsScatter(children: NodeFilterListInput, countNomask: IntQueryOperatorInput, countPromask: IntQueryOperatorInput, deltaNomask: FloatQueryOperatorInput, deltaPromask: FloatQueryOperatorInput, gatsbyPath: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, name: StringQueryOperatorInput, normalizedNomask: FloatQueryOperatorInput, normalizedPromask: FloatQueryOperatorInput, parent: NodeFilterInput, percentageBoth: FloatQueryOperatorInput, percentageNomask: FloatQueryOperatorInput, percentagePromask: FloatQueryOperatorInput): SheetsScatter
     sheetsScelti(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, role: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput, source: StringQueryOperatorInput, word: StringQueryOperatorInput): SheetsScelti
@@ -735,12 +735,12 @@ type SheetsCommentiUnmask implements Node {
     author: String
     children: [Node!]!
     childrenCount: String
+    comment: String
     commentableId: String
     commentableType: String
     createdAt: String
     id: ID!
     internal: Internal!
-    kids: String
     likes: String
     parent: Node
     petitionLink: String
@@ -855,6 +855,7 @@ type SheetsEstratti implements Node {
     petitionLink: String
     petitionSlug: String
     role: String
+    scelto: String
     sheetsId: String
     word: String
 }
@@ -969,7 +970,7 @@ type SheetsScatter implements Node {
     gatsbyPath(filePath: String): String
     id: ID!
     internal: Internal!
-    name: String!
+    name: String
     normalizedNomask: Float
     normalizedPromask: Float
     parent: Node
@@ -2356,6 +2357,7 @@ enum SheetsCommentiUnmaskFieldsEnum {
     children___parent___internal___type
     children___parent___parent___children
     children___parent___parent___id
+    comment
     commentableId
     commentableType
     createdAt
@@ -2368,7 +2370,6 @@ enum SheetsCommentiUnmaskFieldsEnum {
     internal___mediaType
     internal___owner
     internal___type
-    kids
     likes
     parent___children
     parent___children___children
@@ -2611,6 +2612,7 @@ enum SheetsEstrattiFieldsEnum {
     petitionLink
     petitionSlug
     role
+    scelto
     sheetsId
     word
 }
@@ -2726,100 +2728,100 @@ enum SheetsPetitionsFieldsEnum {
 }
 
 enum SheetsScatterFieldsEnum {
-    children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___children___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___children___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___children___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___children___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___children___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___children___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___children___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___children___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___children___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___children___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___children___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___children___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___parent___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___parent___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___parent___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___parent___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___parent___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___parent___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___parent___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___parent___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___parent___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___parent___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___parent___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    children___parent___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
     countNomask
     countPromask
     deltaNomask
     deltaPromask
     gatsbyPath @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    id
+    internal___content
+    internal___contentDigest
+    internal___description
+    internal___fieldOwners
+    internal___ignoreType
+    internal___mediaType
+    internal___owner
+    internal___type
     name
     normalizedNomask
     normalizedPromask
-    parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___children___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___children___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___children___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___children___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___children___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___children___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___children___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___children___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___children___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___children___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___children___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___children___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___parent___children___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___parent___children___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___parent___internal___content @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___parent___internal___contentDigest @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___parent___internal___description @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___parent___internal___fieldOwners @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___parent___internal___ignoreType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___parent___internal___mediaType @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___parent___internal___owner @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___parent___internal___type @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___parent___parent___children @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
-    parent___parent___parent___id @deprecated(reason : "Sorting on fields that need arguments to resolve is deprecated.")
+    parent___children
+    parent___children___children
+    parent___children___children___children
+    parent___children___children___id
+    parent___children___id
+    parent___children___internal___content
+    parent___children___internal___contentDigest
+    parent___children___internal___description
+    parent___children___internal___fieldOwners
+    parent___children___internal___ignoreType
+    parent___children___internal___mediaType
+    parent___children___internal___owner
+    parent___children___internal___type
+    parent___children___parent___children
+    parent___children___parent___id
+    parent___id
+    parent___internal___content
+    parent___internal___contentDigest
+    parent___internal___description
+    parent___internal___fieldOwners
+    parent___internal___ignoreType
+    parent___internal___mediaType
+    parent___internal___owner
+    parent___internal___type
+    parent___parent___children
+    parent___parent___children___children
+    parent___parent___children___id
+    parent___parent___id
+    parent___parent___internal___content
+    parent___parent___internal___contentDigest
+    parent___parent___internal___description
+    parent___parent___internal___fieldOwners
+    parent___parent___internal___ignoreType
+    parent___parent___internal___mediaType
+    parent___parent___internal___owner
+    parent___parent___internal___type
+    parent___parent___parent___children
+    parent___parent___parent___id
     percentageBoth
     percentageNomask
     percentagePromask
@@ -4015,12 +4017,12 @@ input SheetsCommentiUnmaskFilterInput {
     author: StringQueryOperatorInput
     children: NodeFilterListInput
     childrenCount: StringQueryOperatorInput
+    comment: StringQueryOperatorInput
     commentableId: StringQueryOperatorInput
     commentableType: StringQueryOperatorInput
     createdAt: StringQueryOperatorInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
-    kids: StringQueryOperatorInput
     likes: StringQueryOperatorInput
     parent: NodeFilterInput
     petitionLink: StringQueryOperatorInput
@@ -4072,6 +4074,7 @@ input SheetsEstrattiFilterInput {
     petitionLink: StringQueryOperatorInput
     petitionSlug: StringQueryOperatorInput
     role: StringQueryOperatorInput
+    scelto: StringQueryOperatorInput
     sheetsId: StringQueryOperatorInput
     word: StringQueryOperatorInput
 }

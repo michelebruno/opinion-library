@@ -5,7 +5,11 @@ export const commentFragment = graphql`fragment CommentFragment on SheetsEstratt
     comment
     petitionSlug
     origin
+    likes
+    petitionLink
     author
     extracted
+    id
+    commentableId
 
 }`
