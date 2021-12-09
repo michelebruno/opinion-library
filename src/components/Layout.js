@@ -4,12 +4,12 @@ import {Helmet} from "react-helmet";
 import {Link} from "gatsby";
 import classNames from "classnames";
 
-export default function Layout({children, className, container, wrapperClassName}) {
+export default function Layout({children, className, container, wrapperClassName, fixedHeader}) {
     return <div className={classNames(wrapperClassName)}>
         <Helmet>
-            <body style={{'overscroll-behavior-y': 'none'}} className="bg-black text-white rel"></body>
+            <body style="overscroll-behaviour-y: none" className="bg-black text-white rel"></body>
         </Helmet>
-        <nav className={"sticky top-0 py-8 px-8 flex w-full uppercase justify-between text-2xl"}>
+        <nav className={classNames(fixedHeader ? 'fixed' : 'sticky', "top-0 py-8 px-8 flex w-full uppercase justify-between text-2xl")}>
             <Link to={"/"}>
                 WW
             </Link>

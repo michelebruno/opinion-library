@@ -28,6 +28,7 @@
     "gatsby-source-filesystem": "^4.3.0",
     "gatsby-source-google-spreadsheet": "^2.0.0",
     "gatsby-transformer-sharp": "^4.3.0",
+    "gsap": "^3.8.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
