@@ -3,6 +3,7 @@ import {graphql} from "gatsby";
 import Layout from "../components/Layout";
 import classNames from "classnames";
 import Comment from "../components/Comment";
+import {mix} from "../utils/mix";
 
 
 function MaskometerGrid({chosen, words, distribution, comments}) {
@@ -17,9 +18,12 @@ function MaskometerGrid({chosen, words, distribution, comments}) {
     }, [collapse])
 
     return <div className="flex-grow min-h-0 flex flex-col justify-between relative gap-4 ">
-        <div className={classNames("w-full flex justify-between uppercase text-xl sticky top-0")}>
-            <span className={"bg-nomask p-1"}>No</span>
-            <span className={"bg-promask p-1"}>Pro</span>
+        <div className={classNames("w-full flex uppercase text-xl sticky top-0")}>
+            <div className={classNames('transform', !collapse ? 'w-0' : 'w-2/12')}></div>
+            <div className={classNames("flex-1 flex ", !collapse ? 'justify-between' : 'justify-around')}>
+                <span className={"bg-promask p-1"}>Pro</span>
+                <span className={"bg-nomask p-1"}>No</span>
+            </div>
         </div>
         <div className="flex-1">
             <div
@@ -27,7 +31,7 @@ function MaskometerGrid({chosen, words, distribution, comments}) {
                 <div className={"sticky top-0 uppercase"}>
 
                     {
-                        words.nodes.map(({name}) => {
+                        words.nodes.map(({name, deltaPromask}) => {
                             let delta = distribution.nodes.find(({
                                                                      word,
                                                                      secondWord
@@ -37,12 +41,16 @@ function MaskometerGrid({chosen, words, distribution, comments}) {
                                     return chosen.next === word && secondWord === name
                                 }
                                 return (chosen.current ? word === chosen.current : word === word) && secondWord === name
-                            })['nomaskDelta']
-
-                            delta = Math.round(delta * 100)
+                            })['promaskDelta']
 
                             let isCurrent = name === chosen.current
                             let isSelected = name === secondWord
+                            if (isCurrent) {
+                                delta = deltaPromask
+                            }
+
+                            delta = Math.round(delta * 100)
+
 
                             return <div key={name}
                                         className={
@@ -60,13 +68,17 @@ function MaskometerGrid({chosen, words, distribution, comments}) {
                                     className={
                                         classNames(
                                             "inline-block py-1 px-3 text-lg border-[1px] uppercase text-center",
-                                            "transition-all duration-1000 delay-200",
-                                            collapse ? 'rounded-full' : 'rounded-[0px] -translate-x-1/2 ',
-                                            !isCurrent && !isSelected && 'bg-white text-black',
+                                            "transition-[margin] duration-1000 delay-200",
+                                            collapse ? 'rounded-full' : 'rounded-[0px] -translate-x-1/2',
+                                            !isCurrent && !isSelected &&
+                                            (collapse ? 'bg-black text-white hover:text-black hover:bg-white' : 'text-white bg-black'),
                                             isCurrent && "bg-black text-light border-light",
-                                            isSelected && "bg-black text-white border-white"
+                                            isSelected && "bg-white text-black border-white"
                                         )}
-                                    style={!collapse ? {marginLeft: delta + "%"} : undefined}>
+                                    style={{
+                                        marginLeft: !collapse ? delta + "%" : undefined,
+                                        // backgroundColor: mix('6147FF', 'CFFF58', delta)
+                                    }}>
                                     {name}
                                 </button>
                             </div>
@@ -74,7 +86,7 @@ function MaskometerGrid({chosen, words, distribution, comments}) {
                     }
                 </div>
                 <div
-                    className={classNames("absolute transition-transform top-0 bottom-0 right-0 w-10/12 translate-y-full delay-600 duration-500", collapse && 'transform-none')}
+                    className={classNames("absolute transition-transform top-0 bottom-0 right-0 w-9/12 translate-y-full delay-600 duration-500", collapse && 'transform-none')}
                     id={"comments-container"}>
                     <div className="grid grid-cols-2 gap-8 justify-around">
                         {['promask', 'nomask'].map(origin =>
@@ -121,23 +133,23 @@ export default function Glgaossary({data: {words, distribution, allComments}}) {
                     {words.nodes
                         .filter(i => i.scelta === 'x')
                         .map(({name, link}) => <li
-                        key={name}
-                        onMouseEnter={() => setChosen(
-                            c => ({current: c.current, next: name})
-                        )}
-                        onMouseLeave={() => setChosen(c => ({...c, next: undefined}))}
-                        onClick={() => setChosen({current: name})}
-                        className={classNames("text-4xl uppercase",
-                            "px-8 py-8",
-                            "border-b-2 border-white cursor-pointer",
-                            "hover:bg-light hover:text-black",
-                            chosen.current === name && "bg-light text-black"
-                        )}
-                    >
+                            key={name}
+                            onMouseEnter={() => setChosen(
+                                c => ({current: c.current, next: name})
+                            )}
+                            onMouseLeave={() => setChosen(c => ({...c, next: undefined}))}
+                            onClick={() => setChosen({current: name})}
+                            className={classNames("text-2xl uppercase",
+                                "px-8 py-8",
+                                "border-b-2 border-white cursor-pointer",
+                                "hover:bg-light hover:text-black",
+                                chosen.current === name && "bg-light text-black"
+                            )}
+                        >
                         <span href={link} onClick={e => {
                             e.preventDefault();
                         }}>{name}</span>
-                    </li>)}
+                        </li>)}
                 </ul>
             </div>
             <MaskometerGrid chosen={chosen} words={words} distribution={distribution}
@@ -151,7 +163,8 @@ export const query = graphql`query Glossary {
         nodes{
             name
             scelta
-         }
+            deltaPromask
+        }
     }
     distribution: allSheetsDistribuzione {
         nodes {

@@ -13,7 +13,11 @@ exports.createResolvers = ({createResolvers}) => {
                             query: {limit: 35}
                         })
 
-                        regex = new RegExp('(' + Array.from(entries).map(i =>  `${i.name}` ).join('|') + ')', 'gi')
+                        let l = Array.from(entries).map(i => ' ' + i.name).join('|')
+
+                        // console.log(l)
+
+                        regex = new RegExp(`(${l})`, 'gi')
 
                     }
                     return source.extracted.split(regex)

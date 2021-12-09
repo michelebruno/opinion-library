@@ -31,7 +31,7 @@ export default function Comment({
             </div>
             <p>
                 {splitted.map((part, i) => {
-                    if (part === word || part === secondWord) return <span key={i} className={
+                    if (part.toLowerCase() === word || part.toLowerCase() === secondWord) return <span key={i} className={
                         classNames(
                             origin === 'promask' && 'bg-promask text-white',
                             origin === 'nomask' && 'bg-nomask text-white'
