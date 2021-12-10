@@ -3,7 +3,6 @@ import {graphql} from "gatsby";
 import Layout from "../components/Layout";
 import classNames from "classnames";
 import Comment from "../components/Comment";
-import {mix} from "../utils/mix";
 
 
 function MaskometerGrid({chosen, words, distribution, comments}) {
