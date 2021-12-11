@@ -21,7 +21,7 @@ export default function Comment({
         return null;
 
     return <div
-        className={classNames("flex p-4 w-full bg-white text-black boreder-2 rounded-xl", origin === 'promask' && 'border-promask', origin === 'nomask' && 'border-nomask')}>
+        className={classNames("comment flex p-4 w-full bg-white text-black boreder-2 rounded-xl text-lg", origin === 'promask' && 'border-promask', origin === 'nomask' && 'border-nomask')}>
         <div className="w-2/12 px-3">
             <div className={"rounded-full bg-" + origin} style={{aspectRatio: '1'}}/>
         </div>
@@ -30,20 +30,21 @@ export default function Comment({
                 <span>{author}</span>
             </div>
             <p>
-                {splitted.map((part, i) => {
-                    if (part.toLowerCase() === word || part.toLowerCase() === secondWord) return <span key={i} className={
-                        classNames(
-                            origin === 'promask' && 'bg-promask text-white',
-                            origin === 'nomask' && 'bg-nomask text-white'
-                        )
-                    }>{part}</span>
+                {typeof splitted !== 'undefined' ? splitted.map((part, i) => {
+                    if (part.toLowerCase() === word || part.toLowerCase() === secondWord) return <span key={i}
+                                                                                                       className={
+                                                                                                           classNames(
+                                                                                                               origin === 'promask' && 'bg-promask text-white',
+                                                                                                               origin === 'nomask' && 'bg-nomask text-white'
+                                                                                                           )
+                                                                                                       }>{part}</span>
 
                     if (part === secondWord) return <span key={i} className={
                         'border-light border-2'
                     }>{part}</span>
 
                     return part
-                })}
+                }) : children}
             </p>
             <p className="text-sm text-gray-500 flex gap-4">
                 <span>{likes} likes</span>
