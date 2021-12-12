@@ -26,3 +26,13 @@ exports.createResolvers = ({createResolvers}) => {
         },
     })
 }
+
+exports.createSchemaCustomization = ({ actions }) => {
+    const { createTypes } = actions
+    const typeDefs = `
+    type SheetsEstratti implements Node {
+      commentId: Int
+    }
+  `
+    createTypes(typeDefs)
+}

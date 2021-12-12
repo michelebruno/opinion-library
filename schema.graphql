@@ -577,6 +577,7 @@ type Query {
     allSheetsCommentiPromask(filter: SheetsCommentiPromaskFilterInput, limit: Int, skip: Int, sort: SheetsCommentiPromaskSortInput): SheetsCommentiPromaskConnection!
     allSheetsCommentiUnmask(filter: SheetsCommentiUnmaskFilterInput, limit: Int, skip: Int, sort: SheetsCommentiUnmaskSortInput): SheetsCommentiUnmaskConnection!
     allSheetsDistribuzione(filter: SheetsDistribuzioneFilterInput, limit: Int, skip: Int, sort: SheetsDistribuzioneSortInput): SheetsDistribuzioneConnection!
+    allSheetsDistribuzioneV2(filter: SheetsDistribuzioneV2FilterInput, limit: Int, skip: Int, sort: SheetsDistribuzioneV2SortInput): SheetsDistribuzioneV2Connection!
     allSheetsEstratti(filter: SheetsEstrattiFilterInput, limit: Int, skip: Int, sort: SheetsEstrattiSortInput): SheetsEstrattiConnection!
     allSheetsPetitions(filter: SheetsPetitionsFilterInput, limit: Int, skip: Int, sort: SheetsPetitionsSortInput): SheetsPetitionsConnection!
     allSheetsScatter(filter: SheetsScatterFilterInput, limit: Int, skip: Int, sort: SheetsScatterSortInput): SheetsScatterConnection!
@@ -596,9 +597,10 @@ type Query {
     sheetsCommentiPromask(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, petitionSlug: StringQueryOperatorInput, role: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput): SheetsCommentiPromask
     sheetsCommentiUnmask(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, petitionSlug: StringQueryOperatorInput, role: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput): SheetsCommentiUnmask
     sheetsDistribuzione(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, nomask: IntQueryOperatorInput, nomaskDelta: FloatQueryOperatorInput, nomask__: FloatQueryOperatorInput, parent: NodeFilterInput, promaks__: FloatQueryOperatorInput, promask: IntQueryOperatorInput, promaskDelta: FloatQueryOperatorInput, secondWord: StringQueryOperatorInput, summedPercentage: FloatQueryOperatorInput, word: StringQueryOperatorInput): SheetsDistribuzione
-    sheetsEstratti(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, extracted: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, origin: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, petitionSlug: StringQueryOperatorInput, role: StringQueryOperatorInput, scelto: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput, word: StringQueryOperatorInput): SheetsEstratti
+    sheetsDistribuzioneV2(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, nomask: StringQueryOperatorInput, nomaskDelta: StringQueryOperatorInput, nomask__: StringQueryOperatorInput, parent: NodeFilterInput, promaks__: StringQueryOperatorInput, promask: StringQueryOperatorInput, promaskDelta: StringQueryOperatorInput, secondWord: StringQueryOperatorInput, summedPercentage: StringQueryOperatorInput, word: StringQueryOperatorInput): SheetsDistribuzioneV2
+    sheetsEstratti(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentId: IntQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, extracted: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, origin: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, petitionSlug: StringQueryOperatorInput, role: StringQueryOperatorInput, scelto: StringQueryOperatorInput, word: StringQueryOperatorInput): SheetsEstratti
     sheetsPetitions(children: NodeFilterListInput, country: StringQueryOperatorInput, date: DateQueryOperatorInput, description: StringQueryOperatorInput, id: StringQueryOperatorInput, imgUrl: StringQueryOperatorInput, internal: InternalFilterInput, link: StringQueryOperatorInput, originalLocale: StringQueryOperatorInput, pageViews: StringQueryOperatorInput, parent: NodeFilterInput, shareCountTotal: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput, signatures: StringQueryOperatorInput, slug: StringQueryOperatorInput, sponsored: StringQueryOperatorInput, tagRawNames: StringQueryOperatorInput, tagSlugs: StringQueryOperatorInput, tags: StringQueryOperatorInput, targets: StringQueryOperatorInput, title: StringQueryOperatorInput, user: StringQueryOperatorInput, userId: StringQueryOperatorInput, verifiedVictory: StringQueryOperatorInput, victory: StringQueryOperatorInput): SheetsPetitions
-    sheetsScatter(children: NodeFilterListInput, countNomask: IntQueryOperatorInput, countPromask: IntQueryOperatorInput, deltaNomask: FloatQueryOperatorInput, deltaPromask: FloatQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, name: StringQueryOperatorInput, normalizedNomask: FloatQueryOperatorInput, normalizedPromask: FloatQueryOperatorInput, parent: NodeFilterInput, percentageBoth: FloatQueryOperatorInput, percentageNomask: FloatQueryOperatorInput, percentagePromask: FloatQueryOperatorInput, scelta: StringQueryOperatorInput): SheetsScatter
+    sheetsScatter(children: NodeFilterListInput, countNomask: IntQueryOperatorInput, countPromask: IntQueryOperatorInput, deltaNomask: StringQueryOperatorInput, deltaPromask: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, name: StringQueryOperatorInput, normalizedNomask: FloatQueryOperatorInput, normalizedPromask: FloatQueryOperatorInput, parent: NodeFilterInput, percentageBoth: FloatQueryOperatorInput, percentageNomask: FloatQueryOperatorInput, percentagePromask: FloatQueryOperatorInput, scelta: StringQueryOperatorInput): SheetsScatter
     sheetsScelti(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, role: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput, source: StringQueryOperatorInput, word: StringQueryOperatorInput): SheetsScelti
     sheetsSelezionatiVaccine(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, no: StringQueryOperatorInput, parent: NodeFilterInput, pro: StringQueryOperatorInput): SheetsSelezionatiVaccine
     sheetsUnmask(children: NodeFilterListInput, country: StringQueryOperatorInput, date: DateQueryOperatorInput, description: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, pageViews: StringQueryOperatorInput, parent: NodeFilterInput, shareCountTotal: StringQueryOperatorInput, signatures: StringQueryOperatorInput, sponsored: StringQueryOperatorInput, tagRawNames: StringQueryOperatorInput, tagSlugs: StringQueryOperatorInput, tags: StringQueryOperatorInput, targets: StringQueryOperatorInput, title: StringQueryOperatorInput, user: StringQueryOperatorInput, userId: StringQueryOperatorInput, verifiedVictory: StringQueryOperatorInput, victory: StringQueryOperatorInput): SheetsUnmask
@@ -829,11 +831,60 @@ type SheetsDistribuzioneGroupConnection {
     totalCount: Int!
 }
 
+type SheetsDistribuzioneV2 implements Node {
+    children: [Node!]!
+    id: ID!
+    internal: Internal!
+    nomask: String
+    nomaskDelta: String
+    nomask__: String
+    parent: Node
+    promaks__: String
+    promask: String
+    promaskDelta: String
+    secondWord: String
+    summedPercentage: String
+    word: String
+}
+
+type SheetsDistribuzioneV2Connection {
+    distinct(field: SheetsDistribuzioneV2FieldsEnum!): [String!]!
+    edges: [SheetsDistribuzioneV2Edge!]!
+    group(field: SheetsDistribuzioneV2FieldsEnum!, limit: Int, skip: Int): [SheetsDistribuzioneV2GroupConnection!]!
+    max(field: SheetsDistribuzioneV2FieldsEnum!): Float
+    min(field: SheetsDistribuzioneV2FieldsEnum!): Float
+    nodes: [SheetsDistribuzioneV2!]!
+    pageInfo: PageInfo!
+    sum(field: SheetsDistribuzioneV2FieldsEnum!): Float
+    totalCount: Int!
+}
+
+type SheetsDistribuzioneV2Edge {
+    next: SheetsDistribuzioneV2
+    node: SheetsDistribuzioneV2!
+    previous: SheetsDistribuzioneV2
+}
+
+type SheetsDistribuzioneV2GroupConnection {
+    distinct(field: SheetsDistribuzioneV2FieldsEnum!): [String!]!
+    edges: [SheetsDistribuzioneV2Edge!]!
+    field: String!
+    fieldValue: String
+    group(field: SheetsDistribuzioneV2FieldsEnum!, limit: Int, skip: Int): [SheetsDistribuzioneV2GroupConnection!]!
+    max(field: SheetsDistribuzioneV2FieldsEnum!): Float
+    min(field: SheetsDistribuzioneV2FieldsEnum!): Float
+    nodes: [SheetsDistribuzioneV2!]!
+    pageInfo: PageInfo!
+    sum(field: SheetsDistribuzioneV2FieldsEnum!): Float
+    totalCount: Int!
+}
+
 type SheetsEstratti implements Node {
     author: String
     children: [Node!]!
     childrenCount: String
     comment: String
+    commentId: Int
     commentableId: String
     commentableType: String
     createdAt(
@@ -856,7 +907,6 @@ type SheetsEstratti implements Node {
     petitionSlug: String
     role: String
     scelto: String
-    sheetsId: String
     splitted: [String]
     word: String
 }
@@ -966,8 +1016,8 @@ type SheetsScatter implements Node {
     children: [Node!]!
     countNomask: Int
     countPromask: Int
-    deltaNomask: Float
-    deltaPromask: Float
+    deltaNomask: String
+    deltaPromask: String
     id: ID!
     internal: Internal!
     name: String
@@ -2514,6 +2564,104 @@ enum SheetsDistribuzioneFieldsEnum {
     word
 }
 
+enum SheetsDistribuzioneV2FieldsEnum {
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
+    id
+    internal___content
+    internal___contentDigest
+    internal___description
+    internal___fieldOwners
+    internal___ignoreType
+    internal___mediaType
+    internal___owner
+    internal___type
+    nomask
+    nomaskDelta
+    nomask__
+    parent___children
+    parent___children___children
+    parent___children___children___children
+    parent___children___children___id
+    parent___children___id
+    parent___children___internal___content
+    parent___children___internal___contentDigest
+    parent___children___internal___description
+    parent___children___internal___fieldOwners
+    parent___children___internal___ignoreType
+    parent___children___internal___mediaType
+    parent___children___internal___owner
+    parent___children___internal___type
+    parent___children___parent___children
+    parent___children___parent___id
+    parent___id
+    parent___internal___content
+    parent___internal___contentDigest
+    parent___internal___description
+    parent___internal___fieldOwners
+    parent___internal___ignoreType
+    parent___internal___mediaType
+    parent___internal___owner
+    parent___internal___type
+    parent___parent___children
+    parent___parent___children___children
+    parent___parent___children___id
+    parent___parent___id
+    parent___parent___internal___content
+    parent___parent___internal___contentDigest
+    parent___parent___internal___description
+    parent___parent___internal___fieldOwners
+    parent___parent___internal___ignoreType
+    parent___parent___internal___mediaType
+    parent___parent___internal___owner
+    parent___parent___internal___type
+    parent___parent___parent___children
+    parent___parent___parent___id
+    promaks__
+    promask
+    promaskDelta
+    secondWord
+    summedPercentage
+    word
+}
+
 enum SheetsEstrattiFieldsEnum {
     author
     children
@@ -2557,6 +2705,7 @@ enum SheetsEstrattiFieldsEnum {
     children___parent___parent___children
     children___parent___parent___id
     comment
+    commentId
     commentableId
     commentableType
     createdAt
@@ -2614,7 +2763,6 @@ enum SheetsEstrattiFieldsEnum {
     petitionSlug
     role
     scelto
-    sheetsId
     word
 }
 
@@ -4058,11 +4206,33 @@ input SheetsDistribuzioneSortInput {
     order: [SortOrderEnum] = [ASC]
 }
 
+input SheetsDistribuzioneV2FilterInput {
+    children: NodeFilterListInput
+    id: StringQueryOperatorInput
+    internal: InternalFilterInput
+    nomask: StringQueryOperatorInput
+    nomaskDelta: StringQueryOperatorInput
+    nomask__: StringQueryOperatorInput
+    parent: NodeFilterInput
+    promaks__: StringQueryOperatorInput
+    promask: StringQueryOperatorInput
+    promaskDelta: StringQueryOperatorInput
+    secondWord: StringQueryOperatorInput
+    summedPercentage: StringQueryOperatorInput
+    word: StringQueryOperatorInput
+}
+
+input SheetsDistribuzioneV2SortInput {
+    fields: [SheetsDistribuzioneV2FieldsEnum]
+    order: [SortOrderEnum] = [ASC]
+}
+
 input SheetsEstrattiFilterInput {
     author: StringQueryOperatorInput
     children: NodeFilterListInput
     childrenCount: StringQueryOperatorInput
     comment: StringQueryOperatorInput
+    commentId: IntQueryOperatorInput
     commentableId: StringQueryOperatorInput
     commentableType: StringQueryOperatorInput
     createdAt: DateQueryOperatorInput
@@ -4076,7 +4246,6 @@ input SheetsEstrattiFilterInput {
     petitionSlug: StringQueryOperatorInput
     role: StringQueryOperatorInput
     scelto: StringQueryOperatorInput
-    sheetsId: StringQueryOperatorInput
     word: StringQueryOperatorInput
 }
 
@@ -4122,8 +4291,8 @@ input SheetsScatterFilterInput {
     children: NodeFilterListInput
     countNomask: IntQueryOperatorInput
     countPromask: IntQueryOperatorInput
-    deltaNomask: FloatQueryOperatorInput
-    deltaPromask: FloatQueryOperatorInput
+    deltaNomask: StringQueryOperatorInput
+    deltaPromask: StringQueryOperatorInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
     name: StringQueryOperatorInput
