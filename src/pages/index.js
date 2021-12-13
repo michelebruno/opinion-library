@@ -8,9 +8,11 @@ import {ScrollToPlugin} from "gsap/ScrollToPlugin"
 import {TextPlugin} from "gsap/TextPlugin"
 import {forwardRef, useEffect, useRef, useState} from "react";
 import classNames from "classnames";
-import {graphql} from "gatsby";
+import {graphql, Link} from "gatsby";
 import Image from "../components/Image";
 import Comment, {HighlightedWord} from "../components/Comment";
+import DeltaWord from "../components/DeltaWord";
+import Button from "../components/Button";
 
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(ScrollToPlugin)
@@ -478,24 +480,36 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
                             <div className="grid auto-rows-min gap-y-4 comment-container">
                                 {
                                     homeComments.map(comment => <Comment key={comment.text}
-                                                                         highlightWords={highlightWords} origin={'black'} {...comment} />)
+                                                                         highlightWords={highlightWords}
+                                                                         origin={'black'} {...comment} />)
                                 }
                             </div>
                         </div>
                     </div>
                 </div>
             </HomeSlide>
-            <HomeSlide span={2} className={"auto-rows-min"} id={"some-words-frequent"}>
-                <div className="col-span-12 pin-spacer">
-                    <div className="pin-me w-full grid grid-cols-12 gap-16 relative">
+            <HomeSlide span={1} className={"pb-32"} id={"some-words-frequent"}>
 
-                        <h2 className={"col-span-6"}>
-                            Some words are common but used in different ways by <span
-                            className="bg-promask inline-block">Pro mask</span> or
-                            {' '}
-                            <span className="bg-nomask inline-block">no mask</span> to hold a particular point of view.
-                        </h2>
-                    </div>
+                <div className={"col-span-6"}>
+                    <h2>
+                        Some words are common but used in different ways by <span
+                        className="bg-promask inline-block">Pro mask</span> or
+                        {' '}
+                        <span className="bg-nomask inline-block">no mask</span> to hold a particular point of
+                        view.
+                    </h2>
+                    <Button as={Link} to={"/glossary"}>View the library</Button>
+                </div>
+                <div className="col-span-6 relative">
+                    <DeltaWord promask={61} rotate={-23} bottom={21}>Family</DeltaWord>
+                    <DeltaWord promask={33} bottom={20} right={12} rotate={12}>Mandate</DeltaWord>
+                    <DeltaWord promask={51} bottom={35} right={10} rotate={17}>Science</DeltaWord>
+                    <DeltaWord promask={55} left={45} top={8} rotate={9}>Health</DeltaWord>
+                    <DeltaWord promask={45} bottom={60} rotate={-9} left={10}>Vaccine</DeltaWord>
+                    <DeltaWord promask={60} bottom={55} rotate={8} right={8}>Student</DeltaWord>
+                    <DeltaWord promask={55} bottom={40} left={13}>School</DeltaWord>
+                    <DeltaWord promask={54} bottom={0} rotate={-2}>Teacher</DeltaWord>
+                    <DeltaWord promask={32} bottom={0} right={0} rotate={10}>Children</DeltaWord>
                 </div>
 
             </HomeSlide>

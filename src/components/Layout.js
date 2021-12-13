@@ -3,11 +3,12 @@ import "../style.css"
 import {Helmet} from "react-helmet";
 import {Link} from "gatsby";
 import classNames from "classnames";
+import Button from "./Button";
 
 function MenuItem({children, to}) {
     return <li className={"first:border-white"}>
-        <Link to={to} className={"rounded-2xl border-[1px] py-2 px-4"}
-              activeClassName={"border-light text-light"}>{children}</Link>
+        <Button as={Link} to={to}
+              activeClassName={"border-light text-light"}>{children}</Button>
     </li>
 }
 
