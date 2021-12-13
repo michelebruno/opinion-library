@@ -8,15 +8,13 @@ import Button from "./Button";
 function MenuItem({children, to}) {
     return <li className={"first:border-white"}>
         <Button as={Link} to={to}
-              activeClassName={"border-light text-light"}>{children}</Button>
+                activeClassName={"border-light text-light"}>{children}</Button>
     </li>
 }
 
 export default function Layout({children, className, container, wrapperClassName, fixedHeader}) {
     return <div className={classNames(wrapperClassName)}>
-        <Helmet>
-            <body style="overscroll-behaviour-y: none" className="bg-black text-white rel"></body>
-        </Helmet>
+        <Helmet bodyAttributes={{'class': 'bg-black text-white'}}/>
         <nav
             className={classNames(fixedHeader ? 'fixed' : 'sticky', "top-0 z-40 py-8 px-10 flex w-full uppercase justify-between text-lg")}>
             <Link to={"/"}>

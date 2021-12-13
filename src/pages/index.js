@@ -6,7 +6,7 @@ import {CSSRulePlugin} from "gsap/CSSRulePlugin"
 import {CSSPlugin} from "gsap/CSSPlugin"
 import {ScrollToPlugin} from "gsap/ScrollToPlugin"
 import {TextPlugin} from "gsap/TextPlugin"
-import {forwardRef, useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import classNames from "classnames";
 import {graphql, Link} from "gatsby";
 import Image from "../components/Image";
@@ -348,10 +348,10 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
                     <div
                         className={
                             classNames(
-                                "bg-light rotate-[-30deg] " +
-                                "bg-light rounded-full " +
-                                "flex items-center justify-center " +
-                                "w-[50vmin] h-[50vmin] " +
+                                "bg-light rotate-[-30deg] ",
+                                "bg-light rounded-full " ,
+                                "flex items-center justify-center " ,
+                                "w-[50vmin] h-[50vmin] ",
                                 "absolute right-8 bottom-[15%] "
                             )}>
                         <div>
@@ -362,10 +362,10 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
                     <div
                         className={
                             classNames(
-                                "bg-light rotate-[40deg] " +
-                                "bg-light rounded-full " +
-                                "flex items-center justify-center " +
-                                "w-[20vmin] h-[20vmin] " +
+                                "bg-light rotate-[40deg] ",
+                                "bg-light rounded-full " ,
+                                "flex items-center justify-center " ,
+                                "w-[20vmin] h-[20vmin] ",
                                 "absolute left-32 bottom-[12%] "
                             )}>
                         <div>
@@ -376,10 +376,10 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
                     <div
                         className={
                             classNames(
-                                "bg-light rotate-[5deg] " +
-                                "bg-light rounded-full " +
-                                "flex items-center justify-center " +
-                                "w-[20vmin] h-[20vmin] " +
+                                "bg-light rotate-[5deg] ",
+                                "bg-light rounded-full ",
+                                "flex items-center justify-center " ,
+                                "w-[20vmin] h-[20vmin] ",
                                 "absolute left-[40%] bottom-[2%] "
                             )}>
                         <div>
