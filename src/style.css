@@ -8,6 +8,20 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+@layer base {
+
+    article {
+        @apply text-xl;
+    }
+    article p {
+        @apply pb-8;
+    }
+
+    article h2 {
+        @apply text-white bg-black mt-16 inline-block uppercase;
+    }
 }

@@ -9,7 +9,8 @@ module.exports = {
             colors: {
                 'promask' : '#4E31FF',
                 'nomask' :'#EA3CB7',
-                'light':  '#CFFF58'
+                'light':  '#CFFF58',
+                'light-darker': '#B3E537'
             }
         },
     },
