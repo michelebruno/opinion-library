@@ -25,7 +25,7 @@ export default function DeltaWord({children, className, style, id, promask, top,
                     <span className="opacity-0 group-hover:opacity-100 transition-all">{nomaskPercentage}</span>
                 </div>
             </div>
-            <span className="group-hover:opacity-0 transition-all relative">{children}</span>
+            <span className="group-hover:opacity-0 transition-all relative px-1">{children}</span>
 
         </div>
     </div>

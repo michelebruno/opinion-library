@@ -76,7 +76,7 @@ function enableScroll() {
 
 
 function SlotMaschine({words}) {
-    return <div className="p-8 overflow-hidden h-[2em] rounded-full border-2 border-white inline-block">
+    return <div className="px-16 py-6 overflow-hidden h-[1.75em] rounded-full border-2 border-white inline-block">
         <div className="overflow-hidden inline-block h-[1em]" id={"slot-machine"}>
             <div className="slot-content w-auto">
                 {
@@ -141,10 +141,42 @@ const homeComments = [
         dateText: '23/04/2020',
         author: 'User34'
     },
+    {
+        splitted: ['I don\'t want anyone else to die while waiting for their ', 'vaccine', '.'],
+        user: 'User55',
+        petitionTitle: 'Reinstate the Texas Covid-19 Mask Mandate',
+        word: 'vaccine',
+        dateText: '8 months ago',
+        author: 'User34'
+    },
+    {
+        splitted: ['I miss being able to hug my ', 'family', '.'],
+        user: 'User55',
+        petitionTitle: 'Reinstate the Texas Covid-19 Mask Mandate',
+        word: 'family',
+        dateText: '8 months ago',
+        author: 'User34'
+    },
+    {
+        splitted: ['Sadly, it won\'t be taken seriously until it affects their ', 'family', '.'],
+        user: 'User55',
+        petitionTitle: 'Make face masks mandatory in public, in Duluth, MN during the COVID-19 pandemic.\n',
+        word: 'family',
+        dateText: '8 months ago',
+        author: 'User34'
+    },
+    {
+        splitted: ['As a high ', 'risk', ' family, I ask that you reconsider lifting the mandate.'],
+        user: 'User55',
+        petitionTitle: 'Make face masks mandatory in public, in Duluth, MN during the COVID-19 pandemic.\n',
+        word: 'risk',
+        dateText: '8 months ago',
+        author: 'User34'
+    },
 ]
 
 // markup
-const IndexPage = ({data: {allFile, words, comments}}) => {
+const IndexPage = ({data: {allFile, words, comments, front}}) => {
 
     const [highlightWords, setHighlightWords] = useState(false)
     const changeDataSlide = useRef()
@@ -185,14 +217,14 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
             yPercent: -100 * (65 * 2 - 1) / (65 * 2),
             ease: 'power4.out',
             paused: true,
-            duration: 1,
+            duration: 3,
             delay: .3,
-            onStart: disableScroll,
             onComplete: enableScroll,
             scrollTrigger: {
                 trigger: '#slot-machine',
                 once: true,
                 // start: 'top center'
+                onEnter: disableScroll
             }
         })
 
@@ -229,12 +261,29 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
             text: {
                 value: 'Those who signed these petitions explained their reasons in comments.'
             },
-            duration: 3,
+            duration: 2,
             ease: 'linear',
             paused: true,
             onStart: disableScroll,
             onComplete: enableScroll
         })
+
+
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '#some-words-frequent',
+                onEnter: () => console.log('entered last slide')
+            }
+        })
+            .from('#some-words-frequent .delta-word', {
+                y: -1200,
+                stagger: -.2
+            })
+            .from('#view-library-button', {
+                yPercent: 100,
+                opacity: 0
+            })
+
 
         ScrollTrigger.create({
             trigger: whyYouSigned.current,
@@ -248,8 +297,6 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
                     trigger: understandLanguage.current,
                     // scrub: true,
                     end: 'bottom bottom',
-                    pin: understandLanguage.current.querySelector('.pin-me'),
-                    pinSpacer: understandLanguage.current.querySelector('.pin-spacer'),
                     // toggleActions: "play pause reverse reset",
 
                 },
@@ -333,6 +380,10 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
         <Layout fixedHeader className={"text-[4.34vw] leading-tight"}>
             <div className="fixed left-0 top-0 bottom-0 origin-top bg-light w-2 z-40" id="progress-bar"></div>
             <HomeSlide className={"bg-light pb-32 text-[6vw] grid-rows-6 z-50"}>
+                <Image image={front.nodes[2]} className={"absolute left-[8.3%] top-16 w-1/6"}/>
+                <Image image={front.nodes[0]} className={"absolute right-16 top-8 w-1/6"}/>
+                <Image image={front.nodes[3]} className={"absolute right-20 bottom-32 w-1/6"}/>
+                <Image image={front.nodes[1]} className={"absolute left-20 bottom-60 w-1/6"}/>
                 <h1 className="text-black text-center col-span-12 row-start-3 self-end ">Opinion Library</h1>
                 <div className="absolute left-0 right-0 bottom-0 py-8 text-center text-xl normal-case text-black">
                     <p>
@@ -350,7 +401,8 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
             </HomeSlide>
             <HomeSlide span={1} ref={changeDataSlide}>
                 <h2 className={"col-span-9"}>
-                    Change.org is the largest petition website, and in 2020 it only grew larger,
+                    Change.org is the largest petition website, and in 2020 <span
+                    className="inline-block">it only grew</span> larger,
                     especially in the United States.
                 </h2>
                 <div id={'change-data-bubbles'}
@@ -361,40 +413,40 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
                                 "bg-light rotate-[-30deg] ",
                                 "bg-light rounded-full ",
                                 "flex items-center justify-center ",
-                                "w-[50vmin] h-[50vmin] ",
-                                "absolute right-8 bottom-[15%] "
+                                "w-[60vmin] h-[60vmin] ",
+                                "absolute right-0 bottom-[15%] "
                             )}>
                         <div>
-                            <p className={"text-2xl"}>+208,5%</p>
-                            <p className="text-xl">Signatures</p>
+                            <p className={"text-3xl"}>+208,5%</p>
+                            <p className="text-base">Signatures</p>
                         </div>
                     </div>
                     <div
                         className={
                             classNames(
-                                "bg-light rotate-[40deg] ",
-                                "bg-light rounded-full ",
+                                "bg-light rotate-[18deg] ",
+                                "bg-light rounded-full px-2 ",
                                 "flex items-center justify-center ",
-                                "w-[20vmin] h-[20vmin] ",
-                                "absolute left-32 bottom-[12%] "
+                                "w-[16vmin] h-[16vmin] ",
+                                "absolute right-[66%] bottom-[16%] "
                             )}>
                         <div>
-                            <p className={"text-2xl"}>+33%</p>
-                            <p className="text-xl">Global Users</p>
+                            <p className={"text-3xl"}>+33%</p>
+                            <p className="text-base">Global Users</p>
                         </div>
                     </div>
                     <div
                         className={
                             classNames(
-                                "bg-light rotate-[5deg] ",
-                                "bg-light rounded-full ",
+                                "bg-light rotate-[-30deg] ",
+                                "bg-light rounded-full px-2 ",
                                 "flex items-center justify-center ",
-                                "w-[20vmin] h-[20vmin] ",
-                                "absolute left-[40%] bottom-[2%] "
+                                "w-[15vmin] h-[15vmin] ",
+                                "absolute left-[41%] bottom-[4%] "
                             )}>
                         <div>
-                            <p className={"text-2xl"}>+46%</p>
-                            <p className="text-xl">Published Petitions</p>
+                            <p className={"text-3xl"}>+46%</p>
+                            <p className="text-base">Published Petitions</p>
                         </div>
                     </div>
 
@@ -430,7 +482,7 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
                 </div>
             </HomeSlide>
             <HomeSlide className={"auto-rows-min content-center pb-32"} id={"why-you-signed"} ref={whyYouSigned}>
-                <div className="col-span-9 aspect-video">
+                <div className="col-span-9 aspect-[16/7]">
                     <p className="pb-8">
                         Why they have signed
                     </p>
@@ -440,55 +492,53 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
                 </div>
             </HomeSlide>
             <HomeSlide span={1} className={"auto-rows-min"} id={"understand-language"} ref={understandLanguage}>
-                <div className="col-span-12 pin-spacer">
-                    <div className="pin-me w-full grid grid-cols-12 gap-16 relative">
-                        <div className={"col-span-8 relative "}>
-                            <p id={'this-allows'}>
-                                This allows us to understand the different points of view and the language used to
-                                express them.
-                            </p>
-                            <p id={'recurring-words'} className={''}>
-                                We can find recurring
-                                <HighlightedWord isActive={highlightWords}
-                                                 className={highlightWords && 'text-black'}>words</HighlightedWord> in
-                                these comments.
-                            </p>
 
-                        </div>
-                        <div className="col-span-4  normal-case overflow-hidden">
-                            <div className="grid auto-rows-min gap-y-4 comment-container">
-                                {
-                                    homeComments.map(comment => <Comment key={comment.splitted}
-                                                                         highlightWords={highlightWords}
-                                                                         origin={'black'} {...comment} />)
-                                }
-                            </div>
-                        </div>
+                <div className={"col-span-8 relative "}>
+                    <p id={'this-allows'}>
+                        This allows us to understand the different points of view and the language used to
+                        express them.
+                    </p>
+                    <p id={'recurring-words'} className={''}>
+                        We can find recurring
+                        <HighlightedWord isActive={highlightWords}
+                                         className={highlightWords && 'text-black'}>words</HighlightedWord> in
+                        these comments.
+                    </p>
+
+                </div>
+                <div className="col-span-4  normal-case overflow-hidden">
+                    <div
+                        className="grid auto-rows-min gap-y-4 comment-container absolute top-0 pt-32 h-screen overflow-scroll ">
+                        {
+                            homeComments.map(comment => <Comment key={comment.splitted}
+                                                                 highlightWords={highlightWords}
+                                                                 origin={'black'} {...comment} />)
+                        }
                     </div>
                 </div>
             </HomeSlide>
             <HomeSlide span={1} className={"pb-32"} id={"some-words-frequent"}>
 
                 <div className={"col-span-6"}>
-                    <h2>
+                    <h2 className={"mb-4"}>
                         Some words are common but used in different ways by <span
                         className="bg-promask inline-block">Pro mask</span> or
                         {' '}
                         <span className="bg-nomask inline-block">no mask</span> to hold a particular point of
                         view.
                     </h2>
-                    <Button as={Link} to={"/glossary"}>View the library</Button>
+                    <Button id="view-library-button" as={Link} to={"/glossary"} large>View the library</Button>
                 </div>
                 <div className="col-span-6 relative">
-                    <DeltaWord promask={61} rotate={-23} bottom={21}>Family</DeltaWord>
-                    <DeltaWord promask={33} bottom={20} right={12} rotate={12}>Mandate</DeltaWord>
-                    <DeltaWord promask={51} bottom={35} right={10} rotate={17}>Science</DeltaWord>
-                    <DeltaWord promask={55} left={45} top={8} rotate={9}>Health</DeltaWord>
-                    <DeltaWord promask={45} bottom={60} rotate={-9} left={10}>Vaccine</DeltaWord>
-                    <DeltaWord promask={60} bottom={55} rotate={8} right={8}>Student</DeltaWord>
-                    <DeltaWord promask={55} bottom={40} left={13}>School</DeltaWord>
-                    <DeltaWord promask={54} bottom={0} rotate={-2}>Teacher</DeltaWord>
-                    <DeltaWord promask={32} bottom={0} right={0} rotate={10}>Children</DeltaWord>
+                    <DeltaWord promask={55} bottom={78} left={45} rotate={9}>Health</DeltaWord>
+                    <DeltaWord promask={45} bottom={65} right={12} rotate={6}>Vaccine</DeltaWord>
+                    <DeltaWord promask={60} bottom={53} right={8} rotate={12}>Student</DeltaWord>
+                    <DeltaWord promask={55} bottom={40} right={20} rotate={2}>School</DeltaWord>
+                    <DeltaWord promask={51} bottom={25} right={10} rotate={11}>Science</DeltaWord>
+                    <DeltaWord promask={61} bottom={19} left={14} rotate={-39}>Family</DeltaWord>
+                    <DeltaWord promask={33} bottom={12} right={12} rotate={3}>Mandate</DeltaWord>
+                    <DeltaWord promask={54} bottom={0} rotate={-4}>Teacher</DeltaWord>
+                    <DeltaWord promask={32} bottom={0} right={0} rotate={4}>Children</DeltaWord>
                 </div>
 
             </HomeSlide>
@@ -500,7 +550,7 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
 export default IndexPage
 
 export const query = graphql`{
-    words: allSheetsScatter(limit: 64){
+    words: allSheetsScatter(limit: 64, skip: 2){
         nodes {
             name
         }
@@ -516,6 +566,13 @@ export const query = graphql`{
     comments: allSheetsEstratti(filter: {commentId: {in: [817756846,811710031,814486694,822518213,817756846, 821382262]}}) {
         nodes {
             ...CommentFragment
+        }
+    }
+    front: allFile(filter: {relativeDirectory: {eq: "landing"}}) {
+        nodes {
+            childImageSharp {
+                gatsbyImageData
+            }
         }
     }
 }`
