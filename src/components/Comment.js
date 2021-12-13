@@ -61,7 +61,7 @@ export default function Comment({
                 {' • '}
                 <span>{dateText || date}</span>
             </div>
-            <p className={ 'comment-text '+ (large ? 'text-6xl leading-snug py-4' : '')}>
+            <p className={ 'comment-text '+ (large ? 'text-7xl leading-snug py-4' : '')}>
                 {typeof splitted !== 'undefined' ? splitted.map((part, i) => {
                     if (part.toLowerCase() === word || part.toLowerCase() === secondWord) return <HighlightedWord
                         key={i} isActive={highlightWords} promask={origin === 'promask'} nomask={origin === 'nomask'}>

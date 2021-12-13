@@ -10,9 +10,13 @@ module.exports = {
                 'promask' : '#4E31FF',
                 'nomask' :'#EA3CB7',
                 'light':  '#CFFF58',
-                'light-darker': '#B3E537'
+                'light-darker': '#B3E537',
+
             }
         },
+        fontFamily: {
+            'sans' : 'Everett, sans'
+        }
     },
     variants: {
         extend: {},

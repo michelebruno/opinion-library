@@ -4,6 +4,12 @@ import Layout from "../components/Layout";
 import classNames from "classnames";
 import Comment from "../components/Comment";
 
+function Header({children}) {
+    return <div className={"px-8 py-2 text-xl uppercase border-white border-[1px] "}>
+        {children}
+    </div>
+}
+
 
 function MaskometerGrid({chosen, words, distribution, comments}) {
     const [collapse, setCollapse] = useState(false)
@@ -16,14 +22,7 @@ function MaskometerGrid({chosen, words, distribution, comments}) {
         }
     }, [collapse])
 
-    return <div className="flex-grow min-h-0 flex flex-col justify-between relative gap-4 ">
-        <div className={classNames("w-full flex uppercase text-xl sticky top-0")}>
-            <div className={classNames('transform', !collapse ? 'w-0' : 'w-2/12')}></div>
-            <div className={classNames("flex-1 flex ", !collapse ? 'justify-between' : 'justify-around')}>
-                <span className={"bg-promask p-1"}>Pro</span>
-                <span className={"bg-nomask p-1"}>No</span>
-            </div>
-        </div>
+    return <div className="col-span-10 min-h-0 flex flex-col justify-between relative gap-4 ">
         <div className="flex-1">
             <div
                 className={classNames("h-full flex flex-col justify-between relative", collapse ? 'overflow-y-scroll' : 'overflow-hidden')}>
@@ -49,7 +48,6 @@ function MaskometerGrid({chosen, words, distribution, comments}) {
                             }
 
                             delta = Math.round(delta * 100)
-
 
                             return <div key={name}
                                         className={
@@ -93,10 +91,10 @@ function MaskometerGrid({chosen, words, distribution, comments}) {
                                 {comments
                                     .filter(({origin: o}) => origin === o)
                                     .map(
-                                        ({extracted, ...c}) => <Comment key={c.id}
-                                                                        extracted={extracted}
-                                                                        word={chosen.current}
-                                                                        secondWord={secondWord} {...c} />
+                                        (c) => <Comment key={c.id}
+                                                        highlightWords={true}
+                                                        word={chosen.current}
+                                                        secondWord={secondWord} {...c} />
                                     )}
 
                             </div>)}
@@ -117,17 +115,15 @@ function MaskometerGrid({chosen, words, distribution, comments}) {
 }
 
 
-export default function Glgaossary({data: {words, distribution, allComments}}) {
+export default function Glossary({data: {words, distribution, allComments}}) {
     const [chosen, setChosen] = useState({})
 
 
     return <Layout wrapperClassName={"max-h-screen h-screen flex flex-col "}
                    className={"flex-1 min-h-0 "}>
-        <div className="flex h-full overflow-hidden gap-8">
-            <div className="w-3/12 overflow-y-scroll border-r-2 border-white">
-                <h1 className="text-light bg-black  uppercase text-3xl px-8 py-8 border-b-2 border-light sticky top-0">
-                    Glossary
-                </h1>
+        <div className="grid grid-cols-12 h-full overflow-hidden">
+            <div className="col-span-2 overflow-y-scroll border-r-2 border-white">
+                <Header>Most used words</Header>
                 <ul>
                     {words.nodes
                         .filter(i => i.scelta === 'x')
@@ -165,7 +161,7 @@ export const query = graphql`query Glossary {
             deltaPromask
         }
     }
-    distribution: allSheetsDistribuzione {
+    distribution: allSheetsDistribuzioneV2 {
         nodes {
             word
             secondWord

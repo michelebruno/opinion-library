@@ -167,12 +167,14 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
             .from(
                 changeDataSlide.current.querySelector('h2'), {
                     opacity: 0,
+                    duration: .7
                 }
             )
+            // .to({}, {duration: .3})
             .from('#change-data-bubbles > div', {
-                y: 1900,
-                stagger: .5,
-                duration: 2,
+                y: 1300,
+                stagger: .2,
+                duration: 1,
                 // ease: 'linear',
                 onStart: disableScroll,
                 onComplete: enableScroll
@@ -198,12 +200,12 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
             .from(gsap.utils.toArray(maskMandateSlide.current.querySelectorAll('img')), {
                 paused: true,
                 opacity: 0,
-                yPercent: 200,
+                y: 20,
+                duration: .2,
                 stagger: .1,
                 onStart: disableScroll,
                 onComplete: enableScroll
             })
-
 
 
         let maskMandateTl = gsap.timeline({
@@ -218,7 +220,7 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
                     scroll.direction === 1 && scroll.progress > .49 && petitionImagesTl.play()
                     scroll.direction === -1 && petitionImagesTl.reverse()
 
-                 }
+                }
             }
         })
 
@@ -240,50 +242,42 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
         })
 
         // THIS LETS US UNDERSTAND
-
-        let commentFadeIn = gsap.from(
-            gsap.utils.toArray(understandLanguage.current.querySelectorAll('.comment-container .comment')),
-            {
-                yPercent: 20,
-                opacity: 0,
-                stagger: .3,
-                paused: true,
-                onComplete: enableScroll
-            }
-        )
-
         gsap.timeline(
             {
                 scrollTrigger: {
                     trigger: understandLanguage.current,
-                    scrub: true,
+                    // scrub: true,
                     end: 'bottom bottom',
                     pin: understandLanguage.current.querySelector('.pin-me'),
                     pinSpacer: understandLanguage.current.querySelector('.pin-spacer'),
-                }
+                    // toggleActions: "play pause reverse reset",
+
+                },
             }
         )
-            .call(() => {
-                disableScroll()
-                commentFadeIn.play()
-            })
+            .call(disableScroll)
+            .addLabel('comment-apper')
+            .from(
+                gsap.utils.toArray(understandLanguage.current.querySelectorAll('.comment-container .comment')),
+                {
+                    yPercent: 20,
+                    opacity: 0,
+                    stagger: .3,
+                }, 'comment-apper'
+            )
             .from('#recurring-words', {
                 y: 300,
                 opacity: 0,
-                duration: .5,
-            })
-            .to({}, {duration: 1.5})
-
-        gsap.timeline(
-            {
-                scrollTrigger: {
-                    trigger: understandLanguage.current.querySelector('.snapper:nth-child(3)'),
-                    scrub: true,
-                    onEnter: () => setHighlightWords(true),
-                    onLeaveBack: () => setHighlightWords(false)
+                duration: 1,
+            }, 'comment-apper')
+            .to({}, {
+                delay: 2,
+                onComplete() {
+                    setHighlightWords(true)
+                    enableScroll()
                 }
-            }
-        )
+            }, 'comment-apper')
+
 
         let panels = gsap.utils.toArray(".snapper"),
             scrollTween;
@@ -434,12 +428,10 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
                     </div>
 
                 </div>
-
-
             </HomeSlide>
-            <HomeSlide className={"auto-rows-min"} id={"why-you-signed"} ref={whyYouSigned}>
-                <div className="col-span-9 col-start-3 ">
-                    <p className="text-5xl text-right pb-8">
+            <HomeSlide className={"auto-rows-min content-center pb-32"} id={"why-you-signed"} ref={whyYouSigned}>
+                <div className="col-span-9 aspect-video">
+                    <p className="pb-8">
                         Why they have signed
                     </p>
                     <Comment id={'fake-comment'} author="User33" dateText={"1 minute ago"}
@@ -447,7 +439,7 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
                     </Comment>
                 </div>
             </HomeSlide>
-            <HomeSlide span={3} className={"auto-rows-min"} id={"understand-language"} ref={understandLanguage}>
+            <HomeSlide span={1} className={"auto-rows-min"} id={"understand-language"} ref={understandLanguage}>
                 <div className="col-span-12 pin-spacer">
                     <div className="pin-me w-full grid grid-cols-12 gap-16 relative">
                         <div className={"col-span-8 relative "}>
