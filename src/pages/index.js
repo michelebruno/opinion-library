@@ -48,7 +48,7 @@ try {
 }
 
 let wheelOpt = supportsPassive ? {passive: false} : false;
-let wheelEvent = typeof document ==='undefined' || 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+let wheelEvent = typeof document === 'undefined' || 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
 
 // call this to Disable
 function disableScroll() {
@@ -194,6 +194,17 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
             }
         })
 
+        let petitionImagesTl = gsap
+            .from(gsap.utils.toArray(maskMandateSlide.current.querySelectorAll('img')), {
+                paused: true,
+                opacity: 0,
+                yPercent: 200,
+                stagger: .1,
+                onStart: disableScroll,
+                onComplete: enableScroll
+            })
+
+
 
         let maskMandateTl = gsap.timeline({
             scrollTrigger: {
@@ -203,6 +214,11 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
                 pin: maskMandateSlide.current.querySelector('.pin-me'),
                 pinSpacer: maskMandateSlide.current.querySelector('.pin-spacer'),
                 end: 'bottom bottom',
+                onUpdate: scroll => {
+                    scroll.direction === 1 && scroll.progress > .49 && petitionImagesTl.play()
+                    scroll.direction === -1 && petitionImagesTl.reverse()
+
+                 }
             }
         })
 
@@ -349,8 +365,8 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
                         className={
                             classNames(
                                 "bg-light rotate-[-30deg] ",
-                                "bg-light rounded-full " ,
-                                "flex items-center justify-center " ,
+                                "bg-light rounded-full ",
+                                "flex items-center justify-center ",
                                 "w-[50vmin] h-[50vmin] ",
                                 "absolute right-8 bottom-[15%] "
                             )}>
@@ -363,8 +379,8 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
                         className={
                             classNames(
                                 "bg-light rotate-[40deg] ",
-                                "bg-light rounded-full " ,
-                                "flex items-center justify-center " ,
+                                "bg-light rounded-full ",
+                                "flex items-center justify-center ",
                                 "w-[20vmin] h-[20vmin] ",
                                 "absolute left-32 bottom-[12%] "
                             )}>
@@ -378,7 +394,7 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
                             classNames(
                                 "bg-light rotate-[5deg] ",
                                 "bg-light rounded-full ",
-                                "flex items-center justify-center " ,
+                                "flex items-center justify-center ",
                                 "w-[20vmin] h-[20vmin] ",
                                 "absolute left-[40%] bottom-[2%] "
                             )}>
@@ -392,31 +408,34 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
 
             </HomeSlide>
             <HomeSlide span={2} ref={maskMandateSlide}>
-                <div className="col-span-12 pin-spacer">
+                <div className="col-span-12 pin-spacer ">
                     <div className="pin-me w-full grid grid-cols-12 gap-16 relative">
-
-                        <h2 className={"col-span-10"}>
+                        <h2 className={"col-span-8"}>
                             As the platform grew,
                             so did the topics being discussed. One of the
                             most controversial
                             themes has been that of <br/>
                             <SlotMaschine words={words}/>
                         </h2>
+                        <div className={"absolute h-screen w-full top-0 left-0 right-0"}>
+                            <div className="relative h-full w-full">
+                                <Image image={allFile.nodes[0]} className={"w-1/3 absolute top-0 left-0"}/>
+                                <Image image={allFile.nodes[1]} className={"w-1/3 absolute top-1/3 left-2/3"}/>
+                                <Image image={allFile.nodes[2]} className={"w-1/3 absolute top-2/3 left-3/4"}/>
+                                <Image image={allFile.nodes[3]} className={"w-1/3 absolute top-1/2 left-0"}/>
+                                <Image image={allFile.nodes[4]} className={"w-1/3 absolute top-1/4 left-1/4"}/>
+                                <Image image={allFile.nodes[5]} className={"w-1/3 absolute top-1/2 right-1/4"}/>
+                                <Image image={allFile.nodes[6]} className={"w-1/3 absolute bottom-20 -left-4"}/>
+                                <Image image={allFile.nodes[7]} className={"w-1/3 absolute top-5 -right-2"}/>
+                                <Image image={allFile.nodes[8]} className={"w-1/3 absolute -top-4 left-1/3"}/>
+
+                            </div>
+                        </div>
                     </div>
+
                 </div>
 
-                <div className={"absolute h-screen w-screen bottom-0"}>
-                    <div className="relative h-full w-full">
-                        <Image image={allFile.nodes[0]} className={"w-2/5 absolute top-0 left-0"}/>
-                        <Image image={allFile.nodes[1]} className={"w-2/5 absolute top-1/3 left-2/3"}/>
-                        <Image image={allFile.nodes[2]} className={"w-2/5 absolute top-2/3 left-2/4"}/>
-                        <Image image={allFile.nodes[3]} className={"w-2/5 absolute top-0 left-0"}/>
-                        <Image image={allFile.nodes[4]} className={"w-2/5 absolute top-1/4 left-1/4"}/>
-                        <Image image={allFile.nodes[5]} className={"w-2/5 absolute top-1/2 -left-1/4"}/>
-                        <Image image={allFile.nodes[6]} className={"w-2/5 absolute -bottom-4 -left-1/5"}/>
 
-                    </div>
-                </div>
             </HomeSlide>
             <HomeSlide className={"auto-rows-min"} id={"why-you-signed"} ref={whyYouSigned}>
                 <div className="col-span-9 col-start-3 ">
@@ -447,7 +466,7 @@ const IndexPage = ({data: {allFile, words, comments}}) => {
                         <div className="col-span-4  normal-case overflow-hidden">
                             <div className="grid auto-rows-min gap-y-4 comment-container">
                                 {
-                                    homeComments.map(comment => <Comment key={comment.text}
+                                    homeComments.map(comment => <Comment key={comment.splitted}
                                                                          highlightWords={highlightWords}
                                                                          origin={'black'} {...comment} />)
                                 }
