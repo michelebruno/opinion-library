@@ -13,6 +13,7 @@ import Image from "../components/Image";
 import Comment, {HighlightedWord} from "../components/Comment";
 import DeltaWord from "../components/DeltaWord";
 import Button from "../components/Button";
+import HomeSlide from "../components/HomeSlide";
 
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(ScrollToPlugin)
@@ -47,10 +48,11 @@ try {
 }
 
 let wheelOpt = supportsPassive ? {passive: false} : false;
-let wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+let wheelEvent = typeof document ==='undefined' || 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
 
 // call this to Disable
 function disableScroll() {
+    if (typeof window === 'undefined') return
     window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
     window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
     window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
@@ -62,6 +64,8 @@ function disableScroll() {
 
 // call this to Enable
 function enableScroll() {
+    if (typeof window === 'undefined') return
+
     window.removeEventListener('DOMMouseScroll', preventDefault, false);
     window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
     window.removeEventListener('touchmove', preventDefault, wheelOpt);
@@ -69,14 +73,6 @@ function enableScroll() {
 
     // console.log("scroll enabled")
 }
-
-let heightClasses = [
-    'h-0',
-    'h-screen',
-    'h-[200vh]',
-    'h-[300vh]',
-    'h-[400vh]',
-]
 
 
 function SlotMaschine({words}) {
@@ -93,34 +89,6 @@ function SlotMaschine({words}) {
             </div>
         </div>
     </div>
-}
-
-const HomeSlide = forwardRef(({children, className, id, span, uppercase}, ref) => {
-    return <div className={classNames(
-        "section px-10 w-screen pt-32 overflow-hidden box-border",
-        heightClasses[span],
-        uppercase && 'uppercase',
-        'grid grid-cols-12 gap-16',
-        'relative',
-        className
-    )}
-                style={{height: `${span}00 vh`}}
-                id={id}
-                ref={ref}
-    >
-        {children}
-
-        <div className="snappers-container absolute inset-0 z-[-1]">
-            {
-                Array(span).fill(0).map((_zero, index) => <div className="h-screen snapper" key={index}/>)
-            }
-        </div>
-
-    </div>
-})
-HomeSlide.defaultProps = {
-    span: 1,
-    uppercase: true
 }
 
 
