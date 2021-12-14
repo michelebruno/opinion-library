@@ -355,7 +355,7 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
             });
         });
 
-        gsap.timeline({
+        const snapTl = gsap.timeline({
             scrollTrigger: {
                 trigger: 'body',
                 scrub: true,
@@ -372,7 +372,7 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
                 duration: 1,
                 ease: 'linear'
             })
-
+        return  () => snapTl.kill(true)
 
     }, [])
 
