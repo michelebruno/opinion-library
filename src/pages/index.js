@@ -213,7 +213,8 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
             })
 
 
-        let slotMachine = gsap.to('#slot-machine div', {
+        // SLOT MACHINE
+        gsap.to('#slot-machine div', {
             yPercent: -100 * (65 * 2 - 1) / (65 * 2),
             ease: 'power4.out',
             paused: true,
@@ -240,7 +241,8 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
             })
 
 
-        let maskMandateTl = gsap.timeline({
+        // MASK MANDATE
+        gsap.timeline({
             scrollTrigger: {
                 trigger: maskMandateSlide.current,
                 // scrub: 0.3,

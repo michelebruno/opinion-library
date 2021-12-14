@@ -1,8 +1,6 @@
 import * as React from "react"
 import Layout from "../components/Layout";
 import Button from "../components/Button";
-import Footer from "../components/Footer";
-
 
 export default function About() {
     return <Layout wrapperClassName={"bg-white text-black"} container footer>

@@ -10,14 +10,20 @@ exports.createResolvers = ({createResolvers}) => {
                     if (typeof regex === 'undefined') {
                         const {entries} = await context.nodeModel.findAll({
                             type: `SheetsScatter`,
-                            query: {limit: 35}
+                            query: {
+                                filter: {
+                                    scelta: {
+                                        eq: 'X'
+                                    }
+                                }
+                            }
                         })
 
-                        let l = Array.from(entries).map(i => ' ' + i.name).join('|')
+                        let l = Array.from(entries).map(i => i.name).join('|')
 
-                        // console.log(l)
+                        let wBrew = /\b/
+                        regex = new RegExp(wBrew.source + "(" + l + ")" + wBrew.source, 'gi')
 
-                        regex = new RegExp(`(${l})`, 'gi')
 
                     }
                     return source.extracted.split(regex)
@@ -27,8 +33,8 @@ exports.createResolvers = ({createResolvers}) => {
     })
 }
 
-exports.createSchemaCustomization = ({ actions }) => {
-    const { createTypes } = actions
+exports.createSchemaCustomization = ({actions}) => {
+    const {createTypes} = actions
     const typeDefs = `
     type SheetsEstratti implements Node {
       commentId: Int

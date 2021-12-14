@@ -5,8 +5,8 @@ export function HighlightedWord({children, className, isActive, promask, nomask,
     return <span
         className={classNames(
             'highlighted-word',
-            "relative inline-block",
-            "transition-colors duration-1000",
+            "relative inline-block z-[0]",
+            "transition-colors duration-1000 text-white",
             "before:z-[-1] before:absolute",
             "before:transition-all before:duration-1000 before:origin-left",
             "before:h-full before:w-full",
@@ -61,12 +61,15 @@ export default function Comment({
                 {' • '}
                 <span>{dateText || date}</span>
             </div>
-            <p className={ 'comment-text '+ (large ? 'text-7xl leading-snug py-4' : '')}>
+            <p className={'comment-text ' + (large ? 'text-7xl leading-snug py-4' : '')}>
                 {typeof splitted !== 'undefined' ? splitted.map((part, i) => {
-                    if (part.toLowerCase() === word || part.toLowerCase() === secondWord) return <HighlightedWord
-                        key={i} isActive={highlightWords} promask={origin === 'promask'} nomask={origin === 'nomask'}>
-                        {part}
-                    </HighlightedWord>
+                    if (part.toLowerCase() === word || part.toLowerCase() === secondWord) return <React.Fragment key={i}>{" "}
+                        <HighlightedWord
+                            isActive={highlightWords} promask={origin === 'promask'}
+                            nomask={origin === 'nomask'}>
+                            {part}
+                        </HighlightedWord>
+                    </React.Fragment>
 
                     if (part === secondWord) return <span key={i} className={
                         'border-light border-2'

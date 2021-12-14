@@ -1,37 +1,23 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import classNames from "classnames";
-import Comment from "./Comment";
-
-function Header({children, className}) {
-    return <div className={"px-8 py-2 text-xl uppercase border-white border-[1px] " + className}>
-        {children}
-    </div>
-}
 
 
-export function MaskometerGrid({chosen, words, distribution, comments}) {
-    const [collapse, setCollapse] = useState(false)
-
+export function MaskometerGrid({chosen, words, distribution}) {
     const [secondWord, setSecondWord] = useState()
 
-    useEffect(() => {
-        if (collapse) {
-            setSecondWord()
-        }
-    }, [collapse])
 
     return <div className="col-span-9 min-h-0 flex flex-col justify-between relative gap-4 ">
         <div className="flex-1">
             <div
-                className={classNames("h-full flex flex-col justify-between relative", collapse ? 'overflow-y-scroll' : 'overflow-hidden')}>
+                className={classNames("h-full flex flex-col justify-between relative", 'overflow-hidden')}>
                 <div className={"uppercase"}>
                     <p className="bg-promask text-white text-lg text-center h-full absolute top-0 bottom-0 left-0"
-                       style={{'writing-mode': 'vertical-lr'}}>
+                       style={{writingMode: 'vertical-lr'}}>
                         Promask
                     </p>
 
                     <p className="bg-nomask text-white text-lg text-center h-full absolute top-0 bottom-0 right-0"
-                       style={{'writing-mode': 'vertical-rl'}}>
+                       style={{writingMode: 'vertical-rl'}}>
                         Nomask
                     </p>
 
@@ -46,7 +32,7 @@ export function MaskometerGrid({chosen, words, distribution, comments}) {
                                 if (chosen.next) {
                                     return chosen.next === word && secondWord === name
                                 }
-                                return (chosen.current ? word === chosen.current : word === word) && secondWord === name
+                                return (chosen.current && word === chosen.current) && secondWord === name
                             })['promaskDelta']
 
                             let isCurrent = name === chosen.current
@@ -63,25 +49,25 @@ export function MaskometerGrid({chosen, words, distribution, comments}) {
                                                 "w-full relative ",
                                                 "before:absolute before:left-0 before:right-0 my-1",
                                                 "before:border-b-[1px] before:block before:top-1/2 before:transition-all",
-                                                collapse ? "before:w-0" : "before:w-full",
+                                                "before:w-full",
                                                 isCurrent ? 'before:border-b-light' : 'before:border-b-white'
                                             )
                                         }>
                                 <button
-                                    disabled={!collapse || isCurrent}
+                                    disabled={isCurrent}
                                     onClick={() => setSecondWord(isSelected ? undefined : name)}
                                     className={
                                         classNames(
                                             "inline-block px-1 text-lg border-[1px] uppercase text-center",
                                             "transition-[margin] duration-1000 delay-200",
-                                            collapse ? 'rounded-full' : 'rounded-[0px] -translate-x-1/2',
+                                            'rounded-[0px] -translate-x-1/2',
                                             !isCurrent && !isSelected &&
-                                            (collapse ? 'bg-black text-white hover:text-black hover:bg-white' : 'text-white bg-black'),
+                                            'bg-black text-white hover:text-black hover:bg-white',
                                             isCurrent && "bg-black text-light border-light",
                                             isSelected && "bg-white text-black border-white"
                                         )}
                                     style={{
-                                        marginLeft: !collapse ? delta + "%" : undefined,
+                                        marginLeft: delta + "%"
                                         // backgroundColor: mix('6147FF', 'CFFF58', delta)
                                     }}>
                                     {name}
