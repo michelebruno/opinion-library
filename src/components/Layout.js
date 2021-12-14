@@ -6,6 +6,7 @@ import classNames from "classnames";
 import Button from "./Button";
 import Logo from "./Logo";
 import Image from "./Image";
+import Footer from "./Footer";
 
 function MenuItem({children, to}) {
     return <li className={"first:border-current"}>
@@ -14,7 +15,7 @@ function MenuItem({children, to}) {
     </li>
 }
 
-export default function Layout({children, className, container, wrapperClassName, fixedHeader}) {
+export default function Layout({children, className, container, wrapperClassName, fixedHeader, footer}) {
 
     const {logo} = useStaticQuery(graphql`{
         logo : file(relativePath: {eq: "logo.png"}) {
@@ -45,5 +46,6 @@ export default function Layout({children, className, container, wrapperClassName
         <div className={classNames('relative', container && 'mx-8', className)}>
             {children}
         </div>
+        {footer && <Footer />}
     </div>
 }

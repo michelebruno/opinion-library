@@ -1,10 +1,11 @@
 import * as React from "react"
 import Layout from "../components/Layout";
 import Button from "../components/Button";
+import Footer from "../components/Footer";
 
 
 export default function About() {
-    return <Layout wrapperClassName={"bg-white text-black"} container>
+    return <Layout wrapperClassName={"bg-white text-black"} container footer>
         <h2 className={"text-8xl"}>The research presented in this website was carried out during the Final Synthesis
             Studio of the Master Degree in Communication Design offered by Politecnico di Milano.</h2>
 
@@ -152,5 +153,5 @@ export default function About() {
                 </Button>
             </nav>
         </div>
-    </Layout>
+     </Layout>
 }

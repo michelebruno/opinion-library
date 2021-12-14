@@ -24,4 +24,58 @@
     article h2 {
         @apply text-white bg-black mt-16 inline-block uppercase;
     }
+
+    footer h3 {
+        @apply bg-black text-white inline-block uppercase;
+    }
+
+    footer [href] {
+        @apply underline;
+    }
+
+    footer .bi {
+        @apply inline-block mr-2;
+    }
+    footer * {
+        grid-column: span 1;
+    }
+
+    footer .logo {
+        display: grid;
+        grid-template-columns: repeat(2, 65px);
+        column-gap: 0.5rem;
+    }
+    footer p {
+        @apply my-2;
+    }
+
+    footer .logo * {
+        grid-column: span 1;
+    }
+
+    footer .icon {
+        vertical-align: bottom;
+        padding-bottom: 0.6rem;
+    }
+
+    footer img {
+        height: 50px;
+        width: auto;
+    }
+
+    footer h1 {
+        margin: 0 0 1rem 0;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+    }
+
+    footer ul {
+        padding: 0;
+    }
+
+    footer li {
+        list-style: none;
+        margin: 0;
+        line-height: 1.5;
+    }
 }
