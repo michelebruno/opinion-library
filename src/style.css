@@ -1,3 +1,9 @@
+@font-face {
+    font-family: Everett;
+    src: local(Everett), url("fonts/Everett-Regular.woff");
+    font-weight: normal;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -83,7 +89,7 @@
     }
 
     .archive-button {
-        --gradient-mix : '#FFF';
+        --gradient-mix: '#FFF';
         background-color: var(--gradient-mix);
         border-color: var(--gradient-mix);
 
