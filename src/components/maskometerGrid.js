@@ -1,13 +1,19 @@
 import React, {useState} from "react";
 import classNames from "classnames";
 import {ArchiveButton} from "./Button";
+import {mix} from "../utils/mix";
 
 
 export function MaskometerGrid({chosen, words, distribution}) {
     const [secondWord, setSecondWord] = useState()
 
 
-    return <div className="h-full flex flex-col justify-between relative gap-4 ">
+    return <div className="h-full flex flex-col justify-between relative gap-4  ">
+        <p className={"mx-8 mb-3 text-base"}>
+            Horizontal position corresponds to usage by the two groups in comments mentioning the word
+            {" "}
+            <span className="underline">{chosen.next || chosen.current}</span>
+        </p>
         <div className="flex-1 ">
             <div
                 className={classNames(" h-full px-8 py-4 flex flex-col justify-between relative", 'overflow-hidden')}>
@@ -34,7 +40,6 @@ export function MaskometerGrid({chosen, words, distribution}) {
                         let delta = isCurrent ?
                             deltaPromask :
                             distribution
-                                .nodes
                                 .find(({
                                            word,
                                            secondWord
@@ -46,7 +51,6 @@ export function MaskometerGrid({chosen, words, distribution}) {
                                     return (chosen.current && word === chosen.current) && secondWord === name
                                 })['promaskDelta']
 
-                        
                         delta = Math.round(delta * 100)
 
                         return <div key={name}
@@ -56,14 +60,14 @@ export function MaskometerGrid({chosen, words, distribution}) {
                                             "before:absolute before:left-0 before:right-0 my-1",
                                             "before:border-b-[1px] before:block before:top-1/2 before:transition-all",
                                             "before:w-full",
-                                            isCurrent ? 'before:border-b-gray' : 'before:border-b-current'
+                                            isCurrent ? 'before:border-b-light' : 'before:border-b-current'
                                         )
                                     }>
                             <ArchiveButton
                                 isCurrent={isCurrent}
                                 style={{
-                                    marginLeft: delta + "%"
-                                    // backgroundColor: mix('6147FF', 'CFFF58', delta)
+                                    marginLeft: delta + "%",
+                                    backgroundColor: isCurrent ? undefined : mix('EA3C9A', '3514FF', delta)
                                 }}
                                 className={"transition-[margin] duration-1000 delay-200 rounded-[0px] -translate-x-1/2"}
                             >

@@ -9,9 +9,8 @@ export function ArchiveButton({children, className, isSelected, isCurrent, ...pr
             classNames(
                 "archive-button",
                 !isCurrent && !isSelected &&
-                'bg-black text-white hover:text-black hover:bg-white',
-                isCurrent && "bg-black text-gray",
-                isSelected && "bg-white text-black",
+                'text-white hover:border-light',
+                isSelected && "bg-light text-black border-light",
                 className
             )}
         {...props}

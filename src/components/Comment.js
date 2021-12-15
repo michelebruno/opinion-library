@@ -30,7 +30,7 @@ export default function Comment({
                                     petitionLink,
                                     likes,
                                     author,
-                                    date,
+                                    createdAt,
                                     dateText,
                                     word,
                                     secondWord,
@@ -48,21 +48,21 @@ export default function Comment({
         id={id}
         className={classNames(
             className,
-            "comment flex w-full bg-white text-black boreder-2 normal-case",
+            "comment flex gap-4 w-full bg-white text-black boreder-2 normal-case",
             large ? 'p-8 rounded-3xl' : 'p-4 rounded-xl text-base ',
             origin === 'promask' && 'border-promask',
             origin === 'nomask' && 'border-nomask'
         )}>
-        <div className="w-2/12 ">
-            <div className={"mr-[25%] rounded-full bg-" + origin} style={{aspectRatio: '1'}}/>
+        <div className="w-1/12 ">
+            <div className={"rounded-full bg-" + origin} style={{aspectRatio: '1'}}/>
         </div>
-        <div className={"w-10/12"}>
-            <div className={"text-[#A2A2A2] " + (large ? 'text-3xl' : 'text-base')}>
+        <div className={"w-11/12"}>
+            <div className={"text-gray " + (large ? 'text-3xl' : 'text-sm')}>
                 <span>{author}</span>
                 {' • '}
-                <span>{dateText || date}</span>
+                <span>{dateText || createdAt}</span>
             </div>
-            <p className={'comment-text ' + (large ? 'text-7xl leading-snug py-4' : '')}>
+            <p className={'comment-text ' + (large ? 'text-7xl leading-snug py-4' : 'py-1 text-base')}>
                 {typeof splitted !== 'undefined' ? splitted.map((part, i) => {
                     if (part.toLowerCase() === word || part.toLowerCase() === secondWord) return <React.Fragment key={i}>{" "}
                         <HighlightedWord
@@ -79,8 +79,8 @@ export default function Comment({
                     return part
                 }) : children}
             </p>
-            <p className={"text-[#A2A2A2] " + (large ? 'text-2xl' : 'text-base')}>
-                <a href={petitionLink} className={"underline"} target={'_blank'}>{petitionTitle}</a>
+            <p className={"text-gray " + (large ? 'text-2xl' : 'text-sm')}>
+                <a href={petitionLink} className={"underline"} target={'_blank'}>{petitionTitle || "Petition title"}</a>
             </p>
         </div>
 

@@ -1,9 +1,24 @@
+const users = {}
+
 exports.createResolvers = ({createResolvers}) => {
 
     let regex
 
     createResolvers({
         SheetsEstratti: {
+            userId: {
+                type: "String",
+                resolve: (source) => {
+                    let author = source.author
+
+                    if (!(author in users)) {
+                        users[author] = Math.floor(Math.random() * 100000 ) + 2
+                    }
+
+                    return "User" + users[author]
+
+                }
+            },
             splitted: {
                 type: "[String]",
                 resolve: async (source, args, context, info) => {

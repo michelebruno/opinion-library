@@ -8,10 +8,20 @@ import {MaskometerGrid} from "../components/maskometerGrid";
 import Comments from "../components/Comments";
 
 
-export default function Glossary({data: {words, distribution, allComments}}) {
+export default function Glossary({data: {words, allComments, ...data}}) {
     const [chosen, setChosen] = useState({})
     const [secondWord, setSecondWord] = useState()
     const [showComments, setShowComments] = useState(false)
+
+    const listOfChosenWords = words.nodes.map(x => x.name)
+
+    const distribution = data
+        .distribution
+        .nodes
+        .filter(i => {
+            return listOfChosenWords.findIndex(x => x === i.secondWord) !== -1
+        })
+
 
     return <Layout wrapperClassName={"max-h-screen h-screen flex flex-col"}
                    className={"flex-1 min-h-0 "}>
@@ -31,7 +41,7 @@ export default function Glossary({data: {words, distribution, allComments}}) {
                                 return word === chosen.current
                             })
                         }
-                        words={words.nodes}
+                        distribution={distribution.filter(({word}) => word === chosen.current)}
                         chosen={chosen.current}
                         secondWord={secondWord}
                         onChangeSecondWord={setSecondWord}
@@ -46,11 +56,11 @@ export const query = graphql`query Glossary {
     words: allSheetsScatter(filter: {scelta: {eq: "X"}}, sort: {order: ASC, fields: [name]}){
         nodes{
             name
-            scelta
             deltaPromask
+            finding
         }
     }
-    distribution: allSheetsDistribuzioneV2 {
+    distribution: allSheetsDistribuzioneV2(sort: {order: ASC, fields: [secondWord]}) {
         nodes {
             word
             secondWord

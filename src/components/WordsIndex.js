@@ -9,28 +9,34 @@ export default function Index({words, chosen, setChosen}) {
         chosen.current ? "w-2/12 border-r-2 border-r-current" : "w-full "
     )}>
         <h2 className={
-            classNames("sticky top-0 text-3xl uppercase p-8 border-current border-y-2 transition-[width] duration-1000 bg-black", !chosen.current && 'w-screen')
+            classNames("sticky top-0 text-3xl px-8 pt-4 pb-3 border-current border-y-2 transition-[width] duration-1000 bg-black", !chosen.current && 'w-screen')
         }>
             Words
         </h2>
 
         <ul className="pb-8">
             {words
-                .map(({name, link}) => <li
+                .map(({name, finding}) => <li
                     key={name}
                     onMouseEnter={() => setChosen(
                         c => ({current: c.current, next: name})
                     )}
                     onMouseLeave={() => setChosen(c => ({...c, next: undefined}))}
                     onClick={() => chosen.current !== name ? setChosen({current: name}) : setChosen({})}
-                    className={classNames("text-xl uppercase",
-                        "px-8 py-8",
+                    className={classNames(
                         "border-b-[1px] border-current cursor-pointer",
-                        "hover:bg-light hover:text-black",
-                        chosen.current === name && "bg-light text-black"
+                        chosen.current === name ? "bg-light text-black" : "hover:text-light",
                     )}
                 >
-                    {name}
+                    <h2 className={classNames(
+                        "text-xl uppercase",
+                        "px-8 pt-4 pb-3",
+                    )}>
+                        {name}
+                    </h2>
+                    {(chosen.current === name && finding) && <p className={"px-8 pb-4"}>
+                        {finding}
+                    </p>}
                 </li>)}
         </ul>
     </div>

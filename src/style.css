@@ -83,7 +83,11 @@
     }
 
     .archive-button {
-        @apply block px-2 text-base border-[0.5px] border-current uppercase text-center rounded-none;
+        --gradient-mix : '#FFF';
+        background-color: var(--gradient-mix);
+        border-color: var(--gradient-mix);
+
+        @apply block px-2 text-base uppercase text-center rounded-none border-[1px];
     }
 
 }

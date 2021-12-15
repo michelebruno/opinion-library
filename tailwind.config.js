@@ -6,8 +6,8 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'promask': '#4E31FF',
-                'nomask': '#EA3CB7',
+                'promask': '#3514FF',
+                'nomask': '#EA3C9A',
                 'light': '#CFFF58',
                 'light-darker': '#B3E537',
                 'gray': '#A2A2A2'
