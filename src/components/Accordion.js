@@ -5,9 +5,24 @@ export default function Accordion({onClick, isOpen, children, title}) {
 
 
     return <div className={"flex-grow flex flex-col " + (isOpen && "h-full")}>
-        <h2 className={"p-8 text-3xl uppercase border-y-2 border-y-current box-border " + (title === 'Comments' && '-mx-[2px]')}
-            onClick={onClick}
-        >{title}</h2>
+        <div className={"p-8 border-y-2 border-y-current box-border flex justify-between"} onClick={onClick}
+        >
+            <h2
+                className={" text-3xl uppercase " + (title === 'Comments' && '-mx-[2px]')}
+            >
+                {title}
+            </h2>
+
+            <div>
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 12.5L25 12.5" stroke="white" strokeWidth="2"/>
+                    <path d="M12.5 25L12.5 -1.04308e-06" stroke="white" strokeWidth="2"
+                          className={"transition-all " + (isOpen && "rotate-90")}/>
+                </svg>
+            </div>
+
+        </div>
+
         <div className={classNames(
             "overflow-hidden",
             "transition-all duration-1000 ",

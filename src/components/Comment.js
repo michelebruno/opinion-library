@@ -6,14 +6,15 @@ export function HighlightedWord({children, className, isActive, promask, nomask,
         className={classNames(
             'highlighted-word',
             "relative inline-block z-[0]",
-            "transition-colors duration-1000 text-white",
+            "transition-colors duration-1000",
             "before:z-[-1] before:absolute",
             "before:transition-all before:duration-1000 before:origin-left",
             "before:h-full before:w-full",
             !promask && !nomask && 'before:bg-light',
             promask && 'before:bg-promask',
             nomask && 'before:bg-nomask',
-            !isActive && 'before:scale-x-0',
+            isActive && (nomask || promask) && 'text-white',
+            !isActive && 'before:scale-x-0 text-white',
             className
         )}
     >

@@ -22,11 +22,15 @@ export default function Glossary({data: {words, distribution, allComments}}) {
                 chosen.current ? 'w-10/12' : 'w-0'
             )}>
                 <Accordion title={"Maskometer"} isOpen={!showComments} onClick={() => setShowComments(!showComments)}>
-                    <MaskometerGrid chosen={chosen} words={words} distribution={distribution} />
+                    <MaskometerGrid chosen={chosen} words={words} distribution={distribution}/>
                 </Accordion>
                 <Accordion title={"Comments"} isOpen={showComments} onClick={() => setShowComments(!showComments)}>
                     <Comments
-                        comments={allComments.nodes.filter(({word}) => word === chosen.current)}
+                        comments={allComments.nodes
+                            .filter(({word}) => {
+                                return word === chosen.current
+                            })
+                        }
                         words={words.nodes}
                         chosen={chosen.current}
                         secondWord={secondWord}

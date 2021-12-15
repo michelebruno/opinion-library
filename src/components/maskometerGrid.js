@@ -27,11 +27,9 @@ export function MaskometerGrid({chosen, words, distribution}) {
                 {(typeof chosen !== 'undefined' && chosen.current) ?
                     words.nodes.map(({name, deltaPromask}) => {
 
-                        let isCurrent = name === chosen.current
+                        let isCurrent = chosen.next ? chosen.next === name : chosen.current === name
                         let isSelected = name === secondWord
-                        if (isCurrent) {
-                            delta = deltaPromask
-                        }
+
 
                         let delta = isCurrent ?
                             deltaPromask :
@@ -48,7 +46,7 @@ export function MaskometerGrid({chosen, words, distribution}) {
                                     return (chosen.current && word === chosen.current) && secondWord === name
                                 })['promaskDelta']
 
-
+                        
                         delta = Math.round(delta * 100)
 
                         return <div key={name}
