@@ -17,6 +17,7 @@
     article {
         @apply text-xl;
     }
+
     article p {
         @apply pb-8;
     }
@@ -36,6 +37,7 @@
     footer .bi {
         @apply inline-block mr-2;
     }
+
     footer * {
         grid-column: span 1;
     }
@@ -45,6 +47,7 @@
         grid-template-columns: repeat(2, 65px);
         column-gap: 0.5rem;
     }
+
     footer p {
         @apply my-2;
     }
@@ -78,4 +81,9 @@
         margin: 0;
         line-height: 1.5;
     }
+
+    .archive-button {
+        @apply block px-2 text-base border-[0.5px] border-current uppercase text-center rounded-none;
+    }
+
 }

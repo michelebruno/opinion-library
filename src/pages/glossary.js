@@ -39,7 +39,7 @@ export default function Glossary({data: {words, distribution, allComments}}) {
 }
 
 export const query = graphql`query Glossary {
-    words: allSheetsScatter(filter: {scelta: {eq: "X"}}){
+    words: allSheetsScatter(filter: {scelta: {eq: "X"}}, sort: {order: ASC, fields: [name]}){
         nodes{
             name
             scelta

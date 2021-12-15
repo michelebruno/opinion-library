@@ -1,9 +1,29 @@
 import React from "react";
+import classNames from "classnames";
+
+export function ArchiveButton({children, className, isSelected, isCurrent, ...props}) {
+
+    return <button
+        disabled={isCurrent}
+        className={
+            classNames(
+                "archive-button",
+                !isCurrent && !isSelected &&
+                'bg-black text-white hover:text-black hover:bg-white',
+                isCurrent && "bg-black text-gray",
+                isSelected && "bg-white text-black",
+                className
+            )}
+        {...props}
+    >
+        {children}
+    </button>
+}
 
 
 export default function Button({children, id, as: As, after, large, ...props}) {
     return <As id={id}
-               className={"group hover:text-light inline-block flex items-middle "}
+               className={"group hover:text-light inline-block flex items-middle"}
                activeClassName={"border-light text-light"} {...props}>
         <span
             className={

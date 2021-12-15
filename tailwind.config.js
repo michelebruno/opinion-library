@@ -10,7 +10,7 @@ module.exports = {
                 'nomask': '#EA3CB7',
                 'light': '#CFFF58',
                 'light-darker': '#B3E537',
-
+                'gray': '#A2A2A2'
             }
         },
         fontFamily: {

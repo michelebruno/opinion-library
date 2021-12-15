@@ -4,7 +4,6 @@ import {Helmet} from "react-helmet";
 import {graphql, Link, useStaticQuery} from "gatsby";
 import classNames from "classnames";
 import Button from "./Button";
-import Logo from "./Logo";
 import Image from "./Image";
 import Footer from "./Footer";
 
@@ -35,10 +34,10 @@ export default function Layout({children, className, container, wrapperClassName
                 <MenuItem to={"/"}>
                     Context
                 </MenuItem>
-                <MenuItem to={"/glossary"}>
+                <MenuItem to={"/glossary/"}>
                     Archive
                 </MenuItem>
-                <MenuItem to={"/about"}>
+                <MenuItem to={"/about/"}>
                     About
                 </MenuItem>
             </ul>
