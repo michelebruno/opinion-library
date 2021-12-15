@@ -3,7 +3,6 @@ import React from "react";
 
 export default function Index({words, chosen, setChosen}) {
 
-
     return <div className={classNames(
         "transition-all duration-1000 overflow-y-scroll",
         chosen.current ? "w-2/12 border-r-2 border-r-current" : "w-full "
@@ -24,8 +23,8 @@ export default function Index({words, chosen, setChosen}) {
                     onMouseLeave={() => setChosen(c => ({...c, next: undefined}))}
                     onClick={() => chosen.current !== name ? setChosen({current: name}) : setChosen({})}
                     className={classNames(
-                        "border-b-[1px] border-current cursor-pointer",
-                        chosen.current === name ? "bg-light text-black" : "hover:text-light",
+                        "border-y-[1px] border-b-current cursor-pointer hover:border-t-light",
+                        chosen.current === name ? "bg-light text-black border-t-light" : "hover:text-light border-t-black",
                     )}
                 >
                     <h2 className={classNames(

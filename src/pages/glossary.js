@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {graphql} from "gatsby";
 import Layout from "../components/Layout";
 import classNames from "classnames";
@@ -12,6 +12,10 @@ export default function Glossary({data: {words, allComments, ...data}}) {
     const [chosen, setChosen] = useState({})
     const [secondWord, setSecondWord] = useState()
     const [showComments, setShowComments] = useState(false)
+
+    useEffect(() => {
+        !showComments && secondWord && setShowComments(true)
+    },[secondWord])
 
     const listOfChosenWords = words.nodes.map(x => x.name)
 
@@ -32,7 +36,7 @@ export default function Glossary({data: {words, allComments, ...data}}) {
                 chosen.current ? 'w-10/12' : 'w-0'
             )}>
                 <Accordion title={"Maskometer"} isOpen={!showComments} onClick={() => setShowComments(!showComments)}>
-                    <MaskometerGrid chosen={chosen} words={words} distribution={distribution}/>
+                    <MaskometerGrid chosen={chosen} words={words} distribution={distribution} onClickSecondWord={setSecondWord}/>
                 </Accordion>
                 <Accordion title={"Comments"} isOpen={showComments} onClick={() => setShowComments(!showComments)}>
                     <Comments

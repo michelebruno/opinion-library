@@ -4,8 +4,7 @@ import {ArchiveButton} from "./Button";
 import {mix} from "../utils/mix";
 
 
-export function MaskometerGrid({chosen, words, distribution}) {
-    const [secondWord, setSecondWord] = useState()
+export function MaskometerGrid({chosen, words, distribution, onClickSecondWord}) {
 
 
     return <div className="h-full flex flex-col justify-between relative gap-4  ">
@@ -19,12 +18,12 @@ export function MaskometerGrid({chosen, words, distribution}) {
                 className={classNames(" h-full px-8 py-4 flex flex-col justify-between relative", 'overflow-hidden')}>
                 <div className={"z-1 uppercase"}>
 
-                    <p className="bg-promask text-white text-lg text-center h-full absolute top-0 bottom-0 left-0"
+                    <p className="bg-promask text-white text-xl text-center h-full absolute top-0 bottom-0 left-0 rotate-180 p-1 z-10"
                        style={{writingMode: 'vertical-lr'}}>
                         Promask
                     </p>
 
-                    <p className="bg-nomask text-white text-lg text-center h-full absolute top-0 bottom-0 right-0"
+                    <p className="bg-nomask text-white text-xl text-center h-full absolute top-0 bottom-0 right-0 p-1 z-10"
                        style={{writingMode: 'vertical-rl'}}>
                         Nomask
                     </p>
@@ -43,7 +42,6 @@ export function MaskometerGrid({chosen, words, distribution}) {
                     words.nodes.map(({name, deltaPromask}) => {
 
                         let isCurrent = chosen.next ? chosen.next === name : chosen.current === name
-                        let isSelected = name === secondWord
 
 
                         let delta = isCurrent ?
@@ -67,18 +65,19 @@ export function MaskometerGrid({chosen, words, distribution}) {
                                         classNames(
                                             "w-full flex items-center relative",
                                             "before:absolute before:left-0 before:right-0 ",
-                                            "before:border-b-[1px] before:opacity-20 before:block before:top-1/2 before:transition-all",
+                                            "before:border-b-[1px] before:block before:top-1/2 before:transition-all",
                                             "before:w-full",
-                                            isCurrent ? 'before:border-b-light' : 'before:border-b-current'
+                                            isCurrent ? 'before:border-b-light' : 'before:border-b-current  before:opacity-20 '
                                         )
                                     }>
                             <ArchiveButton
                                 isCurrent={isCurrent}
                                 style={{
                                     marginLeft: delta + "%",
-                                    backgroundColor: isCurrent ? undefined : mix('EA3C9A', '3514FF', delta)
+                                    '--gradient-mix': isCurrent ? undefined : mix('EA3C9A', '3514FF', delta)
                                 }}
                                 className={"transition-[margin] duration-1000 delay-200 rounded-[0px] -translate-x-1/2"}
+                                onClick={() => onClickSecondWord(name)}
                             >
                                 {name}
                             </ArchiveButton>
