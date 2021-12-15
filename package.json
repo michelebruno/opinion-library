@@ -34,8 +34,7 @@
     "matter-js": "^0.17.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-helmet": "^6.1.0",
-    "react-highlight-words": "^0.17.0"
+    "react-helmet": "^6.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.0",
