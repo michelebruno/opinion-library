@@ -7927,6 +7927,16 @@ markdown-table@^2.0.0:
   dependencies:
     repeat-string "^1.0.0"
 
+matter-dom-plugin@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/matter-dom-plugin/-/matter-dom-plugin-1.0.0.tgz#62214c9d355058eedaeb6fab981502360fca7fab"
+  integrity sha1-YiFMnTVQWO7a62+rmBUCNg/Kf6s=
+
+matter-js@^0.17.1:
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/matter-js/-/matter-js-0.17.1.tgz#b30ac4c708116258fbcaacd2efd8a94e34a91c7f"
+  integrity sha512-pSquoENJgvSAlQGcA0s5UkmEohGXZaUww2g3B6qG87x0iEcVf+aigMXn5UkFPdnh6w3B+C4vXSLaYqhHwKrOLA==
+
 md5-file@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/md5-file/-/md5-file-5.0.0.tgz#e519f631feca9c39e7f9ea1780b63c4745012e20"
