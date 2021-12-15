@@ -322,7 +322,10 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
                 <Image image={front.nodes[0]} className={"absolute right-16 top-8 w-1/6"}/>
                 <Image image={front.nodes[3]} className={"absolute right-20 bottom-32 w-1/6"}/>
                 <Image image={front.nodes[1]} className={"absolute left-20 bottom-60 w-1/6"}/>
-                <h1 className="text-black text-center col-span-12 row-start-3 self-end ">Opinion Library</h1>
+                <div className="text-black text-center col-span-12 row-start-3 row-span-2 self-middle">
+                    <h1 className={"text-9xl"} >Opinion Library</h1>
+                    <h2 className={"text-2xl normal-case"}>What do change.org users think about mask mandates in the U.S.?</h2>
+                </div>
                 <div className="absolute left-0 right-0 bottom-0 py-8 text-center text-xl normal-case text-black">
                     <p>
                         Scroll down to discover more

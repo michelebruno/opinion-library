@@ -52,7 +52,7 @@ export default function Comment({
             <div className={"rounded-full bg-" + origin} style={{aspectRatio: '1'}}/>
         </div>
         <div className={"w-11/12"}>
-            <div className={"text-gray " + (large ? 'text-3xl' : 'text-sm')}>
+            <div className={"text-gray " + (large ? 'text-xl' : 'text-sm')}>
                 <span>{author}</span>
                 {' • '}
                 <span>{dateText || createdAt}</span>

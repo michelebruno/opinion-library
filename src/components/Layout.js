@@ -9,8 +9,8 @@ import Footer from "./Footer";
 
 function MenuItem({children, to}) {
     return <li className={"first:border-current"}>
-        <Button as={Link} to={to}
-                activeClassName={"border-light text-light"}>{children}</Button>
+        <Link to={to} className={"hover:underline active:text-light-darker"}
+                activeClassName={"border-light text-light underline "}>{children}</Link>
     </li>
 }
 
@@ -26,8 +26,8 @@ export default function Layout({children, className, container, wrapperClassName
     return <div className={classNames(wrapperClassName)}>
         <Helmet bodyAttributes={{'class': 'bg-black text-white'}}/>
         <nav
-            className={classNames(fixedHeader ? 'fixed' : 'sticky', "top-0 z-40 py-8 px-10 flex w-full uppercase justify-between text-lg")}>
-            <Link to={"/"}>
+            className={classNames(fixedHeader ? 'fixed' : 'sticky', "top-0 z-40 py-4 px-8 flex w-full uppercase justify-between text-lg items-center")}>
+            <Link to={"/"} className={"w-1/12"}>
                 <Image image={logo} />
             </Link>
             <ul className={"flex gap-8"}>
