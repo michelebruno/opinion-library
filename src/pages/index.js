@@ -1,4 +1,5 @@
 import * as React from "react"
+import {useEffect, useRef, useState} from "react"
 import Layout from "../components/Layout";
 import gsap from 'gsap'
 import {ScrollTrigger} from "gsap/ScrollTrigger";
@@ -6,7 +7,6 @@ import {CSSRulePlugin} from "gsap/CSSRulePlugin"
 import {CSSPlugin} from "gsap/CSSPlugin"
 import {ScrollToPlugin} from "gsap/ScrollToPlugin"
 import {TextPlugin} from "gsap/TextPlugin"
-import {useEffect, useRef, useState} from "react";
 import classNames from "classnames";
 import {graphql, Link} from "gatsby";
 import Image from "../components/Image";
@@ -14,6 +14,7 @@ import Comment, {HighlightedWord} from "../components/Comment";
 import DeltaWord from "../components/DeltaWord";
 import Button from "../components/Button";
 import HomeSlide from "../components/HomeSlide";
+import SlotMaschine from "../components/SlotMaschine";
 
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(ScrollToPlugin)
@@ -72,23 +73,6 @@ function enableScroll() {
     window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
 
     // console.log("scroll enabled")
-}
-
-
-function SlotMaschine({words}) {
-    return <div className="px-16 py-6 overflow-hidden h-[1.75em] rounded-full border-2 border-white inline-block">
-        <div className="overflow-hidden inline-block h-[1em]" id={"slot-machine"}>
-            <div className="slot-content w-auto">
-                {
-                    [
-                        ...words.nodes.map(i => i.name),
-                        ...words.nodes.map(i => i.name),
-                        'mask mandate',
-                    ].map((w, i) => <span className="block w-auto" key={i}>{w}</span>)
-                }
-            </div>
-        </div>
-    </div>
 }
 
 
@@ -213,22 +197,6 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
             })
 
 
-        // SLOT MACHINE
-        gsap.to('#slot-machine div', {
-            yPercent: -100 * (65 * 2 - 1) / (65 * 2),
-            ease: 'power4.out',
-            paused: true,
-            duration: 3,
-            delay: .3,
-            onComplete: enableScroll,
-            scrollTrigger: {
-                trigger: '#slot-machine',
-                once: true,
-                // start: 'top center'
-                onEnter: disableScroll
-            }
-        })
-
         let petitionImagesTl = gsap
             .from(gsap.utils.toArray(maskMandateSlide.current.querySelectorAll('img')), {
                 paused: true,
@@ -259,17 +227,6 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
         })
 
         // WHY YOU SIGNED
-        let commentAnimation = gsap.to('#fake-comment .comment-text', {
-            text: {
-                value: 'Those who signed these petitions explained their reasons in comments.'
-            },
-            duration: 2,
-            ease: 'linear',
-            paused: true,
-            onStart: disableScroll,
-            onComplete: enableScroll
-        })
-
 
         gsap.timeline({
             scrollTrigger: {
@@ -285,12 +242,6 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
                 yPercent: 100,
                 opacity: 0
             })
-
-
-        ScrollTrigger.create({
-            trigger: whyYouSigned.current,
-            onEnter: () => commentAnimation.play()
-        })
 
         // THIS LETS US UNDERSTAND
         gsap.timeline(
@@ -332,18 +283,10 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
             scrollTween;
 
         function goToSection(i) {
-            let scrollTo = {
-                y: i * window.innerHeight,
-                autoKill: false
-            }
             scrollTween = gsap.to(window, {
-                scrollTo,
+                scrollTo: {y: i * window.innerHeight, autoKill: false},
                 duration: 1,
-                onStart: disableScroll,
-                onComplete: () => {
-                    scrollTween = null
-                    enableScroll()
-                },
+                onComplete: () => scrollTween = null,
                 overwrite: true
             });
         }
@@ -357,30 +300,23 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
             });
         });
 
-        const snapTl = gsap.timeline({
+        // just in case the user forces the scroll to an inbetween spot (like a momentum scroll on a Mac that ends AFTER the scrollTo tween finishes):
+        gsap.timeline({
             scrollTrigger: {
-                trigger: 'body',
-                scrub: true,
-                snap: {
-                    snapTo: 1 / (panels.length + 1),
-                    ease: 'linear',
-                    inertia: false,
-                    delay: 0,
-                }
+                start: 0,
+                end: "max",
+                snap: 1 / (panels.length - 1)
             }
         })
             .from('#progress-bar', {
-                scaleY: 0,
-                duration: 1,
-                ease: 'linear'
+                scaleY: 0
             })
-        return  () => snapTl.kill(true)
 
     }, [])
 
     return (
         <Layout fixedHeader className={"text-[4.34vw] leading-tight"}>
-            <div className="fixed left-0 top-0 bottom-0 origin-top bg-light w-2 z-40" id="progress-bar"></div>
+            <div className="fixed right-0 top-0 bottom-0 origin-top bg-light w-2 z-40" id="progress-bar"></div>
             <HomeSlide className={"bg-light pb-32 text-[6vw] grid-rows-6 z-50"}>
                 <Image image={front.nodes[2]} className={"absolute left-[8.3%] top-16 w-1/6"}/>
                 <Image image={front.nodes[0]} className={"absolute right-16 top-8 w-1/6"}/>
@@ -403,7 +339,7 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
             </HomeSlide>
             <HomeSlide span={1} ref={changeDataSlide}>
                 <h2 className={"col-span-9"}>
-                    Change.org is the largest petition website, and in 2020 <span
+                    <span className="text-light">Change.org</span> is the largest petition website, and in 2020 <span
                     className="inline-block">it only grew</span> larger,
                     especially in the United States.
                 </h2>
@@ -461,8 +397,8 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
                         <h2 className={"col-span-8"}>
                             As the platform grew,
                             so did the topics being discussed. One of the
-                            most controversial
-                            themes has been that of <br/>
+                            most <span className="text-light">controversial
+                            themes</span> has been that of <br/>
                             <SlotMaschine words={words}/>
                         </h2>
                         <div className={"absolute h-screen w-full top-0 left-0 right-0"}>
@@ -486,10 +422,11 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
             <HomeSlide className={"auto-rows-min content-center pb-32"} id={"why-you-signed"} ref={whyYouSigned}>
                 <div className="col-span-9 aspect-[16/7]">
                     <p className="pb-8">
-                        Why they have signed
+                        <span className="text-light">Why</span> they have signed
                     </p>
-                    <Comment id={'fake-comment'} author="User33" dateText={"1 minute ago"}
+                    <Comment id={'fake-comment'} author="User30130" dateText={"1 minute ago"}
                              petitionTitle="Mask mandate petition" large origin={'black'}>
+                        Those who signed these petitions explained their reasons in comments.
                     </Comment>
                 </div>
             </HomeSlide>
@@ -497,7 +434,8 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
 
                 <div className={"col-span-8 relative "}>
                     <p id={'this-allows'}>
-                        This allows us to understand the different points of view and the language used to
+                        This allows us to understand the different points of view and the <span
+                        className="text-light">language</span> used to
                         express them.
                     </p>
                     <p id={'recurring-words'} className={''}>
@@ -510,7 +448,7 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
                 </div>
                 <div className="col-span-4  normal-case overflow-hidden">
                     <div
-                        className="grid auto-rows-min gap-y-4 comment-container absolute top-0 pt-32 h-screen overflow-scroll ">
+                        className="grid auto-rows-min gap-y-4 comment-container absolute top-0 pt-32 h-screen overflow-y-scroll ">
                         {
                             homeComments.map(comment => <Comment key={comment.splitted}
                                                                  highlightWords={highlightWords}

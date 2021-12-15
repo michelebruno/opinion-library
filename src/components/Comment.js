@@ -5,16 +5,11 @@ export function HighlightedWord({children, className, isActive, promask, nomask,
     return <span
         className={classNames(
             'highlighted-word',
-            "relative inline-block z-[0]",
-            "transition-colors duration-1000",
-            "before:z-[-1] before:absolute",
-            "before:transition-all before:duration-1000 before:origin-left",
-            "before:h-full before:w-full",
             !promask && !nomask && 'before:bg-light',
             promask && 'before:bg-promask',
             nomask && 'before:bg-nomask',
             isActive && (nomask || promask) && 'text-white',
-            !isActive && 'before:scale-x-0 text-white',
+            !isActive && 'before:scale-x-0',
             className
         )}
     >
@@ -49,7 +44,7 @@ export default function Comment({
         className={classNames(
             className,
             "comment flex gap-4 w-full bg-white text-black boreder-2 normal-case",
-            large ? 'p-8 rounded-3xl' : 'p-4 rounded-xl text-base ',
+            large ? 'p-8 rounded-xl' : 'p-4 rounded-xl text-base ',
             origin === 'promask' && 'border-promask',
             origin === 'nomask' && 'border-nomask'
         )}>
@@ -62,7 +57,7 @@ export default function Comment({
                 {' • '}
                 <span>{dateText || createdAt}</span>
             </div>
-            <p className={'comment-text ' + (large ? 'text-7xl leading-snug py-4' : 'py-1 text-base')}>
+            <p className={'comment-text ' + (large ? 'text-4xl leading-snug py-4' : 'py-1 text-base')}>
                 {typeof splitted !== 'undefined' ? splitted.map((part, i) => {
                     if (part.toLowerCase() === word || part.toLowerCase() === secondWord) return <React.Fragment key={i}>{" "}
                         <HighlightedWord
@@ -79,7 +74,7 @@ export default function Comment({
                     return part
                 }) : children}
             </p>
-            <p className={"text-gray " + (large ? 'text-2xl' : 'text-sm')}>
+            <p className={"text-gray " + (large ? 'text-xl' : 'text-sm')}>
                 <a href={petitionLink} className={"underline"} target={'_blank'}>{petitionTitle || "Petition title"}</a>
             </p>
         </div>

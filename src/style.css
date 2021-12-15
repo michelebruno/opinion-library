@@ -96,4 +96,8 @@
         @apply block px-2 text-base uppercase text-center rounded-none border-[1px];
     }
 
+    .highlighted-word {
+        @apply relative inline-block z-[0] transition-colors duration-1000 before:z-[-1] before:absolute before:transition-all before:duration-1000 before:origin-left before:h-full before:w-full before:scale-y-90;
+    }
+
 }

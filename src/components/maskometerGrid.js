@@ -28,7 +28,16 @@ export function MaskometerGrid({chosen, words, distribution}) {
                        style={{writingMode: 'vertical-rl'}}>
                         Nomask
                     </p>
-                </div>
+
+                    <div className="absolute top-0 bottom-0 right-1/2 translate-x-1/2 border-r-[1px] boreder-r-white border-dashed opacity-20"></div>
+
+                    <p className="text-lg text-xs text-center h-full absolute top-0 bottom-0 right-1/2 translate-x-1/2 rotate-180 normal-case
+                    before:border-b-[1px] before:opacity-20 before:block before:top-1/2 before:transition-all"
+                       style={{writingMode: 'vertical-rl'}}>
+                        equally used
+                    </p>
+
+                 </div>
 
                 {(typeof chosen !== 'undefined' && chosen.current) ?
                     words.nodes.map(({name, deltaPromask}) => {
@@ -57,8 +66,8 @@ export function MaskometerGrid({chosen, words, distribution}) {
                                     className={
                                         classNames(
                                             "w-full flex items-center relative",
-                                            "before:absolute before:left-0 before:right-0 my-1",
-                                            "before:border-b-[1px] before:block before:top-1/2 before:transition-all",
+                                            "before:absolute before:left-0 before:right-0 ",
+                                            "before:border-b-[1px] before:opacity-20 before:block before:top-1/2 before:transition-all",
                                             "before:w-full",
                                             isCurrent ? 'before:border-b-light' : 'before:border-b-current'
                                         )

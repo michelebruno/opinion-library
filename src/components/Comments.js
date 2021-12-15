@@ -11,7 +11,7 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
         <p className="mb-3 w-full">Comments containing the
             word <span className={"underline"}>{chosen}</span>{secondWord && <>{" and "}<span className={"underline"}>{secondWord}</span></>}</p>
                 <div className="flex h-full w-full overflow-y-scroll">
-                <div className={"w-3/12 sticky top-0"}>
+                <div className={"w-[25%] sticky top-0"}>
                 <h3 className={"uppercase mb-3"}>Filter comments by:</h3>
             {distribution.map(({secondWord: word, promaskDelta}) => {
                 const isSelected = secondWord === word
@@ -34,7 +34,7 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
             })}
                 </div>
                 <div
-                className={classNames("transition-transform w-9/12")}
+                className={classNames("transition-transform w-[60%]")}
                 id={"comments-container"}>
                 <div className="grid grid-cols-2 gap-8 justify-around ">
             {['promask', 'nomask'].map(origin => {
