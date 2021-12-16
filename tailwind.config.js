@@ -14,7 +14,8 @@ module.exports = {
             }
         },
         fontFamily: {
-            'sans': 'Everett, sans'
+            'sans': 'Everett, sans',
+            'mono': ['Everett Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', "Liberation Mono", "Courier New", 'monospace']
         }
     },
     variants: {

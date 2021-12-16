@@ -9,9 +9,7 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
 
     return <div className="h-full flex flex-col justify-between relative gap-4  ">
         <p className={"mx-8 mb-4 text-xl"}>
-            Horizontal position corresponds to usage by the two groups in comments mentioning the word
-            {" "}
-            <span className="uppercase">{chosen.next || chosen.current}</span>
+            Horizontal position corresponds to usage by the two groups in the selcted corpus of comments
         </p>
         <div className="flex-1 ">
             <div
@@ -74,7 +72,7 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
                                     marginLeft: delta + "%",
                                     '--gradient-mix': isCurrent ? undefined : mix('EA3C9A', '3514FF', delta)
                                 }}
-                                className={"transition-[margin] duration-1000 delay-100 rounded-[0px] -translate-x-1/2"}
+                                className={"transition-[margin] duration-1000 delay-100 rounded-[0px] -translate-x-1/2 absolute"}
                                 onClick={() => onClickSecondWord(name)}
                             >
                                 {name}

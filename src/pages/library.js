@@ -33,10 +33,10 @@ export default function Library({data: {words, allComments, ...data}}) {
 
     return <Layout wrapperClassName={"max-h-screen h-screen flex flex-col"}
                    className={"flex-1 min-h-0 "}>
-        <div className="w-full h-full overflow-hidden flex flex-nowrap">
+        <div className="w-full h-full overflow-hidden flex flex-nowrap  border-y-white border-y-2">
             <WordsIndex words={words.nodes} chosen={chosen} setChosen={setChosen}/>
             <div className={classNames(
-                'transition-[width] duration-1000 overflow-hidden flex flex-col ',
+                'transition-[width] duration-1000 overflow-hidden flex flex-col',
                 chosen.current ? 'w-10/12' : 'w-0'
             )}>
                 <Accordion title={"Related words"} subtitle={<>usage of words when occurring with <span className="uppercase">{chosen.current}</span></>}

@@ -4,6 +4,12 @@
     font-weight: normal;
 }
 
+@font-face {
+    font-family: Everett Mono;
+    src: local(Everett Mono), local(TWKEverett Mono), url("fonts/TWKEverettMono-Regular-web.woff");
+    font-weight: normal;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

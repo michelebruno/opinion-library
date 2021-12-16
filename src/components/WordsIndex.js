@@ -8,7 +8,7 @@ export default function Index({words, chosen, setChosen}) {
         chosen.current ? "w-2/12 border-r-2 border-r-current" : "w-full "
     )}>
         <div
-            className={"sticky top-0 text-light px-8 pt-4 pb-4 border-white border-y-2 transition-[width] duration-1000 bg-black select-none  whitespace-nowrap " + (!chosen.current && 'w-screen cursor-pointer')}
+            className={"sticky top-0 text-light px-8 pt-4 pb-4 border-white border-b-2 transition-[width] duration-1000 bg-black select-none  whitespace-nowrap " + (!chosen.current && 'w-screen cursor-pointer')}
             onClick={() => setChosen({})}
         >
             <h2
