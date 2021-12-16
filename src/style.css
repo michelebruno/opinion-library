@@ -19,17 +19,36 @@
 }
 
 @layer base {
-
-    article {
-        @apply text-xl;
+    mark {
+        @apply text-light bg-transparent;
     }
 
-    article p {
-        @apply pb-8;
+    ::selection {
+        @apply bg-none text-light;
+    }
+
+    mark::selection {
+        @apply text-white;
+    }
+
+    .bg-white mark::selection {
+        @apply text-black;
+    }
+
+    .bg-white ::selection {
+        @apply bg-none text-light-darker;
+    }
+
+    article {
+        @apply text-3xl;
+    }
+
+    article > p, article > div {
+        @apply pb-12;
     }
 
     article h2 {
-        @apply text-white bg-black mt-16 inline-block uppercase;
+        @apply text-white bg-black mt-8 inline-block uppercase;
     }
 
     footer h3 {

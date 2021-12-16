@@ -323,8 +323,9 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
                 <Image image={front.nodes[3]} className={"absolute right-20 bottom-32 w-1/6"}/>
                 <Image image={front.nodes[1]} className={"absolute left-20 bottom-60 w-1/6"}/>
                 <div className="text-black text-center col-span-12 row-start-3 row-span-2 self-middle">
-                    <h1 className={"text-9xl"} >Opinion Library</h1>
-                    <h2 className={"text-2xl normal-case"}>What do change.org users think about mask mandates in the U.S.?</h2>
+                    <h1 className={"text-9xl"}>Opinion Library</h1>
+                    <h2 className={"text-2xl normal-case"}>What do change.org users think about mask mandates in the
+                        U.S.?</h2>
                 </div>
                 <div className="absolute left-0 right-0 bottom-0 py-8 text-center text-xl normal-case text-black">
                     <p>
@@ -342,7 +343,9 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
             </HomeSlide>
             <HomeSlide span={1} ref={changeDataSlide}>
                 <h2 className={"col-span-9"}>
-                    <span className="text-light">Change.org</span> is the largest petition website, and in 2020 <span
+                    <mark>Change.org</mark>
+                    {" "}
+                    is the largest petition website, and in 2020 <span
                     className="inline-block">it only grew</span> larger,
                     especially in the United States.
                 </h2>
@@ -400,8 +403,8 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
                         <h2 className={"col-span-8"}>
                             As the platform grew,
                             so did the topics being discussed. One of the
-                            most <span className="text-light">controversial
-                            themes</span> has been that of <br/>
+                            most <mark>controversial
+                            themes</mark> has been that of <br/>
                             <SlotMaschine words={words}/>
                         </h2>
                         <div className={"absolute h-screen w-full top-0 left-0 right-0"}>
@@ -425,7 +428,8 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
             <HomeSlide className={"auto-rows-min content-center pb-32"} id={"why-you-signed"} ref={whyYouSigned}>
                 <div className="col-span-9 aspect-[16/7]">
                     <p className="pb-8">
-                        <span className="text-light">Why</span> they have signed
+                        <mark>Why</mark>{" "}
+                        they have signed
                     </p>
                     <Comment id={'fake-comment'} author="User30130" dateText={"1 minute ago"}
                              petitionTitle="Mask mandate petition" large origin={'black'}>
@@ -437,8 +441,7 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
 
                 <div className={"col-span-8 relative "}>
                     <p id={'this-allows'}>
-                        This allows us to understand the different points of view and the <span
-                        className="text-light">language</span> used to
+                        This allows us to understand the different points of view and the <mark>language</mark> used to
                         express them.
                     </p>
                     <p id={'recurring-words'} className={''}>

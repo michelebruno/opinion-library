@@ -52,7 +52,7 @@ export default function Comment({
             <div className={"rounded-full bg-" + origin} style={{aspectRatio: '1'}}/>
         </div>
         <div className={"w-11/12"}>
-            <div className={"text-gray " + (large ? 'text-xl' : 'text-sm')}>
+            <div className={"text-gray select-none " + (large ? 'text-xl' : 'text-sm')}>
                 <span>{author}</span>
                 {' • '}
                 <span>{dateText || createdAt}</span>
@@ -75,7 +75,7 @@ export default function Comment({
                 }) : children}
             </p>
             <p className={"text-gray " + (large ? 'text-xl' : 'text-sm')}>
-                <a href={petitionLink} className={"underline"} target={'_blank'}>{petitionTitle || "Petition title"}</a>
+                <a href={petitionLink} className={"underline hover:text-light-darker"} target={'_blank'}>{petitionTitle || "Petition title"}</a>
             </p>
         </div>
 

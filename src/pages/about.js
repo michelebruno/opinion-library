@@ -6,9 +6,9 @@ import Image from "../components/Image";
 import petitionJson from '../images/petition.json'
 
 
-export default function About({data: {images: {nodes: images}}}) {
+export default function About({data: {images: {nodes: images}, team: {nodes: team}}}) {
     return <Layout wrapperClassName={"bg-white text-black"} container footer>
-        <h2 className={"text-7xl uppercase"}>
+        <h2 className={"text-[4.34vw] leading-[1.15] uppercase"}>
             The research presented in this website was carried out during the Final Synthesis Studio of the Master
             Degree in Communication Design offered by Politecnico di Milano.
         </h2>
@@ -111,13 +111,18 @@ export default function About({data: {images: {nodes: images}}}) {
                     the comments they’re reading.
                 </p>
                 <h2 id={"team"}>The team</h2>
+                <p>This project was created by:</p>
+
+                <div className="grid grid-cols-4 gap-4">
+                    {team.map(t => <Image image={t} key={t.publicURL}/>)}
+                </div>
 
             </article>
 
             <nav className={"sticky top-24 uppercase"}>
                 <ul className={"flex flex-col gap-y-2"}>
                     <li>
-                        <Button as={'a'} href={"#focuse"}>
+                        <Button as={'a'} href={"#focus"}>
                             Focus, Aim and Objective
                         </Button>
                     </li>
@@ -144,6 +149,16 @@ export default function About({data: {images: {nodes: images}}}) {
 
 export const query = graphql`{
     images : allFile(filter: {relativeDirectory: {eq: "about"}}) {
+        nodes {
+            childImageSharp {
+                gatsbyImageData
+            }
+            id
+            relativePath
+            publicURL
+        }
+    }
+    team : allFile(filter: {relativeDirectory: {eq: "team"}}) {
         nodes {
             childImageSharp {
                 gatsbyImageData
