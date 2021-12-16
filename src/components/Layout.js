@@ -34,7 +34,7 @@ export default function Layout({children, className, container, wrapperClassName
                 <MenuItem to={"/"}>
                     Context
                 </MenuItem>
-                <MenuItem to={"/glossary/"}>
+                <MenuItem to={"/library/"}>
                     Library
                 </MenuItem>
                 <MenuItem to={"/about/"}>

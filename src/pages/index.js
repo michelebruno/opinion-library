@@ -475,7 +475,7 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
                                 <span className="bg-nomask inline-block">no mask</span> to hold a particular point of
                                 view.
                             </h2>
-                            <Button id="view-library-button" as={Link} to={"/glossary"} large>View the library</Button>
+                            <Button id="view-library-button" as={Link} to={"/library/"} large>View the library</Button>
                         </div>
                         <div className="col-span-6 relative">
                             <DeltaWord promask={55} bottom={78} left={45} rotate={9}>Health</DeltaWord>

@@ -8,7 +8,7 @@ import {MaskometerGrid} from "../components/maskometerGrid";
 import Comments from "../components/Comments";
 
 
-export default function Glossary({data: {words, allComments, ...data}}) {
+export default function Library({data: {words, allComments, ...data}}) {
     const [chosen, setChosen] = useState({})
     const [secondWord, setSecondWord] = useState()
     const [showComments, setShowComments] = useState(false)
