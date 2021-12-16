@@ -1,6 +1,6 @@
 @font-face {
     font-family: Everett;
-    src: local(Everett), url("fonts/Everett-Regular.woff");
+    src: local(Everett), local(TWKEverett), url("fonts/TWKEverett-Regular-web.woff");
     font-weight: normal;
 }
 

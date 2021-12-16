@@ -11,7 +11,7 @@ let heightClasses = [
 
 const HomeSlide = forwardRef(({children, className, id, span, uppercase}, ref) => {
     return <div className={classNames(
-        "section px-10 w-screen pt-32 overflow-hidden box-border",
+        "section px-10 pt-32 overflow-hidden box-border",
         heightClasses[span],
         uppercase && 'uppercase',
         'grid grid-cols-12 gap-16',

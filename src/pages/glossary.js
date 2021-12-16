@@ -17,6 +17,10 @@ export default function Glossary({data: {words, allComments, ...data}}) {
         !showComments && secondWord && setShowComments(true)
     }, [secondWord])
 
+    useEffect(() => {
+        !chosen.next && setSecondWord()
+    },[chosen])
+
     const listOfChosenWords = words.nodes.map(x => x.name)
 
     const distribution = data
@@ -35,13 +39,13 @@ export default function Glossary({data: {words, allComments, ...data}}) {
                 'transition-[width] duration-1000 overflow-hidden flex flex-col ',
                 chosen.current ? 'w-10/12' : 'w-0'
             )}>
-                <Accordion title={"Maskometer"} subtitle={<>usage of words when occurring with <span className="underline">{chosen.current}</span></>}
+                <Accordion title={"Related words"} subtitle={<>usage of words when occurring with <span className="uppercase">{chosen.current}</span></>}
                            isOpen={!showComments} onClick={() => setShowComments(!showComments)}>
                     <MaskometerGrid chosen={chosen} words={words} distribution={distribution}
                                     onClickSecondWord={setSecondWord}/>
                 </Accordion>
-                <Accordion title={"Comments"}
-                           subtitle={<>containing <span className="underline">{chosen.current}</span> {secondWord && <>and <span className="underline">{secondWord}</span></>}  </>}
+                <Accordion title={"Opinions"}
+                           subtitle={<>containing <span className="uppercase">{chosen.current}</span> {secondWord && <>and <span className="uppercase">{secondWord}</span></>}  </>}
                            isOpen={showComments} onClick={() => setShowComments(!showComments)}>
                     <Comments
                         comments={allComments.nodes

@@ -7,14 +7,21 @@ export default function Index({words, chosen, setChosen}) {
         "transition-all duration-1000 overflow-y-scroll",
         chosen.current ? "w-2/12 border-r-2 border-r-current" : "w-full "
     )}>
-        <h2 className={
-            classNames("sticky top-0 text-3xl px-8 pt-4 pb-3 border-current border-y-2 transition-[width] duration-1000 bg-black select-none", !chosen.current && 'w-screen')
-        }>
-            Words
+        <div
+            className={"sticky top-0 text-light px-8 pt-4 pb-4 border-white border-y-2 transition-[width] duration-1000 bg-black select-none  whitespace-nowrap " + (!chosen.current && 'w-screen cursor-pointer')}
+            onClick={() => setChosen({})}
+        >
+            <h2
+                className={
+                    classNames("inline-block text-3xl uppercase ")
+                }
+            >
+                Words
+            </h2>
             <span
-                className={classNames("ml-4 text-gray", chosen.current ? "hidden" : "")}>20 most used in promask and nomask comments</span>
+                className={classNames("ml-2 text-light text-2xl", chosen.current ? "hidden" : "")}>/ 20 most used in promask and nomask comments</span>
 
-        </h2>
+        </div>
 
         <ul className="pb-8">
             {words
@@ -32,7 +39,7 @@ export default function Index({words, chosen, setChosen}) {
                 >
                     <h2 className={classNames(
                         "text-xl uppercase",
-                        "px-8 pt-4 pb-3",
+                        "px-8 pt-4 pb-4",
                     )}>
                         {name}
                     </h2>

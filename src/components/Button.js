@@ -10,14 +10,16 @@ export function ArchiveButton({children, className, isSelected, isCurrent, check
                 "archive-button",
                 checkbox ?
                     [
-                        'checkbox hover:border-light active:bg-light active:text-black border-2',
-                        isCurrent && 'bg-gray',
+                        'checkbox border-2',
+                        !isCurrent && 'hover:border-light active:bg-light active:text-black',
+                        isCurrent && 'bg-gray border-gray cursor-disabled',
                         isSelected && 'border-light before:content-["X"] before:text-xs before:mr-2'
                     ] :
                     [
-                        (!isCurrent && !isSelected) ?
-                            'text-white hover:border-light' :
-                            "bg-light text-black border-light"
+                        (!isCurrent && !isSelected) &&
+                        'text-white hover:border-light',
+                        isSelected && "bg-light text-black border-light",
+                        isCurrent && 'bg-gray text-white'
                     ],
                 className
             )}

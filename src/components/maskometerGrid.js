@@ -8,10 +8,10 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
 
 
     return <div className="h-full flex flex-col justify-between relative gap-4  ">
-        <p className={"mx-8 mb-3 text-base"}>
+        <p className={"mx-8 mb-4 text-xl"}>
             Horizontal position corresponds to usage by the two groups in comments mentioning the word
             {" "}
-            <span className="underline">{chosen.next || chosen.current}</span>
+            <span className="uppercase">{chosen.next || chosen.current}</span>
         </p>
         <div className="flex-1 ">
             <div
@@ -64,8 +64,8 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
                                             "w-full flex items-center relative",
                                             "before:absolute before:left-0 before:right-0 ",
                                             "before:border-b-[1px] before:block before:top-1/2 before:transition-all",
-                                            "before:w-full",
-                                            isCurrent ? 'before:border-b-gray' : 'before:border-b-current  before:opacity-20 '
+                                            "before:w-full transition-all duration-500 delay-100",
+                                            isCurrent ? 'before:border-b-gray  opacity-30' : 'before:border-b-current  before:opacity-20'
                                         )
                                     }>
                             <ArchiveButton
@@ -74,7 +74,7 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
                                     marginLeft: delta + "%",
                                     '--gradient-mix': isCurrent ? undefined : mix('EA3C9A', '3514FF', delta)
                                 }}
-                                className={"transition-[margin] duration-1000 delay-200 rounded-[0px] -translate-x-1/2"}
+                                className={"transition-[margin] duration-1000 delay-100 rounded-[0px] -translate-x-1/2"}
                                 onClick={() => onClickSecondWord(name)}
                             >
                                 {name}
