@@ -15,7 +15,7 @@ export default function Glossary({data: {words, allComments, ...data}}) {
 
     useEffect(() => {
         !showComments && secondWord && setShowComments(true)
-    },[secondWord])
+    }, [secondWord])
 
     const listOfChosenWords = words.nodes.map(x => x.name)
 
@@ -35,10 +35,14 @@ export default function Glossary({data: {words, allComments, ...data}}) {
                 'transition-[width] duration-1000 overflow-hidden flex flex-col ',
                 chosen.current ? 'w-10/12' : 'w-0'
             )}>
-                <Accordion title={"Maskometer"} isOpen={!showComments} onClick={() => setShowComments(!showComments)}>
-                    <MaskometerGrid chosen={chosen} words={words} distribution={distribution} onClickSecondWord={setSecondWord}/>
+                <Accordion title={"Maskometer"} subtitle={<>usage of words when occurring with <span className="underline">{chosen.current}</span></>}
+                           isOpen={!showComments} onClick={() => setShowComments(!showComments)}>
+                    <MaskometerGrid chosen={chosen} words={words} distribution={distribution}
+                                    onClickSecondWord={setSecondWord}/>
                 </Accordion>
-                <Accordion title={"Comments"} isOpen={showComments} onClick={() => setShowComments(!showComments)}>
+                <Accordion title={"Comments"}
+                           subtitle={<>containing <span className="underline">{chosen.current}</span> {secondWord && <>and <span className="underline">{secondWord}</span></>}  </>}
+                           isOpen={showComments} onClick={() => setShowComments(!showComments)}>
                     <Comments
                         comments={allComments.nodes
                             .filter(({word}) => {
@@ -72,7 +76,7 @@ export const query = graphql`query Glossary {
             promaskDelta
         }
     }
-    allComments: allSheetsEstratti(filter: {scelto: {eq: "x"}}) {
+    allComments: allSheetsEstratti {
         nodes {
             ...CommentFragment
         }

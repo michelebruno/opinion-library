@@ -44,7 +44,7 @@
     }
 
     article > p, article > div {
-        @apply pb-12;
+        @apply mb-12;
     }
 
     article h2 {
@@ -112,7 +112,7 @@
         background-color: var(--gradient-mix);
         border-color: var(--gradient-mix);
 
-        @apply block px-2 text-base uppercase text-center rounded-none border-[1px];
+        @apply block px-2 text-base uppercase text-center rounded-none border;
     }
 
     .highlighted-word {

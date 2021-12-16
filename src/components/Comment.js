@@ -1,14 +1,21 @@
 import React from "react";
 import classNames from "classnames";
 
-export function HighlightedWord({children, className, isActive, promask, nomask, black}) {
+export function HighlightedWord({children, className, isActive, promask, nomask, secondary}) {
     return <span
         className={classNames(
             'highlighted-word',
             !promask && !nomask && 'before:bg-light',
-            promask && 'before:bg-promask',
-            nomask && 'before:bg-nomask',
-            isActive && (nomask || promask) && 'text-white',
+            secondary ?
+                [
+                    isActive && 'before:bg-light'
+                ] :
+                [
+                    promask && 'before:bg-promask',
+                    nomask && 'before:bg-nomask',
+                    isActive && (nomask || promask) && 'text-white',
+
+                ],
             !isActive && 'before:scale-x-0',
             className
         )}
@@ -36,9 +43,6 @@ export default function Comment({
                                 }) {
 
 
-    if (secondWord && splitted.findIndex(s => s === secondWord) === -1)
-        return null;
-
     return <div
         id={id}
         className={classNames(
@@ -59,10 +63,14 @@ export default function Comment({
             </div>
             <p className={'comment-text ' + (large ? 'text-4xl leading-snug py-4' : 'py-1 text-base')}>
                 {typeof splitted !== 'undefined' ? splitted.map((part, i) => {
-                    if (part.toLowerCase() === word || part.toLowerCase() === secondWord) return <React.Fragment key={i}>{" "}
+                    const isPrimaryWord = part.toLowerCase() === word
+                    const isSecondaryWord = part.toLowerCase() === secondWord
+
+                    if (isPrimaryWord || isSecondaryWord) return <React.Fragment
+                        key={i}>{" "}
                         <HighlightedWord
                             isActive={highlightWords} promask={origin === 'promask'}
-                            nomask={origin === 'nomask'}>
+                            nomask={origin === 'nomask'} secondary={!isSecondaryWord}>
                             {part}
                         </HighlightedWord>
                     </React.Fragment>
@@ -75,7 +83,8 @@ export default function Comment({
                 }) : children}
             </p>
             <p className={"text-gray " + (large ? 'text-xl' : 'text-sm')}>
-                <a href={petitionLink} className={"underline hover:text-light-darker"} target={'_blank'}>{petitionTitle || "Petition title"}</a>
+                <a href={petitionLink} className={"underline hover:text-light-darker"}
+                   target={'_blank'}>{petitionTitle || "Petition title"}</a>
             </p>
         </div>
 

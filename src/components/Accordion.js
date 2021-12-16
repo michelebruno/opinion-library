@@ -1,16 +1,17 @@
 import React from "react";
 import classNames from "classnames";
 
-export default function Accordion({onClick, isOpen, children, title}) {
+export default function Accordion({onClick, isOpen, children, title, subtitle}) {
 
 
     return <div className={"flex-grow flex flex-col " + (isOpen && "h-full")}>
-        <div className={"pt-4 pb-3 px-8 border-t-2 border-y-current box-border flex justify-between"} onClick={onClick}
+        <div className={"pt-4 pb-3 px-8 border-t-2 border-y-current box-border flex justify-between group select-none cursor-pointer"} onClick={onClick}
         >
             <h2
                 className={" text-3xl "}
             >
                 {title}
+                <span className={classNames("ml-4 text-gray transition-[opacity]", !isOpen? "opacity-0 group-hover:opacity-50" : "opacity-50")}>{subtitle}</span>
             </h2>
 
             <div className={"pt-1"}>
@@ -25,7 +26,7 @@ export default function Accordion({onClick, isOpen, children, title}) {
 
         <div className={classNames(
             "overflow-hidden",
-            "transition-all duration-1000 ",
+            "",
             isOpen ? "h-full" : 'h-0'
         )}>
             {children}

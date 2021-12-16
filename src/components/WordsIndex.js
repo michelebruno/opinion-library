@@ -8,9 +8,12 @@ export default function Index({words, chosen, setChosen}) {
         chosen.current ? "w-2/12 border-r-2 border-r-current" : "w-full "
     )}>
         <h2 className={
-            classNames("sticky top-0 text-3xl px-8 pt-4 pb-3 border-current border-y-2 transition-[width] duration-1000 bg-black", !chosen.current && 'w-screen')
+            classNames("sticky top-0 text-3xl px-8 pt-4 pb-3 border-current border-y-2 transition-[width] duration-1000 bg-black select-none", !chosen.current && 'w-screen')
         }>
             Words
+            <span
+                className={classNames("ml-4 text-gray", chosen.current ? "hidden" : "")}>20 most used in promask and nomask comments</span>
+
         </h2>
 
         <ul className="pb-8">

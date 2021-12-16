@@ -8,53 +8,65 @@ import {mix} from "../utils/mix";
 export default function Comments({comments, chosen, secondWord, onChangeSecondWord, distribution}) {
 
     return <div className={"flex h-full px-8 flex-wrap "}>
-        <p className="mb-3 w-full">Comments containing the
-            word <span className={"underline"}>{chosen}</span>{secondWord && <>{" and "}<span className={"underline"}>{secondWord}</span></>}</p>
-                <div className="flex h-full w-full overflow-y-scroll">
-                <div className={"w-[25%] sticky top-0"}>
-                <h3 className={"uppercase mb-3"}>Filter comments by:</h3>
-            {distribution.map(({secondWord: word, promaskDelta}) => {
-                const isSelected = secondWord === word
-                const isCurrent = chosen === word
+        <p className="mb-3 w-full">Here you can read the comments on the 100 most liked promask and nomask petition</p>
+        <div className={"w-full sticky top-0"}>
+            <h3 className={"uppercase mb-3"}>Filter comments by:</h3>
+            <div className="flex flex-wrap gap-x-2">
+                {distribution.map(({secondWord: word, promaskDelta}) => {
+                    const isSelected = secondWord === word
+                    const isCurrent = chosen === word
 
-                if (isCurrent)
-                return null;
+                    if (isCurrent)
+                        return null;
 
-                return <ArchiveButton
-                key={word}
-                className={"mb-2"}
-                isSelected={isSelected}
-                onClick={() => onChangeSecondWord(isSelected ? undefined : word)}
-                style={{
-                '--gradient-mix': mix('EA3C9A', '3514FF', promaskDelta*100)
-            }}
-                >
-            {word}
-                </ArchiveButton>
-            })}
-                </div>
-                <div
-                className={classNames("transition-transform w-[60%]")}
+                    return <ArchiveButton
+                        key={word}
+                        checkbox
+                        className={"mb-2"}
+                        isSelected={isSelected}
+                        onClick={() => onChangeSecondWord(isSelected ? undefined : word)}
+                        style={{
+                            '--gradient-mix': mix('EA3C9A', '3514FF', promaskDelta * 100)
+                        }}
+                    >
+                        {word}
+                    </ArchiveButton>
+                })}
+            </div>
+        </div>
+        <div className="flex h-full w-full overflow-y-scroll">
+
+            <div
+                className={classNames("transition-transform w-3/4 mx-auto")}
                 id={"comments-container"}>
-                <div className="grid grid-cols-2 gap-8 justify-around ">
-            {['promask', 'nomask'].map(origin => {
-                const filteredComments = comments
-                .filter(({origin: o}) => origin === o)
+                <div className="grid grid-cols-2 gap-16 justify-around ">
+                    {['promask', 'nomask'].map(origin => {
+                        let filteredComments = comments
+                            .filter(({origin: o}) => origin === o)
 
-                return <div key={origin} className={"flex flex-col gap-3 pb-64 "}>
-                <p className="sticky top-0 bg-black z-30 text-center">{filteredComments.length} {origin} comments</p>
-            {filteredComments
-                .map(
-                (c) => <Comment key={c.id}
-                highlightWords={true}
-                word={chosen.current}
-                secondWord={secondWord} {...c} />
-                )}
+                        let totalComments = filteredComments.length
 
+                        if (secondWord) {
+                            filteredComments = filteredComments.filter(c => c.splitted.findIndex(s => s === secondWord) !== -1)
+                        }
+
+
+                        return <div>
+                            <p className="sticky top-0 bg-black z-30 text-center pt-3 pb-4">{filteredComments.length}{secondWord && " of " + totalComments} {origin} comments</p>
+
+                            <div key={origin} className={"flex flex-col gap-3 pb-64 "}> {filteredComments
+                                .map(
+                                    (c) => <Comment key={c.id}
+                                                    highlightWords={true}
+                                                    word={chosen.current}
+                                                    secondWord={secondWord} {...c} />
+                                )}
+
+                            </div>
+                        </div>
+                    })}
                 </div>
-            })}
-                </div>
-                </div>
-                </div>
-                </div>
-            }
+            </div>
+        </div>
+    </div>
+}

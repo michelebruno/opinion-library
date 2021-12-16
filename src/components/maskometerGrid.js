@@ -28,35 +28,33 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
                         Nomask
                     </p>
 
-                    <div className="absolute top-0 bottom-0 right-1/2 translate-x-1/2 border-r-[1px] boreder-r-white border-dashed opacity-20"></div>
+                    <div
+                        className="absolute top-0 bottom-0 right-1/2 translate-x-1/2 border-r-[1px] boreder-r-white border-dashed opacity-50"/>
 
-                    <p className="text-lg text-xs text-center h-full absolute top-0 bottom-0 right-1/2 translate-x-1/2 rotate-180 normal-case
-                    before:border-b-[1px] before:opacity-20 before:block before:top-1/2 before:transition-all"
-                       style={{writingMode: 'vertical-rl'}}>
+                    <p className="text-lg text-xs text-center absolute top-0 left-0 right-0 w-full normal-case bg-black"
+                    >
                         equally used
                     </p>
 
-                 </div>
+                </div>
 
                 {(typeof chosen !== 'undefined' && chosen.current) ?
-                    words.nodes.map(({name, deltaPromask}) => {
+                    words.nodes.map(({name}) => {
 
                         let isCurrent = chosen.next ? chosen.next === name : chosen.current === name
 
 
-                        let delta = isCurrent ?
-                            deltaPromask :
-                            distribution
-                                .find(({
-                                           word,
-                                           secondWord
-                                       }) => {
+                        let delta = distribution
+                            .find(({
+                                       word,
+                                       secondWord
+                                   }) => {
 
-                                    if (chosen.next) {
-                                        return chosen.next === word && secondWord === name
-                                    }
-                                    return (chosen.current && word === chosen.current) && secondWord === name
-                                })['promaskDelta']
+                                if (chosen.next) {
+                                    return chosen.next === word && secondWord === name
+                                }
+                                return (chosen.current && word === chosen.current) && secondWord === name
+                            })['promaskDelta']
 
                         delta = Math.round(delta * 100)
 
@@ -67,7 +65,7 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
                                             "before:absolute before:left-0 before:right-0 ",
                                             "before:border-b-[1px] before:block before:top-1/2 before:transition-all",
                                             "before:w-full",
-                                            isCurrent ? 'before:border-b-light' : 'before:border-b-current  before:opacity-20 '
+                                            isCurrent ? 'before:border-b-gray' : 'before:border-b-current  before:opacity-20 '
                                         )
                                     }>
                             <ArchiveButton

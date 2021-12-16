@@ -317,7 +317,7 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
     return (
         <Layout fixedHeader className={"text-[4.34vw] leading-tight"}>
             <div className="fixed right-0 top-0 bottom-0 origin-top bg-light w-2 z-40" id="progress-bar"></div>
-            <HomeSlide className={"bg-light pb-32 text-[6vw] grid-rows-6 z-50"}>
+            <HomeSlide className={"bg-light pb-32 text-[6vw] grid-rows-6 z-50 select-none"}>
                 <Image image={front.nodes[2]} className={"absolute left-[8.3%] top-16 w-1/6"}/>
                 <Image image={front.nodes[0]} className={"absolute right-16 top-8 w-1/6"}/>
                 <Image image={front.nodes[3]} className={"absolute right-20 bottom-32 w-1/6"}/>
@@ -426,7 +426,7 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
                 </div>
             </HomeSlide>
             <HomeSlide className={"auto-rows-min content-center pb-32"} id={"why-you-signed"} ref={whyYouSigned}>
-                <div className="col-span-9 aspect-[16/7]">
+                <div className="col-span-9 col-start-3 aspect-[16/7]">
                     <p className="pb-8">
                         <mark>Why</mark>{" "}
                         they have signed
@@ -454,7 +454,7 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
                 </div>
                 <div className="col-span-4  normal-case overflow-hidden">
                     <div
-                        className="grid auto-rows-min gap-y-4 comment-container absolute top-0 pt-32 h-screen overflow-y-scroll ">
+                        className="grid auto-rows-min gap-y-4 comment-container absolute top-0 pt-32 h-screen overflow-y-scroll no-scrollbar ">
                         {
                             homeComments.map(comment => <Comment key={comment.splitted}
                                                                  highlightWords={highlightWords}

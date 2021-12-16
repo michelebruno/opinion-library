@@ -4,13 +4,14 @@ import Button from "../components/Button";
 import {graphql} from "gatsby";
 import Image from "../components/Image";
 import petitionJson from '../images/petition.json'
+import commentJson from '../images/comments.json'
 
 
 export default function About({data: {images: {nodes: images}, team: {nodes: team}}}) {
     return <Layout wrapperClassName={"bg-white text-black"} container footer>
         <h2 className={"text-[4.34vw] leading-[1.15] uppercase"}>
             The research presented in this website was carried out during the Final Synthesis Studio of the Master
-            Degree in Communication Design offered by Politecnico di Milano.
+            Degree <span className="inline-block">in Communication</span> Design offered <span className="inline-block">by Politecnico</span> di Milano.
         </h2>
 
         <div className="mt-32 grid grid-cols-3 gap-x-8">
@@ -64,26 +65,27 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
                     a specific tag. The server then answers back with a *.json file containing all the petitions we
                     asked for — this includes the title, body, image, signature count, etc.
                 </p>
-                {
-                    /// JSON
-                }
+                <div
+                    className="h-96 text-base w-full overflow-scroll no-scrollbar border-2 border-black rounded-3xl w-7/12 mx-auto">
+                    <h3 className="bg-black text-white px-8 rounded-t-3xl py-4 sticky top-0 left-0 select-none">
+                        <code>petition.json</code></h3>
+                    <pre className={"px-8 py-4"}>
+                            {JSON.stringify(petitionJson.items[0].petition, null, 2)}
+                        </pre>
+                </div>
                 <p>
                     We filtered the petitions, selecting only the 100 most signed in both groups. Once we had the
                     petitions, we could use their ID to ask the API for their comments. Once again, the server answered
                     back with a *.json file containing all the comments for each petition.
                 </p>
-                <div>
-                    {
-                        /// JSON
-                    }
-                    <div
-                        className="h-96 text-base w-full overflow-scroll border-2 border-black rounded-3xl w-7/12 mx-auto">
-                        <h3 className="bg-black text-white px-8 py-4 sticky top-0 left-0 select-none">
-                            <code>petition.json</code></h3>
-                        <pre className={"px-8 py-4"}>
-                            {JSON.stringify(petitionJson.items[0].petition, null, 2)}
+                <div
+                    className="h-96 text-base w-full overflow-scroll no-scrollbar border-2 border-black rounded-3xl w-7/12 mx-auto">
+                    <h3 className="bg-black text-white px-8 py-4 sticky rounded-t-3xl top-0 left-0 select-none">
+                        <code>comments.json</code>
+                    </h3>
+                    <pre className={"px-8 py-4"}>
+                            {JSON.stringify(commentJson.items, null, 2)}
                         </pre>
-                    </div>
                 </div>
                 <p>
                     Once all the comments were gathered, we used Google Natural Language API to extract entities from
@@ -94,7 +96,7 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
                     percentage values for both groups.
                 </p>
                 <div>
-                    <Image image={images.find(i => i.relativePath === 'about/normalize.png')} className={"w-full"}/>
+                    <Image image={images.find(i => i.relativePath === 'about/sheets.png')} className={"w-full"}/>
                 </div>
 
 

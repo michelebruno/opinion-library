@@ -1,16 +1,24 @@
 import React from "react";
 import classNames from "classnames";
 
-export function ArchiveButton({children, className, isSelected, isCurrent, ...props}) {
+export function ArchiveButton({children, className, isSelected, isCurrent, checkbox, ...props}) {
 
     return <button
         disabled={isCurrent}
         className={
             classNames(
                 "archive-button",
-                (!isCurrent && !isSelected) ?
-                    'text-white hover:border-light' :
-                    "bg-light text-black border-light",
+                checkbox ?
+                    [
+                        'checkbox hover:border-light active:bg-light active:text-black border-2',
+                        isCurrent && 'bg-gray',
+                        isSelected && 'border-light before:content-["X"] before:text-xs before:mr-2'
+                    ] :
+                    [
+                        (!isCurrent && !isSelected) ?
+                            'text-white hover:border-light' :
+                            "bg-light text-black border-light"
+                    ],
                 className
             )}
         {...props}
@@ -27,7 +35,7 @@ export default function Button({children, id, as: As, after, large, ...props}) {
         <span
             className={
                 (large ? 'py-4 px-8 text-2xl rounded-3xl' : ' text-lg py-1 px-4 rounded-2xl') +
-                " border-current group-active:bg-light group-active:text-black  border-[1px]"
+                " border-current group-active:bg-light group-active:text-black  border"
             }>
                     {children}
         </span>
