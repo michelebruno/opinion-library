@@ -15,14 +15,15 @@ export const commentFragment = graphql`
         commentableId
     }
     fragment CommentJsonFragment on CommentsJson {
+        id
         sentences
         origin
         user
-        created_at(fromNow: true)
+        commentId
+        createdAt(fromNow: true)
         petition {
             slug
             title
-            created_at(fromNow: true)
         }
     }
 `

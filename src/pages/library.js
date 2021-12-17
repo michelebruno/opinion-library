@@ -38,9 +38,9 @@ export default function Library({data: {words, allComments, ...data}}) {
         })
 
 
-    return <Layout wrapperClassName={"max-h-screen h-screen flex flex-col"}
+    return <Layout wrapperClassName={"max-h-screen h-screen flex flex-col pb-16"}
                    className={"flex-1 min-h-0 "}>
-        <div className="w-full h-full overflow-hidden flex flex-nowrap  border-y-white border-y-2">
+        <div className="w-full h-full overflow-hidden flex flex-nowrap  border-y-white border-y-2 ">
             <WordsIndex words={words.nodes} chosen={chosen} setChosen={setChosen}/>
             <div className={classNames(
                 'transition-[width] duration-1000 overflow-hidden flex flex-col',

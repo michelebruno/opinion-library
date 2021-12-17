@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import classNames from "classnames";
 import {sentenceHasWord} from "../utils/sentences";
 
@@ -32,7 +32,7 @@ export default function Comment({
                                     origin,
                                     sentences,
                                     user,
-                                    created_at,
+                                    createdAt,
                                     dateText,
                                     word,
                                     secondWord,
@@ -42,7 +42,9 @@ export default function Comment({
                                     highlightWords,
                                     large
                                 }) {
+    let lastWasSkipped = false
 
+    const [showAll, setShowAll] = useState()
 
     return <div
         id={id}
@@ -60,38 +62,42 @@ export default function Comment({
             <div className={"text-gray select-none " + (large ? 'text-xl' : 'text-sm')}>
                 <span>User{user}</span>
                 {' • '}
-                <span>{dateText || created_at}</span>
+                <span>{dateText || createdAt}</span>
             </div>
             <p className={'comment-text ' + (large ? 'text-4xl leading-snug py-4' : 'py-1 text-base')}>
                 {typeof sentences !== 'undefined' ? sentences.map((sentence, i) => {
 
-                    return <React.Fragment key={i}>
-                        {
-                            (sentenceHasWord(sentence, word) || sentenceHasWord(sentence, secondWord)) ?
-                                <>{
-                                    sentence.map((part, i) => {
-                                        const isPrimaryWord = part.toLowerCase() === word
-                                        const isSecondaryWord = part.toLowerCase() === secondWord
 
-                                        if (isPrimaryWord || isSecondaryWord) return <React.Fragment
-                                            key={i}>{" "}
-                                            <HighlightedWord
-                                                isActive={highlightWords} promask={origin === 'promask'}
-                                                nomask={origin === 'nomask'} secondary={!isSecondaryWord}>
-                                                {part}
-                                            </HighlightedWord>
-                                        </React.Fragment>
+                    if (sentenceHasWord(sentence, word) || sentenceHasWord(sentence, secondWord)) {
+                        lastWasSkipped = false
+                        return <React.Fragment key={i}>{
+                            sentence.map((part, i) => {
+                                const isPrimaryWord = part.toLowerCase() === word
+                                const isSecondaryWord = part.toLowerCase() === secondWord
 
-                                        if (part === secondWord) return <span key={i} className={
-                                            'border-light border-2'
-                                        }>{part}</span>
+                                if (isPrimaryWord || isSecondaryWord) return <React.Fragment
+                                    key={i}>{" "}
+                                    <HighlightedWord
+                                        isActive={highlightWords} promask={origin === 'promask'}
+                                        nomask={origin === 'nomask'} secondary={!isSecondaryWord}>
+                                        {part}
+                                    </HighlightedWord>
+                                </React.Fragment>
 
-                                        return part
-                                    })
-                                }{" [...] "}
-                                </> : null
-                        }
-                    </React.Fragment>
+                                if (part === secondWord) return <span key={i} className={
+                                    'border-light border-2'
+                                }>{part}</span>
+
+                                return part
+                            })
+                        }{" "}
+                        </React.Fragment>
+                    }
+
+                    if (!lastWasSkipped) {
+                        lastWasSkipped = true
+                        return "[...] "
+                    }
 
 
                 }) : children}

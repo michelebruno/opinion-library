@@ -77,92 +77,17 @@ function enableScroll() {
     // console.log("scroll enabled")
 }
 
-
-const homeComments = [
-    {
-        splitted: ['I have the ', 'vaccine', ' I need to make sure it’s working can’t do that wearing masks!!!'],
-        user: 'User55',
-        petitionTitle: 'Broken Arrow Mask Mandate Rejection',
-        word: 'vaccine',
-        dateText: '1 year ago',
-        author: 'User34'
-    },
-    {
-        splitted: ['I’m capable of making my own personal ', 'health choices', '.'],
-        user: 'User55',
-        petitionTitle: 'Broken Arrow Mask Mandate Rejection',
-        word: 'health choices',
-        dateText: '23/04/2020',
-        author: 'User34'
-    },
-    {
-        splitted: ['Not everyone who wants to get the ', 'vaccine', ' has the access to it yet.'],
-        user: 'User55',
-        petitionTitle: 'Broken Arrow Mask Mandate Rejection',
-        word: 'vaccine',
-        dateText: '23/04/2020',
-        author: 'User34'
-    },
-    {
-        splitted: ['My #1 priority is the ', 'health', ' and safety of my children, and yours!'],
-        user: 'User55',
-        petitionTitle: 'Broken Arrow Mask Mandate Rejection',
-        word: 'health',
-        dateText: '23/04/2020',
-        author: 'User34'
-    },
-    {
-        splitted: ['Adults who want the ', 'vaccine', ' have been afforded the opportunity to receive it.'],
-        user: 'User55',
-        petitionTitle: 'Broken Arrow Mask Mandate Rejection',
-        word: 'vaccine',
-        dateText: '23/04/2020',
-        author: 'User34'
-    },
-    {
-        splitted: ['At this stage, ', 'masks', ' serve no purpose and this should be a family choice!'],
-        user: 'User55',
-        petitionTitle: 'Broken Arrow Mask Mandate Rejection',
-        word: 'masks',
-        dateText: '23/04/2020',
-        author: 'User34'
-    },
-    {
-        splitted: ['I don\'t want anyone else to die while waiting for their ', 'vaccine', '.'],
-        user: 'User55',
-        petitionTitle: 'Reinstate the Texas Covid-19 Mask Mandate',
-        word: 'vaccine',
-        dateText: '8 months ago',
-        author: 'User34'
-    },
-    {
-        splitted: ['I miss being able to hug my ', 'family', '.'],
-        user: 'User55',
-        petitionTitle: 'Reinstate the Texas Covid-19 Mask Mandate',
-        word: 'family',
-        dateText: '8 months ago',
-        author: 'User34'
-    },
-    {
-        splitted: ['Sadly, it won\'t be taken seriously until it affects their ', 'family', '.'],
-        user: 'User55',
-        petitionTitle: 'Make face masks mandatory in public, in Duluth, MN during the COVID-19 pandemic.\n',
-        word: 'family',
-        dateText: '8 months ago',
-        author: 'User34'
-    },
-    {
-        splitted: ['As a high ', 'risk', ' family, I ask that you reconsider lifting the mandate.'],
-        user: 'User55',
-        petitionTitle: 'Make face masks mandatory in public, in Duluth, MN during the COVID-19 pandemic.\n',
-        word: 'risk',
-        dateText: '8 months ago',
-        author: 'User34'
-    },
-]
+const commentsData = {
+    812047727: 'vaccine',
+    811710031: 'health',
+    814486694: 'vaccine',
+    822518213: 'health',
+    817756846: 'vaccine',
+    821382262: 'family'
+}
 
 // markup
-const IndexPage = ({data: {allFile, words, comments, front}}) => {
+const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, front}}) => {
 
     const [highlightWords, setHighlightWords] = useState(false)
     const changeDataSlide = useRef()
@@ -326,10 +251,12 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
                         <Image image={front.nodes[1]} className={"absolute left-20 bottom-60 w-1/6"}/>
                         <div className="text-black text-center col-span-12 row-start-3 row-span-2 self-middle">
                             <h1 className={"text-9xl"}>Opinion Library</h1>
-                            <h2 className={"text-2xl normal-case"}>What do change.org users think about mask mandates in the
+                            <h2 className={"text-2xl normal-case"}>What do change.org users think about mask mandates in
+                                the
                                 U.S.?</h2>
                         </div>
-                        <div className="absolute left-0 right-0 bottom-0 py-8 text-center text-xl normal-case text-black">
+                        <div
+                            className="absolute left-0 right-0 bottom-0 py-8 text-center text-xl normal-case text-black">
                             <p>
                                 Scroll down to discover more
 
@@ -427,14 +354,17 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
 
                         </div>
                     </HomeSlide>
-                    <HomeSlide className={"auto-rows-min content-center pb-32"} id={"why-you-signed"} ref={whyYouSigned}>
+                    <HomeSlide className={"auto-rows-min content-center pb-32"} id={"why-you-signed"}
+                               ref={whyYouSigned}>
                         <div className="col-span-9 col-start-3 aspect-[16/7]">
                             <p className="pb-8">
-                                <mark>Why</mark>{" "}
+                                <mark>Why</mark>
+                                {" "}
                                 they have signed
                             </p>
-                            <Comment id={'fake-comment'} author="User30130" dateText={"1 minute ago"}
-                                     petitionTitle="Mask mandate petition" large origin={'black'}>
+                            <Comment id={'fake-comment'} author="User30130" created_at={"1 minute ago"}
+                                     petition={{title: "Mask mandate petition"}}
+                                     large origin={'black'}>
                                 Those who signed these petitions explained their reasons in comments.
                             </Comment>
                         </div>
@@ -443,7 +373,8 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
 
                         <div className={"col-span-8 relative "}>
                             <p id={'this-allows'}>
-                                This allows us to understand the different points of view and the <mark>language</mark> used to
+                                This allows us to understand the different points of view and
+                                the <mark>language</mark> used to
                                 express them.
                             </p>
                             <p id={'recurring-words'} className={''}>
@@ -458,9 +389,19 @@ const IndexPage = ({data: {allFile, words, comments, front}}) => {
                             <div
                                 className="grid auto-rows-min gap-y-4 comment-container absolute top-0 pt-32 h-screen overflow-y-scroll no-scrollbar ">
                                 {
-                                    homeComments.map(comment => <Comment key={comment.splitted}
-                                                                         highlightWords={highlightWords}
-                                                                         origin={'black'} {...comment} />)
+                                    Object.entries(commentsData).map(([id, word]) => {
+
+
+                                        const comment = homeComments.find(({commentId}) => commentId == id)
+
+                                        console.log(id, homeComments.map(i => i.commentId))
+
+                                        return <Comment key={id}
+                                                        highlightWords={highlightWords}
+                                                        word={word}
+                                                        {...comment}
+                                                        origin={'black'}/>
+                                    })
                                 }
                             </div>
                         </div>
@@ -513,7 +454,13 @@ export const query = graphql`{
                 gatsbyImageData
             }
         }
-    } 
+    }
+
+    comments: allCommentsJson(filter: {showInHome: {eq: true}}) {
+        nodes {
+            ...CommentJsonFragment
+        }
+    }
     front: allFile(filter: {relativeDirectory: {eq: "landing"}}) {
         nodes {
             childImageSharp {

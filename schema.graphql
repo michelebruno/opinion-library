@@ -55,7 +55,8 @@ interface Node {
 type CommentsJson implements Node {
     children: [Node!]!
     comment: String
-    created_at(
+    commentId: Int
+    createdAt(
         "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
         difference: String,
         "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
@@ -67,11 +68,11 @@ type CommentsJson implements Node {
     ): Date
     id: ID!
     internal: Internal!
-    jsonId: Int
     origin: String
     parent: Node
     petition: CommentsJsonPetition
     sentences: [[String]]
+    showInHome: Boolean
     user: Int
 }
 
@@ -1660,7 +1661,7 @@ type Query {
     allSiteFunction(filter: SiteFunctionFilterInput, limit: Int, skip: Int, sort: SiteFunctionSortInput): SiteFunctionConnection!
     allSitePage(filter: SitePageFilterInput, limit: Int, skip: Int, sort: SitePageSortInput): SitePageConnection!
     allSitePlugin(filter: SitePluginFilterInput, limit: Int, skip: Int, sort: SitePluginSortInput): SitePluginConnection!
-    commentsJson(children: NodeFilterListInput, comment: StringQueryOperatorInput, created_at: DateQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, jsonId: IntQueryOperatorInput, origin: StringQueryOperatorInput, parent: NodeFilterInput, petition: CommentsJsonPetitionFilterInput, sentences: StringQueryOperatorInput, user: IntQueryOperatorInput): CommentsJson
+    commentsJson(children: NodeFilterListInput, comment: StringQueryOperatorInput, commentId: IntQueryOperatorInput, createdAt: DateQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, origin: StringQueryOperatorInput, parent: NodeFilterInput, petition: CommentsJsonPetitionFilterInput, sentences: StringQueryOperatorInput, showInHome: BooleanQueryOperatorInput, user: IntQueryOperatorInput): CommentsJson
     directory(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, changeTime: DateQueryOperatorInput, children: NodeFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): Directory
     file(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, blksize: IntQueryOperatorInput, blocks: IntQueryOperatorInput, changeTime: DateQueryOperatorInput, childCommentsJson: CommentsJsonFilterInput, childImageSharp: ImageSharpFilterInput, childImagesJson: ImagesJsonFilterInput, children: NodeFilterListInput, childrenCommentsJson: CommentsJsonFilterListInput, childrenImageSharp: ImageSharpFilterListInput, childrenImagesJson: ImagesJsonFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, publicURL: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): File
     imageSharp(children: NodeFilterListInput, fixed: ImageSharpFixedFilterInput, fluid: ImageSharpFluidFilterInput, gatsbyImageData: JSONQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, original: ImageSharpOriginalFilterInput, parent: NodeFilterInput, resize: ImageSharpResizeFilterInput): ImageSharp
@@ -2370,7 +2371,8 @@ enum CommentsJsonFieldsEnum {
     children___parent___parent___children
     children___parent___parent___id
     comment
-    created_at
+    commentId
+    createdAt
     id
     internal___content
     internal___contentDigest
@@ -2380,7 +2382,6 @@ enum CommentsJsonFieldsEnum {
     internal___mediaType
     internal___owner
     internal___type
-    jsonId
     origin
     parent___children
     parent___children___children
@@ -2424,6 +2425,7 @@ enum CommentsJsonFieldsEnum {
     petition___slug
     petition___title
     sentences
+    showInHome
     user
 }
 
@@ -2575,7 +2577,8 @@ enum FileFieldsEnum {
     childCommentsJson___children___parent___children
     childCommentsJson___children___parent___id
     childCommentsJson___comment
-    childCommentsJson___created_at
+    childCommentsJson___commentId
+    childCommentsJson___createdAt
     childCommentsJson___id
     childCommentsJson___internal___content
     childCommentsJson___internal___contentDigest
@@ -2585,7 +2588,6 @@ enum FileFieldsEnum {
     childCommentsJson___internal___mediaType
     childCommentsJson___internal___owner
     childCommentsJson___internal___type
-    childCommentsJson___jsonId
     childCommentsJson___origin
     childCommentsJson___parent___children
     childCommentsJson___parent___children___children
@@ -2605,6 +2607,7 @@ enum FileFieldsEnum {
     childCommentsJson___petition___slug
     childCommentsJson___petition___title
     childCommentsJson___sentences
+    childCommentsJson___showInHome
     childCommentsJson___user
     childImageSharp___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
     childImageSharp___children___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -2843,7 +2846,8 @@ enum FileFieldsEnum {
     childrenCommentsJson___children___parent___children
     childrenCommentsJson___children___parent___id
     childrenCommentsJson___comment
-    childrenCommentsJson___created_at
+    childrenCommentsJson___commentId
+    childrenCommentsJson___createdAt
     childrenCommentsJson___id
     childrenCommentsJson___internal___content
     childrenCommentsJson___internal___contentDigest
@@ -2853,7 +2857,6 @@ enum FileFieldsEnum {
     childrenCommentsJson___internal___mediaType
     childrenCommentsJson___internal___owner
     childrenCommentsJson___internal___type
-    childrenCommentsJson___jsonId
     childrenCommentsJson___origin
     childrenCommentsJson___parent___children
     childrenCommentsJson___parent___children___children
@@ -2873,6 +2876,7 @@ enum FileFieldsEnum {
     childrenCommentsJson___petition___slug
     childrenCommentsJson___petition___title
     childrenCommentsJson___sentences
+    childrenCommentsJson___showInHome
     childrenCommentsJson___user
     childrenImageSharp
     childrenImageSharp___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -5226,14 +5230,15 @@ input BooleanQueryOperatorInput {
 input CommentsJsonFilterInput {
     children: NodeFilterListInput
     comment: StringQueryOperatorInput
-    created_at: DateQueryOperatorInput
+    commentId: IntQueryOperatorInput
+    createdAt: DateQueryOperatorInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
-    jsonId: IntQueryOperatorInput
     origin: StringQueryOperatorInput
     parent: NodeFilterInput
     petition: CommentsJsonPetitionFilterInput
     sentences: StringQueryOperatorInput
+    showInHome: BooleanQueryOperatorInput
     user: IntQueryOperatorInput
 }
 
