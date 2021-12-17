@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {graphql} from "gatsby";
 import Layout from "../components/Layout";
 import classNames from "classnames";
@@ -12,6 +12,13 @@ export default function Library({data: {words, allComments, ...data}}) {
     const [chosen, setChosen] = useState({})
     const [secondWord, setSecondWord] = useState()
     const [showComments, setShowComments] = useState(false)
+
+    const filteredComments = useMemo(() => allComments
+            .nodes
+            .filter(({sentences}) => {
+                return sentencesHaveWord(sentences, chosen.current)
+            }),
+        [chosen.current])
 
     useEffect(() => {
         !showComments && secondWord && setShowComments(true)
@@ -51,11 +58,7 @@ export default function Library({data: {words, allComments, ...data}}) {
                                className="uppercase">{secondWord}</span></>}  </>}
                            isOpen={showComments} onClick={() => setShowComments(!showComments)}>
                     <Comments
-                        comments={allComments
-                            .nodes
-                            .filter(({sentences}) => {
-                                return sentencesHaveWord(sentences, chosen.current)
-                            })}
+                        comments={filteredComments}
                         distribution={distribution.filter(({word}) => word === chosen.current)}
                         chosen={chosen.current}
                         secondWord={secondWord}

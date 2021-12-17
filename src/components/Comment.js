@@ -32,7 +32,7 @@ export default function Comment({
                                     origin,
                                     sentences,
                                     user,
-                                    createdAt,
+                                    created_at,
                                     dateText,
                                     word,
                                     secondWord,
@@ -60,7 +60,7 @@ export default function Comment({
             <div className={"text-gray select-none " + (large ? 'text-xl' : 'text-sm')}>
                 <span>User{user}</span>
                 {' • '}
-                <span>{dateText || createdAt}</span>
+                <span>{dateText || created_at}</span>
             </div>
             <p className={'comment-text ' + (large ? 'text-4xl leading-snug py-4' : 'py-1 text-base')}>
                 {typeof sentences !== 'undefined' ? sentences.map((sentence, i) => {
