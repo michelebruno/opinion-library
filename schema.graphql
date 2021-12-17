@@ -52,6 +52,76 @@ interface Node {
     parent: Node
 }
 
+type CommentsJson implements Node {
+    children: [Node!]!
+    comment: String
+    created_at(
+        "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
+        difference: String,
+        "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
+        formatString: String,
+        "Returns a string generated with Moment.js' `fromNow` function"
+        fromNow: Boolean,
+        "Configures the locale Moment.js will use to format the date."
+        locale: String
+    ): Date
+    id: ID!
+    internal: Internal!
+    jsonId: Int
+    origin: String
+    parent: Node
+    petition: CommentsJsonPetition
+    sentences: [[String]]
+    user: Int
+}
+
+type CommentsJsonConnection {
+    distinct(field: CommentsJsonFieldsEnum!): [String!]!
+    edges: [CommentsJsonEdge!]!
+    group(field: CommentsJsonFieldsEnum!, limit: Int, skip: Int): [CommentsJsonGroupConnection!]!
+    max(field: CommentsJsonFieldsEnum!): Float
+    min(field: CommentsJsonFieldsEnum!): Float
+    nodes: [CommentsJson!]!
+    pageInfo: PageInfo!
+    sum(field: CommentsJsonFieldsEnum!): Float
+    totalCount: Int!
+}
+
+type CommentsJsonEdge {
+    next: CommentsJson
+    node: CommentsJson!
+    previous: CommentsJson
+}
+
+type CommentsJsonGroupConnection {
+    distinct(field: CommentsJsonFieldsEnum!): [String!]!
+    edges: [CommentsJsonEdge!]!
+    field: String!
+    fieldValue: String
+    group(field: CommentsJsonFieldsEnum!, limit: Int, skip: Int): [CommentsJsonGroupConnection!]!
+    max(field: CommentsJsonFieldsEnum!): Float
+    min(field: CommentsJsonFieldsEnum!): Float
+    nodes: [CommentsJson!]!
+    pageInfo: PageInfo!
+    sum(field: CommentsJsonFieldsEnum!): Float
+    totalCount: Int!
+}
+
+type CommentsJsonPetition {
+    created_at(
+        "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
+        difference: String,
+        "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
+        formatString: String,
+        "Returns a string generated with Moment.js' `fromNow` function"
+        fromNow: Boolean,
+        "Configures the locale Moment.js will use to format the date."
+        locale: String
+    ): Date
+    slug: String
+    title: String
+}
+
 type Directory implements Node {
     absolutePath: String!
     accessTime(
@@ -233,11 +303,19 @@ type File implements Node {
         "Configures the locale Moment.js will use to format the date."
         locale: String
     ): Date!
+    "Returns the first child node of type CommentsJson or null if there are no children of given type on this node"
+    childCommentsJson: CommentsJson
     "Returns the first child node of type ImageSharp or null if there are no children of given type on this node"
     childImageSharp: ImageSharp
+    "Returns the first child node of type ImagesJson or null if there are no children of given type on this node"
+    childImagesJson: ImagesJson
     children: [Node!]!
+    "Returns all children nodes filtered by type CommentsJson"
+    childrenCommentsJson: [CommentsJson]
     "Returns all children nodes filtered by type ImageSharp"
     childrenImageSharp: [ImageSharp]
+    "Returns all children nodes filtered by type ImagesJson"
+    childrenImagesJson: [ImagesJson]
     ctime(
         "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
         difference: String,
@@ -521,6 +599,960 @@ type ImageSharpResize {
     width: Int
 }
 
+type ImagesJson implements Node {
+    children: [Node!]!
+    count: Int
+    id: ID!
+    internal: Internal!
+    items: [ImagesJsonItems]
+    last_page: Boolean
+    limit: Int
+    offset: Int
+    order: String
+    parent: Node
+    query_source: String
+    total_count: Int
+}
+
+type ImagesJsonConnection {
+    distinct(field: ImagesJsonFieldsEnum!): [String!]!
+    edges: [ImagesJsonEdge!]!
+    group(field: ImagesJsonFieldsEnum!, limit: Int, skip: Int): [ImagesJsonGroupConnection!]!
+    max(field: ImagesJsonFieldsEnum!): Float
+    min(field: ImagesJsonFieldsEnum!): Float
+    nodes: [ImagesJson!]!
+    pageInfo: PageInfo!
+    sum(field: ImagesJsonFieldsEnum!): Float
+    totalCount: Int!
+}
+
+type ImagesJsonEdge {
+    next: ImagesJson
+    node: ImagesJson!
+    previous: ImagesJson
+}
+
+type ImagesJsonGroupConnection {
+    distinct(field: ImagesJsonFieldsEnum!): [String!]!
+    edges: [ImagesJsonEdge!]!
+    field: String!
+    fieldValue: String
+    group(field: ImagesJsonFieldsEnum!, limit: Int, skip: Int): [ImagesJsonGroupConnection!]!
+    max(field: ImagesJsonFieldsEnum!): Float
+    min(field: ImagesJsonFieldsEnum!): Float
+    nodes: [ImagesJson!]!
+    pageInfo: PageInfo!
+    sum(field: ImagesJsonFieldsEnum!): Float
+    totalCount: Int!
+}
+
+type ImagesJsonItems {
+    card_context: ImagesJsonItemsCard_context
+    children_count: Int
+    comment: String
+    commentable_entity: ImagesJsonItemsCommentable_entity
+    commentable_id: Int
+    commentable_type: String
+    created_at(
+        "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
+        difference: String,
+        "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
+        formatString: String,
+        "Returns a string generated with Moment.js' `fromNow` function"
+        fromNow: Boolean,
+        "Configures the locale Moment.js will use to format the date."
+        locale: String
+    ): Date
+    likes: Int
+    parent_id: Int
+    petition: ImagesJsonItemsPetition
+    role: String
+    user: ImagesJsonItemsUser
+}
+
+type ImagesJsonItemsCard_context {
+    kind: String
+    weekly_signature_count: Int
+}
+
+type ImagesJsonItemsCommentable_entity {
+    activity: ImagesJsonItemsCommentable_entityActivity
+    ask: String
+    calculated_goal: Int
+    created_at(
+        "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
+        difference: String,
+        "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
+        formatString: String,
+        "Returns a string generated with Moment.js' `fromNow` function"
+        fromNow: Boolean,
+        "Configures the locale Moment.js will use to format the date."
+        locale: String
+    ): Date
+    creator_name: String
+    creator_photo: ImagesJsonItemsCommentable_entityCreator_photo
+    daily_signature_count: Int
+    daily_signup_count: Int
+    description: String
+    discoverable: Boolean
+    display_title: String
+    displayed_signature_count: Int
+    document_id: String
+    enable_human_verification: Boolean
+    hide_comments: Boolean
+    hide_dm_action_panel: Boolean
+    id: Int
+    is_pledge: Boolean
+    is_verified_victory: Boolean
+    is_victory: Boolean
+    languages: [String]
+    last_edited_at(
+        "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
+        difference: String,
+        "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
+        formatString: String,
+        "Returns a string generated with Moment.js' `fromNow` function"
+        fromNow: Boolean,
+        "Configures the locale Moment.js will use to format the date."
+        locale: String
+    ): Date
+    letter_body: String
+    media: ImagesJsonItemsCommentable_entityMedia
+    monthly_signature_count: Int
+    monthly_signup_count: Int
+    organization: ImagesJsonItemsCommentable_entityOrganization
+    original_locale: String
+    petition_status: String
+    petition_title: String
+    photo: ImagesJsonItemsCommentable_entityPhoto
+    primary_target: ImagesJsonItemsCommentable_entityPrimary_target
+    progress: Float
+    published_at(
+        "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
+        difference: String,
+        "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
+        formatString: String,
+        "Returns a string generated with Moment.js' `fromNow` function"
+        fromNow: Boolean,
+        "Configures the locale Moment.js will use to format the date."
+        locale: String
+    ): Date
+    relevant_location: ImagesJsonItemsCommentable_entityRelevant_location
+    slug: String
+    sponsored_campaign: Boolean
+    status: String
+    tags: [ImagesJsonItemsCommentable_entityTags]
+    targeting_description: String
+    targets: [ImagesJsonItemsCommentable_entityTargets]
+    title: String
+    total_page_views: Int
+    total_share_count: Int
+    total_signature_count: Int
+    total_signup_count: Int
+    user: ImagesJsonItemsCommentable_entityUser
+    weekly_signature_count: Int
+    weekly_signup_count: Int
+}
+
+type ImagesJsonItemsCommentable_entityActivity {
+    recruit__count: Int
+    recruit__last_updated: Int
+    recruit_abi_gmail_count: Int
+    recruit_abi_gmail_last_updated: Int
+    recruit_copylink_count: Int
+    recruit_copylink_last_updated: Int
+    recruit_email_count: Int
+    recruit_email_last_updated: Int
+    recruit_facebook_count: Int
+    recruit_facebook_last_updated: Int
+    recruit_facebook_messenger_mobile_count: Int
+    recruit_facebook_messenger_mobile_last_updated: Int
+    recruit_sms_count: Int
+    recruit_sms_last_updated: Int
+    recruit_twitter_count: Int
+    recruit_twitter_last_updated: Int
+    recruit_whatsapp_count: Int
+    recruit_whatsapp_last_updated: Int
+    share_copylink_count: Int
+    share_copylink_last_updated: Float
+    share_email_count: Int
+    share_email_last_updated: Float
+    share_facebook_count: Int
+    share_facebook_last_updated: Float
+    share_facebook_messenger_count: Int
+    share_facebook_messenger_last_updated: Float
+    share_sms_count: Int
+    share_sms_last_updated: Float
+    share_twitter_count: Int
+    share_twitter_last_updated: Float
+    share_whatsapp_count: Int
+    share_whatsapp_last_updated: Float
+}
+
+type ImagesJsonItemsCommentable_entityCreator_photo {
+    id: Int
+    sizes: ImagesJsonItemsCommentable_entityCreator_photoSizes
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityCreator_photoSizes {
+    large: ImagesJsonItemsCommentable_entityCreator_photoSizesLarge
+    medium: ImagesJsonItemsCommentable_entityCreator_photoSizesMedium
+    small: ImagesJsonItemsCommentable_entityCreator_photoSizesSmall
+}
+
+type ImagesJsonItemsCommentable_entityCreator_photoSizesLarge {
+    processing: Boolean
+    size: ImagesJsonItemsCommentable_entityCreator_photoSizesLargeSize
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityCreator_photoSizesLargeSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsCommentable_entityCreator_photoSizesMedium {
+    processing: Boolean
+    size: ImagesJsonItemsCommentable_entityCreator_photoSizesMediumSize
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityCreator_photoSizesMediumSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsCommentable_entityCreator_photoSizesSmall {
+    processing: Boolean
+    size: ImagesJsonItemsCommentable_entityCreator_photoSizesSmallSize
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityCreator_photoSizesSmallSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsCommentable_entityMedia {
+    id: Int
+    sizes: ImagesJsonItemsCommentable_entityMediaSizes
+    type: String
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityMediaSizes {
+    large: ImagesJsonItemsCommentable_entityMediaSizesLarge
+    medium: ImagesJsonItemsCommentable_entityMediaSizesMedium
+    small: ImagesJsonItemsCommentable_entityMediaSizesSmall
+    square: ImagesJsonItemsCommentable_entityMediaSizesSquare
+}
+
+type ImagesJsonItemsCommentable_entityMediaSizesLarge {
+    processing: Boolean
+    size: ImagesJsonItemsCommentable_entityMediaSizesLargeSize
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityMediaSizesLargeSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsCommentable_entityMediaSizesMedium {
+    processing: Boolean
+    size: ImagesJsonItemsCommentable_entityMediaSizesMediumSize
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityMediaSizesMediumSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsCommentable_entityMediaSizesSmall {
+    processing: Boolean
+    size: ImagesJsonItemsCommentable_entityMediaSizesSmallSize
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityMediaSizesSmallSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsCommentable_entityMediaSizesSquare {
+    processing: Boolean
+    size: ImagesJsonItemsCommentable_entityMediaSizesSquareSize
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityMediaSizesSquareSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsCommentable_entityOrganization {
+    country_code: String
+    formatted_location_string: String
+    id: Int
+    name: String
+    photo: ImagesJsonItemsCommentable_entityOrganizationPhoto
+    slug: String
+    website: String
+}
+
+type ImagesJsonItemsCommentable_entityOrganizationPhoto {
+    id: Int
+    sizes: ImagesJsonItemsCommentable_entityOrganizationPhotoSizes
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityOrganizationPhotoSizes {
+    large: ImagesJsonItemsCommentable_entityOrganizationPhotoSizesLarge
+    medium: ImagesJsonItemsCommentable_entityOrganizationPhotoSizesMedium
+    small: ImagesJsonItemsCommentable_entityOrganizationPhotoSizesSmall
+}
+
+type ImagesJsonItemsCommentable_entityOrganizationPhotoSizesLarge {
+    processing: Boolean
+    size: ImagesJsonItemsCommentable_entityOrganizationPhotoSizesLargeSize
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityOrganizationPhotoSizesLargeSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsCommentable_entityOrganizationPhotoSizesMedium {
+    processing: Boolean
+    size: ImagesJsonItemsCommentable_entityOrganizationPhotoSizesMediumSize
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityOrganizationPhotoSizesMediumSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsCommentable_entityOrganizationPhotoSizesSmall {
+    processing: Boolean
+    size: ImagesJsonItemsCommentable_entityOrganizationPhotoSizesSmallSize
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityOrganizationPhotoSizesSmallSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsCommentable_entityPhoto {
+    id: Int
+    sizes: ImagesJsonItemsCommentable_entityPhotoSizes
+    type: String
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityPhotoSizes {
+    large: ImagesJsonItemsCommentable_entityPhotoSizesLarge
+    medium: ImagesJsonItemsCommentable_entityPhotoSizesMedium
+    small: ImagesJsonItemsCommentable_entityPhotoSizesSmall
+    square: ImagesJsonItemsCommentable_entityPhotoSizesSquare
+}
+
+type ImagesJsonItemsCommentable_entityPhotoSizesLarge {
+    processing: Boolean
+    size: ImagesJsonItemsCommentable_entityPhotoSizesLargeSize
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityPhotoSizesLargeSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsCommentable_entityPhotoSizesMedium {
+    processing: Boolean
+    size: ImagesJsonItemsCommentable_entityPhotoSizesMediumSize
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityPhotoSizesMediumSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsCommentable_entityPhotoSizesSmall {
+    processing: Boolean
+    size: ImagesJsonItemsCommentable_entityPhotoSizesSmallSize
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityPhotoSizesSmallSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsCommentable_entityPhotoSizesSquare {
+    processing: Boolean
+    size: ImagesJsonItemsCommentable_entityPhotoSizesSquareSize
+    url: String
+}
+
+type ImagesJsonItemsCommentable_entityPhotoSizesSquareSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsCommentable_entityPrimary_target {
+    additional_data: ImagesJsonItemsCommentable_entityPrimary_targetAdditional_data
+    display_name: String
+    has_email: Boolean
+    id: Int
+    is_person: Boolean
+    publicly_visible: Boolean
+    slug: String
+    type: String
+}
+
+type ImagesJsonItemsCommentable_entityPrimary_targetAdditional_data {
+    first_name: String
+    last_name: String
+    title: String
+}
+
+type ImagesJsonItemsCommentable_entityRelevant_location {
+    city: String
+    country_code: String
+    google_places_id: String
+    lat: Float
+    lng: Float
+}
+
+type ImagesJsonItemsCommentable_entityTags {
+    created_by_owner: Boolean
+    created_by_staff_member: Boolean
+    id: Int
+    locale: String
+    name: String
+    photo_id: Int
+    slug: String
+    total_count: Int
+}
+
+type ImagesJsonItemsCommentable_entityTargets {
+    additional_data: ImagesJsonItemsCommentable_entityTargetsAdditional_data
+    display_name: String
+    has_email: Boolean
+    id: Int
+    is_person: Boolean
+    publicly_visible: Boolean
+    slug: String
+    type: String
+}
+
+type ImagesJsonItemsCommentable_entityTargetsAdditional_data {
+    first_name: String
+    last_name: String
+    title: String
+}
+
+type ImagesJsonItemsCommentable_entityUser {
+    city: String
+    country_code: String
+    display_name: String
+    first_name: String
+    id: Int
+    last_name: String
+    locale: String
+    short_display_name: String
+    slug: String
+}
+
+type ImagesJsonItemsPetition {
+    activity: ImagesJsonItemsPetitionActivity
+    ask: String
+    calculated_goal: Int
+    created_at(
+        "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
+        difference: String,
+        "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
+        formatString: String,
+        "Returns a string generated with Moment.js' `fromNow` function"
+        fromNow: Boolean,
+        "Configures the locale Moment.js will use to format the date."
+        locale: String
+    ): Date
+    creator_name: String
+    creator_photo: ImagesJsonItemsPetitionCreator_photo
+    daily_signature_count: Int
+    daily_signup_count: Int
+    description: String
+    discoverable: Boolean
+    display_title: String
+    displayed_signature_count: Int
+    document_id: String
+    enable_human_verification: Boolean
+    hide_comments: Boolean
+    hide_dm_action_panel: Boolean
+    id: Int
+    is_pledge: Boolean
+    is_verified_victory: Boolean
+    is_victory: Boolean
+    languages: [String]
+    last_edited_at(
+        "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
+        difference: String,
+        "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
+        formatString: String,
+        "Returns a string generated with Moment.js' `fromNow` function"
+        fromNow: Boolean,
+        "Configures the locale Moment.js will use to format the date."
+        locale: String
+    ): Date
+    letter_body: String
+    media: ImagesJsonItemsPetitionMedia
+    monthly_signature_count: Int
+    monthly_signup_count: Int
+    organization: ImagesJsonItemsPetitionOrganization
+    original_locale: String
+    petition_status: String
+    petition_title: String
+    photo: ImagesJsonItemsPetitionPhoto
+    primary_target: ImagesJsonItemsPetitionPrimary_target
+    progress: Float
+    published_at(
+        "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
+        difference: String,
+        "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
+        formatString: String,
+        "Returns a string generated with Moment.js' `fromNow` function"
+        fromNow: Boolean,
+        "Configures the locale Moment.js will use to format the date."
+        locale: String
+    ): Date
+    relevant_location: ImagesJsonItemsPetitionRelevant_location
+    slug: String
+    sponsored_campaign: Boolean
+    status: String
+    tags: [ImagesJsonItemsPetitionTags]
+    targeting_description: String
+    targets: [ImagesJsonItemsPetitionTargets]
+    title: String
+    total_page_views: Int
+    total_share_count: Int
+    total_signature_count: Int
+    total_signup_count: Int
+    user: ImagesJsonItemsPetitionUser
+    victory_description: String
+    weekly_signature_count: Int
+    weekly_signup_count: Int
+}
+
+type ImagesJsonItemsPetitionActivity {
+    recruit__count: Int
+    recruit__last_updated: Int
+    recruit_copylink_count: Int
+    recruit_copylink_last_updated: Int
+    recruit_email_count: Int
+    recruit_email_last_updated: Int
+    recruit_facebook_count: Int
+    recruit_facebook_last_updated: Int
+    recruit_facebook_messenger_mobile_count: Int
+    recruit_facebook_messenger_mobile_last_updated: Int
+    recruit_sms_count: Int
+    recruit_sms_last_updated: Int
+    recruit_twitter_count: Int
+    recruit_twitter_last_updated: Int
+    recruit_whatsapp_count: Int
+    recruit_whatsapp_last_updated: Int
+    share_copylink_count: Int
+    share_copylink_last_updated: Float
+    share_email_count: Int
+    share_email_last_updated: Float
+    share_facebook_count: Int
+    share_facebook_last_updated: Float
+    share_facebook_messenger_count: Int
+    share_facebook_messenger_last_updated: Float
+    share_sms_count: Int
+    share_sms_last_updated: Float
+    share_twitter_count: Int
+    share_twitter_last_updated: Float
+    share_whatsapp_count: Int
+    share_whatsapp_last_updated: Float
+}
+
+type ImagesJsonItemsPetitionCreator_photo {
+    id: Int
+    sizes: ImagesJsonItemsPetitionCreator_photoSizes
+    url: String
+}
+
+type ImagesJsonItemsPetitionCreator_photoSizes {
+    large: ImagesJsonItemsPetitionCreator_photoSizesLarge
+    medium: ImagesJsonItemsPetitionCreator_photoSizesMedium
+    small: ImagesJsonItemsPetitionCreator_photoSizesSmall
+}
+
+type ImagesJsonItemsPetitionCreator_photoSizesLarge {
+    processing: Boolean
+    size: ImagesJsonItemsPetitionCreator_photoSizesLargeSize
+    url: String
+}
+
+type ImagesJsonItemsPetitionCreator_photoSizesLargeSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsPetitionCreator_photoSizesMedium {
+    processing: Boolean
+    size: ImagesJsonItemsPetitionCreator_photoSizesMediumSize
+    url: String
+}
+
+type ImagesJsonItemsPetitionCreator_photoSizesMediumSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsPetitionCreator_photoSizesSmall {
+    processing: Boolean
+    size: ImagesJsonItemsPetitionCreator_photoSizesSmallSize
+    url: String
+}
+
+type ImagesJsonItemsPetitionCreator_photoSizesSmallSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsPetitionMedia {
+    id: Int
+    sizes: ImagesJsonItemsPetitionMediaSizes
+    type: String
+    url: String
+}
+
+type ImagesJsonItemsPetitionMediaSizes {
+    large: ImagesJsonItemsPetitionMediaSizesLarge
+    medium: ImagesJsonItemsPetitionMediaSizesMedium
+    small: ImagesJsonItemsPetitionMediaSizesSmall
+    square: ImagesJsonItemsPetitionMediaSizesSquare
+}
+
+type ImagesJsonItemsPetitionMediaSizesLarge {
+    processing: Boolean
+    size: ImagesJsonItemsPetitionMediaSizesLargeSize
+    url: String
+}
+
+type ImagesJsonItemsPetitionMediaSizesLargeSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsPetitionMediaSizesMedium {
+    processing: Boolean
+    size: ImagesJsonItemsPetitionMediaSizesMediumSize
+    url: String
+}
+
+type ImagesJsonItemsPetitionMediaSizesMediumSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsPetitionMediaSizesSmall {
+    processing: Boolean
+    size: ImagesJsonItemsPetitionMediaSizesSmallSize
+    url: String
+}
+
+type ImagesJsonItemsPetitionMediaSizesSmallSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsPetitionMediaSizesSquare {
+    processing: Boolean
+    size: ImagesJsonItemsPetitionMediaSizesSquareSize
+    url: String
+}
+
+type ImagesJsonItemsPetitionMediaSizesSquareSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsPetitionOrganization {
+    address: String
+    city: String
+    country_code: String
+    fb_page: String
+    formatted_location_string: String
+    id: Int
+    mission: String
+    name: String
+    photo: ImagesJsonItemsPetitionOrganizationPhoto
+    postal_code: String
+    slug: String
+    state: String
+    state_code: String
+    twitter_page: String
+    website: String
+    zipcode: String
+}
+
+type ImagesJsonItemsPetitionOrganizationPhoto {
+    id: Int
+    sizes: ImagesJsonItemsPetitionOrganizationPhotoSizes
+    url: String
+}
+
+type ImagesJsonItemsPetitionOrganizationPhotoSizes {
+    large: ImagesJsonItemsPetitionOrganizationPhotoSizesLarge
+    medium: ImagesJsonItemsPetitionOrganizationPhotoSizesMedium
+    small: ImagesJsonItemsPetitionOrganizationPhotoSizesSmall
+}
+
+type ImagesJsonItemsPetitionOrganizationPhotoSizesLarge {
+    processing: Boolean
+    size: ImagesJsonItemsPetitionOrganizationPhotoSizesLargeSize
+    url: String
+}
+
+type ImagesJsonItemsPetitionOrganizationPhotoSizesLargeSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsPetitionOrganizationPhotoSizesMedium {
+    processing: Boolean
+    size: ImagesJsonItemsPetitionOrganizationPhotoSizesMediumSize
+    url: String
+}
+
+type ImagesJsonItemsPetitionOrganizationPhotoSizesMediumSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsPetitionOrganizationPhotoSizesSmall {
+    processing: Boolean
+    size: ImagesJsonItemsPetitionOrganizationPhotoSizesSmallSize
+    url: String
+}
+
+type ImagesJsonItemsPetitionOrganizationPhotoSizesSmallSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsPetitionPhoto {
+    id: Int
+    sizes: ImagesJsonItemsPetitionPhotoSizes
+    type: String
+    url: String
+}
+
+type ImagesJsonItemsPetitionPhotoSizes {
+    large: ImagesJsonItemsPetitionPhotoSizesLarge
+    medium: ImagesJsonItemsPetitionPhotoSizesMedium
+    small: ImagesJsonItemsPetitionPhotoSizesSmall
+    square: ImagesJsonItemsPetitionPhotoSizesSquare
+}
+
+type ImagesJsonItemsPetitionPhotoSizesLarge {
+    processing: Boolean
+    size: ImagesJsonItemsPetitionPhotoSizesLargeSize
+    url: String
+}
+
+type ImagesJsonItemsPetitionPhotoSizesLargeSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsPetitionPhotoSizesMedium {
+    processing: Boolean
+    size: ImagesJsonItemsPetitionPhotoSizesMediumSize
+    url: String
+}
+
+type ImagesJsonItemsPetitionPhotoSizesMediumSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsPetitionPhotoSizesSmall {
+    processing: Boolean
+    size: ImagesJsonItemsPetitionPhotoSizesSmallSize
+    url: String
+}
+
+type ImagesJsonItemsPetitionPhotoSizesSmallSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsPetitionPhotoSizesSquare {
+    processing: Boolean
+    size: ImagesJsonItemsPetitionPhotoSizesSquareSize
+    url: String
+}
+
+type ImagesJsonItemsPetitionPhotoSizesSquareSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsPetitionPrimary_target {
+    additional_data: ImagesJsonItemsPetitionPrimary_targetAdditional_data
+    display_name: String
+    has_email: Boolean
+    id: Int
+    is_person: Boolean
+    locale: String
+    publicly_visible: Boolean
+    slug: String
+    type: String
+}
+
+type ImagesJsonItemsPetitionPrimary_targetAdditional_data {
+    first_name: String
+    last_name: String
+}
+
+type ImagesJsonItemsPetitionRelevant_location {
+    country_code: String
+}
+
+type ImagesJsonItemsPetitionTags {
+    created_by_owner: Boolean
+    created_by_staff_member: Boolean
+    id: Int
+    locale: String
+    name: String
+    photo_id: Int
+    slug: String
+    total_count: Int
+}
+
+type ImagesJsonItemsPetitionTargets {
+    additional_data: ImagesJsonItemsPetitionTargetsAdditional_data
+    confirmed_at(
+        "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
+        difference: String,
+        "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
+        formatString: String,
+        "Returns a string generated with Moment.js' `fromNow` function"
+        fromNow: Boolean,
+        "Configures the locale Moment.js will use to format the date."
+        locale: String
+    ): Date
+    display_name: String
+    has_email: Boolean
+    id: Int
+    is_person: Boolean
+    locale: String
+    publicly_visible: Boolean
+    slug: String
+    type: String
+}
+
+type ImagesJsonItemsPetitionTargetsAdditional_data {
+    first_name: String
+    last_name: String
+}
+
+type ImagesJsonItemsPetitionUser {
+    city: String
+    country_code: String
+    description: String
+    display_name: String
+    first_name: String
+    id: Int
+    last_name: String
+    locale: String
+    short_display_name: String
+    slug: String
+    state_code: String
+    website: String
+}
+
+type ImagesJsonItemsUser {
+    city: String
+    country_code: String
+    display_name: String
+    first_name: String
+    id: Int
+    last_name: String
+    locale: String
+    photo: ImagesJsonItemsUserPhoto
+    short_display_name: String
+    slug: String
+    state_code: String
+}
+
+type ImagesJsonItemsUserPhoto {
+    id: Int
+    sizes: ImagesJsonItemsUserPhotoSizes
+    url: String
+}
+
+type ImagesJsonItemsUserPhotoSizes {
+    large: ImagesJsonItemsUserPhotoSizesLarge
+    medium: ImagesJsonItemsUserPhotoSizesMedium
+    small: ImagesJsonItemsUserPhotoSizesSmall
+    xlarge: ImagesJsonItemsUserPhotoSizesXlarge
+}
+
+type ImagesJsonItemsUserPhotoSizesLarge {
+    processing: Boolean
+    size: ImagesJsonItemsUserPhotoSizesLargeSize
+    url: String
+}
+
+type ImagesJsonItemsUserPhotoSizesLargeSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsUserPhotoSizesMedium {
+    processing: Boolean
+    size: ImagesJsonItemsUserPhotoSizesMediumSize
+    url: String
+}
+
+type ImagesJsonItemsUserPhotoSizesMediumSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsUserPhotoSizesSmall {
+    processing: Boolean
+    size: ImagesJsonItemsUserPhotoSizesSmallSize
+    url: String
+}
+
+type ImagesJsonItemsUserPhotoSizesSmallSize {
+    height: Int
+    width: Int
+}
+
+type ImagesJsonItemsUserPhotoSizesXlarge {
+    processing: Boolean
+    size: ImagesJsonItemsUserPhotoSizesXlargeSize
+    url: String
+}
+
+type ImagesJsonItemsUserPhotoSizesXlargeSize {
+    height: Int
+    width: Int
+}
+
 type Internal {
     content: String
     contentDigest: String!
@@ -609,47 +1641,39 @@ type PageInfo {
 }
 
 type Query {
+    allCommentsJson(filter: CommentsJsonFilterInput, limit: Int, skip: Int, sort: CommentsJsonSortInput): CommentsJsonConnection!
     allDirectory(filter: DirectoryFilterInput, limit: Int, skip: Int, sort: DirectorySortInput): DirectoryConnection!
     allFile(filter: FileFilterInput, limit: Int, skip: Int, sort: FileSortInput): FileConnection!
     allImageSharp(filter: ImageSharpFilterInput, limit: Int, skip: Int, sort: ImageSharpSortInput): ImageSharpConnection!
+    allImagesJson(filter: ImagesJsonFilterInput, limit: Int, skip: Int, sort: ImagesJsonSortInput): ImagesJsonConnection!
     allMdx(filter: MdxFilterInput, limit: Int, skip: Int, sort: MdxSortInput): MdxConnection!
     allSheetsArchivioVaccine(filter: SheetsArchivioVaccineFilterInput, limit: Int, skip: Int, sort: SheetsArchivioVaccineSortInput): SheetsArchivioVaccineConnection!
     allSheetsChiFaCosa(filter: SheetsChiFaCosaFilterInput, limit: Int, skip: Int, sort: SheetsChiFaCosaSortInput): SheetsChiFaCosaConnection!
-    allSheetsCommentiPromask(filter: SheetsCommentiPromaskFilterInput, limit: Int, skip: Int, sort: SheetsCommentiPromaskSortInput): SheetsCommentiPromaskConnection!
-    allSheetsCommentiUnmask(filter: SheetsCommentiUnmaskFilterInput, limit: Int, skip: Int, sort: SheetsCommentiUnmaskSortInput): SheetsCommentiUnmaskConnection!
     allSheetsDistribuzione(filter: SheetsDistribuzioneFilterInput, limit: Int, skip: Int, sort: SheetsDistribuzioneSortInput): SheetsDistribuzioneConnection!
-    allSheetsDistribuzioneMauri(filter: SheetsDistribuzioneMauriFilterInput, limit: Int, skip: Int, sort: SheetsDistribuzioneMauriSortInput): SheetsDistribuzioneMauriConnection!
     allSheetsDistribuzioneV2(filter: SheetsDistribuzioneV2FilterInput, limit: Int, skip: Int, sort: SheetsDistribuzioneV2SortInput): SheetsDistribuzioneV2Connection!
     allSheetsEstratti(filter: SheetsEstrattiFilterInput, limit: Int, skip: Int, sort: SheetsEstrattiSortInput): SheetsEstrattiConnection!
-    allSheetsPetitions(filter: SheetsPetitionsFilterInput, limit: Int, skip: Int, sort: SheetsPetitionsSortInput): SheetsPetitionsConnection!
     allSheetsScatter(filter: SheetsScatterFilterInput, limit: Int, skip: Int, sort: SheetsScatterSortInput): SheetsScatterConnection!
-    allSheetsScelti(filter: SheetsSceltiFilterInput, limit: Int, skip: Int, sort: SheetsSceltiSortInput): SheetsSceltiConnection!
     allSheetsSelezionatiVaccine(filter: SheetsSelezionatiVaccineFilterInput, limit: Int, skip: Int, sort: SheetsSelezionatiVaccineSortInput): SheetsSelezionatiVaccineConnection!
     allSheetsTestiFinding(filter: SheetsTestiFindingFilterInput, limit: Int, skip: Int, sort: SheetsTestiFindingSortInput): SheetsTestiFindingConnection!
-    allSheetsUnmask(filter: SheetsUnmaskFilterInput, limit: Int, skip: Int, sort: SheetsUnmaskSortInput): SheetsUnmaskConnection!
     allSite(filter: SiteFilterInput, limit: Int, skip: Int, sort: SiteSortInput): SiteConnection!
     allSiteBuildMetadata(filter: SiteBuildMetadataFilterInput, limit: Int, skip: Int, sort: SiteBuildMetadataSortInput): SiteBuildMetadataConnection!
     allSiteFunction(filter: SiteFunctionFilterInput, limit: Int, skip: Int, sort: SiteFunctionSortInput): SiteFunctionConnection!
     allSitePage(filter: SitePageFilterInput, limit: Int, skip: Int, sort: SitePageSortInput): SitePageConnection!
     allSitePlugin(filter: SitePluginFilterInput, limit: Int, skip: Int, sort: SitePluginSortInput): SitePluginConnection!
+    commentsJson(children: NodeFilterListInput, comment: StringQueryOperatorInput, created_at: DateQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, jsonId: IntQueryOperatorInput, origin: StringQueryOperatorInput, parent: NodeFilterInput, petition: CommentsJsonPetitionFilterInput, sentences: StringQueryOperatorInput, user: IntQueryOperatorInput): CommentsJson
     directory(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, changeTime: DateQueryOperatorInput, children: NodeFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): Directory
-    file(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, blksize: IntQueryOperatorInput, blocks: IntQueryOperatorInput, changeTime: DateQueryOperatorInput, childImageSharp: ImageSharpFilterInput, children: NodeFilterListInput, childrenImageSharp: ImageSharpFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, publicURL: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): File
+    file(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, blksize: IntQueryOperatorInput, blocks: IntQueryOperatorInput, changeTime: DateQueryOperatorInput, childCommentsJson: CommentsJsonFilterInput, childImageSharp: ImageSharpFilterInput, childImagesJson: ImagesJsonFilterInput, children: NodeFilterListInput, childrenCommentsJson: CommentsJsonFilterListInput, childrenImageSharp: ImageSharpFilterListInput, childrenImagesJson: ImagesJsonFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, publicURL: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): File
     imageSharp(children: NodeFilterListInput, fixed: ImageSharpFixedFilterInput, fluid: ImageSharpFluidFilterInput, gatsbyImageData: JSONQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, original: ImageSharpOriginalFilterInput, parent: NodeFilterInput, resize: ImageSharpResizeFilterInput): ImageSharp
+    imagesJson(children: NodeFilterListInput, count: IntQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, items: ImagesJsonItemsFilterListInput, last_page: BooleanQueryOperatorInput, limit: IntQueryOperatorInput, offset: IntQueryOperatorInput, order: StringQueryOperatorInput, parent: NodeFilterInput, query_source: StringQueryOperatorInput, total_count: IntQueryOperatorInput): ImagesJson
     mdx(body: StringQueryOperatorInput, children: NodeFilterListInput, excerpt: StringQueryOperatorInput, fileAbsolutePath: StringQueryOperatorInput, frontmatter: MdxFrontmatterFilterInput, headings: MdxHeadingMdxFilterListInput, html: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, mdxAST: JSONQueryOperatorInput, parent: NodeFilterInput, rawBody: StringQueryOperatorInput, slug: StringQueryOperatorInput, tableOfContents: JSONQueryOperatorInput, timeToRead: IntQueryOperatorInput, wordCount: MdxWordCountFilterInput): Mdx
     sheetsArchivioVaccine(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, descr: StringQueryOperatorInput, extracted: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, origin: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, petitionSlug: StringQueryOperatorInput, role: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput, word: StringQueryOperatorInput): SheetsArchivioVaccine
     sheetsChiFaCosa(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, parole: StringQueryOperatorInput, persone: StringQueryOperatorInput): SheetsChiFaCosa
-    sheetsCommentiPromask(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, petitionSlug: StringQueryOperatorInput, role: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput): SheetsCommentiPromask
-    sheetsCommentiUnmask(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, petitionSlug: StringQueryOperatorInput, role: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput): SheetsCommentiUnmask
     sheetsDistribuzione(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, nomask: IntQueryOperatorInput, nomaskDelta: FloatQueryOperatorInput, nomask__: FloatQueryOperatorInput, parent: NodeFilterInput, promaks__: FloatQueryOperatorInput, promask: IntQueryOperatorInput, promaskDelta: FloatQueryOperatorInput, secondWord: StringQueryOperatorInput, summedPercentage: FloatQueryOperatorInput, word: StringQueryOperatorInput): SheetsDistribuzione
-    sheetsDistribuzioneMauri(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, nomask: StringQueryOperatorInput, nomaskDelta: StringQueryOperatorInput, nomask__: StringQueryOperatorInput, parent: NodeFilterInput, promaks__: StringQueryOperatorInput, promask: StringQueryOperatorInput, promaskDelta: StringQueryOperatorInput, secondWord: StringQueryOperatorInput, summedPercentage: StringQueryOperatorInput, word: StringQueryOperatorInput): SheetsDistribuzioneMauri
     sheetsDistribuzioneV2(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, nomask: StringQueryOperatorInput, nomaskDelta: FloatQueryOperatorInput, nomask__: FloatQueryOperatorInput, parent: NodeFilterInput, promaks__: FloatQueryOperatorInput, promask: StringQueryOperatorInput, promaskDelta: FloatQueryOperatorInput, secondWord: StringQueryOperatorInput, summedPercentage: FloatQueryOperatorInput, word: StringQueryOperatorInput): SheetsDistribuzioneV2
     sheetsEstratti(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentId: IntQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: DateQueryOperatorInput, extracted: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, origin: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, petitionSlug: StringQueryOperatorInput, role: StringQueryOperatorInput, scelto: StringQueryOperatorInput, word: StringQueryOperatorInput): SheetsEstratti
-    sheetsPetitions(children: NodeFilterListInput, country: StringQueryOperatorInput, date: DateQueryOperatorInput, description: StringQueryOperatorInput, id: StringQueryOperatorInput, imgUrl: StringQueryOperatorInput, internal: InternalFilterInput, link: StringQueryOperatorInput, originalLocale: StringQueryOperatorInput, pageViews: StringQueryOperatorInput, parent: NodeFilterInput, shareCountTotal: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput, signatures: StringQueryOperatorInput, slug: StringQueryOperatorInput, sponsored: StringQueryOperatorInput, tagRawNames: StringQueryOperatorInput, tagSlugs: StringQueryOperatorInput, tags: StringQueryOperatorInput, targets: StringQueryOperatorInput, title: StringQueryOperatorInput, user: StringQueryOperatorInput, userId: StringQueryOperatorInput, verifiedVictory: StringQueryOperatorInput, victory: StringQueryOperatorInput): SheetsPetitions
-    sheetsScatter(children: NodeFilterListInput, countNomask: IntQueryOperatorInput, countPromask: IntQueryOperatorInput, deltaNomask: FloatQueryOperatorInput, deltaPromask: FloatQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, name: StringQueryOperatorInput, normalizedNomask: FloatQueryOperatorInput, normalizedPromask: FloatQueryOperatorInput, parent: NodeFilterInput, percentageBoth: FloatQueryOperatorInput, percentageNomask: FloatQueryOperatorInput, percentagePromask: FloatQueryOperatorInput, scelta: StringQueryOperatorInput): SheetsScatter
-    sheetsScelti(author: StringQueryOperatorInput, children: NodeFilterListInput, childrenCount: StringQueryOperatorInput, comment: StringQueryOperatorInput, commentableId: StringQueryOperatorInput, commentableType: StringQueryOperatorInput, createdAt: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, likes: StringQueryOperatorInput, parent: NodeFilterInput, petitionLink: StringQueryOperatorInput, role: StringQueryOperatorInput, sheetsId: StringQueryOperatorInput, source: StringQueryOperatorInput, word: StringQueryOperatorInput): SheetsScelti
+    sheetsScatter(children: NodeFilterListInput, countNomask: IntQueryOperatorInput, countPromask: IntQueryOperatorInput, deltaNomask: FloatQueryOperatorInput, deltaPromask: FloatQueryOperatorInput, finding: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, name: StringQueryOperatorInput, normalizedNomask: FloatQueryOperatorInput, normalizedPromask: FloatQueryOperatorInput, parent: NodeFilterInput, percentageBoth: FloatQueryOperatorInput, percentageNomask: FloatQueryOperatorInput, percentagePromask: FloatQueryOperatorInput, scelta: StringQueryOperatorInput): SheetsScatter
     sheetsSelezionatiVaccine(children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, no: StringQueryOperatorInput, parent: NodeFilterInput, pro: StringQueryOperatorInput): SheetsSelezionatiVaccine
     sheetsTestiFinding(children: NodeFilterListInput, finding: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, word: StringQueryOperatorInput): SheetsTestiFinding
-    sheetsUnmask(children: NodeFilterListInput, country: StringQueryOperatorInput, date: DateQueryOperatorInput, description: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, pageViews: StringQueryOperatorInput, parent: NodeFilterInput, shareCountTotal: StringQueryOperatorInput, signatures: StringQueryOperatorInput, sponsored: StringQueryOperatorInput, tagRawNames: StringQueryOperatorInput, tagSlugs: StringQueryOperatorInput, tags: StringQueryOperatorInput, targets: StringQueryOperatorInput, title: StringQueryOperatorInput, user: StringQueryOperatorInput, userId: StringQueryOperatorInput, verifiedVictory: StringQueryOperatorInput, victory: StringQueryOperatorInput): SheetsUnmask
     site(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, host: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, jsxRuntime: StringQueryOperatorInput, parent: NodeFilterInput, pathPrefix: StringQueryOperatorInput, polyfill: BooleanQueryOperatorInput, port: IntQueryOperatorInput, siteMetadata: SiteSiteMetadataFilterInput): Site
     siteBuildMetadata(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput): SiteBuildMetadata
     siteFunction(absoluteCompiledFilePath: StringQueryOperatorInput, children: NodeFilterListInput, functionRoute: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, matchPath: StringQueryOperatorInput, originalAbsoluteFilePath: StringQueryOperatorInput, originalRelativeFilePath: StringQueryOperatorInput, parent: NodeFilterInput, pluginName: StringQueryOperatorInput, relativeCompiledFilePath: StringQueryOperatorInput): SiteFunction
@@ -761,115 +1785,6 @@ type SheetsChiFaCosaGroupConnection {
     totalCount: Int!
 }
 
-type SheetsCommentiPromask implements Node {
-    author: String
-    children: [Node!]!
-    childrenCount: String
-    comment: String
-    commentableId: String
-    commentableType: String
-    createdAt(
-        "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
-        difference: String,
-        "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
-        formatString: String,
-        "Returns a string generated with Moment.js' `fromNow` function"
-        fromNow: Boolean,
-        "Configures the locale Moment.js will use to format the date."
-        locale: String
-    ): Date
-    id: ID!
-    internal: Internal!
-    likes: String
-    parent: Node
-    petitionLink: String
-    petitionSlug: String
-    role: String
-    sheetsId: String
-}
-
-type SheetsCommentiPromaskConnection {
-    distinct(field: SheetsCommentiPromaskFieldsEnum!): [String!]!
-    edges: [SheetsCommentiPromaskEdge!]!
-    group(field: SheetsCommentiPromaskFieldsEnum!, limit: Int, skip: Int): [SheetsCommentiPromaskGroupConnection!]!
-    max(field: SheetsCommentiPromaskFieldsEnum!): Float
-    min(field: SheetsCommentiPromaskFieldsEnum!): Float
-    nodes: [SheetsCommentiPromask!]!
-    pageInfo: PageInfo!
-    sum(field: SheetsCommentiPromaskFieldsEnum!): Float
-    totalCount: Int!
-}
-
-type SheetsCommentiPromaskEdge {
-    next: SheetsCommentiPromask
-    node: SheetsCommentiPromask!
-    previous: SheetsCommentiPromask
-}
-
-type SheetsCommentiPromaskGroupConnection {
-    distinct(field: SheetsCommentiPromaskFieldsEnum!): [String!]!
-    edges: [SheetsCommentiPromaskEdge!]!
-    field: String!
-    fieldValue: String
-    group(field: SheetsCommentiPromaskFieldsEnum!, limit: Int, skip: Int): [SheetsCommentiPromaskGroupConnection!]!
-    max(field: SheetsCommentiPromaskFieldsEnum!): Float
-    min(field: SheetsCommentiPromaskFieldsEnum!): Float
-    nodes: [SheetsCommentiPromask!]!
-    pageInfo: PageInfo!
-    sum(field: SheetsCommentiPromaskFieldsEnum!): Float
-    totalCount: Int!
-}
-
-type SheetsCommentiUnmask implements Node {
-    author: String
-    children: [Node!]!
-    childrenCount: String
-    comment: String
-    commentableId: String
-    commentableType: String
-    createdAt: String
-    id: ID!
-    internal: Internal!
-    likes: String
-    parent: Node
-    petitionLink: String
-    petitionSlug: String
-    role: String
-    sheetsId: String
-}
-
-type SheetsCommentiUnmaskConnection {
-    distinct(field: SheetsCommentiUnmaskFieldsEnum!): [String!]!
-    edges: [SheetsCommentiUnmaskEdge!]!
-    group(field: SheetsCommentiUnmaskFieldsEnum!, limit: Int, skip: Int): [SheetsCommentiUnmaskGroupConnection!]!
-    max(field: SheetsCommentiUnmaskFieldsEnum!): Float
-    min(field: SheetsCommentiUnmaskFieldsEnum!): Float
-    nodes: [SheetsCommentiUnmask!]!
-    pageInfo: PageInfo!
-    sum(field: SheetsCommentiUnmaskFieldsEnum!): Float
-    totalCount: Int!
-}
-
-type SheetsCommentiUnmaskEdge {
-    next: SheetsCommentiUnmask
-    node: SheetsCommentiUnmask!
-    previous: SheetsCommentiUnmask
-}
-
-type SheetsCommentiUnmaskGroupConnection {
-    distinct(field: SheetsCommentiUnmaskFieldsEnum!): [String!]!
-    edges: [SheetsCommentiUnmaskEdge!]!
-    field: String!
-    fieldValue: String
-    group(field: SheetsCommentiUnmaskFieldsEnum!, limit: Int, skip: Int): [SheetsCommentiUnmaskGroupConnection!]!
-    max(field: SheetsCommentiUnmaskFieldsEnum!): Float
-    min(field: SheetsCommentiUnmaskFieldsEnum!): Float
-    nodes: [SheetsCommentiUnmask!]!
-    pageInfo: PageInfo!
-    sum(field: SheetsCommentiUnmaskFieldsEnum!): Float
-    totalCount: Int!
-}
-
 type SheetsDistribuzione implements Node {
     children: [Node!]!
     id: ID!
@@ -915,54 +1830,6 @@ type SheetsDistribuzioneGroupConnection {
     nodes: [SheetsDistribuzione!]!
     pageInfo: PageInfo!
     sum(field: SheetsDistribuzioneFieldsEnum!): Float
-    totalCount: Int!
-}
-
-type SheetsDistribuzioneMauri implements Node {
-    children: [Node!]!
-    id: ID!
-    internal: Internal!
-    nomask: String
-    nomaskDelta: String
-    nomask__: String
-    parent: Node
-    promaks__: String
-    promask: String
-    promaskDelta: String
-    secondWord: String
-    summedPercentage: String
-    word: String
-}
-
-type SheetsDistribuzioneMauriConnection {
-    distinct(field: SheetsDistribuzioneMauriFieldsEnum!): [String!]!
-    edges: [SheetsDistribuzioneMauriEdge!]!
-    group(field: SheetsDistribuzioneMauriFieldsEnum!, limit: Int, skip: Int): [SheetsDistribuzioneMauriGroupConnection!]!
-    max(field: SheetsDistribuzioneMauriFieldsEnum!): Float
-    min(field: SheetsDistribuzioneMauriFieldsEnum!): Float
-    nodes: [SheetsDistribuzioneMauri!]!
-    pageInfo: PageInfo!
-    sum(field: SheetsDistribuzioneMauriFieldsEnum!): Float
-    totalCount: Int!
-}
-
-type SheetsDistribuzioneMauriEdge {
-    next: SheetsDistribuzioneMauri
-    node: SheetsDistribuzioneMauri!
-    previous: SheetsDistribuzioneMauri
-}
-
-type SheetsDistribuzioneMauriGroupConnection {
-    distinct(field: SheetsDistribuzioneMauriFieldsEnum!): [String!]!
-    edges: [SheetsDistribuzioneMauriEdge!]!
-    field: String!
-    fieldValue: String
-    group(field: SheetsDistribuzioneMauriFieldsEnum!, limit: Int, skip: Int): [SheetsDistribuzioneMauriGroupConnection!]!
-    max(field: SheetsDistribuzioneMauriFieldsEnum!): Float
-    min(field: SheetsDistribuzioneMauriFieldsEnum!): Float
-    nodes: [SheetsDistribuzioneMauri!]!
-    pageInfo: PageInfo!
-    sum(field: SheetsDistribuzioneMauriFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1043,6 +1910,7 @@ type SheetsEstratti implements Node {
     role: String
     scelto: String
     splitted: [String]
+    userId: String
     word: String
 }
 
@@ -1078,81 +1946,13 @@ type SheetsEstrattiGroupConnection {
     totalCount: Int!
 }
 
-type SheetsPetitions implements Node {
-    children: [Node!]!
-    country: String
-    date(
-        "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
-        difference: String,
-        "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
-        formatString: String,
-        "Returns a string generated with Moment.js' `fromNow` function"
-        fromNow: Boolean,
-        "Configures the locale Moment.js will use to format the date."
-        locale: String
-    ): Date
-    description: String
-    id: ID!
-    imgUrl: String
-    internal: Internal!
-    link: String
-    originalLocale: String
-    pageViews: String
-    parent: Node
-    shareCountTotal: String
-    sheetsId: String
-    signatures: String
-    slug: String
-    sponsored: String
-    tagRawNames: String
-    tagSlugs: String
-    tags: String
-    targets: String
-    title: String
-    user: String
-    userId: String
-    verifiedVictory: String
-    victory: String
-}
-
-type SheetsPetitionsConnection {
-    distinct(field: SheetsPetitionsFieldsEnum!): [String!]!
-    edges: [SheetsPetitionsEdge!]!
-    group(field: SheetsPetitionsFieldsEnum!, limit: Int, skip: Int): [SheetsPetitionsGroupConnection!]!
-    max(field: SheetsPetitionsFieldsEnum!): Float
-    min(field: SheetsPetitionsFieldsEnum!): Float
-    nodes: [SheetsPetitions!]!
-    pageInfo: PageInfo!
-    sum(field: SheetsPetitionsFieldsEnum!): Float
-    totalCount: Int!
-}
-
-type SheetsPetitionsEdge {
-    next: SheetsPetitions
-    node: SheetsPetitions!
-    previous: SheetsPetitions
-}
-
-type SheetsPetitionsGroupConnection {
-    distinct(field: SheetsPetitionsFieldsEnum!): [String!]!
-    edges: [SheetsPetitionsEdge!]!
-    field: String!
-    fieldValue: String
-    group(field: SheetsPetitionsFieldsEnum!, limit: Int, skip: Int): [SheetsPetitionsGroupConnection!]!
-    max(field: SheetsPetitionsFieldsEnum!): Float
-    min(field: SheetsPetitionsFieldsEnum!): Float
-    nodes: [SheetsPetitions!]!
-    pageInfo: PageInfo!
-    sum(field: SheetsPetitionsFieldsEnum!): Float
-    totalCount: Int!
-}
-
 type SheetsScatter implements Node {
     children: [Node!]!
     countNomask: Int
     countPromask: Int
     deltaNomask: Float
     deltaPromask: Float
+    finding: String
     id: ID!
     internal: Internal!
     name: String
@@ -1194,57 +1994,6 @@ type SheetsScatterGroupConnection {
     nodes: [SheetsScatter!]!
     pageInfo: PageInfo!
     sum(field: SheetsScatterFieldsEnum!): Float
-    totalCount: Int!
-}
-
-type SheetsScelti implements Node {
-    author: String
-    children: [Node!]!
-    childrenCount: String
-    comment: String
-    commentableId: String
-    commentableType: String
-    createdAt: String
-    id: ID!
-    internal: Internal!
-    likes: String
-    parent: Node
-    petitionLink: String
-    role: String
-    sheetsId: String
-    source: String
-    word: String
-}
-
-type SheetsSceltiConnection {
-    distinct(field: SheetsSceltiFieldsEnum!): [String!]!
-    edges: [SheetsSceltiEdge!]!
-    group(field: SheetsSceltiFieldsEnum!, limit: Int, skip: Int): [SheetsSceltiGroupConnection!]!
-    max(field: SheetsSceltiFieldsEnum!): Float
-    min(field: SheetsSceltiFieldsEnum!): Float
-    nodes: [SheetsScelti!]!
-    pageInfo: PageInfo!
-    sum(field: SheetsSceltiFieldsEnum!): Float
-    totalCount: Int!
-}
-
-type SheetsSceltiEdge {
-    next: SheetsScelti
-    node: SheetsScelti!
-    previous: SheetsScelti
-}
-
-type SheetsSceltiGroupConnection {
-    distinct(field: SheetsSceltiFieldsEnum!): [String!]!
-    edges: [SheetsSceltiEdge!]!
-    field: String!
-    fieldValue: String
-    group(field: SheetsSceltiFieldsEnum!, limit: Int, skip: Int): [SheetsSceltiGroupConnection!]!
-    max(field: SheetsSceltiFieldsEnum!): Float
-    min(field: SheetsSceltiFieldsEnum!): Float
-    nodes: [SheetsScelti!]!
-    pageInfo: PageInfo!
-    sum(field: SheetsSceltiFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1327,70 +2076,6 @@ type SheetsTestiFindingGroupConnection {
     nodes: [SheetsTestiFinding!]!
     pageInfo: PageInfo!
     sum(field: SheetsTestiFindingFieldsEnum!): Float
-    totalCount: Int!
-}
-
-type SheetsUnmask implements Node {
-    children: [Node!]!
-    country: String
-    date(
-        "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
-        difference: String,
-        "Format the date using Moment.js' date tokens, e.g. `date(formatString: \"YYYY MMMM DD\")`. See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens."
-        formatString: String,
-        "Returns a string generated with Moment.js' `fromNow` function"
-        fromNow: Boolean,
-        "Configures the locale Moment.js will use to format the date."
-        locale: String
-    ): Date
-    description: String
-    id: ID!
-    internal: Internal!
-    pageViews: String
-    parent: Node
-    shareCountTotal: String
-    signatures: String
-    sponsored: String
-    tagRawNames: String
-    tagSlugs: String
-    tags: String
-    targets: String
-    title: String
-    user: String
-    userId: String
-    verifiedVictory: String
-    victory: String
-}
-
-type SheetsUnmaskConnection {
-    distinct(field: SheetsUnmaskFieldsEnum!): [String!]!
-    edges: [SheetsUnmaskEdge!]!
-    group(field: SheetsUnmaskFieldsEnum!, limit: Int, skip: Int): [SheetsUnmaskGroupConnection!]!
-    max(field: SheetsUnmaskFieldsEnum!): Float
-    min(field: SheetsUnmaskFieldsEnum!): Float
-    nodes: [SheetsUnmask!]!
-    pageInfo: PageInfo!
-    sum(field: SheetsUnmaskFieldsEnum!): Float
-    totalCount: Int!
-}
-
-type SheetsUnmaskEdge {
-    next: SheetsUnmask
-    node: SheetsUnmask!
-    previous: SheetsUnmask
-}
-
-type SheetsUnmaskGroupConnection {
-    distinct(field: SheetsUnmaskFieldsEnum!): [String!]!
-    edges: [SheetsUnmaskEdge!]!
-    field: String!
-    fieldValue: String
-    group(field: SheetsUnmaskFieldsEnum!, limit: Int, skip: Int): [SheetsUnmaskGroupConnection!]!
-    max(field: SheetsUnmaskFieldsEnum!): Float
-    min(field: SheetsUnmaskFieldsEnum!): Float
-    nodes: [SheetsUnmask!]!
-    pageInfo: PageInfo!
-    sum(field: SheetsUnmaskFieldsEnum!): Float
     totalCount: Int!
 }
 
@@ -1644,6 +2329,104 @@ type SiteSiteMetadata {
     title: String
 }
 
+enum CommentsJsonFieldsEnum {
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
+    comment
+    created_at
+    id
+    internal___content
+    internal___contentDigest
+    internal___description
+    internal___fieldOwners
+    internal___ignoreType
+    internal___mediaType
+    internal___owner
+    internal___type
+    jsonId
+    origin
+    parent___children
+    parent___children___children
+    parent___children___children___children
+    parent___children___children___id
+    parent___children___id
+    parent___children___internal___content
+    parent___children___internal___contentDigest
+    parent___children___internal___description
+    parent___children___internal___fieldOwners
+    parent___children___internal___ignoreType
+    parent___children___internal___mediaType
+    parent___children___internal___owner
+    parent___children___internal___type
+    parent___children___parent___children
+    parent___children___parent___id
+    parent___id
+    parent___internal___content
+    parent___internal___contentDigest
+    parent___internal___description
+    parent___internal___fieldOwners
+    parent___internal___ignoreType
+    parent___internal___mediaType
+    parent___internal___owner
+    parent___internal___type
+    parent___parent___children
+    parent___parent___children___children
+    parent___parent___children___id
+    parent___parent___id
+    parent___parent___internal___content
+    parent___parent___internal___contentDigest
+    parent___parent___internal___description
+    parent___parent___internal___fieldOwners
+    parent___parent___internal___ignoreType
+    parent___parent___internal___mediaType
+    parent___parent___internal___owner
+    parent___parent___internal___type
+    parent___parent___parent___children
+    parent___parent___parent___id
+    petition___created_at
+    petition___slug
+    petition___title
+    sentences
+    user
+}
+
 enum DirectoryFieldsEnum {
     absolutePath
     accessTime
@@ -1776,6 +2559,53 @@ enum FileFieldsEnum {
     blksize
     blocks
     changeTime
+    childCommentsJson___children
+    childCommentsJson___children___children
+    childCommentsJson___children___children___children
+    childCommentsJson___children___children___id
+    childCommentsJson___children___id
+    childCommentsJson___children___internal___content
+    childCommentsJson___children___internal___contentDigest
+    childCommentsJson___children___internal___description
+    childCommentsJson___children___internal___fieldOwners
+    childCommentsJson___children___internal___ignoreType
+    childCommentsJson___children___internal___mediaType
+    childCommentsJson___children___internal___owner
+    childCommentsJson___children___internal___type
+    childCommentsJson___children___parent___children
+    childCommentsJson___children___parent___id
+    childCommentsJson___comment
+    childCommentsJson___created_at
+    childCommentsJson___id
+    childCommentsJson___internal___content
+    childCommentsJson___internal___contentDigest
+    childCommentsJson___internal___description
+    childCommentsJson___internal___fieldOwners
+    childCommentsJson___internal___ignoreType
+    childCommentsJson___internal___mediaType
+    childCommentsJson___internal___owner
+    childCommentsJson___internal___type
+    childCommentsJson___jsonId
+    childCommentsJson___origin
+    childCommentsJson___parent___children
+    childCommentsJson___parent___children___children
+    childCommentsJson___parent___children___id
+    childCommentsJson___parent___id
+    childCommentsJson___parent___internal___content
+    childCommentsJson___parent___internal___contentDigest
+    childCommentsJson___parent___internal___description
+    childCommentsJson___parent___internal___fieldOwners
+    childCommentsJson___parent___internal___ignoreType
+    childCommentsJson___parent___internal___mediaType
+    childCommentsJson___parent___internal___owner
+    childCommentsJson___parent___internal___type
+    childCommentsJson___parent___parent___children
+    childCommentsJson___parent___parent___id
+    childCommentsJson___petition___created_at
+    childCommentsJson___petition___slug
+    childCommentsJson___petition___title
+    childCommentsJson___sentences
+    childCommentsJson___user
     childImageSharp___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
     childImageSharp___children___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
     childImageSharp___children___children___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -1846,7 +2676,204 @@ enum FileFieldsEnum {
     childImageSharp___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
     childImageSharp___resize___tracedSVG @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
     childImageSharp___resize___width @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+    childImagesJson___children
+    childImagesJson___children___children
+    childImagesJson___children___children___children
+    childImagesJson___children___children___id
+    childImagesJson___children___id
+    childImagesJson___children___internal___content
+    childImagesJson___children___internal___contentDigest
+    childImagesJson___children___internal___description
+    childImagesJson___children___internal___fieldOwners
+    childImagesJson___children___internal___ignoreType
+    childImagesJson___children___internal___mediaType
+    childImagesJson___children___internal___owner
+    childImagesJson___children___internal___type
+    childImagesJson___children___parent___children
+    childImagesJson___children___parent___id
+    childImagesJson___count
+    childImagesJson___id
+    childImagesJson___internal___content
+    childImagesJson___internal___contentDigest
+    childImagesJson___internal___description
+    childImagesJson___internal___fieldOwners
+    childImagesJson___internal___ignoreType
+    childImagesJson___internal___mediaType
+    childImagesJson___internal___owner
+    childImagesJson___internal___type
+    childImagesJson___items
+    childImagesJson___items___card_context___kind
+    childImagesJson___items___card_context___weekly_signature_count
+    childImagesJson___items___children_count
+    childImagesJson___items___comment
+    childImagesJson___items___commentable_entity___ask
+    childImagesJson___items___commentable_entity___calculated_goal
+    childImagesJson___items___commentable_entity___created_at
+    childImagesJson___items___commentable_entity___creator_name
+    childImagesJson___items___commentable_entity___daily_signature_count
+    childImagesJson___items___commentable_entity___daily_signup_count
+    childImagesJson___items___commentable_entity___description
+    childImagesJson___items___commentable_entity___discoverable
+    childImagesJson___items___commentable_entity___display_title
+    childImagesJson___items___commentable_entity___displayed_signature_count
+    childImagesJson___items___commentable_entity___document_id
+    childImagesJson___items___commentable_entity___enable_human_verification
+    childImagesJson___items___commentable_entity___hide_comments
+    childImagesJson___items___commentable_entity___hide_dm_action_panel
+    childImagesJson___items___commentable_entity___id
+    childImagesJson___items___commentable_entity___is_pledge
+    childImagesJson___items___commentable_entity___is_verified_victory
+    childImagesJson___items___commentable_entity___is_victory
+    childImagesJson___items___commentable_entity___languages
+    childImagesJson___items___commentable_entity___last_edited_at
+    childImagesJson___items___commentable_entity___letter_body
+    childImagesJson___items___commentable_entity___monthly_signature_count
+    childImagesJson___items___commentable_entity___monthly_signup_count
+    childImagesJson___items___commentable_entity___original_locale
+    childImagesJson___items___commentable_entity___petition_status
+    childImagesJson___items___commentable_entity___petition_title
+    childImagesJson___items___commentable_entity___progress
+    childImagesJson___items___commentable_entity___published_at
+    childImagesJson___items___commentable_entity___slug
+    childImagesJson___items___commentable_entity___sponsored_campaign
+    childImagesJson___items___commentable_entity___status
+    childImagesJson___items___commentable_entity___tags
+    childImagesJson___items___commentable_entity___targeting_description
+    childImagesJson___items___commentable_entity___targets
+    childImagesJson___items___commentable_entity___title
+    childImagesJson___items___commentable_entity___total_page_views
+    childImagesJson___items___commentable_entity___total_share_count
+    childImagesJson___items___commentable_entity___total_signature_count
+    childImagesJson___items___commentable_entity___total_signup_count
+    childImagesJson___items___commentable_entity___weekly_signature_count
+    childImagesJson___items___commentable_entity___weekly_signup_count
+    childImagesJson___items___commentable_id
+    childImagesJson___items___commentable_type
+    childImagesJson___items___created_at
+    childImagesJson___items___likes
+    childImagesJson___items___parent_id
+    childImagesJson___items___petition___ask
+    childImagesJson___items___petition___calculated_goal
+    childImagesJson___items___petition___created_at
+    childImagesJson___items___petition___creator_name
+    childImagesJson___items___petition___daily_signature_count
+    childImagesJson___items___petition___daily_signup_count
+    childImagesJson___items___petition___description
+    childImagesJson___items___petition___discoverable
+    childImagesJson___items___petition___display_title
+    childImagesJson___items___petition___displayed_signature_count
+    childImagesJson___items___petition___document_id
+    childImagesJson___items___petition___enable_human_verification
+    childImagesJson___items___petition___hide_comments
+    childImagesJson___items___petition___hide_dm_action_panel
+    childImagesJson___items___petition___id
+    childImagesJson___items___petition___is_pledge
+    childImagesJson___items___petition___is_verified_victory
+    childImagesJson___items___petition___is_victory
+    childImagesJson___items___petition___languages
+    childImagesJson___items___petition___last_edited_at
+    childImagesJson___items___petition___letter_body
+    childImagesJson___items___petition___monthly_signature_count
+    childImagesJson___items___petition___monthly_signup_count
+    childImagesJson___items___petition___original_locale
+    childImagesJson___items___petition___petition_status
+    childImagesJson___items___petition___petition_title
+    childImagesJson___items___petition___progress
+    childImagesJson___items___petition___published_at
+    childImagesJson___items___petition___slug
+    childImagesJson___items___petition___sponsored_campaign
+    childImagesJson___items___petition___status
+    childImagesJson___items___petition___tags
+    childImagesJson___items___petition___targeting_description
+    childImagesJson___items___petition___targets
+    childImagesJson___items___petition___title
+    childImagesJson___items___petition___total_page_views
+    childImagesJson___items___petition___total_share_count
+    childImagesJson___items___petition___total_signature_count
+    childImagesJson___items___petition___total_signup_count
+    childImagesJson___items___petition___victory_description
+    childImagesJson___items___petition___weekly_signature_count
+    childImagesJson___items___petition___weekly_signup_count
+    childImagesJson___items___role
+    childImagesJson___items___user___city
+    childImagesJson___items___user___country_code
+    childImagesJson___items___user___display_name
+    childImagesJson___items___user___first_name
+    childImagesJson___items___user___id
+    childImagesJson___items___user___last_name
+    childImagesJson___items___user___locale
+    childImagesJson___items___user___short_display_name
+    childImagesJson___items___user___slug
+    childImagesJson___items___user___state_code
+    childImagesJson___last_page
+    childImagesJson___limit
+    childImagesJson___offset
+    childImagesJson___order
+    childImagesJson___parent___children
+    childImagesJson___parent___children___children
+    childImagesJson___parent___children___id
+    childImagesJson___parent___id
+    childImagesJson___parent___internal___content
+    childImagesJson___parent___internal___contentDigest
+    childImagesJson___parent___internal___description
+    childImagesJson___parent___internal___fieldOwners
+    childImagesJson___parent___internal___ignoreType
+    childImagesJson___parent___internal___mediaType
+    childImagesJson___parent___internal___owner
+    childImagesJson___parent___internal___type
+    childImagesJson___parent___parent___children
+    childImagesJson___parent___parent___id
+    childImagesJson___query_source
+    childImagesJson___total_count
     children
+    childrenCommentsJson
+    childrenCommentsJson___children
+    childrenCommentsJson___children___children
+    childrenCommentsJson___children___children___children
+    childrenCommentsJson___children___children___id
+    childrenCommentsJson___children___id
+    childrenCommentsJson___children___internal___content
+    childrenCommentsJson___children___internal___contentDigest
+    childrenCommentsJson___children___internal___description
+    childrenCommentsJson___children___internal___fieldOwners
+    childrenCommentsJson___children___internal___ignoreType
+    childrenCommentsJson___children___internal___mediaType
+    childrenCommentsJson___children___internal___owner
+    childrenCommentsJson___children___internal___type
+    childrenCommentsJson___children___parent___children
+    childrenCommentsJson___children___parent___id
+    childrenCommentsJson___comment
+    childrenCommentsJson___created_at
+    childrenCommentsJson___id
+    childrenCommentsJson___internal___content
+    childrenCommentsJson___internal___contentDigest
+    childrenCommentsJson___internal___description
+    childrenCommentsJson___internal___fieldOwners
+    childrenCommentsJson___internal___ignoreType
+    childrenCommentsJson___internal___mediaType
+    childrenCommentsJson___internal___owner
+    childrenCommentsJson___internal___type
+    childrenCommentsJson___jsonId
+    childrenCommentsJson___origin
+    childrenCommentsJson___parent___children
+    childrenCommentsJson___parent___children___children
+    childrenCommentsJson___parent___children___id
+    childrenCommentsJson___parent___id
+    childrenCommentsJson___parent___internal___content
+    childrenCommentsJson___parent___internal___contentDigest
+    childrenCommentsJson___parent___internal___description
+    childrenCommentsJson___parent___internal___fieldOwners
+    childrenCommentsJson___parent___internal___ignoreType
+    childrenCommentsJson___parent___internal___mediaType
+    childrenCommentsJson___parent___internal___owner
+    childrenCommentsJson___parent___internal___type
+    childrenCommentsJson___parent___parent___children
+    childrenCommentsJson___parent___parent___id
+    childrenCommentsJson___petition___created_at
+    childrenCommentsJson___petition___slug
+    childrenCommentsJson___petition___title
+    childrenCommentsJson___sentences
+    childrenCommentsJson___user
     childrenImageSharp
     childrenImageSharp___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
     childrenImageSharp___children___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -1918,6 +2945,156 @@ enum FileFieldsEnum {
     childrenImageSharp___resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
     childrenImageSharp___resize___tracedSVG @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
     childrenImageSharp___resize___width @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+    childrenImagesJson
+    childrenImagesJson___children
+    childrenImagesJson___children___children
+    childrenImagesJson___children___children___children
+    childrenImagesJson___children___children___id
+    childrenImagesJson___children___id
+    childrenImagesJson___children___internal___content
+    childrenImagesJson___children___internal___contentDigest
+    childrenImagesJson___children___internal___description
+    childrenImagesJson___children___internal___fieldOwners
+    childrenImagesJson___children___internal___ignoreType
+    childrenImagesJson___children___internal___mediaType
+    childrenImagesJson___children___internal___owner
+    childrenImagesJson___children___internal___type
+    childrenImagesJson___children___parent___children
+    childrenImagesJson___children___parent___id
+    childrenImagesJson___count
+    childrenImagesJson___id
+    childrenImagesJson___internal___content
+    childrenImagesJson___internal___contentDigest
+    childrenImagesJson___internal___description
+    childrenImagesJson___internal___fieldOwners
+    childrenImagesJson___internal___ignoreType
+    childrenImagesJson___internal___mediaType
+    childrenImagesJson___internal___owner
+    childrenImagesJson___internal___type
+    childrenImagesJson___items
+    childrenImagesJson___items___card_context___kind
+    childrenImagesJson___items___card_context___weekly_signature_count
+    childrenImagesJson___items___children_count
+    childrenImagesJson___items___comment
+    childrenImagesJson___items___commentable_entity___ask
+    childrenImagesJson___items___commentable_entity___calculated_goal
+    childrenImagesJson___items___commentable_entity___created_at
+    childrenImagesJson___items___commentable_entity___creator_name
+    childrenImagesJson___items___commentable_entity___daily_signature_count
+    childrenImagesJson___items___commentable_entity___daily_signup_count
+    childrenImagesJson___items___commentable_entity___description
+    childrenImagesJson___items___commentable_entity___discoverable
+    childrenImagesJson___items___commentable_entity___display_title
+    childrenImagesJson___items___commentable_entity___displayed_signature_count
+    childrenImagesJson___items___commentable_entity___document_id
+    childrenImagesJson___items___commentable_entity___enable_human_verification
+    childrenImagesJson___items___commentable_entity___hide_comments
+    childrenImagesJson___items___commentable_entity___hide_dm_action_panel
+    childrenImagesJson___items___commentable_entity___id
+    childrenImagesJson___items___commentable_entity___is_pledge
+    childrenImagesJson___items___commentable_entity___is_verified_victory
+    childrenImagesJson___items___commentable_entity___is_victory
+    childrenImagesJson___items___commentable_entity___languages
+    childrenImagesJson___items___commentable_entity___last_edited_at
+    childrenImagesJson___items___commentable_entity___letter_body
+    childrenImagesJson___items___commentable_entity___monthly_signature_count
+    childrenImagesJson___items___commentable_entity___monthly_signup_count
+    childrenImagesJson___items___commentable_entity___original_locale
+    childrenImagesJson___items___commentable_entity___petition_status
+    childrenImagesJson___items___commentable_entity___petition_title
+    childrenImagesJson___items___commentable_entity___progress
+    childrenImagesJson___items___commentable_entity___published_at
+    childrenImagesJson___items___commentable_entity___slug
+    childrenImagesJson___items___commentable_entity___sponsored_campaign
+    childrenImagesJson___items___commentable_entity___status
+    childrenImagesJson___items___commentable_entity___tags
+    childrenImagesJson___items___commentable_entity___targeting_description
+    childrenImagesJson___items___commentable_entity___targets
+    childrenImagesJson___items___commentable_entity___title
+    childrenImagesJson___items___commentable_entity___total_page_views
+    childrenImagesJson___items___commentable_entity___total_share_count
+    childrenImagesJson___items___commentable_entity___total_signature_count
+    childrenImagesJson___items___commentable_entity___total_signup_count
+    childrenImagesJson___items___commentable_entity___weekly_signature_count
+    childrenImagesJson___items___commentable_entity___weekly_signup_count
+    childrenImagesJson___items___commentable_id
+    childrenImagesJson___items___commentable_type
+    childrenImagesJson___items___created_at
+    childrenImagesJson___items___likes
+    childrenImagesJson___items___parent_id
+    childrenImagesJson___items___petition___ask
+    childrenImagesJson___items___petition___calculated_goal
+    childrenImagesJson___items___petition___created_at
+    childrenImagesJson___items___petition___creator_name
+    childrenImagesJson___items___petition___daily_signature_count
+    childrenImagesJson___items___petition___daily_signup_count
+    childrenImagesJson___items___petition___description
+    childrenImagesJson___items___petition___discoverable
+    childrenImagesJson___items___petition___display_title
+    childrenImagesJson___items___petition___displayed_signature_count
+    childrenImagesJson___items___petition___document_id
+    childrenImagesJson___items___petition___enable_human_verification
+    childrenImagesJson___items___petition___hide_comments
+    childrenImagesJson___items___petition___hide_dm_action_panel
+    childrenImagesJson___items___petition___id
+    childrenImagesJson___items___petition___is_pledge
+    childrenImagesJson___items___petition___is_verified_victory
+    childrenImagesJson___items___petition___is_victory
+    childrenImagesJson___items___petition___languages
+    childrenImagesJson___items___petition___last_edited_at
+    childrenImagesJson___items___petition___letter_body
+    childrenImagesJson___items___petition___monthly_signature_count
+    childrenImagesJson___items___petition___monthly_signup_count
+    childrenImagesJson___items___petition___original_locale
+    childrenImagesJson___items___petition___petition_status
+    childrenImagesJson___items___petition___petition_title
+    childrenImagesJson___items___petition___progress
+    childrenImagesJson___items___petition___published_at
+    childrenImagesJson___items___petition___slug
+    childrenImagesJson___items___petition___sponsored_campaign
+    childrenImagesJson___items___petition___status
+    childrenImagesJson___items___petition___tags
+    childrenImagesJson___items___petition___targeting_description
+    childrenImagesJson___items___petition___targets
+    childrenImagesJson___items___petition___title
+    childrenImagesJson___items___petition___total_page_views
+    childrenImagesJson___items___petition___total_share_count
+    childrenImagesJson___items___petition___total_signature_count
+    childrenImagesJson___items___petition___total_signup_count
+    childrenImagesJson___items___petition___victory_description
+    childrenImagesJson___items___petition___weekly_signature_count
+    childrenImagesJson___items___petition___weekly_signup_count
+    childrenImagesJson___items___role
+    childrenImagesJson___items___user___city
+    childrenImagesJson___items___user___country_code
+    childrenImagesJson___items___user___display_name
+    childrenImagesJson___items___user___first_name
+    childrenImagesJson___items___user___id
+    childrenImagesJson___items___user___last_name
+    childrenImagesJson___items___user___locale
+    childrenImagesJson___items___user___short_display_name
+    childrenImagesJson___items___user___slug
+    childrenImagesJson___items___user___state_code
+    childrenImagesJson___last_page
+    childrenImagesJson___limit
+    childrenImagesJson___offset
+    childrenImagesJson___order
+    childrenImagesJson___parent___children
+    childrenImagesJson___parent___children___children
+    childrenImagesJson___parent___children___id
+    childrenImagesJson___parent___id
+    childrenImagesJson___parent___internal___content
+    childrenImagesJson___parent___internal___contentDigest
+    childrenImagesJson___parent___internal___description
+    childrenImagesJson___parent___internal___fieldOwners
+    childrenImagesJson___parent___internal___ignoreType
+    childrenImagesJson___parent___internal___mediaType
+    childrenImagesJson___parent___internal___owner
+    childrenImagesJson___parent___internal___type
+    childrenImagesJson___parent___parent___children
+    childrenImagesJson___parent___parent___id
+    childrenImagesJson___query_source
+    childrenImagesJson___total_count
     children___children
     children___children___children
     children___children___children___children
@@ -2222,6 +3399,381 @@ enum ImageSharpFieldsEnum {
     resize___src @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
     resize___tracedSVG @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
     resize___width @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+}
+
+enum ImagesJsonFieldsEnum {
+    children
+    children___children
+    children___children___children
+    children___children___children___children
+    children___children___children___id
+    children___children___id
+    children___children___internal___content
+    children___children___internal___contentDigest
+    children___children___internal___description
+    children___children___internal___fieldOwners
+    children___children___internal___ignoreType
+    children___children___internal___mediaType
+    children___children___internal___owner
+    children___children___internal___type
+    children___children___parent___children
+    children___children___parent___id
+    children___id
+    children___internal___content
+    children___internal___contentDigest
+    children___internal___description
+    children___internal___fieldOwners
+    children___internal___ignoreType
+    children___internal___mediaType
+    children___internal___owner
+    children___internal___type
+    children___parent___children
+    children___parent___children___children
+    children___parent___children___id
+    children___parent___id
+    children___parent___internal___content
+    children___parent___internal___contentDigest
+    children___parent___internal___description
+    children___parent___internal___fieldOwners
+    children___parent___internal___ignoreType
+    children___parent___internal___mediaType
+    children___parent___internal___owner
+    children___parent___internal___type
+    children___parent___parent___children
+    children___parent___parent___id
+    count
+    id
+    internal___content
+    internal___contentDigest
+    internal___description
+    internal___fieldOwners
+    internal___ignoreType
+    internal___mediaType
+    internal___owner
+    internal___type
+    items
+    items___card_context___kind
+    items___card_context___weekly_signature_count
+    items___children_count
+    items___comment
+    items___commentable_entity___activity___recruit__count
+    items___commentable_entity___activity___recruit__last_updated
+    items___commentable_entity___activity___recruit_abi_gmail_count
+    items___commentable_entity___activity___recruit_abi_gmail_last_updated
+    items___commentable_entity___activity___recruit_copylink_count
+    items___commentable_entity___activity___recruit_copylink_last_updated
+    items___commentable_entity___activity___recruit_email_count
+    items___commentable_entity___activity___recruit_email_last_updated
+    items___commentable_entity___activity___recruit_facebook_count
+    items___commentable_entity___activity___recruit_facebook_last_updated
+    items___commentable_entity___activity___recruit_facebook_messenger_mobile_count
+    items___commentable_entity___activity___recruit_facebook_messenger_mobile_last_updated
+    items___commentable_entity___activity___recruit_sms_count
+    items___commentable_entity___activity___recruit_sms_last_updated
+    items___commentable_entity___activity___recruit_twitter_count
+    items___commentable_entity___activity___recruit_twitter_last_updated
+    items___commentable_entity___activity___recruit_whatsapp_count
+    items___commentable_entity___activity___recruit_whatsapp_last_updated
+    items___commentable_entity___activity___share_copylink_count
+    items___commentable_entity___activity___share_copylink_last_updated
+    items___commentable_entity___activity___share_email_count
+    items___commentable_entity___activity___share_email_last_updated
+    items___commentable_entity___activity___share_facebook_count
+    items___commentable_entity___activity___share_facebook_last_updated
+    items___commentable_entity___activity___share_facebook_messenger_count
+    items___commentable_entity___activity___share_facebook_messenger_last_updated
+    items___commentable_entity___activity___share_sms_count
+    items___commentable_entity___activity___share_sms_last_updated
+    items___commentable_entity___activity___share_twitter_count
+    items___commentable_entity___activity___share_twitter_last_updated
+    items___commentable_entity___activity___share_whatsapp_count
+    items___commentable_entity___activity___share_whatsapp_last_updated
+    items___commentable_entity___ask
+    items___commentable_entity___calculated_goal
+    items___commentable_entity___created_at
+    items___commentable_entity___creator_name
+    items___commentable_entity___creator_photo___id
+    items___commentable_entity___creator_photo___url
+    items___commentable_entity___daily_signature_count
+    items___commentable_entity___daily_signup_count
+    items___commentable_entity___description
+    items___commentable_entity___discoverable
+    items___commentable_entity___display_title
+    items___commentable_entity___displayed_signature_count
+    items___commentable_entity___document_id
+    items___commentable_entity___enable_human_verification
+    items___commentable_entity___hide_comments
+    items___commentable_entity___hide_dm_action_panel
+    items___commentable_entity___id
+    items___commentable_entity___is_pledge
+    items___commentable_entity___is_verified_victory
+    items___commentable_entity___is_victory
+    items___commentable_entity___languages
+    items___commentable_entity___last_edited_at
+    items___commentable_entity___letter_body
+    items___commentable_entity___media___id
+    items___commentable_entity___media___type
+    items___commentable_entity___media___url
+    items___commentable_entity___monthly_signature_count
+    items___commentable_entity___monthly_signup_count
+    items___commentable_entity___organization___country_code
+    items___commentable_entity___organization___formatted_location_string
+    items___commentable_entity___organization___id
+    items___commentable_entity___organization___name
+    items___commentable_entity___organization___slug
+    items___commentable_entity___organization___website
+    items___commentable_entity___original_locale
+    items___commentable_entity___petition_status
+    items___commentable_entity___petition_title
+    items___commentable_entity___photo___id
+    items___commentable_entity___photo___type
+    items___commentable_entity___photo___url
+    items___commentable_entity___primary_target___display_name
+    items___commentable_entity___primary_target___has_email
+    items___commentable_entity___primary_target___id
+    items___commentable_entity___primary_target___is_person
+    items___commentable_entity___primary_target___publicly_visible
+    items___commentable_entity___primary_target___slug
+    items___commentable_entity___primary_target___type
+    items___commentable_entity___progress
+    items___commentable_entity___published_at
+    items___commentable_entity___relevant_location___city
+    items___commentable_entity___relevant_location___country_code
+    items___commentable_entity___relevant_location___google_places_id
+    items___commentable_entity___relevant_location___lat
+    items___commentable_entity___relevant_location___lng
+    items___commentable_entity___slug
+    items___commentable_entity___sponsored_campaign
+    items___commentable_entity___status
+    items___commentable_entity___tags
+    items___commentable_entity___tags___created_by_owner
+    items___commentable_entity___tags___created_by_staff_member
+    items___commentable_entity___tags___id
+    items___commentable_entity___tags___locale
+    items___commentable_entity___tags___name
+    items___commentable_entity___tags___photo_id
+    items___commentable_entity___tags___slug
+    items___commentable_entity___tags___total_count
+    items___commentable_entity___targeting_description
+    items___commentable_entity___targets
+    items___commentable_entity___targets___display_name
+    items___commentable_entity___targets___has_email
+    items___commentable_entity___targets___id
+    items___commentable_entity___targets___is_person
+    items___commentable_entity___targets___publicly_visible
+    items___commentable_entity___targets___slug
+    items___commentable_entity___targets___type
+    items___commentable_entity___title
+    items___commentable_entity___total_page_views
+    items___commentable_entity___total_share_count
+    items___commentable_entity___total_signature_count
+    items___commentable_entity___total_signup_count
+    items___commentable_entity___user___city
+    items___commentable_entity___user___country_code
+    items___commentable_entity___user___display_name
+    items___commentable_entity___user___first_name
+    items___commentable_entity___user___id
+    items___commentable_entity___user___last_name
+    items___commentable_entity___user___locale
+    items___commentable_entity___user___short_display_name
+    items___commentable_entity___user___slug
+    items___commentable_entity___weekly_signature_count
+    items___commentable_entity___weekly_signup_count
+    items___commentable_id
+    items___commentable_type
+    items___created_at
+    items___likes
+    items___parent_id
+    items___petition___activity___recruit__count
+    items___petition___activity___recruit__last_updated
+    items___petition___activity___recruit_copylink_count
+    items___petition___activity___recruit_copylink_last_updated
+    items___petition___activity___recruit_email_count
+    items___petition___activity___recruit_email_last_updated
+    items___petition___activity___recruit_facebook_count
+    items___petition___activity___recruit_facebook_last_updated
+    items___petition___activity___recruit_facebook_messenger_mobile_count
+    items___petition___activity___recruit_facebook_messenger_mobile_last_updated
+    items___petition___activity___recruit_sms_count
+    items___petition___activity___recruit_sms_last_updated
+    items___petition___activity___recruit_twitter_count
+    items___petition___activity___recruit_twitter_last_updated
+    items___petition___activity___recruit_whatsapp_count
+    items___petition___activity___recruit_whatsapp_last_updated
+    items___petition___activity___share_copylink_count
+    items___petition___activity___share_copylink_last_updated
+    items___petition___activity___share_email_count
+    items___petition___activity___share_email_last_updated
+    items___petition___activity___share_facebook_count
+    items___petition___activity___share_facebook_last_updated
+    items___petition___activity___share_facebook_messenger_count
+    items___petition___activity___share_facebook_messenger_last_updated
+    items___petition___activity___share_sms_count
+    items___petition___activity___share_sms_last_updated
+    items___petition___activity___share_twitter_count
+    items___petition___activity___share_twitter_last_updated
+    items___petition___activity___share_whatsapp_count
+    items___petition___activity___share_whatsapp_last_updated
+    items___petition___ask
+    items___petition___calculated_goal
+    items___petition___created_at
+    items___petition___creator_name
+    items___petition___creator_photo___id
+    items___petition___creator_photo___url
+    items___petition___daily_signature_count
+    items___petition___daily_signup_count
+    items___petition___description
+    items___petition___discoverable
+    items___petition___display_title
+    items___petition___displayed_signature_count
+    items___petition___document_id
+    items___petition___enable_human_verification
+    items___petition___hide_comments
+    items___petition___hide_dm_action_panel
+    items___petition___id
+    items___petition___is_pledge
+    items___petition___is_verified_victory
+    items___petition___is_victory
+    items___petition___languages
+    items___petition___last_edited_at
+    items___petition___letter_body
+    items___petition___media___id
+    items___petition___media___type
+    items___petition___media___url
+    items___petition___monthly_signature_count
+    items___petition___monthly_signup_count
+    items___petition___organization___address
+    items___petition___organization___city
+    items___petition___organization___country_code
+    items___petition___organization___fb_page
+    items___petition___organization___formatted_location_string
+    items___petition___organization___id
+    items___petition___organization___mission
+    items___petition___organization___name
+    items___petition___organization___postal_code
+    items___petition___organization___slug
+    items___petition___organization___state
+    items___petition___organization___state_code
+    items___petition___organization___twitter_page
+    items___petition___organization___website
+    items___petition___organization___zipcode
+    items___petition___original_locale
+    items___petition___petition_status
+    items___petition___petition_title
+    items___petition___photo___id
+    items___petition___photo___type
+    items___petition___photo___url
+    items___petition___primary_target___display_name
+    items___petition___primary_target___has_email
+    items___petition___primary_target___id
+    items___petition___primary_target___is_person
+    items___petition___primary_target___locale
+    items___petition___primary_target___publicly_visible
+    items___petition___primary_target___slug
+    items___petition___primary_target___type
+    items___petition___progress
+    items___petition___published_at
+    items___petition___relevant_location___country_code
+    items___petition___slug
+    items___petition___sponsored_campaign
+    items___petition___status
+    items___petition___tags
+    items___petition___tags___created_by_owner
+    items___petition___tags___created_by_staff_member
+    items___petition___tags___id
+    items___petition___tags___locale
+    items___petition___tags___name
+    items___petition___tags___photo_id
+    items___petition___tags___slug
+    items___petition___tags___total_count
+    items___petition___targeting_description
+    items___petition___targets
+    items___petition___targets___confirmed_at
+    items___petition___targets___display_name
+    items___petition___targets___has_email
+    items___petition___targets___id
+    items___petition___targets___is_person
+    items___petition___targets___locale
+    items___petition___targets___publicly_visible
+    items___petition___targets___slug
+    items___petition___targets___type
+    items___petition___title
+    items___petition___total_page_views
+    items___petition___total_share_count
+    items___petition___total_signature_count
+    items___petition___total_signup_count
+    items___petition___user___city
+    items___petition___user___country_code
+    items___petition___user___description
+    items___petition___user___display_name
+    items___petition___user___first_name
+    items___petition___user___id
+    items___petition___user___last_name
+    items___petition___user___locale
+    items___petition___user___short_display_name
+    items___petition___user___slug
+    items___petition___user___state_code
+    items___petition___user___website
+    items___petition___victory_description
+    items___petition___weekly_signature_count
+    items___petition___weekly_signup_count
+    items___role
+    items___user___city
+    items___user___country_code
+    items___user___display_name
+    items___user___first_name
+    items___user___id
+    items___user___last_name
+    items___user___locale
+    items___user___photo___id
+    items___user___photo___url
+    items___user___short_display_name
+    items___user___slug
+    items___user___state_code
+    last_page
+    limit
+    offset
+    order
+    parent___children
+    parent___children___children
+    parent___children___children___children
+    parent___children___children___id
+    parent___children___id
+    parent___children___internal___content
+    parent___children___internal___contentDigest
+    parent___children___internal___description
+    parent___children___internal___fieldOwners
+    parent___children___internal___ignoreType
+    parent___children___internal___mediaType
+    parent___children___internal___owner
+    parent___children___internal___type
+    parent___children___parent___children
+    parent___children___parent___id
+    parent___id
+    parent___internal___content
+    parent___internal___contentDigest
+    parent___internal___description
+    parent___internal___fieldOwners
+    parent___internal___ignoreType
+    parent___internal___mediaType
+    parent___internal___owner
+    parent___internal___type
+    parent___parent___children
+    parent___parent___children___children
+    parent___parent___children___id
+    parent___parent___id
+    parent___parent___internal___content
+    parent___parent___internal___contentDigest
+    parent___parent___internal___description
+    parent___parent___internal___fieldOwners
+    parent___parent___internal___ignoreType
+    parent___parent___internal___mediaType
+    parent___parent___internal___owner
+    parent___parent___internal___type
+    parent___parent___parent___children
+    parent___parent___parent___id
+    query_source
+    total_count
 }
 
 enum MdxFieldsEnum {
@@ -2533,305 +4085,7 @@ enum SheetsChiFaCosaFieldsEnum {
     persone
 }
 
-enum SheetsCommentiPromaskFieldsEnum {
-    author
-    children
-    childrenCount
-    children___children
-    children___children___children
-    children___children___children___children
-    children___children___children___id
-    children___children___id
-    children___children___internal___content
-    children___children___internal___contentDigest
-    children___children___internal___description
-    children___children___internal___fieldOwners
-    children___children___internal___ignoreType
-    children___children___internal___mediaType
-    children___children___internal___owner
-    children___children___internal___type
-    children___children___parent___children
-    children___children___parent___id
-    children___id
-    children___internal___content
-    children___internal___contentDigest
-    children___internal___description
-    children___internal___fieldOwners
-    children___internal___ignoreType
-    children___internal___mediaType
-    children___internal___owner
-    children___internal___type
-    children___parent___children
-    children___parent___children___children
-    children___parent___children___id
-    children___parent___id
-    children___parent___internal___content
-    children___parent___internal___contentDigest
-    children___parent___internal___description
-    children___parent___internal___fieldOwners
-    children___parent___internal___ignoreType
-    children___parent___internal___mediaType
-    children___parent___internal___owner
-    children___parent___internal___type
-    children___parent___parent___children
-    children___parent___parent___id
-    comment
-    commentableId
-    commentableType
-    createdAt
-    id
-    internal___content
-    internal___contentDigest
-    internal___description
-    internal___fieldOwners
-    internal___ignoreType
-    internal___mediaType
-    internal___owner
-    internal___type
-    likes
-    parent___children
-    parent___children___children
-    parent___children___children___children
-    parent___children___children___id
-    parent___children___id
-    parent___children___internal___content
-    parent___children___internal___contentDigest
-    parent___children___internal___description
-    parent___children___internal___fieldOwners
-    parent___children___internal___ignoreType
-    parent___children___internal___mediaType
-    parent___children___internal___owner
-    parent___children___internal___type
-    parent___children___parent___children
-    parent___children___parent___id
-    parent___id
-    parent___internal___content
-    parent___internal___contentDigest
-    parent___internal___description
-    parent___internal___fieldOwners
-    parent___internal___ignoreType
-    parent___internal___mediaType
-    parent___internal___owner
-    parent___internal___type
-    parent___parent___children
-    parent___parent___children___children
-    parent___parent___children___id
-    parent___parent___id
-    parent___parent___internal___content
-    parent___parent___internal___contentDigest
-    parent___parent___internal___description
-    parent___parent___internal___fieldOwners
-    parent___parent___internal___ignoreType
-    parent___parent___internal___mediaType
-    parent___parent___internal___owner
-    parent___parent___internal___type
-    parent___parent___parent___children
-    parent___parent___parent___id
-    petitionLink
-    petitionSlug
-    role
-    sheetsId
-}
-
-enum SheetsCommentiUnmaskFieldsEnum {
-    author
-    children
-    childrenCount
-    children___children
-    children___children___children
-    children___children___children___children
-    children___children___children___id
-    children___children___id
-    children___children___internal___content
-    children___children___internal___contentDigest
-    children___children___internal___description
-    children___children___internal___fieldOwners
-    children___children___internal___ignoreType
-    children___children___internal___mediaType
-    children___children___internal___owner
-    children___children___internal___type
-    children___children___parent___children
-    children___children___parent___id
-    children___id
-    children___internal___content
-    children___internal___contentDigest
-    children___internal___description
-    children___internal___fieldOwners
-    children___internal___ignoreType
-    children___internal___mediaType
-    children___internal___owner
-    children___internal___type
-    children___parent___children
-    children___parent___children___children
-    children___parent___children___id
-    children___parent___id
-    children___parent___internal___content
-    children___parent___internal___contentDigest
-    children___parent___internal___description
-    children___parent___internal___fieldOwners
-    children___parent___internal___ignoreType
-    children___parent___internal___mediaType
-    children___parent___internal___owner
-    children___parent___internal___type
-    children___parent___parent___children
-    children___parent___parent___id
-    comment
-    commentableId
-    commentableType
-    createdAt
-    id
-    internal___content
-    internal___contentDigest
-    internal___description
-    internal___fieldOwners
-    internal___ignoreType
-    internal___mediaType
-    internal___owner
-    internal___type
-    likes
-    parent___children
-    parent___children___children
-    parent___children___children___children
-    parent___children___children___id
-    parent___children___id
-    parent___children___internal___content
-    parent___children___internal___contentDigest
-    parent___children___internal___description
-    parent___children___internal___fieldOwners
-    parent___children___internal___ignoreType
-    parent___children___internal___mediaType
-    parent___children___internal___owner
-    parent___children___internal___type
-    parent___children___parent___children
-    parent___children___parent___id
-    parent___id
-    parent___internal___content
-    parent___internal___contentDigest
-    parent___internal___description
-    parent___internal___fieldOwners
-    parent___internal___ignoreType
-    parent___internal___mediaType
-    parent___internal___owner
-    parent___internal___type
-    parent___parent___children
-    parent___parent___children___children
-    parent___parent___children___id
-    parent___parent___id
-    parent___parent___internal___content
-    parent___parent___internal___contentDigest
-    parent___parent___internal___description
-    parent___parent___internal___fieldOwners
-    parent___parent___internal___ignoreType
-    parent___parent___internal___mediaType
-    parent___parent___internal___owner
-    parent___parent___internal___type
-    parent___parent___parent___children
-    parent___parent___parent___id
-    petitionLink
-    petitionSlug
-    role
-    sheetsId
-}
-
 enum SheetsDistribuzioneFieldsEnum {
-    children
-    children___children
-    children___children___children
-    children___children___children___children
-    children___children___children___id
-    children___children___id
-    children___children___internal___content
-    children___children___internal___contentDigest
-    children___children___internal___description
-    children___children___internal___fieldOwners
-    children___children___internal___ignoreType
-    children___children___internal___mediaType
-    children___children___internal___owner
-    children___children___internal___type
-    children___children___parent___children
-    children___children___parent___id
-    children___id
-    children___internal___content
-    children___internal___contentDigest
-    children___internal___description
-    children___internal___fieldOwners
-    children___internal___ignoreType
-    children___internal___mediaType
-    children___internal___owner
-    children___internal___type
-    children___parent___children
-    children___parent___children___children
-    children___parent___children___id
-    children___parent___id
-    children___parent___internal___content
-    children___parent___internal___contentDigest
-    children___parent___internal___description
-    children___parent___internal___fieldOwners
-    children___parent___internal___ignoreType
-    children___parent___internal___mediaType
-    children___parent___internal___owner
-    children___parent___internal___type
-    children___parent___parent___children
-    children___parent___parent___id
-    id
-    internal___content
-    internal___contentDigest
-    internal___description
-    internal___fieldOwners
-    internal___ignoreType
-    internal___mediaType
-    internal___owner
-    internal___type
-    nomask
-    nomaskDelta
-    nomask__
-    parent___children
-    parent___children___children
-    parent___children___children___children
-    parent___children___children___id
-    parent___children___id
-    parent___children___internal___content
-    parent___children___internal___contentDigest
-    parent___children___internal___description
-    parent___children___internal___fieldOwners
-    parent___children___internal___ignoreType
-    parent___children___internal___mediaType
-    parent___children___internal___owner
-    parent___children___internal___type
-    parent___children___parent___children
-    parent___children___parent___id
-    parent___id
-    parent___internal___content
-    parent___internal___contentDigest
-    parent___internal___description
-    parent___internal___fieldOwners
-    parent___internal___ignoreType
-    parent___internal___mediaType
-    parent___internal___owner
-    parent___internal___type
-    parent___parent___children
-    parent___parent___children___children
-    parent___parent___children___id
-    parent___parent___id
-    parent___parent___internal___content
-    parent___parent___internal___contentDigest
-    parent___parent___internal___description
-    parent___parent___internal___fieldOwners
-    parent___parent___internal___ignoreType
-    parent___parent___internal___mediaType
-    parent___parent___internal___owner
-    parent___parent___internal___type
-    parent___parent___parent___children
-    parent___parent___parent___id
-    promaks__
-    promask
-    promaskDelta
-    secondWord
-    summedPercentage
-    word
-}
-
-enum SheetsDistribuzioneMauriFieldsEnum {
     children
     children___children
     children___children___children
@@ -3131,116 +4385,6 @@ enum SheetsEstrattiFieldsEnum {
     word
 }
 
-enum SheetsPetitionsFieldsEnum {
-    children
-    children___children
-    children___children___children
-    children___children___children___children
-    children___children___children___id
-    children___children___id
-    children___children___internal___content
-    children___children___internal___contentDigest
-    children___children___internal___description
-    children___children___internal___fieldOwners
-    children___children___internal___ignoreType
-    children___children___internal___mediaType
-    children___children___internal___owner
-    children___children___internal___type
-    children___children___parent___children
-    children___children___parent___id
-    children___id
-    children___internal___content
-    children___internal___contentDigest
-    children___internal___description
-    children___internal___fieldOwners
-    children___internal___ignoreType
-    children___internal___mediaType
-    children___internal___owner
-    children___internal___type
-    children___parent___children
-    children___parent___children___children
-    children___parent___children___id
-    children___parent___id
-    children___parent___internal___content
-    children___parent___internal___contentDigest
-    children___parent___internal___description
-    children___parent___internal___fieldOwners
-    children___parent___internal___ignoreType
-    children___parent___internal___mediaType
-    children___parent___internal___owner
-    children___parent___internal___type
-    children___parent___parent___children
-    children___parent___parent___id
-    country
-    date
-    description
-    id
-    imgUrl
-    internal___content
-    internal___contentDigest
-    internal___description
-    internal___fieldOwners
-    internal___ignoreType
-    internal___mediaType
-    internal___owner
-    internal___type
-    link
-    originalLocale
-    pageViews
-    parent___children
-    parent___children___children
-    parent___children___children___children
-    parent___children___children___id
-    parent___children___id
-    parent___children___internal___content
-    parent___children___internal___contentDigest
-    parent___children___internal___description
-    parent___children___internal___fieldOwners
-    parent___children___internal___ignoreType
-    parent___children___internal___mediaType
-    parent___children___internal___owner
-    parent___children___internal___type
-    parent___children___parent___children
-    parent___children___parent___id
-    parent___id
-    parent___internal___content
-    parent___internal___contentDigest
-    parent___internal___description
-    parent___internal___fieldOwners
-    parent___internal___ignoreType
-    parent___internal___mediaType
-    parent___internal___owner
-    parent___internal___type
-    parent___parent___children
-    parent___parent___children___children
-    parent___parent___children___id
-    parent___parent___id
-    parent___parent___internal___content
-    parent___parent___internal___contentDigest
-    parent___parent___internal___description
-    parent___parent___internal___fieldOwners
-    parent___parent___internal___ignoreType
-    parent___parent___internal___mediaType
-    parent___parent___internal___owner
-    parent___parent___internal___type
-    parent___parent___parent___children
-    parent___parent___parent___id
-    shareCountTotal
-    sheetsId
-    signatures
-    slug
-    sponsored
-    tagRawNames
-    tagSlugs
-    tags
-    targets
-    title
-    user
-    userId
-    verifiedVictory
-    victory
-}
-
 enum SheetsScatterFieldsEnum {
     children
     children___children
@@ -3285,6 +4429,7 @@ enum SheetsScatterFieldsEnum {
     countPromask
     deltaNomask
     deltaPromask
+    finding
     id
     internal___content
     internal___contentDigest
@@ -3339,107 +4484,6 @@ enum SheetsScatterFieldsEnum {
     percentageNomask
     percentagePromask
     scelta
-}
-
-enum SheetsSceltiFieldsEnum {
-    author
-    children
-    childrenCount
-    children___children
-    children___children___children
-    children___children___children___children
-    children___children___children___id
-    children___children___id
-    children___children___internal___content
-    children___children___internal___contentDigest
-    children___children___internal___description
-    children___children___internal___fieldOwners
-    children___children___internal___ignoreType
-    children___children___internal___mediaType
-    children___children___internal___owner
-    children___children___internal___type
-    children___children___parent___children
-    children___children___parent___id
-    children___id
-    children___internal___content
-    children___internal___contentDigest
-    children___internal___description
-    children___internal___fieldOwners
-    children___internal___ignoreType
-    children___internal___mediaType
-    children___internal___owner
-    children___internal___type
-    children___parent___children
-    children___parent___children___children
-    children___parent___children___id
-    children___parent___id
-    children___parent___internal___content
-    children___parent___internal___contentDigest
-    children___parent___internal___description
-    children___parent___internal___fieldOwners
-    children___parent___internal___ignoreType
-    children___parent___internal___mediaType
-    children___parent___internal___owner
-    children___parent___internal___type
-    children___parent___parent___children
-    children___parent___parent___id
-    comment
-    commentableId
-    commentableType
-    createdAt
-    id
-    internal___content
-    internal___contentDigest
-    internal___description
-    internal___fieldOwners
-    internal___ignoreType
-    internal___mediaType
-    internal___owner
-    internal___type
-    likes
-    parent___children
-    parent___children___children
-    parent___children___children___children
-    parent___children___children___id
-    parent___children___id
-    parent___children___internal___content
-    parent___children___internal___contentDigest
-    parent___children___internal___description
-    parent___children___internal___fieldOwners
-    parent___children___internal___ignoreType
-    parent___children___internal___mediaType
-    parent___children___internal___owner
-    parent___children___internal___type
-    parent___children___parent___children
-    parent___children___parent___id
-    parent___id
-    parent___internal___content
-    parent___internal___contentDigest
-    parent___internal___description
-    parent___internal___fieldOwners
-    parent___internal___ignoreType
-    parent___internal___mediaType
-    parent___internal___owner
-    parent___internal___type
-    parent___parent___children
-    parent___parent___children___children
-    parent___parent___children___id
-    parent___parent___id
-    parent___parent___internal___content
-    parent___parent___internal___contentDigest
-    parent___parent___internal___description
-    parent___parent___internal___fieldOwners
-    parent___parent___internal___ignoreType
-    parent___parent___internal___mediaType
-    parent___parent___internal___owner
-    parent___parent___internal___type
-    parent___parent___parent___children
-    parent___parent___parent___id
-    petitionLink
-    role
-    sheetsId
-    source
-    word
 }
 
 enum SheetsSelezionatiVaccineFieldsEnum {
@@ -3622,111 +4666,6 @@ enum SheetsTestiFindingFieldsEnum {
     parent___parent___parent___children
     parent___parent___parent___id
     word
-}
-
-enum SheetsUnmaskFieldsEnum {
-    children
-    children___children
-    children___children___children
-    children___children___children___children
-    children___children___children___id
-    children___children___id
-    children___children___internal___content
-    children___children___internal___contentDigest
-    children___children___internal___description
-    children___children___internal___fieldOwners
-    children___children___internal___ignoreType
-    children___children___internal___mediaType
-    children___children___internal___owner
-    children___children___internal___type
-    children___children___parent___children
-    children___children___parent___id
-    children___id
-    children___internal___content
-    children___internal___contentDigest
-    children___internal___description
-    children___internal___fieldOwners
-    children___internal___ignoreType
-    children___internal___mediaType
-    children___internal___owner
-    children___internal___type
-    children___parent___children
-    children___parent___children___children
-    children___parent___children___id
-    children___parent___id
-    children___parent___internal___content
-    children___parent___internal___contentDigest
-    children___parent___internal___description
-    children___parent___internal___fieldOwners
-    children___parent___internal___ignoreType
-    children___parent___internal___mediaType
-    children___parent___internal___owner
-    children___parent___internal___type
-    children___parent___parent___children
-    children___parent___parent___id
-    country
-    date
-    description
-    id
-    internal___content
-    internal___contentDigest
-    internal___description
-    internal___fieldOwners
-    internal___ignoreType
-    internal___mediaType
-    internal___owner
-    internal___type
-    pageViews
-    parent___children
-    parent___children___children
-    parent___children___children___children
-    parent___children___children___id
-    parent___children___id
-    parent___children___internal___content
-    parent___children___internal___contentDigest
-    parent___children___internal___description
-    parent___children___internal___fieldOwners
-    parent___children___internal___ignoreType
-    parent___children___internal___mediaType
-    parent___children___internal___owner
-    parent___children___internal___type
-    parent___children___parent___children
-    parent___children___parent___id
-    parent___id
-    parent___internal___content
-    parent___internal___contentDigest
-    parent___internal___description
-    parent___internal___fieldOwners
-    parent___internal___ignoreType
-    parent___internal___mediaType
-    parent___internal___owner
-    parent___internal___type
-    parent___parent___children
-    parent___parent___children___children
-    parent___parent___children___id
-    parent___parent___id
-    parent___parent___internal___content
-    parent___parent___internal___contentDigest
-    parent___parent___internal___description
-    parent___parent___internal___fieldOwners
-    parent___parent___internal___ignoreType
-    parent___parent___internal___mediaType
-    parent___parent___internal___owner
-    parent___parent___internal___type
-    parent___parent___parent___children
-    parent___parent___parent___id
-    shareCountTotal
-    signatures
-    sponsored
-    tagRawNames
-    tagSlugs
-    tags
-    targets
-    title
-    user
-    userId
-    verifiedVictory
-    victory
 }
 
 enum SiteBuildMetadataFieldsEnum {
@@ -4284,6 +5223,35 @@ input BooleanQueryOperatorInput {
     nin: [Boolean]
 }
 
+input CommentsJsonFilterInput {
+    children: NodeFilterListInput
+    comment: StringQueryOperatorInput
+    created_at: DateQueryOperatorInput
+    id: StringQueryOperatorInput
+    internal: InternalFilterInput
+    jsonId: IntQueryOperatorInput
+    origin: StringQueryOperatorInput
+    parent: NodeFilterInput
+    petition: CommentsJsonPetitionFilterInput
+    sentences: StringQueryOperatorInput
+    user: IntQueryOperatorInput
+}
+
+input CommentsJsonFilterListInput {
+    elemMatch: CommentsJsonFilterInput
+}
+
+input CommentsJsonPetitionFilterInput {
+    created_at: DateQueryOperatorInput
+    slug: StringQueryOperatorInput
+    title: StringQueryOperatorInput
+}
+
+input CommentsJsonSortInput {
+    fields: [CommentsJsonFieldsEnum]
+    order: [SortOrderEnum] = [ASC]
+}
+
 input DateQueryOperatorInput {
     eq: Date
     gt: Date
@@ -4356,9 +5324,13 @@ input FileFilterInput {
     blksize: IntQueryOperatorInput
     blocks: IntQueryOperatorInput
     changeTime: DateQueryOperatorInput
+    childCommentsJson: CommentsJsonFilterInput
     childImageSharp: ImageSharpFilterInput
+    childImagesJson: ImagesJsonFilterInput
     children: NodeFilterListInput
+    childrenCommentsJson: CommentsJsonFilterListInput
     childrenImageSharp: ImageSharpFilterListInput
+    childrenImagesJson: ImagesJsonFilterListInput
     ctime: DateQueryOperatorInput
     ctimeMs: FloatQueryOperatorInput
     dev: IntQueryOperatorInput
@@ -4464,6 +5436,885 @@ input ImageSharpResizeFilterInput {
 
 input ImageSharpSortInput {
     fields: [ImageSharpFieldsEnum]
+    order: [SortOrderEnum] = [ASC]
+}
+
+input ImagesJsonFilterInput {
+    children: NodeFilterListInput
+    count: IntQueryOperatorInput
+    id: StringQueryOperatorInput
+    internal: InternalFilterInput
+    items: ImagesJsonItemsFilterListInput
+    last_page: BooleanQueryOperatorInput
+    limit: IntQueryOperatorInput
+    offset: IntQueryOperatorInput
+    order: StringQueryOperatorInput
+    parent: NodeFilterInput
+    query_source: StringQueryOperatorInput
+    total_count: IntQueryOperatorInput
+}
+
+input ImagesJsonFilterListInput {
+    elemMatch: ImagesJsonFilterInput
+}
+
+input ImagesJsonItemsCard_contextFilterInput {
+    kind: StringQueryOperatorInput
+    weekly_signature_count: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityActivityFilterInput {
+    recruit__count: IntQueryOperatorInput
+    recruit__last_updated: IntQueryOperatorInput
+    recruit_abi_gmail_count: IntQueryOperatorInput
+    recruit_abi_gmail_last_updated: IntQueryOperatorInput
+    recruit_copylink_count: IntQueryOperatorInput
+    recruit_copylink_last_updated: IntQueryOperatorInput
+    recruit_email_count: IntQueryOperatorInput
+    recruit_email_last_updated: IntQueryOperatorInput
+    recruit_facebook_count: IntQueryOperatorInput
+    recruit_facebook_last_updated: IntQueryOperatorInput
+    recruit_facebook_messenger_mobile_count: IntQueryOperatorInput
+    recruit_facebook_messenger_mobile_last_updated: IntQueryOperatorInput
+    recruit_sms_count: IntQueryOperatorInput
+    recruit_sms_last_updated: IntQueryOperatorInput
+    recruit_twitter_count: IntQueryOperatorInput
+    recruit_twitter_last_updated: IntQueryOperatorInput
+    recruit_whatsapp_count: IntQueryOperatorInput
+    recruit_whatsapp_last_updated: IntQueryOperatorInput
+    share_copylink_count: IntQueryOperatorInput
+    share_copylink_last_updated: FloatQueryOperatorInput
+    share_email_count: IntQueryOperatorInput
+    share_email_last_updated: FloatQueryOperatorInput
+    share_facebook_count: IntQueryOperatorInput
+    share_facebook_last_updated: FloatQueryOperatorInput
+    share_facebook_messenger_count: IntQueryOperatorInput
+    share_facebook_messenger_last_updated: FloatQueryOperatorInput
+    share_sms_count: IntQueryOperatorInput
+    share_sms_last_updated: FloatQueryOperatorInput
+    share_twitter_count: IntQueryOperatorInput
+    share_twitter_last_updated: FloatQueryOperatorInput
+    share_whatsapp_count: IntQueryOperatorInput
+    share_whatsapp_last_updated: FloatQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityCreator_photoFilterInput {
+    id: IntQueryOperatorInput
+    sizes: ImagesJsonItemsCommentable_entityCreator_photoSizesFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityCreator_photoSizesFilterInput {
+    large: ImagesJsonItemsCommentable_entityCreator_photoSizesLargeFilterInput
+    medium: ImagesJsonItemsCommentable_entityCreator_photoSizesMediumFilterInput
+    small: ImagesJsonItemsCommentable_entityCreator_photoSizesSmallFilterInput
+}
+
+input ImagesJsonItemsCommentable_entityCreator_photoSizesLargeFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsCommentable_entityCreator_photoSizesLargeSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityCreator_photoSizesLargeSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityCreator_photoSizesMediumFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsCommentable_entityCreator_photoSizesMediumSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityCreator_photoSizesMediumSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityCreator_photoSizesSmallFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsCommentable_entityCreator_photoSizesSmallSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityCreator_photoSizesSmallSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityFilterInput {
+    activity: ImagesJsonItemsCommentable_entityActivityFilterInput
+    ask: StringQueryOperatorInput
+    calculated_goal: IntQueryOperatorInput
+    created_at: DateQueryOperatorInput
+    creator_name: StringQueryOperatorInput
+    creator_photo: ImagesJsonItemsCommentable_entityCreator_photoFilterInput
+    daily_signature_count: IntQueryOperatorInput
+    daily_signup_count: IntQueryOperatorInput
+    description: StringQueryOperatorInput
+    discoverable: BooleanQueryOperatorInput
+    display_title: StringQueryOperatorInput
+    displayed_signature_count: IntQueryOperatorInput
+    document_id: StringQueryOperatorInput
+    enable_human_verification: BooleanQueryOperatorInput
+    hide_comments: BooleanQueryOperatorInput
+    hide_dm_action_panel: BooleanQueryOperatorInput
+    id: IntQueryOperatorInput
+    is_pledge: BooleanQueryOperatorInput
+    is_verified_victory: BooleanQueryOperatorInput
+    is_victory: BooleanQueryOperatorInput
+    languages: StringQueryOperatorInput
+    last_edited_at: DateQueryOperatorInput
+    letter_body: StringQueryOperatorInput
+    media: ImagesJsonItemsCommentable_entityMediaFilterInput
+    monthly_signature_count: IntQueryOperatorInput
+    monthly_signup_count: IntQueryOperatorInput
+    organization: ImagesJsonItemsCommentable_entityOrganizationFilterInput
+    original_locale: StringQueryOperatorInput
+    petition_status: StringQueryOperatorInput
+    petition_title: StringQueryOperatorInput
+    photo: ImagesJsonItemsCommentable_entityPhotoFilterInput
+    primary_target: ImagesJsonItemsCommentable_entityPrimary_targetFilterInput
+    progress: FloatQueryOperatorInput
+    published_at: DateQueryOperatorInput
+    relevant_location: ImagesJsonItemsCommentable_entityRelevant_locationFilterInput
+    slug: StringQueryOperatorInput
+    sponsored_campaign: BooleanQueryOperatorInput
+    status: StringQueryOperatorInput
+    tags: ImagesJsonItemsCommentable_entityTagsFilterListInput
+    targeting_description: StringQueryOperatorInput
+    targets: ImagesJsonItemsCommentable_entityTargetsFilterListInput
+    title: StringQueryOperatorInput
+    total_page_views: IntQueryOperatorInput
+    total_share_count: IntQueryOperatorInput
+    total_signature_count: IntQueryOperatorInput
+    total_signup_count: IntQueryOperatorInput
+    user: ImagesJsonItemsCommentable_entityUserFilterInput
+    weekly_signature_count: IntQueryOperatorInput
+    weekly_signup_count: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityMediaFilterInput {
+    id: IntQueryOperatorInput
+    sizes: ImagesJsonItemsCommentable_entityMediaSizesFilterInput
+    type: StringQueryOperatorInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityMediaSizesFilterInput {
+    large: ImagesJsonItemsCommentable_entityMediaSizesLargeFilterInput
+    medium: ImagesJsonItemsCommentable_entityMediaSizesMediumFilterInput
+    small: ImagesJsonItemsCommentable_entityMediaSizesSmallFilterInput
+    square: ImagesJsonItemsCommentable_entityMediaSizesSquareFilterInput
+}
+
+input ImagesJsonItemsCommentable_entityMediaSizesLargeFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsCommentable_entityMediaSizesLargeSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityMediaSizesLargeSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityMediaSizesMediumFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsCommentable_entityMediaSizesMediumSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityMediaSizesMediumSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityMediaSizesSmallFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsCommentable_entityMediaSizesSmallSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityMediaSizesSmallSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityMediaSizesSquareFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsCommentable_entityMediaSizesSquareSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityMediaSizesSquareSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityOrganizationFilterInput {
+    country_code: StringQueryOperatorInput
+    formatted_location_string: StringQueryOperatorInput
+    id: IntQueryOperatorInput
+    name: StringQueryOperatorInput
+    photo: ImagesJsonItemsCommentable_entityOrganizationPhotoFilterInput
+    slug: StringQueryOperatorInput
+    website: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityOrganizationPhotoFilterInput {
+    id: IntQueryOperatorInput
+    sizes: ImagesJsonItemsCommentable_entityOrganizationPhotoSizesFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityOrganizationPhotoSizesFilterInput {
+    large: ImagesJsonItemsCommentable_entityOrganizationPhotoSizesLargeFilterInput
+    medium: ImagesJsonItemsCommentable_entityOrganizationPhotoSizesMediumFilterInput
+    small: ImagesJsonItemsCommentable_entityOrganizationPhotoSizesSmallFilterInput
+}
+
+input ImagesJsonItemsCommentable_entityOrganizationPhotoSizesLargeFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsCommentable_entityOrganizationPhotoSizesLargeSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityOrganizationPhotoSizesLargeSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityOrganizationPhotoSizesMediumFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsCommentable_entityOrganizationPhotoSizesMediumSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityOrganizationPhotoSizesMediumSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityOrganizationPhotoSizesSmallFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsCommentable_entityOrganizationPhotoSizesSmallSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityOrganizationPhotoSizesSmallSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityPhotoFilterInput {
+    id: IntQueryOperatorInput
+    sizes: ImagesJsonItemsCommentable_entityPhotoSizesFilterInput
+    type: StringQueryOperatorInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityPhotoSizesFilterInput {
+    large: ImagesJsonItemsCommentable_entityPhotoSizesLargeFilterInput
+    medium: ImagesJsonItemsCommentable_entityPhotoSizesMediumFilterInput
+    small: ImagesJsonItemsCommentable_entityPhotoSizesSmallFilterInput
+    square: ImagesJsonItemsCommentable_entityPhotoSizesSquareFilterInput
+}
+
+input ImagesJsonItemsCommentable_entityPhotoSizesLargeFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsCommentable_entityPhotoSizesLargeSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityPhotoSizesLargeSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityPhotoSizesMediumFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsCommentable_entityPhotoSizesMediumSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityPhotoSizesMediumSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityPhotoSizesSmallFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsCommentable_entityPhotoSizesSmallSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityPhotoSizesSmallSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityPhotoSizesSquareFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsCommentable_entityPhotoSizesSquareSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityPhotoSizesSquareSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityPrimary_targetAdditional_dataFilterInput {
+    first_name: StringQueryOperatorInput
+    last_name: StringQueryOperatorInput
+    title: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityPrimary_targetFilterInput {
+    additional_data: ImagesJsonItemsCommentable_entityPrimary_targetAdditional_dataFilterInput
+    display_name: StringQueryOperatorInput
+    has_email: BooleanQueryOperatorInput
+    id: IntQueryOperatorInput
+    is_person: BooleanQueryOperatorInput
+    publicly_visible: BooleanQueryOperatorInput
+    slug: StringQueryOperatorInput
+    type: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityRelevant_locationFilterInput {
+    city: StringQueryOperatorInput
+    country_code: StringQueryOperatorInput
+    google_places_id: StringQueryOperatorInput
+    lat: FloatQueryOperatorInput
+    lng: FloatQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityTagsFilterInput {
+    created_by_owner: BooleanQueryOperatorInput
+    created_by_staff_member: BooleanQueryOperatorInput
+    id: IntQueryOperatorInput
+    locale: StringQueryOperatorInput
+    name: StringQueryOperatorInput
+    photo_id: IntQueryOperatorInput
+    slug: StringQueryOperatorInput
+    total_count: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityTagsFilterListInput {
+    elemMatch: ImagesJsonItemsCommentable_entityTagsFilterInput
+}
+
+input ImagesJsonItemsCommentable_entityTargetsAdditional_dataFilterInput {
+    first_name: StringQueryOperatorInput
+    last_name: StringQueryOperatorInput
+    title: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityTargetsFilterInput {
+    additional_data: ImagesJsonItemsCommentable_entityTargetsAdditional_dataFilterInput
+    display_name: StringQueryOperatorInput
+    has_email: BooleanQueryOperatorInput
+    id: IntQueryOperatorInput
+    is_person: BooleanQueryOperatorInput
+    publicly_visible: BooleanQueryOperatorInput
+    slug: StringQueryOperatorInput
+    type: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsCommentable_entityTargetsFilterListInput {
+    elemMatch: ImagesJsonItemsCommentable_entityTargetsFilterInput
+}
+
+input ImagesJsonItemsCommentable_entityUserFilterInput {
+    city: StringQueryOperatorInput
+    country_code: StringQueryOperatorInput
+    display_name: StringQueryOperatorInput
+    first_name: StringQueryOperatorInput
+    id: IntQueryOperatorInput
+    last_name: StringQueryOperatorInput
+    locale: StringQueryOperatorInput
+    short_display_name: StringQueryOperatorInput
+    slug: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsFilterInput {
+    card_context: ImagesJsonItemsCard_contextFilterInput
+    children_count: IntQueryOperatorInput
+    comment: StringQueryOperatorInput
+    commentable_entity: ImagesJsonItemsCommentable_entityFilterInput
+    commentable_id: IntQueryOperatorInput
+    commentable_type: StringQueryOperatorInput
+    created_at: DateQueryOperatorInput
+    likes: IntQueryOperatorInput
+    parent_id: IntQueryOperatorInput
+    petition: ImagesJsonItemsPetitionFilterInput
+    role: StringQueryOperatorInput
+    user: ImagesJsonItemsUserFilterInput
+}
+
+input ImagesJsonItemsFilterListInput {
+    elemMatch: ImagesJsonItemsFilterInput
+}
+
+input ImagesJsonItemsPetitionActivityFilterInput {
+    recruit__count: IntQueryOperatorInput
+    recruit__last_updated: IntQueryOperatorInput
+    recruit_copylink_count: IntQueryOperatorInput
+    recruit_copylink_last_updated: IntQueryOperatorInput
+    recruit_email_count: IntQueryOperatorInput
+    recruit_email_last_updated: IntQueryOperatorInput
+    recruit_facebook_count: IntQueryOperatorInput
+    recruit_facebook_last_updated: IntQueryOperatorInput
+    recruit_facebook_messenger_mobile_count: IntQueryOperatorInput
+    recruit_facebook_messenger_mobile_last_updated: IntQueryOperatorInput
+    recruit_sms_count: IntQueryOperatorInput
+    recruit_sms_last_updated: IntQueryOperatorInput
+    recruit_twitter_count: IntQueryOperatorInput
+    recruit_twitter_last_updated: IntQueryOperatorInput
+    recruit_whatsapp_count: IntQueryOperatorInput
+    recruit_whatsapp_last_updated: IntQueryOperatorInput
+    share_copylink_count: IntQueryOperatorInput
+    share_copylink_last_updated: FloatQueryOperatorInput
+    share_email_count: IntQueryOperatorInput
+    share_email_last_updated: FloatQueryOperatorInput
+    share_facebook_count: IntQueryOperatorInput
+    share_facebook_last_updated: FloatQueryOperatorInput
+    share_facebook_messenger_count: IntQueryOperatorInput
+    share_facebook_messenger_last_updated: FloatQueryOperatorInput
+    share_sms_count: IntQueryOperatorInput
+    share_sms_last_updated: FloatQueryOperatorInput
+    share_twitter_count: IntQueryOperatorInput
+    share_twitter_last_updated: FloatQueryOperatorInput
+    share_whatsapp_count: IntQueryOperatorInput
+    share_whatsapp_last_updated: FloatQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionCreator_photoFilterInput {
+    id: IntQueryOperatorInput
+    sizes: ImagesJsonItemsPetitionCreator_photoSizesFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionCreator_photoSizesFilterInput {
+    large: ImagesJsonItemsPetitionCreator_photoSizesLargeFilterInput
+    medium: ImagesJsonItemsPetitionCreator_photoSizesMediumFilterInput
+    small: ImagesJsonItemsPetitionCreator_photoSizesSmallFilterInput
+}
+
+input ImagesJsonItemsPetitionCreator_photoSizesLargeFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsPetitionCreator_photoSizesLargeSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionCreator_photoSizesLargeSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionCreator_photoSizesMediumFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsPetitionCreator_photoSizesMediumSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionCreator_photoSizesMediumSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionCreator_photoSizesSmallFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsPetitionCreator_photoSizesSmallSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionCreator_photoSizesSmallSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionFilterInput {
+    activity: ImagesJsonItemsPetitionActivityFilterInput
+    ask: StringQueryOperatorInput
+    calculated_goal: IntQueryOperatorInput
+    created_at: DateQueryOperatorInput
+    creator_name: StringQueryOperatorInput
+    creator_photo: ImagesJsonItemsPetitionCreator_photoFilterInput
+    daily_signature_count: IntQueryOperatorInput
+    daily_signup_count: IntQueryOperatorInput
+    description: StringQueryOperatorInput
+    discoverable: BooleanQueryOperatorInput
+    display_title: StringQueryOperatorInput
+    displayed_signature_count: IntQueryOperatorInput
+    document_id: StringQueryOperatorInput
+    enable_human_verification: BooleanQueryOperatorInput
+    hide_comments: BooleanQueryOperatorInput
+    hide_dm_action_panel: BooleanQueryOperatorInput
+    id: IntQueryOperatorInput
+    is_pledge: BooleanQueryOperatorInput
+    is_verified_victory: BooleanQueryOperatorInput
+    is_victory: BooleanQueryOperatorInput
+    languages: StringQueryOperatorInput
+    last_edited_at: DateQueryOperatorInput
+    letter_body: StringQueryOperatorInput
+    media: ImagesJsonItemsPetitionMediaFilterInput
+    monthly_signature_count: IntQueryOperatorInput
+    monthly_signup_count: IntQueryOperatorInput
+    organization: ImagesJsonItemsPetitionOrganizationFilterInput
+    original_locale: StringQueryOperatorInput
+    petition_status: StringQueryOperatorInput
+    petition_title: StringQueryOperatorInput
+    photo: ImagesJsonItemsPetitionPhotoFilterInput
+    primary_target: ImagesJsonItemsPetitionPrimary_targetFilterInput
+    progress: FloatQueryOperatorInput
+    published_at: DateQueryOperatorInput
+    relevant_location: ImagesJsonItemsPetitionRelevant_locationFilterInput
+    slug: StringQueryOperatorInput
+    sponsored_campaign: BooleanQueryOperatorInput
+    status: StringQueryOperatorInput
+    tags: ImagesJsonItemsPetitionTagsFilterListInput
+    targeting_description: StringQueryOperatorInput
+    targets: ImagesJsonItemsPetitionTargetsFilterListInput
+    title: StringQueryOperatorInput
+    total_page_views: IntQueryOperatorInput
+    total_share_count: IntQueryOperatorInput
+    total_signature_count: IntQueryOperatorInput
+    total_signup_count: IntQueryOperatorInput
+    user: ImagesJsonItemsPetitionUserFilterInput
+    victory_description: StringQueryOperatorInput
+    weekly_signature_count: IntQueryOperatorInput
+    weekly_signup_count: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionMediaFilterInput {
+    id: IntQueryOperatorInput
+    sizes: ImagesJsonItemsPetitionMediaSizesFilterInput
+    type: StringQueryOperatorInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionMediaSizesFilterInput {
+    large: ImagesJsonItemsPetitionMediaSizesLargeFilterInput
+    medium: ImagesJsonItemsPetitionMediaSizesMediumFilterInput
+    small: ImagesJsonItemsPetitionMediaSizesSmallFilterInput
+    square: ImagesJsonItemsPetitionMediaSizesSquareFilterInput
+}
+
+input ImagesJsonItemsPetitionMediaSizesLargeFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsPetitionMediaSizesLargeSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionMediaSizesLargeSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionMediaSizesMediumFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsPetitionMediaSizesMediumSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionMediaSizesMediumSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionMediaSizesSmallFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsPetitionMediaSizesSmallSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionMediaSizesSmallSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionMediaSizesSquareFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsPetitionMediaSizesSquareSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionMediaSizesSquareSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionOrganizationFilterInput {
+    address: StringQueryOperatorInput
+    city: StringQueryOperatorInput
+    country_code: StringQueryOperatorInput
+    fb_page: StringQueryOperatorInput
+    formatted_location_string: StringQueryOperatorInput
+    id: IntQueryOperatorInput
+    mission: StringQueryOperatorInput
+    name: StringQueryOperatorInput
+    photo: ImagesJsonItemsPetitionOrganizationPhotoFilterInput
+    postal_code: StringQueryOperatorInput
+    slug: StringQueryOperatorInput
+    state: StringQueryOperatorInput
+    state_code: StringQueryOperatorInput
+    twitter_page: StringQueryOperatorInput
+    website: StringQueryOperatorInput
+    zipcode: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionOrganizationPhotoFilterInput {
+    id: IntQueryOperatorInput
+    sizes: ImagesJsonItemsPetitionOrganizationPhotoSizesFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionOrganizationPhotoSizesFilterInput {
+    large: ImagesJsonItemsPetitionOrganizationPhotoSizesLargeFilterInput
+    medium: ImagesJsonItemsPetitionOrganizationPhotoSizesMediumFilterInput
+    small: ImagesJsonItemsPetitionOrganizationPhotoSizesSmallFilterInput
+}
+
+input ImagesJsonItemsPetitionOrganizationPhotoSizesLargeFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsPetitionOrganizationPhotoSizesLargeSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionOrganizationPhotoSizesLargeSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionOrganizationPhotoSizesMediumFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsPetitionOrganizationPhotoSizesMediumSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionOrganizationPhotoSizesMediumSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionOrganizationPhotoSizesSmallFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsPetitionOrganizationPhotoSizesSmallSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionOrganizationPhotoSizesSmallSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionPhotoFilterInput {
+    id: IntQueryOperatorInput
+    sizes: ImagesJsonItemsPetitionPhotoSizesFilterInput
+    type: StringQueryOperatorInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionPhotoSizesFilterInput {
+    large: ImagesJsonItemsPetitionPhotoSizesLargeFilterInput
+    medium: ImagesJsonItemsPetitionPhotoSizesMediumFilterInput
+    small: ImagesJsonItemsPetitionPhotoSizesSmallFilterInput
+    square: ImagesJsonItemsPetitionPhotoSizesSquareFilterInput
+}
+
+input ImagesJsonItemsPetitionPhotoSizesLargeFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsPetitionPhotoSizesLargeSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionPhotoSizesLargeSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionPhotoSizesMediumFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsPetitionPhotoSizesMediumSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionPhotoSizesMediumSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionPhotoSizesSmallFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsPetitionPhotoSizesSmallSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionPhotoSizesSmallSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionPhotoSizesSquareFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsPetitionPhotoSizesSquareSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionPhotoSizesSquareSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionPrimary_targetAdditional_dataFilterInput {
+    first_name: StringQueryOperatorInput
+    last_name: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionPrimary_targetFilterInput {
+    additional_data: ImagesJsonItemsPetitionPrimary_targetAdditional_dataFilterInput
+    display_name: StringQueryOperatorInput
+    has_email: BooleanQueryOperatorInput
+    id: IntQueryOperatorInput
+    is_person: BooleanQueryOperatorInput
+    locale: StringQueryOperatorInput
+    publicly_visible: BooleanQueryOperatorInput
+    slug: StringQueryOperatorInput
+    type: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionRelevant_locationFilterInput {
+    country_code: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionTagsFilterInput {
+    created_by_owner: BooleanQueryOperatorInput
+    created_by_staff_member: BooleanQueryOperatorInput
+    id: IntQueryOperatorInput
+    locale: StringQueryOperatorInput
+    name: StringQueryOperatorInput
+    photo_id: IntQueryOperatorInput
+    slug: StringQueryOperatorInput
+    total_count: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionTagsFilterListInput {
+    elemMatch: ImagesJsonItemsPetitionTagsFilterInput
+}
+
+input ImagesJsonItemsPetitionTargetsAdditional_dataFilterInput {
+    first_name: StringQueryOperatorInput
+    last_name: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionTargetsFilterInput {
+    additional_data: ImagesJsonItemsPetitionTargetsAdditional_dataFilterInput
+    confirmed_at: DateQueryOperatorInput
+    display_name: StringQueryOperatorInput
+    has_email: BooleanQueryOperatorInput
+    id: IntQueryOperatorInput
+    is_person: BooleanQueryOperatorInput
+    locale: StringQueryOperatorInput
+    publicly_visible: BooleanQueryOperatorInput
+    slug: StringQueryOperatorInput
+    type: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsPetitionTargetsFilterListInput {
+    elemMatch: ImagesJsonItemsPetitionTargetsFilterInput
+}
+
+input ImagesJsonItemsPetitionUserFilterInput {
+    city: StringQueryOperatorInput
+    country_code: StringQueryOperatorInput
+    description: StringQueryOperatorInput
+    display_name: StringQueryOperatorInput
+    first_name: StringQueryOperatorInput
+    id: IntQueryOperatorInput
+    last_name: StringQueryOperatorInput
+    locale: StringQueryOperatorInput
+    short_display_name: StringQueryOperatorInput
+    slug: StringQueryOperatorInput
+    state_code: StringQueryOperatorInput
+    website: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsUserFilterInput {
+    city: StringQueryOperatorInput
+    country_code: StringQueryOperatorInput
+    display_name: StringQueryOperatorInput
+    first_name: StringQueryOperatorInput
+    id: IntQueryOperatorInput
+    last_name: StringQueryOperatorInput
+    locale: StringQueryOperatorInput
+    photo: ImagesJsonItemsUserPhotoFilterInput
+    short_display_name: StringQueryOperatorInput
+    slug: StringQueryOperatorInput
+    state_code: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsUserPhotoFilterInput {
+    id: IntQueryOperatorInput
+    sizes: ImagesJsonItemsUserPhotoSizesFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsUserPhotoSizesFilterInput {
+    large: ImagesJsonItemsUserPhotoSizesLargeFilterInput
+    medium: ImagesJsonItemsUserPhotoSizesMediumFilterInput
+    small: ImagesJsonItemsUserPhotoSizesSmallFilterInput
+    xlarge: ImagesJsonItemsUserPhotoSizesXlargeFilterInput
+}
+
+input ImagesJsonItemsUserPhotoSizesLargeFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsUserPhotoSizesLargeSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsUserPhotoSizesLargeSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsUserPhotoSizesMediumFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsUserPhotoSizesMediumSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsUserPhotoSizesMediumSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsUserPhotoSizesSmallFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsUserPhotoSizesSmallSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsUserPhotoSizesSmallSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonItemsUserPhotoSizesXlargeFilterInput {
+    processing: BooleanQueryOperatorInput
+    size: ImagesJsonItemsUserPhotoSizesXlargeSizeFilterInput
+    url: StringQueryOperatorInput
+}
+
+input ImagesJsonItemsUserPhotoSizesXlargeSizeFilterInput {
+    height: IntQueryOperatorInput
+    width: IntQueryOperatorInput
+}
+
+input ImagesJsonSortInput {
+    fields: [ImagesJsonFieldsEnum]
     order: [SortOrderEnum] = [ASC]
 }
 
@@ -4615,52 +6466,6 @@ input SheetsChiFaCosaSortInput {
     order: [SortOrderEnum] = [ASC]
 }
 
-input SheetsCommentiPromaskFilterInput {
-    author: StringQueryOperatorInput
-    children: NodeFilterListInput
-    childrenCount: StringQueryOperatorInput
-    comment: StringQueryOperatorInput
-    commentableId: StringQueryOperatorInput
-    commentableType: StringQueryOperatorInput
-    createdAt: DateQueryOperatorInput
-    id: StringQueryOperatorInput
-    internal: InternalFilterInput
-    likes: StringQueryOperatorInput
-    parent: NodeFilterInput
-    petitionLink: StringQueryOperatorInput
-    petitionSlug: StringQueryOperatorInput
-    role: StringQueryOperatorInput
-    sheetsId: StringQueryOperatorInput
-}
-
-input SheetsCommentiPromaskSortInput {
-    fields: [SheetsCommentiPromaskFieldsEnum]
-    order: [SortOrderEnum] = [ASC]
-}
-
-input SheetsCommentiUnmaskFilterInput {
-    author: StringQueryOperatorInput
-    children: NodeFilterListInput
-    childrenCount: StringQueryOperatorInput
-    comment: StringQueryOperatorInput
-    commentableId: StringQueryOperatorInput
-    commentableType: StringQueryOperatorInput
-    createdAt: StringQueryOperatorInput
-    id: StringQueryOperatorInput
-    internal: InternalFilterInput
-    likes: StringQueryOperatorInput
-    parent: NodeFilterInput
-    petitionLink: StringQueryOperatorInput
-    petitionSlug: StringQueryOperatorInput
-    role: StringQueryOperatorInput
-    sheetsId: StringQueryOperatorInput
-}
-
-input SheetsCommentiUnmaskSortInput {
-    fields: [SheetsCommentiUnmaskFieldsEnum]
-    order: [SortOrderEnum] = [ASC]
-}
-
 input SheetsDistribuzioneFilterInput {
     children: NodeFilterListInput
     id: StringQueryOperatorInput
@@ -4675,27 +6480,6 @@ input SheetsDistribuzioneFilterInput {
     secondWord: StringQueryOperatorInput
     summedPercentage: FloatQueryOperatorInput
     word: StringQueryOperatorInput
-}
-
-input SheetsDistribuzioneMauriFilterInput {
-    children: NodeFilterListInput
-    id: StringQueryOperatorInput
-    internal: InternalFilterInput
-    nomask: StringQueryOperatorInput
-    nomaskDelta: StringQueryOperatorInput
-    nomask__: StringQueryOperatorInput
-    parent: NodeFilterInput
-    promaks__: StringQueryOperatorInput
-    promask: StringQueryOperatorInput
-    promaskDelta: StringQueryOperatorInput
-    secondWord: StringQueryOperatorInput
-    summedPercentage: StringQueryOperatorInput
-    word: StringQueryOperatorInput
-}
-
-input SheetsDistribuzioneMauriSortInput {
-    fields: [SheetsDistribuzioneMauriFieldsEnum]
-    order: [SortOrderEnum] = [ASC]
 }
 
 input SheetsDistribuzioneSortInput {
@@ -4751,45 +6535,13 @@ input SheetsEstrattiSortInput {
     order: [SortOrderEnum] = [ASC]
 }
 
-input SheetsPetitionsFilterInput {
-    children: NodeFilterListInput
-    country: StringQueryOperatorInput
-    date: DateQueryOperatorInput
-    description: StringQueryOperatorInput
-    id: StringQueryOperatorInput
-    imgUrl: StringQueryOperatorInput
-    internal: InternalFilterInput
-    link: StringQueryOperatorInput
-    originalLocale: StringQueryOperatorInput
-    pageViews: StringQueryOperatorInput
-    parent: NodeFilterInput
-    shareCountTotal: StringQueryOperatorInput
-    sheetsId: StringQueryOperatorInput
-    signatures: StringQueryOperatorInput
-    slug: StringQueryOperatorInput
-    sponsored: StringQueryOperatorInput
-    tagRawNames: StringQueryOperatorInput
-    tagSlugs: StringQueryOperatorInput
-    tags: StringQueryOperatorInput
-    targets: StringQueryOperatorInput
-    title: StringQueryOperatorInput
-    user: StringQueryOperatorInput
-    userId: StringQueryOperatorInput
-    verifiedVictory: StringQueryOperatorInput
-    victory: StringQueryOperatorInput
-}
-
-input SheetsPetitionsSortInput {
-    fields: [SheetsPetitionsFieldsEnum]
-    order: [SortOrderEnum] = [ASC]
-}
-
 input SheetsScatterFilterInput {
     children: NodeFilterListInput
     countNomask: IntQueryOperatorInput
     countPromask: IntQueryOperatorInput
     deltaNomask: FloatQueryOperatorInput
     deltaPromask: FloatQueryOperatorInput
+    finding: StringQueryOperatorInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
     name: StringQueryOperatorInput
@@ -4804,30 +6556,6 @@ input SheetsScatterFilterInput {
 
 input SheetsScatterSortInput {
     fields: [SheetsScatterFieldsEnum]
-    order: [SortOrderEnum] = [ASC]
-}
-
-input SheetsSceltiFilterInput {
-    author: StringQueryOperatorInput
-    children: NodeFilterListInput
-    childrenCount: StringQueryOperatorInput
-    comment: StringQueryOperatorInput
-    commentableId: StringQueryOperatorInput
-    commentableType: StringQueryOperatorInput
-    createdAt: StringQueryOperatorInput
-    id: StringQueryOperatorInput
-    internal: InternalFilterInput
-    likes: StringQueryOperatorInput
-    parent: NodeFilterInput
-    petitionLink: StringQueryOperatorInput
-    role: StringQueryOperatorInput
-    sheetsId: StringQueryOperatorInput
-    source: StringQueryOperatorInput
-    word: StringQueryOperatorInput
-}
-
-input SheetsSceltiSortInput {
-    fields: [SheetsSceltiFieldsEnum]
     order: [SortOrderEnum] = [ASC]
 }
 
@@ -4856,34 +6584,6 @@ input SheetsTestiFindingFilterInput {
 
 input SheetsTestiFindingSortInput {
     fields: [SheetsTestiFindingFieldsEnum]
-    order: [SortOrderEnum] = [ASC]
-}
-
-input SheetsUnmaskFilterInput {
-    children: NodeFilterListInput
-    country: StringQueryOperatorInput
-    date: DateQueryOperatorInput
-    description: StringQueryOperatorInput
-    id: StringQueryOperatorInput
-    internal: InternalFilterInput
-    pageViews: StringQueryOperatorInput
-    parent: NodeFilterInput
-    shareCountTotal: StringQueryOperatorInput
-    signatures: StringQueryOperatorInput
-    sponsored: StringQueryOperatorInput
-    tagRawNames: StringQueryOperatorInput
-    tagSlugs: StringQueryOperatorInput
-    tags: StringQueryOperatorInput
-    targets: StringQueryOperatorInput
-    title: StringQueryOperatorInput
-    user: StringQueryOperatorInput
-    userId: StringQueryOperatorInput
-    verifiedVictory: StringQueryOperatorInput
-    victory: StringQueryOperatorInput
-}
-
-input SheetsUnmaskSortInput {
-    fields: [SheetsUnmaskFieldsEnum]
     order: [SortOrderEnum] = [ASC]
 }
 

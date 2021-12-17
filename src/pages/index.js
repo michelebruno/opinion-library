@@ -513,12 +513,7 @@ export const query = graphql`{
                 gatsbyImageData
             }
         }
-    }
-    comments: allSheetsEstratti(filter: {commentId: {in: [817756846,811710031,814486694,822518213,817756846, 821382262]}}) {
-        nodes {
-            ...CommentFragment
-        }
-    }
+    } 
     front: allFile(filter: {relativeDirectory: {eq: "landing"}}) {
         nodes {
             childImageSharp {

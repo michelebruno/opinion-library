@@ -28,6 +28,7 @@
     "gatsby-plugin-sitemap": "^5.3.0",
     "gatsby-source-filesystem": "^4.3.0",
     "gatsby-source-google-spreadsheet": "^2.0.0",
+    "gatsby-transformer-json": "^4.4.0",
     "gatsby-transformer-sharp": "^4.3.0",
     "gsap": "^3.8.0",
     "matter-dom-plugin": "^1.0.0",

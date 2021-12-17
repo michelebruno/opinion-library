@@ -6,7 +6,7 @@ import WordsIndex from "../components/WordsIndex";
 import Accordion from "../components/Accordion";
 import {MaskometerGrid} from "../components/maskometerGrid";
 import Comments from "../components/Comments";
-
+import {sentencesHaveWord} from "../utils/sentences";
 
 export default function Library({data: {words, allComments, ...data}}) {
     const [chosen, setChosen] = useState({})
@@ -19,7 +19,7 @@ export default function Library({data: {words, allComments, ...data}}) {
 
     useEffect(() => {
         !chosen.next && setSecondWord()
-    },[chosen])
+    }, [chosen])
 
     const listOfChosenWords = words.nodes.map(x => x.name)
 
@@ -39,20 +39,23 @@ export default function Library({data: {words, allComments, ...data}}) {
                 'transition-[width] duration-1000 overflow-hidden flex flex-col',
                 chosen.current ? 'w-10/12' : 'w-0'
             )}>
-                <Accordion title={"Related words"} subtitle={<>usage of words when occurring with <span className="uppercase">{chosen.current}</span></>}
+                <Accordion title={"Related words"} subtitle={<>usage of words when occurring with <span
+                    className="uppercase">{chosen.current}</span></>}
                            isOpen={!showComments} onClick={() => setShowComments(!showComments)}>
                     <MaskometerGrid chosen={chosen} words={words} distribution={distribution}
                                     onClickSecondWord={setSecondWord}/>
                 </Accordion>
                 <Accordion title={"Opinions"}
-                           subtitle={<>containing <span className="uppercase">{chosen.current}</span> {secondWord && <>and <span className="uppercase">{secondWord}</span></>}  </>}
+                           subtitle={<>containing <span
+                               className="uppercase">{chosen.current}</span> {secondWord && <>and <span
+                               className="uppercase">{secondWord}</span></>}  </>}
                            isOpen={showComments} onClick={() => setShowComments(!showComments)}>
                     <Comments
-                        comments={allComments.nodes
-                            .filter(({word}) => {
-                                return word === chosen.current
-                            })
-                        }
+                        comments={allComments
+                            .nodes
+                            .filter(({sentences}) => {
+                                return sentencesHaveWord(sentences, chosen.current)
+                            })}
                         distribution={distribution.filter(({word}) => word === chosen.current)}
                         chosen={chosen.current}
                         secondWord={secondWord}
@@ -80,9 +83,9 @@ export const query = graphql`query Glossary {
             promaskDelta
         }
     }
-    allComments: allSheetsEstratti {
+    allComments: allCommentsJson {
         nodes {
-            ...CommentFragment
+            ...CommentJsonFragment
         }
     }
 }`

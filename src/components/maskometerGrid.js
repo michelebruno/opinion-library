@@ -52,7 +52,7 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
                                     return chosen.next === word && secondWord === name
                                 }
                                 return (chosen.current && word === chosen.current) && secondWord === name
-                            })['promaskDelta']
+                            })['nomaskDelta']
 
                         delta = Math.round(delta * 100)
 
