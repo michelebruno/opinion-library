@@ -77,6 +77,9 @@ function enableScroll() {
     // console.log("scroll enabled")
 }
 
+const methods = {}
+disableScroll()
+
 const commentsData = {
     812047727: 'vaccine',
     811710031: 'health',
@@ -201,8 +204,6 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
             scrollTween;
 
         function goToSection(i) {
-            i && disableScroll()
-
             scrollTween = gsap.to(window, {
                 scrollTo: {y: i * window.innerHeight, autoKill: false},
                 duration: 1,
@@ -213,6 +214,65 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                 overwrite: true
             });
         }
+
+
+        window.removeEventListener(wheelEvent, e => {
+            e.preventDefault()
+
+            const n = -e.wheelDeltaX || -e.deltaX, o = e.wheelDeltaY || -e.deltaY
+                , r = Math.abs(n) > Math.abs(o) ? n : o;
+            e && e.preventDefault()
+
+            canAdvance && (r < 0 ? triggerNext() : triggerPrev()) && ++lastAdvance
+
+        }, wheelOpt);
+
+        let canAdvance = true,
+            lastAdvance = 0;
+
+
+        function swipeHandler(t) {
+            t.deltaY < -30 ? triggerNext() : t.deltaY > 30 && triggerPrev()
+        }
+
+        function goPrev() {
+            if (lastAdvance === 0)
+                return
+
+            goToSection(--lastAdvance)
+        }
+
+        function goNext() {
+            if (panels.length < lastAdvance)
+                return
+
+            goToSection(++lastAdvance)
+        }
+
+        function triggerNext() {
+            if (canAdvance) {
+                canAdvance = false
+                goNext();
+                setTimeout((function () {
+                        canAdvance = true
+                    }
+                ), 1500)
+
+            }
+        }
+
+        function triggerPrev() {
+            if (canAdvance) {
+                canAdvance = false
+                goPrev()
+                setTimeout((function () {
+                        canAdvance = true
+                    }
+                ), 1500)
+
+            }
+        }
+
 
         panels.forEach((panel, i) => {
             return;

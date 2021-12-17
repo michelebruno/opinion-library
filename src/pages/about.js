@@ -5,33 +5,49 @@ import {graphql} from "gatsby";
 import Image from "../components/Image";
 import petitionJson from '../images/petition.json'
 import commentJson from '../images/comments.json'
+import {useEffect, useRef} from "react";
 
+import gsap from 'gsap'
+import {ScrollTrigger} from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function About({data: {images: {nodes: images}, team: {nodes: team}}}) {
-    return <Layout wrapperClassName={"bg-white text-black"} container footer>
+    const nav = useRef()
+
+    useEffect(() => {
+        ScrollTrigger.create({
+            trigger: nav.current,
+            start: 'top 10%',
+            end:'max',
+            pin: true
+        })
+
+    }, [])
+
+    return <Layout wrapperClassName={"bg-white text-black"} container footer light>
         <h2 className={"text-[4.34vw] leading-[1.15] uppercase"}>
             The research presented in this website was carried out during the Final Synthesis Studio of the Master
-            Degree <span className="inline-block">in Communication</span> Design offered <span className="inline-block">by Politecnico</span> di Milano.
+            Degree <span className="inline-block">in Communication</span> Design offered <span className="inline-block">by Politecnico</span> di
+            Milano.
         </h2>
 
         <div className="mt-32 grid grid-cols-3 gap-x-8">
 
-            <article className={"col-span-2"}>
+            <article className={"col-span-2 relative"}>
 
                 <p>
-                    The studio course is led by <a href="https://densitydesign.org/">DensityDesign</a>, a Research Lab
-                    in the Design Department focusing on the visual representation of complex social, organisational and
-                    urban phenomena.
+                    Opinion library is a website built to explore the language and arguments used in comments to
+                    petitions regarding the mask mandate
+                    in the United States.
                 </p>
 
-                <h2 id={"focus"}>Focus, Aim and Objective</h2>
                 <p>
                     This research petitions published on <a href="https://www.change.org/">change.org</a> during the
                     pandemic. Starting from an analysis of
                     the main petition themes across different countries, the focus of the research narrowed down to the
                     images and language used on the platform.
-                </p>
-                <p>
+                    <br/>
                     The aim of this website is to make the dataset used in this research available to researchers and
                     potential activists interested in the subject. To do this, we set ourselves the objective of
                     realising a tool to explore the language and arguments used in comments to petitions regarding the
@@ -92,13 +108,25 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
                     the dataset — these are words and n-grams. This was a quick and easy way to get rid of punctuation,
                     articles, conjunctions and verbs.
                 </p>
+
+                <div>
+                    <Image image={images.find(i => i.relativePath === 'about/google-nl.png')}
+                           className={"mx-auto w-7/12"}/>
+                </div>
+
                 <p>At this point, we counted how many times each word appeared and converted the absolute number to
                     percentage values for both groups.
                 </p>
                 <div>
-                    <Image image={images.find(i => i.relativePath === 'about/sheets.png')} className={"w-full"}/>
+                    <Image image={images.find(i => i.relativePath === 'about/sheets.png')}
+                           className={"mx-auto w-7/12"}/>
                 </div>
 
+                <p>
+                    We then used these percentages to determine whether the word was used with the same frequency by
+                    both groups or if one used it more than the other. We used the following proportion to transform the
+                    two percentages into a single, more readable metric.
+                </p>
 
                 <h2 id={"interactions"}>Interactions</h2>
                 <p>The archive presents two kinds of information: how often a word is used by a certain group and which
@@ -118,28 +146,28 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
                 <div className="grid grid-cols-4 gap-4">
                     {team.map(t => <Image image={t} key={t.publicURL}/>)}
                 </div>
+                <p className="text-lg">
+                    If you want to follow our real profiles, click on the images!
+                    <br/>
+                    And rememeber, wear masks!
+                </p>
 
             </article>
 
-            <nav className={"sticky top-24 uppercase"}>
-                <ul className={"flex flex-col gap-y-2"}>
+            <nav className={"relative uppercase"} id={'about-nav'} >
+                <ul className={"flex flex-col gap-y-2"} ref={nav}>
                     <li>
-                        <Button as={'a'} href={"#focus"}>
-                            Focus, Aim and Objective
-                        </Button>
-                    </li>
-                    <li>
-                        <Button as={'a'} href={"#data"}>
+                        <Button as={'a'} href={"#data"} light>
                             Data
                         </Button>
                     </li>
                     <li>
-                        <Button as={'a'} href={"#interactions"}>
+                        <Button as={'a'} href={"#interactions"} light>
                             Interactions
                         </Button>
                     </li>
                     <li>
-                        <Button as={'a'} href={"#team"}>
+                        <Button as={'a'} href={"#team"} light>
                             The team
                         </Button>
                     </li>
