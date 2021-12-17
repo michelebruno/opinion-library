@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import React, {useEffect, useMemo, useRef} from "react";
 import classNames from "classnames";
 import Comment from "./Comment";
 import {ArchiveButton} from "./Button";
@@ -7,7 +7,6 @@ import {sentencesHaveWord} from "../utils/sentences";
 
 
 function GroupCommentList({comments, chosen, secondWord, origin}) {
-
 
     const {filteredComments, totalComments} = useMemo(() => {
         let thisOriginComments = comments
@@ -26,7 +25,7 @@ function GroupCommentList({comments, chosen, secondWord, origin}) {
 
     return <div>
         <p className="sticky top-0 bg-black z-30 text-center text-lg pt-3 pb-4">
-            {filteredComments.length}{secondWord && " of " + totalComments} {origin} comments
+            {filteredComments.length}{secondWord && " of " + totalComments + ` (${(filteredComments.length/totalComments).toFixed(2)*100}%)`} {origin} opinions
         </p>
 
         <div key={origin} className={"flex flex-col gap-4 pb-64 "}> {filteredComments
@@ -42,11 +41,23 @@ function GroupCommentList({comments, chosen, secondWord, origin}) {
 }
 
 export default function Comments({comments, chosen, secondWord, onChangeSecondWord, distribution}) {
+
+    const scroller = useRef()
+
+    useEffect(() => {
+        scroller?.current?.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        })
+    }, [chosen, secondWord])
+
+
     return <div className={"flex h-full px-8 flex-wrap "}>
-        <p className="mb-4 w-full text-lg">Here you can read the comments on the 100 most liked promask and nomask
+        <p className="mb-4 w-full text-lg">Here you can read the reasons to sign the 100 most popular promask and nomask
             petition</p>
         <div className={"w-full sticky top-0"}>
-            <h2 className={"uppercase mb-4"}>Filter comments by:</h2>
+            <h2 className={"text-lg text-light my-4"}>Filter opinions by:</h2>
             <div className="flex flex-wrap gap-x-2">
                 {distribution.map(({secondWord: word, nomaskDelta}) => {
                     const isSelected = secondWord === word

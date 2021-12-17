@@ -4,11 +4,11 @@ import React from "react";
 export default function Index({words, chosen, setChosen}) {
 
     return <div className={classNames(
-        "transition-all duration-1000 overflow-y-scroll",
-        chosen.current ? "w-2/12 border-r-2 border-r-current" : "w-full "
+        "transition-all duration-1000 ",
+        chosen.current ? "w-2/12 border-r-2 border-t2 border-r-white" : "w-full "
     )}>
         <div
-            className={"sticky top-0 text-light px-8 pt-4 pb-4 border-white border-b-2 transition-[width] duration-1000 bg-black select-none  whitespace-nowrap " + (!chosen.current && 'w-screen cursor-pointer')}
+            className={"sticky top-0 text-light px-8 pt-4 pb-4 border-white border-b-2 transition-[width] duration-1000 bg-black select-none  whitespace-nowrap " + (!chosen.current && 'w-full cursor-pointer')}
             onClick={() => setChosen({})}
         >
             <h2
@@ -23,7 +23,7 @@ export default function Index({words, chosen, setChosen}) {
 
         </div>
 
-        <ul className="pb-8">
+        <ul className="overflow-y-scroll h-full">
             {words
                 .map(({name, finding}) => <li
                     key={name}
@@ -34,16 +34,17 @@ export default function Index({words, chosen, setChosen}) {
                     onClick={() => chosen.current !== name ? setChosen({current: name}) : setChosen({})}
                     className={classNames(
                         "border-y-[1px] border-b-current cursor-pointer hover:border-t-light",
+                        "px-8 pt-4 pb-4",
+
                         chosen.current === name ? "bg-light text-black border-t-light" : "hover:text-light border-t-black",
                     )}
                 >
                     <h2 className={classNames(
-                        "text-xl uppercase",
-                        "px-8 pt-4 pb-4",
+                        "text-lg uppercase",
                     )}>
                         {name}
                     </h2>
-                    {(chosen.current === name && finding) && <p className={"px-8 pb-4"}>
+                    {(chosen.current === name && finding) && <p className={"pt-1 text-base"}>
                         {finding}
                     </p>}
                 </li>)}

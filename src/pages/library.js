@@ -38,7 +38,7 @@ export default function Library({data: {words, allComments, ...data}}) {
         })
 
 
-    return <Layout wrapperClassName={"max-h-screen h-screen flex flex-col pb-16"}
+    return <Layout wrapperClassName={"max-h-screen h-screen flex flex-col lg:pb-8 2xl:pb-8 3xl:pb-16"}
                    className={"flex-1 min-h-0 "}>
         <div className="w-full h-full overflow-hidden flex flex-nowrap  border-y-white border-y-2 ">
             <WordsIndex words={words.nodes} chosen={chosen} setChosen={setChosen}/>
@@ -86,7 +86,7 @@ export const query = graphql`query Glossary {
             promaskDelta
         }
     }
-    allComments: allCommentsJson {
+    allComments: allCommentsJson(sort: {fields: [createdAt], order: DESC}) {
         nodes {
             ...CommentJsonFragment
         }

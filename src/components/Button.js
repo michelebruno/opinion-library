@@ -7,15 +7,17 @@ export function ArchiveButton({children, className, isSelected, isCurrent, check
         disabled={isCurrent}
         className={
             classNames(
-                "archive-button",
+                "archive-button border-2 select-none",
+
                 checkbox ?
                     [
-                        'checkbox border-2',
+                        'checkbox ',
                         !isCurrent && 'hover:border-light active:bg-light active:text-black',
-                        isCurrent && 'bg-gray border-gray cursor-disabled',
-                        isSelected && 'border-light before:content-["X"] before:text-xs before:mr-2'
+                        isCurrent && 'bg-gray border-white cursor-disabled opacity-30',
+                        isSelected && 'border-light'
                     ] :
                     [
+                        "text-sm 2xl:text-base",
                         (!isCurrent && !isSelected) &&
                         'text-white hover:border-light',
                         isSelected && "bg-light text-black border-light",
@@ -25,7 +27,11 @@ export function ArchiveButton({children, className, isSelected, isCurrent, check
             )}
         {...props}
     >
-        {children}
+        {checkbox && isSelected && <span className={"leading-[0] text-lg mr-1"}>{'\u00D7'}</span>}
+        <span>
+                    {children}
+
+        </span>
     </button>
 }
 

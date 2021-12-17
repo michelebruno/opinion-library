@@ -32,9 +32,8 @@ export default function Accordion({onClick, isOpen, children, title, subtitle}) 
         </div>
 
         <div className={classNames(
-            "overflow-hidden",
             "",
-            isOpen ? "h-full" : 'h-0'
+            isOpen ? "h-full" : 'h-0 overflow-hidden'
         )}>
             {children}
 

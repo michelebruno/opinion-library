@@ -8,15 +8,15 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
 
 
     return <div className="h-full flex flex-col justify-between relative gap-4  ">
-        <p className={"mx-8 mb-4 text-xl"}>
-            Horizontal position corresponds to usage by the two groups in the selcted corpus of comments
+        <p className={"mx-8 mb-4 text-lg"}>
+            Horizontal position corresponds to usage by the two groups in the selcted corpus of reasons to sign
         </p>
         <div className="flex-1 ">
             <div
                 className={classNames(" h-full px-8 py-4 flex flex-col justify-between relative", 'overflow-hidden')}>
                 <div className={"z-1 uppercase"}>
 
-                    <p className="bg-promask text-white text-xl text-center h-full absolute top-0 bottom-0 left-0 rotate-180 p-1 z-10"
+                    <p className="bg-promask text-white text-lg text-center h-full absolute top-0 bottom-0 left-0 rotate-180 p-1 z-10"
                        style={{writingMode: 'vertical-lr'}}>
                         Promask
                     </p>
@@ -29,7 +29,7 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
                     <div
                         className="absolute top-0 bottom-0 right-1/2 translate-x-1/2 border-r-[1px] boreder-r-white border-dashed opacity-50"/>
 
-                    <p className="text-lg text-xs text-center absolute top-0 left-0 right-0 w-full normal-case bg-black"
+                    <p className="text-lg text-sm 2xl:text-base text-center text-gray select-none absolute top-0 left-0 right-0 w-full normal-case bg-black pb-2"
                     >
                         equally used
                     </p>
@@ -62,7 +62,7 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
                                             "w-full flex items-center relative",
                                             "before:absolute before:left-0 before:right-0 ",
                                             "before:border-b-[1px] before:block before:top-1/2 before:transition-all",
-                                            "before:w-full transition-all duration-500 delay-100",
+                                            "before:w-full transition-[margin,background-color] duration-500",
                                             isCurrent ? 'before:border-b-gray  opacity-30' : 'before:border-b-current  before:opacity-20'
                                         )
                                     }>
@@ -72,7 +72,7 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
                                     marginLeft: delta + "%",
                                     '--gradient-mix': isCurrent ? undefined : mix('EA3C9A', '3514FF', delta)
                                 }}
-                                className={"transition-[margin] duration-1000 delay-100 rounded-[0px] -translate-x-1/2 absolute"}
+                                className={"transition-[margin] duration-1000 rounded-[0px] -translate-x-1/2 absolute z-20"}
                                 onClick={() => onClickSecondWord(name)}
                             >
                                 {name}
