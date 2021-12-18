@@ -46,7 +46,7 @@ export default function Navbar({fixed, light, absolute}) {
         <ul className={"flex gap-8"}>
             {
                 menu.map(({path, text}) => {
-                    return <li className={"first:border-current"}>
+                    return <li key={path} className={"first:border-current"}>
                         <Link to={path} className={classNames(
                             "hover:underline",
                             "active:text-light-darker"

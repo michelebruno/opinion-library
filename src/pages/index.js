@@ -14,6 +14,10 @@ import HomeSlide from "../components/HomeSlide";
 import SlotMaschine from "../components/SlotMaschine";
 import Navbar from "../components/Navbar";
 import {Helmet} from "react-helmet";
+import * as Matter from "matter-js";
+import "matter-dom-plugin";
+
+
 
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(ScrollToPlugin)
@@ -92,6 +96,79 @@ const commentsData = {
     821382262: 'family'
 }
 
+
+function runMatterJs() {
+
+    //se lo sbatti dentro con npm/yarn credo vada usato Matter = require('matter.js')
+    //require dovrebbe essere roba di node.js, se non lo si usa js non capisce cosa volgia dire "matter" la mia curiosità non è giunta oltre
+    Matter.use('matter-dom-plugin');
+
+    /** Aliases **/
+    var Engine = Matter.Engine;
+    var Runner = Matter.Runner;
+    var RenderDom = Matter.RenderDom;
+    var DomBodies = Matter.DomBodies;
+    var MouseConstraint = Matter.MouseConstraint;
+    var DomMouseConstraint = Matter.DomMouseConstraint;
+    var Mouse = Matter.Mouse;
+    var World = Matter.World;
+
+    /** Set up engine and renderer **/
+    var engine = Engine.create();
+    var world = engine.world;
+    var runner = Runner.create();
+
+    Runner.run(runner, engine);
+
+    var render = RenderDom.create({
+        engine: engine
+    });
+
+    RenderDom.run(render);
+
+    /** Initialize physics bodies **/
+    var block = DomBodies.block(100, 0, {
+        Dom: {
+            render: render,
+            element: document.querySelector('#block')
+        }
+    });
+
+    //tutta sta roba in realtà non serve ma stavo cercando di capire se potesse tornare utile
+    var worldWidth = render.mapping.WORLD.width;
+    var worldHeight = render.mapping.WORLD.height;
+    var worldCenter = render.mapping.WORLD.center;
+    var viewHeight = render.mapping.VIEW.height;
+    var viewWidth = render.mapping.VIEW.width;
+    var viewCenter = render.mapping.VIEW.center;
+
+    var ground = Matter.DomBodies.block(viewCenter.x, viewHeight - 50, {
+        Dom: {
+            render: render,
+            element: document.querySelector('#ground')
+        },
+        isStatic: true
+    });
+
+    World.add(world, [ground, block]);
+
+    /** Mouse control **/
+    var mouse = Mouse.create(document.body);
+    var MouseConstraint = DomMouseConstraint.create(engine, {
+        mouse: mouse,
+        constraint: {
+            stiffness: 0.1,
+            render: {
+                visible: false
+            }
+        }
+    });
+
+    World.add(world, MouseConstraint);
+
+}
+
+
 // markup
 const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, front}}) => {
 
@@ -118,11 +195,12 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                 }
             )
             // .to({}, {duration: .3})
-            .from('#change-data-bubbles > div', {
-                y: 1300,
-                stagger: .2,
-                duration: 1,
-                // ease: 'linear',
+            .to('#change-data-bubbles > div', {
+                y: -2400,
+                stagger: 1,
+                duration: 10,
+                rotate:15,
+                ease: 'linear',
             })
 
 
@@ -130,7 +208,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
             .from(gsap.utils.toArray(maskMandateSlide.current.querySelectorAll('img')), {
                 paused: true,
                 opacity: 0,
-                y: 20,
+                y: 10,
                 duration: .2,
                 stagger: .1,
             })
@@ -297,7 +375,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                 <Image image={front.nodes[1]} className={"absolute left-20 bottom-60 w-1/6"}/>
                 <div className="text-black text-center col-span-12 row-start-3 row-span-2 self-middle">
                     <h1 className={"text-9xl"}>Opinion Library</h1>
-                    <h2 className={"text-2xl normal-case"}>What do change.org users think about mask mandates in
+                    <h2 className={"text-[2.2rem] normal-case"}>What do change.org users think about mask mandates in
                         the
                         U.S.?</h2>
                 </div>
@@ -333,7 +411,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                                 "bg-light rounded-full ",
                                 "flex items-center justify-center ",
                                 "w-[60vmin] h-[60vmin] ",
-                                "absolute right-0 bottom-[15%] "
+                                "absolute right-0 -bottom-3/4 "
                             )}>
                         <div>
                             <p className={"text-3xl"}>+208,5%</p>
@@ -347,7 +425,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                                 "bg-light rounded-full px-2 ",
                                 "flex items-center justify-center ",
                                 "w-[16vmin] h-[16vmin] ",
-                                "absolute right-[66%] bottom-[16%] "
+                                "absolute right-[66%] -bottom-3/4 "
                             )}>
                         <div>
                             <p className={"text-3xl"}>+33%</p>
@@ -361,7 +439,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                                 "bg-light rounded-full px-2 ",
                                 "flex items-center justify-center ",
                                 "w-[15vmin] h-[15vmin] ",
-                                "absolute left-[41%] bottom-[4%] "
+                                "absolute left-[41%] -bottom-3/4 "
                             )}>
                         <div>
                             <p className={"text-3xl"}>+46%</p>
@@ -443,8 +521,6 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
 
 
                                 const comment = homeComments.find(({commentId}) => commentId == id)
-
-                                console.log(id, homeComments.map(i => i.commentId))
 
                                 return <Comment key={id}
                                                 highlightWords={highlightWords}
