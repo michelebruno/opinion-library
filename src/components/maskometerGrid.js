@@ -36,7 +36,7 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
 
                 </div>
 
-                {(typeof chosen !== 'undefined' && chosen.current) ?
+                {(typeof chosen !== 'undefined' && chosen.current) &&
                     words.nodes.map(({name, deltaNomask}) => {
 
                         let isCurrent = chosen.next ? chosen.next === name : chosen.current === name
@@ -82,10 +82,7 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
                                 {name}
                             </ArchiveButton>
                         </div>
-                    }) : <div className="p-20 text-7xl w-3/4 opacity-50 upppercase">
-                        click on one of the most used words to see how the related words are used by the two groups
-                        in the comments
-                    </div>
+                    })
                 }
             </div>
 

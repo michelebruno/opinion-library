@@ -19,14 +19,18 @@ export default function Index({words, chosen, setChosen}) {
                 Words
             </h2>
             <span
-                className={classNames("ml-2 text-light text-2xl", chosen.current ? "hidden" : "")}>/ 20 most used in promask and nomask comments</span>
+                className={classNames("ml-2 text-light text-2xl overflow-hidden", chosen.current ? "hidden" : "")}>
+                    <span className="animate__animated animate__fadeInLeft">
+                        / 20 most used in promask and nomask comments
+                    </span>
+                </span>
 
         </div>
 
         <ul className="overflow-y-scroll no-scrollbar flex-1">
             {words
                 .map(({name, finding}, index) => {
-                    let isNextSelected = index+1 < words.length ? (words[index + 1].name === chosen.prev || words[index + 1].name === chosen.current) : false
+                    let isNextSelected = index + 1 < words.length ? (words[index + 1].name === chosen.prev || words[index + 1].name === chosen.current) : false
 
                     return <li
                         key={name}

@@ -10,7 +10,12 @@
     font-weight: normal;
 }
 
+
+
 @tailwind base;
+
+@import "~animate.css";
+
 @tailwind components;
 @tailwind utilities;
 
@@ -47,6 +52,10 @@
     /* set button(top and bottom of the scrollbar) */
     ::-webkit-scrollbar-button {
         display:none;
+    }
+
+    .comment .avatar {
+        aspect-ratio: 1;
     }
 
     mark {

@@ -50,15 +50,15 @@ export default function Comment({
         id={id}
         className={classNames(
             className,
-            "comment grid grid-cols-9 w-full bg-white text-black boreder-2 normal-case",
+            "comment grid grid-cols-12 w-full bg-white text-black boreder-2 normal-case",
             large ? 'p-16 rounded-[3rem] gap-8' : 'p-4  gap-4 rounded-xl text-base ',
             origin === 'promask' && 'border-promask',
             origin === 'nomask' && 'border-nomask'
         )}>
         <div className=" ">
-            <div className={"rounded-full bg-" + origin} style={{aspectRatio: '1'}}/>
+            <div className={"rounded-full avatar bg-" + origin} />
         </div>
-        <div className={"col-span-8"}>
+        <div className={"col-span-11"}>
             <div className={"text-gray select-none " + (large ? 'text-2xl' : 'text-xs')}>
                 <span>User{user}</span>
                 {' • '}

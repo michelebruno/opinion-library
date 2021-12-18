@@ -52,7 +52,9 @@ export default function useMatter(containerRef) {
 
         const masks = []
 
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 8; i++) {
+
+            let imgIndex = i % 4
 
             masks.push(Bodies.circle(Math.random() * sizeX, Math.random() * sizeY, maskSize, {
                 friction: 0,
@@ -60,10 +62,10 @@ export default function useMatter(containerRef) {
                 frictionAir: friction,
                 angularVelocity: angularVelocity, // = quanto rimbalzano
                 restitution: 1,
-                force: {x: random() / 2, y: random() / 2},
+                force: {x: random() / 3, y: random() / 3},
                 render: {
                     sprite: {
-                        texture: front.nodes[i].publicURL,
+                        texture: front.nodes[imgIndex].publicURL,
                         xScale: spriteScale,
                         yScale: spriteScale
                     }

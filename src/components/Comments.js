@@ -28,7 +28,7 @@ function GroupCommentList({comments, chosen, secondWord, origin}) {
 
 
     return <div>
-        <p className="sticky top-[8.05rem] bg-black z-30 text-center text-lg pt-3 pb-4">
+        <p className="sticky top-0 bg-black z-30 text-center text-lg pt-3 pb-4">
             {
                 secondWord ?
                     `${(100 * filteredComments.length / totalComments).toFixed(0)}% ${origin} opinions (${filteredComments.length} of ${totalComments})` :
@@ -60,7 +60,7 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
     return <div className={"flex h-full px-8 flex-wrap "}>
         <p className="mb-4 w-full text-lg">Here you can read the reasons to sign the 100 most popular promask and nomask
             petition</p>
-        <div className="flex flex-col h-full w-full overflow-y-scroll no-scrollbar" ref={scroller}>
+        <div className="flex flex-col h-full w-full" ref={scroller}>
 
             <div className={"w-full sticky top-0 bg-black z-20"}>
                 <h2 className={"text-lg text-light my-4"}>Filter opinions by:</h2>
@@ -86,7 +86,7 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
                 </div>
             </div>
             <div
-                className={classNames("transition-transform w-full md:w-11/12 3xl:w-10/12 mx-auto")}
+                className={classNames("transition-transform w-full h-full md:w-11/12 3xl:w-10/12 mx-auto overflow-y-scroll")}
                 id={"comments-container"}>
                 <div className="grid grid-cols-2 gap-8 justify-around ">
                     {['promask', 'nomask'].map(origin => <GroupCommentList key={origin} origin={origin}

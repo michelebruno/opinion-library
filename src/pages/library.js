@@ -44,7 +44,7 @@ export default function Library({data: {words, allComments, ...data}}) {
         <div className="w-full h-full overflow-hidden flex flex-nowrap  border-y-white border-t-2 ">
             <WordsIndex words={words.nodes} chosen={chosen} setChosen={setChosen}/>
             <div className={classNames(
-                'transition-[width] duration-1000 overflow-hidden flex flex-col',
+                ' overflow-hidden flex flex-col',
                 chosen.current ? 'w-10/12' : 'w-0'
             )}>
                 <Accordion title={"Related words"} subtitle={<>usage of words mentioned with <span
