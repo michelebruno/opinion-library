@@ -27,7 +27,7 @@ const menu = [
     }
 ]
 
-export default function Navbar({fixed, light}) {
+export default function Navbar({fixed, light, absolute}) {
 
     const {logo} = useStaticQuery(graphql`{
         logo : file(relativePath: {eq: "logo.png"}) {
@@ -39,7 +39,7 @@ export default function Navbar({fixed, light}) {
 
 
     return <nav
-        className={classNames(fixed ? 'fixed' : 'sticky', "top-0 z-40 py-4 px-8 flex w-full uppercase justify-between text-lg items-center")}>
+        className={classNames(fixed ? 'fixed' : [absolute ? 'absolute' : 'sticky'], "top-0 z-40 py-4 px-8 flex w-full uppercase justify-between text-base items-center")}>
         <Link to={"/"} className={"w-1/12"}>
             <Image image={logo}/>
         </Link>

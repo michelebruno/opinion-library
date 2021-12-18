@@ -19,7 +19,7 @@ export function ArchiveButton({children, className, isSelected, isCurrent, check
                     [
                         "text-sm 2xl:text-base",
                         (!isCurrent && !isSelected) &&
-                        'text-white hover:border-light',
+                        'text-white border-black hover:border-light',
                         isSelected && "bg-light text-black border-light",
                         isCurrent && 'bg-gray text-white'
                     ],

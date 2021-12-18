@@ -45,11 +45,7 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
     const scroller = useRef()
 
     useEffect(() => {
-        scroller?.current?.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'smooth'
-        })
+        scroller.current?.scrollTo(0,0)
     }, [chosen, secondWord])
 
 
@@ -62,7 +58,6 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
                 {distribution.map(({secondWord: word, nomaskDelta}) => {
                     const isSelected = secondWord === word
                     const isCurrent = chosen === word
-
 
                     return <ArchiveButton
                         key={word}
@@ -80,7 +75,7 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
                 })}
             </div>
         </div>
-        <div className="flex h-full w-full overflow-y-scroll">
+        <div className="flex h-full w-full overflow-y-scroll" ref={scroller}>
 
             <div
                 className={classNames("transition-transform w-10/12 mx-auto")}

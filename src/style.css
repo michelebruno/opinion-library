@@ -148,15 +148,15 @@
     .highlighted-word {
         @apply relative inline-block z-[0] transition-colors duration-1000 before:z-[-1] before:absolute before:transition-all before:duration-1000 before:origin-left before:h-full before:w-full before:scale-y-90;
     }
-
+    .home-petition-images img {
+        @apply cursor-pointer grayscale hover:grayscale-0 transition-[filter];
+    }
 }
 
 .overflow-scroll {
-    overflow: scroll;
     overflow: overlay;
 }
 
 .overflow-y-scroll {
-    overflow-y: scroll;
     overflow-y: overlay;
 }

@@ -50,8 +50,8 @@ export default function Comment({
         id={id}
         className={classNames(
             className,
-            "comment grid grid-cols-8 gap-4 w-full bg-white text-black boreder-2 normal-case",
-            large ? 'p-8 rounded-xl' : 'p-4 rounded-xl text-base ',
+            "comment grid grid-cols-8 w-full bg-white text-black boreder-2 normal-case",
+            large ? 'p-16 rounded-[3rem] gap-8' : 'p-4  gap-4 rounded-xl text-base ',
             origin === 'promask' && 'border-promask',
             origin === 'nomask' && 'border-nomask'
         )}>
@@ -59,12 +59,12 @@ export default function Comment({
             <div className={"rounded-full bg-" + origin} style={{aspectRatio: '1'}}/>
         </div>
         <div className={"col-span-7"}>
-            <div className={"text-gray select-none " + (large ? 'text-xl' : 'text-sm')}>
+            <div className={"text-gray select-none " + (large ? 'text-2xl' : 'text-sm')}>
                 <span>User{user}</span>
                 {' • '}
                 <span>{dateText || createdAt}</span>
             </div>
-            <p className={'comment-text ' + (large ? 'text-4xl leading-snug py-4' : 'py-1 text-base')}>
+            <p className={'comment-text ' + (large ? 'text-3xl leading-snug py-4' : 'py-1 text-base')}>
                 {typeof sentences !== 'undefined' ? sentences.map((sentence, i) => {
 
 
@@ -102,8 +102,10 @@ export default function Comment({
 
                 }) : children}
             </p>
-            <a href={"https://www.change.org/p/" + petition.slug} title={petition.title}
-               className={classNames("text-gray truncate underline hover:text-light-darker block ", large ? 'text-xl' : 'text-sm')}
+            <a href={petition.slug ? "https://www.change.org/p/" + petition.slug : undefined} title={petition.title}
+               className={classNames("text-gray truncate underline block ",
+                   petition.slug && ' hover:text-light-darker',
+                   large ? 'text-2xl' : 'text-sm')}
                target={'_blank'}>
                 {petition.title || "Petition title"}
             </a>

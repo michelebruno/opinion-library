@@ -13,19 +13,19 @@ export default function DeltaWord({children, className, style, id, promask, top,
         transform: typeof rotate !== 'undefined' ? "rotate(" + rotate + "deg)" : undefined,
     }}>
         <div className="relative">
-            <div className="text-3xl align-middle">
+            <div className="text-3xl align-middle ">
                 <div
-                    className="absolute left-0 top-0 h-full transition-all text-center bg-promask flex items-center justify-center"
+                    className=" cursor-pointer absolute left-0 top-0 h-full transition-all text-center bg-promask flex items-center justify-center"
                     style={{width: promaskPercentage}}>
                     <span className="opacity-0 group-hover:opacity-100 transition-all">{promaskPercentage}</span>
                 </div>
                 <div
-                    className="absolute right-0 top-0 h-full transition-all text-center bg-nomask flex items-center justify-center"
+                    className="cursor-pointer absolute right-0 top-0 h-full transition-all text-center bg-nomask flex items-center justify-center"
                     style={{width: nomaskPercentage}}>
                     <span className="opacity-0 group-hover:opacity-100 transition-all">{nomaskPercentage}</span>
                 </div>
             </div>
-            <span className="group-hover:opacity-0 transition-all relative px-1">{children}</span>
+            <span className="group-hover:opacity-0 transition-all relative px-1 cursor-pointer">{children}</span>
 
         </div>
     </div>

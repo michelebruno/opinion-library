@@ -16,6 +16,7 @@ module.exports = {
                 lg: ['1.25rem', 1.15], // 20px
                 xl: ['1.5625rem', 1.15], // 25
                 '2xl': ['1.875rem' , 1.15], // 30px
+                '3xl': ['2.5rem', 1.15] // 40px
             },
             breakpoints: {
                 '3xl': '1900px'

@@ -3,10 +3,7 @@ import {useEffect, useRef, useState} from "react"
 import Layout from "../components/Layout";
 import gsap from 'gsap'
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-import {CSSRulePlugin} from "gsap/CSSRulePlugin"
-import {CSSPlugin} from "gsap/CSSPlugin"
 import {ScrollToPlugin} from "gsap/ScrollToPlugin"
-import {TextPlugin} from "gsap/TextPlugin"
 import classNames from "classnames";
 import {graphql, Link} from "gatsby";
 import Image from "../components/Image";
@@ -15,10 +12,11 @@ import DeltaWord from "../components/DeltaWord";
 import Button from "../components/Button";
 import HomeSlide from "../components/HomeSlide";
 import SlotMaschine from "../components/SlotMaschine";
+import Navbar from "../components/Navbar";
+import {Helmet} from "react-helmet";
 
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(ScrollToPlugin)
-gsap.registerPlugin(TextPlugin, CSSPlugin, CSSRulePlugin)
 
 gsap.defaults({
     duration: .8
@@ -51,7 +49,14 @@ try {
 let wheelOpt = supportsPassive ? {passive: false} : false;
 let wheelEvent = typeof document === 'undefined' || 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
 
-// call this to Disable
+function goToSection(i) {
+    gsap.to(window, {
+        scrollTo: {y: i * window.innerHeight, autoKill: false},
+        duration: .8,
+        overwrite: true
+    })
+}
+
 function disableScroll() {
     return;
     if (typeof window === 'undefined') return
@@ -62,7 +67,6 @@ function disableScroll() {
 
     // console.log("scroll disabled")
 }
-
 
 // call this to Enable
 function enableScroll() {
@@ -78,7 +82,6 @@ function enableScroll() {
 }
 
 const methods = {}
-disableScroll()
 
 const commentsData = {
     812047727: 'vaccine',
@@ -177,7 +180,6 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                 },
             }
         )
-            .call(disableScroll)
             .addLabel('comment-apper')
             .from(
                 gsap.utils.toArray(understandLanguage.current.querySelectorAll('.comment-container .comment')),
@@ -190,7 +192,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
             .from('#recurring-words', {
                 y: 300,
                 opacity: 0,
-                duration: 1,
+                delay: 1.6,
             }, 'comment-apper')
             .to({}, {
                 delay: 2,
@@ -200,23 +202,9 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
             }, 'comment-apper')
 
 
-        let panels = gsap.utils.toArray(".snapper"),
-            scrollTween;
+        let panels = gsap.utils.toArray(".snapper")
 
-        function goToSection(i) {
-            scrollTween = gsap.to(window, {
-                scrollTo: {y: i * window.innerHeight, autoKill: false},
-                duration: 1,
-                onComplete: () => {
-                    enableScroll()
-                    scrollTween = null
-                },
-                overwrite: true
-            });
-        }
-
-
-        window.removeEventListener(wheelEvent, e => {
+        function handleScroll(e) {
             e.preventDefault()
 
             const n = -e.wheelDeltaX || -e.deltaX, o = e.wheelDeltaY || -e.deltaY
@@ -225,27 +213,33 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
 
             canAdvance && (r < 0 ? triggerNext() : triggerPrev()) && ++lastAdvance
 
-        }, wheelOpt);
+        }
+
+        window.addEventListener(wheelEvent, handleScroll, wheelOpt);
+
 
         let canAdvance = true,
             lastAdvance = 0;
 
+        document.addEventListener("keyup", (function (e) {
+            e.preventDefault()
+            canAdvance && ("ArrowDown" === e.key || "ArrowRight" === e.key ? triggerNext() : "ArrowUp" !== e.key && "ArrowLeft" !== e.key || triggerPrev())
+        }))
 
-        function swipeHandler(t) {
-            t.deltaY < -30 ? triggerNext() : t.deltaY > 30 && triggerPrev()
-        }
+
+        // function swipeHandler(t) {
+        //     t.deltaY < -30 ? triggerNext() : t.deltaY > 30 && triggerPrev()
+        // }
 
         function goPrev() {
             if (lastAdvance === 0)
                 return
-
             goToSection(--lastAdvance)
         }
 
         function goNext() {
             if (panels.length < lastAdvance)
                 return
-
             goToSection(++lastAdvance)
         }
 
@@ -274,16 +268,6 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
         }
 
 
-        panels.forEach((panel, i) => {
-            return;
-            ScrollTrigger.create({
-                trigger: panel,
-                start: "top bottom",
-                end: "+=200%",
-                onToggle: self => self.isActive && !scrollTween && goToSection(i)
-            });
-        });
-
         // just in case the user forces the scroll to an inbetween spot (like a momentum scroll on a Mac that ends AFTER the scrollTo tween finishes):
         gsap.timeline({
             scrollTrigger: {
@@ -297,204 +281,214 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                 scaleY: 0
             })
 
+        return () => window.removeEventListener(wheelEvent, handleScroll)
     }, [])
 
     return (
         <Layout fixedHeader className={"text-[4.34vw] leading-tight"}>
+            <Helmet bodyAttributes={{'className': 'overflow-y-hidden'}}/>
             <div className="fixed right-0 top-0 bottom-0 origin-top bg-light w-2 z-40" id="progress-bar"></div>
-            <div className="scroller">
-                <div className="snap-wrapper">
-                    <HomeSlide className={"bg-light pb-32 text-[6vw] grid-rows-6 z-50 select-none"}>
-                        <Image image={front.nodes[2]} className={"absolute left-[8.3%] top-16 w-1/6"}/>
-                        <Image image={front.nodes[0]} className={"absolute right-16 top-8 w-1/6"}/>
-                        <Image image={front.nodes[3]} className={"absolute right-20 bottom-32 w-1/6"}/>
-                        <Image image={front.nodes[1]} className={"absolute left-20 bottom-60 w-1/6"}/>
-                        <div className="text-black text-center col-span-12 row-start-3 row-span-2 self-middle">
-                            <h1 className={"text-9xl"}>Opinion Library</h1>
-                            <h2 className={"text-2xl normal-case"}>What do change.org users think about mask mandates in
-                                the
-                                U.S.?</h2>
-                        </div>
-                        <div
-                            className="absolute left-0 right-0 bottom-0 py-8 text-center text-xl normal-case text-black">
-                            <p>
-                                Scroll down to discover more
+            <HomeSlide className={"bg-light text-black text-[6vw] grid-rows-6 z-50 select-none"}>
 
-                                <span className="mx-auto w-12 pt-4 block">
+                <Navbar absolute light/>
+                <Image image={front.nodes[2]} className={"absolute left-[8.3%] top-16 w-1/6"}/>
+                <Image image={front.nodes[0]} className={"absolute right-16 top-32 w-1/6"}/>
+                <Image image={front.nodes[3]} className={"absolute right-20 bottom-32 w-1/6"}/>
+                <Image image={front.nodes[1]} className={"absolute left-20 bottom-60 w-1/6"}/>
+                <div className="text-black text-center col-span-12 row-start-3 row-span-2 self-middle">
+                    <h1 className={"text-9xl"}>Opinion Library</h1>
+                    <h2 className={"text-2xl normal-case"}>What do change.org users think about mask mandates in
+                        the
+                        U.S.?</h2>
+                </div>
+                <div
+                    className="absolute left-0 right-0 bottom-0 py-8 text-center text-xl normal-case text-black">
+                    <p onClick={() => goToSection(1)} className={"cursor-pointer"}>
+                        Scroll down to discover more
+
+                        <span className="mx-auto w-12 pt-4 block">
                             <svg viewBox="0 0 63 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M61.5 2L32 23.5L1 2" stroke="black" strokeWidth="3"/>
                             </svg>
                         </span>
-                            </p>
+                    </p>
 
 
-                        </div>
-                    </HomeSlide>
-                    <HomeSlide span={1} ref={changeDataSlide}>
-                        <h2 className={"col-span-9"}>
-                            <mark>Change.org</mark>
-                            {" "}
-                            is the largest petition website, and in 2020 <span
-                            className="inline-block">it only grew</span> larger,
-                            especially in the United States.
-                        </h2>
-                        <div id={'change-data-bubbles'}
-                             className="text-black text-center normal-case absolute h-full w-full inset-0">
-                            <div
-                                className={
-                                    classNames(
-                                        "bg-light rotate-[-30deg] ",
-                                        "bg-light rounded-full ",
-                                        "flex items-center justify-center ",
-                                        "w-[60vmin] h-[60vmin] ",
-                                        "absolute right-0 bottom-[15%] "
-                                    )}>
-                                <div>
-                                    <p className={"text-3xl"}>+208,5%</p>
-                                    <p className="text-base">Signatures</p>
-                                </div>
-                            </div>
-                            <div
-                                className={
-                                    classNames(
-                                        "bg-light rotate-[18deg] ",
-                                        "bg-light rounded-full px-2 ",
-                                        "flex items-center justify-center ",
-                                        "w-[16vmin] h-[16vmin] ",
-                                        "absolute right-[66%] bottom-[16%] "
-                                    )}>
-                                <div>
-                                    <p className={"text-3xl"}>+33%</p>
-                                    <p className="text-base">Global Users</p>
-                                </div>
-                            </div>
-                            <div
-                                className={
-                                    classNames(
-                                        "bg-light rotate-[-30deg] ",
-                                        "bg-light rounded-full px-2 ",
-                                        "flex items-center justify-center ",
-                                        "w-[15vmin] h-[15vmin] ",
-                                        "absolute left-[41%] bottom-[4%] "
-                                    )}>
-                                <div>
-                                    <p className={"text-3xl"}>+46%</p>
-                                    <p className="text-base">Published Petitions</p>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </HomeSlide>
-                    <HomeSlide span={2} ref={maskMandateSlide}>
-                        <div className="col-span-12 pin-spacer ">
-                            <div className="pin-me w-full grid grid-cols-12 gap-16 relative">
-                                <h2 className={"col-span-8"}>
-                                    As the platform grew,
-                                    so did the topics being discussed. One of the
-                                    most <mark>controversial
-                                    themes</mark> has been that of <br/>
-                                    <SlotMaschine words={words}/>
-                                </h2>
-                                <div className={"absolute h-screen w-full top-0 left-0 right-0"}>
-                                    <div className="relative h-full w-full">
-                                        <Image image={allFile.nodes[0]} className={"w-1/3 absolute top-0 left-0"}/>
-                                        <Image image={allFile.nodes[1]} className={"w-1/3 absolute top-1/3 left-2/3"}/>
-                                        <Image image={allFile.nodes[2]} className={"w-1/3 absolute top-2/3 left-3/4"}/>
-                                        <Image image={allFile.nodes[3]} className={"w-1/3 absolute top-1/2 left-0"}/>
-                                        <Image image={allFile.nodes[4]} className={"w-1/3 absolute top-1/4 left-1/4"}/>
-                                        <Image image={allFile.nodes[5]} className={"w-1/3 absolute top-1/2 right-1/4"}/>
-                                        <Image image={allFile.nodes[6]} className={"w-1/3 absolute bottom-20 -left-4"}/>
-                                        <Image image={allFile.nodes[7]} className={"w-1/3 absolute top-5 -right-2"}/>
-                                        <Image image={allFile.nodes[8]} className={"w-1/3 absolute -top-4 left-1/3"}/>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </HomeSlide>
-                    <HomeSlide className={"auto-rows-min content-center pb-32"} id={"why-you-signed"}
-                               ref={whyYouSigned}>
-                        <div className="col-span-9 col-start-3 aspect-[16/7]">
-                            <p className="pb-8">
-                                <mark>Why</mark>
-                                {" "}
-                                they have signed
-                            </p>
-                            <Comment id={'fake-comment'} author="User30130" created_at={"1 minute ago"}
-                                     petition={{title: "Mask mandate petition"}}
-                                     large origin={'black'}>
-                                Those who signed these petitions explained their reasons in comments.
-                            </Comment>
-                        </div>
-                    </HomeSlide>
-                    <HomeSlide span={1} className={"auto-rows-min"} id={"understand-language"} ref={understandLanguage}>
-
-                        <div className={"col-span-8 relative "}>
-                            <p id={'this-allows'}>
-                                This allows us to understand the different points of view and
-                                the <mark>language</mark> used to
-                                express them.
-                            </p>
-                            <p id={'recurring-words'} className={''}>
-                                We can find recurring
-                                <HighlightedWord isActive={highlightWords}
-                                                 className={highlightWords && 'text-black'}>words</HighlightedWord> in
-                                these comments.
-                            </p>
-
-                        </div>
-                        <div className="col-span-4  normal-case overflow-hidden">
-                            <div
-                                className="grid auto-rows-min gap-y-4 comment-container absolute top-0 pt-32 h-screen overflow-y-scroll no-scrollbar ">
-                                {
-                                    Object.entries(commentsData).map(([id, word]) => {
-
-
-                                        const comment = homeComments.find(({commentId}) => commentId == id)
-
-                                        console.log(id, homeComments.map(i => i.commentId))
-
-                                        return <Comment key={id}
-                                                        highlightWords={highlightWords}
-                                                        word={word}
-                                                        {...comment}
-                                                        origin={'black'}/>
-                                    })
-                                }
-                            </div>
-                        </div>
-                    </HomeSlide>
-                    <HomeSlide span={1} className={"pb-32"} id={"some-words-frequent"}>
-
-                        <div className={"col-span-6"}>
-                            <h2 className={"mb-4"}>
-                                Some words are common but used in different ways by <span
-                                className="bg-promask inline-block">Pro mask</span> or
-                                {' '}
-                                <span className="bg-nomask inline-block">no mask</span> to hold a particular point of
-                                view.
-                            </h2>
-                            <Button id="view-library-button" as={Link} to={"/library/"} large>View the library</Button>
-                        </div>
-                        <div className="col-span-6 relative">
-                            <DeltaWord promask={55} bottom={78} left={45} rotate={9}>Health</DeltaWord>
-                            <DeltaWord promask={45} bottom={65} right={12} rotate={6}>Vaccine</DeltaWord>
-                            <DeltaWord promask={60} bottom={53} right={8} rotate={12}>Student</DeltaWord>
-                            <DeltaWord promask={55} bottom={40} right={20} rotate={2}>School</DeltaWord>
-                            <DeltaWord promask={51} bottom={25} right={10} rotate={11}>Science</DeltaWord>
-                            <DeltaWord promask={61} bottom={19} left={14} rotate={-39}>Family</DeltaWord>
-                            <DeltaWord promask={33} bottom={12} right={12} rotate={3}>Mandate</DeltaWord>
-                            <DeltaWord promask={54} bottom={0} rotate={-4}>Teacher</DeltaWord>
-                            <DeltaWord promask={32} bottom={0} right={0} rotate={4}>Children</DeltaWord>
-                        </div>
-
-                    </HomeSlide>
                 </div>
-            </div>
+            </HomeSlide>
+            <HomeSlide span={1} ref={changeDataSlide}>
+                <h2 className={"col-span-9"}>
+                    <mark>Change.org</mark>
+                    {" "}
+                    is the largest petition website, and in 2020 <span
+                    className="inline-block">it only grew</span> larger,
+                    especially in the United States.
+                </h2>
+                <div id={'change-data-bubbles'}
+                     className="text-black text-center normal-case absolute h-full w-full inset-0">
+                    <div
+                        className={
+                            classNames(
+                                "bg-light rotate-[-30deg] ",
+                                "bg-light rounded-full ",
+                                "flex items-center justify-center ",
+                                "w-[60vmin] h-[60vmin] ",
+                                "absolute right-0 bottom-[15%] "
+                            )}>
+                        <div>
+                            <p className={"text-3xl"}>+208,5%</p>
+                            <p className="text-base">Signatures</p>
+                        </div>
+                    </div>
+                    <div
+                        className={
+                            classNames(
+                                "bg-light rotate-[18deg] ",
+                                "bg-light rounded-full px-2 ",
+                                "flex items-center justify-center ",
+                                "w-[16vmin] h-[16vmin] ",
+                                "absolute right-[66%] bottom-[16%] "
+                            )}>
+                        <div>
+                            <p className={"text-3xl"}>+33%</p>
+                            <p className="text-base">Global Users</p>
+                        </div>
+                    </div>
+                    <div
+                        className={
+                            classNames(
+                                "bg-light rotate-[-30deg] ",
+                                "bg-light rounded-full px-2 ",
+                                "flex items-center justify-center ",
+                                "w-[15vmin] h-[15vmin] ",
+                                "absolute left-[41%] bottom-[4%] "
+                            )}>
+                        <div>
+                            <p className={"text-3xl"}>+46%</p>
+                            <p className="text-base">Published Petitions</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </HomeSlide>
+            <HomeSlide span={2} ref={maskMandateSlide}>
+                <div className="col-span-12 pin-spacer ">
+                    <div className="pin-me w-full grid grid-cols-12 gap-16 relative">
+                        <h2 className={"col-span-8"} style={{letterSpacing: -1}}>
+                            As the platform grew,
+                            so did the topics being discussed. One of the
+                            most <mark>controversial
+                            themes</mark> has been that of
+                            <br/>
+                            <SlotMaschine words={words}/>
+                        </h2>
+
+                    </div>
+
+                </div>
+                <div className={"absolute h-screen w-full bottom-0 left-0 right-0 p-8"}>
+                    <div className="relative h-full w-full z-40 home-petition-images ">
+                        <Image image={allFile.nodes[7]} className={"w-1/3 absolute -top-16 right-8"}/>
+                        <Image image={allFile.nodes[0]} className={"w-1/3 absolute top-0 left-0"}/>
+                        <Image image={allFile.nodes[8]} className={"w-1/3 absolute top-[16%] left-[41%]"}/>
+                        <Image image={allFile.nodes[2]} className={"w-1/3 absolute top-1/3 mt-8 -right-16"}/>
+                        <Image image={allFile.nodes[1]}
+                               className={"w-1/3 absolute top-1/2 -translate-y-1/2 left-[8.3%]"}/>
+                        <Image image={allFile.nodes[3]} className={"w-1/3 absolute bottom-[16%] right-[16%]"}/>
+                        <Image image={allFile.nodes[4]} className={"w-1/3 absolute bottom-4 left-[16%]"}/>
+                        <Image image={allFile.nodes[5]} className={"w-1/3 absolute top-[90%] -left-1/4 "}/>
+                        <Image image={allFile.nodes[6]} className={"w-1/3 absolute top-[90%] right-0"}/>
+
+                    </div>
+                </div>
+            </HomeSlide>
+            <HomeSlide className={"auto-rows-min content-center pb-32 "} id={"why-you-signed"}
+                       ref={whyYouSigned}>
+                <div className="col-span-9 col-start-4">
+                    <p className="pb-8 text-right">
+                        <mark>Why</mark>
+                        {" "}
+                        they have signed
+                    </p>
+                    <Comment id={'fake-comment'} user="30200130" created_at={"1 minute ago"}
+                             petition={{title: "Mask mandate petition"}}
+                             createdAt={"1 minute ago"}
+                             large origin={'black'}>
+                        Those who signed these petitions explained their reasons in comments.
+                    </Comment>
+                </div>
+            </HomeSlide>
+            <HomeSlide span={1} className={"auto-rows-min"} id={"understand-language"} ref={understandLanguage}>
+
+                <div className={"col-span-8 relative "}>
+                    <p id={'this-allows'}>
+                        This allows us to understand the different points of view and
+                        the <mark>language</mark> used to
+                        express them.
+                    </p>
+                    <p id={'recurring-words'} className={''}>
+                        We can find recurring
+                        <HighlightedWord isActive={highlightWords}
+                                         className={highlightWords && 'text-black'}>words</HighlightedWord> in
+                        these comments.
+                    </p>
+
+                </div>
+                <div className="col-span-4  normal-case overflow-hidden">
+                    <div
+                        className="grid auto-rows-min gap-y-4 comment-container h-screen overflow-y-scroll no-scrollbar ">
+                        {
+                            Object.entries(commentsData).map(([id, word]) => {
 
 
+                                const comment = homeComments.find(({commentId}) => commentId == id)
+
+                                console.log(id, homeComments.map(i => i.commentId))
+
+                                return <Comment key={id}
+                                                highlightWords={highlightWords}
+                                                word={word}
+                                                {...comment}
+                                                origin={'black'}/>
+                            })
+                        }
+                    </div>
+                </div>
+            </HomeSlide>
+            <HomeSlide span={1} className={"pb-32"} id={"some-words-frequent"}>
+
+                <div className={"col-span-6"}>
+                    <h2 className={"mb-4"}>
+                        these words are common, but are used in different ways by <span
+                        className="bg-promask inline-block">pro mask</span> or
+                        {' '}
+                        <span className="bg-nomask inline-block">no mask</span> users
+                    </h2>
+                </div>
+                <div className="col-span-6 relative">
+                    <DeltaWord promask={55} bottom={78} left={45} rotate={9}>Health</DeltaWord>
+                    <DeltaWord promask={45} bottom={65} right={12} rotate={6}>Vaccine</DeltaWord>
+                    <DeltaWord promask={60} bottom={53} right={8} rotate={12}>Student</DeltaWord>
+                    <DeltaWord promask={55} bottom={40} right={20} rotate={2}>School</DeltaWord>
+                    <DeltaWord promask={51} bottom={25} right={10} rotate={11}>Science</DeltaWord>
+                    <DeltaWord promask={61} bottom={19} left={14} rotate={-39}>Family</DeltaWord>
+                    <DeltaWord promask={33} bottom={12} right={12} rotate={3}>Mandate</DeltaWord>
+                    <DeltaWord promask={54} bottom={0} rotate={-4}>Teacher</DeltaWord>
+                    <DeltaWord promask={32} bottom={0} right={0} rotate={4}>Children</DeltaWord>
+                </div>
+            </HomeSlide>
+            <HomeSlide>
+                <div className="col-span-9" style={{letterSpacing: -1}}>This is an opinion library
+                    collecting comments and showing relations among the most used words in pro mask and no mask
+                    comments.
+                </div>
+                <div className="absolute left-0 right-0 bottom-8 text-center">
+                    <div className="mx-auto inline-block">
+                        <Button id="view-library-button" as={Link} to={"/library/"} large>View the library</Button>
+                    </div>
+                </div>
+            </HomeSlide>
         </Layout>
     )
 }
