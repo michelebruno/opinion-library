@@ -27,19 +27,9 @@ const menu = [
     }
 ]
 
-export default function Navbar({fixed, light, absolute}) {
-
-    const {logo} = useStaticQuery(graphql`{
-        logo : file(relativePath: {eq: "logo.png"}) {
-            childImageSharp {
-                gatsbyImageData
-            }
-        }
-    }`)
-
-
+export default function Navbar({fixed, light, absolute, className, allBlack}) {
     return <nav
-        className={classNames(fixed ? 'fixed' : [absolute ? 'absolute' : 'sticky'], "top-0 z-40 py-4 px-8 flex w-full uppercase justify-between text-base items-center")}>
+        className={classNames(fixed ? 'fixed' : [absolute ? 'absolute' : 'sticky'], "top-0 z-40 py-4 px-8 flex w-full uppercase justify-between text-base items-center", className)}>
         <Link to={"/"} className={"w-1/12"}>
             <Logo height={"60px"} className={"fill-current"}/>
         </Link>
@@ -49,11 +39,11 @@ export default function Navbar({fixed, light, absolute}) {
                     return <li key={path} className={"first:border-current"}>
                         <Link to={path} className={classNames(
                             "hover:underline",
-                            "active:text-light-darker"
+                            !allBlack && "active:text-light-darker"
                         )}
                               activeClassName={classNames(
                                   "underline",
-                                  light ? "border-light-darker text-light-darker" : "border-light text-light",
+                                  !allBlack && [light ? "border-light-darker text-light-darker" : "border-light text-light"]
                               )}>{text}</Link>
                     </li>
                 })

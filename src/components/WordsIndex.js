@@ -8,12 +8,12 @@ export default function Index({words, chosen, setChosen}) {
         chosen.current ? "w-2/12 border-r-2 border-t2 border-r-white" : "w-full "
     )}>
         <div
-            className={"sticky top-0 text-light px-8 pt-4 pb-4 border-white border-b-2 transition-[width] duration-1000 bg-black select-none  whitespace-nowrap " + (!chosen.current && 'w-full cursor-pointer')}
+            className={"sticky top-0 text-light px-8 pt-4 pb-4 border-white border-b-2 duration-1000 bg-black select-none  whitespace-nowrap " + (!chosen.current && 'w-full cursor-pointer')}
             onClick={() => setChosen({})}
         >
             <h2
                 className={
-                    classNames("inline-block text-3xl uppercase ")
+                    classNames("inline-block text-2xl uppercase ")
                 }
             >
                 Words
@@ -23,7 +23,7 @@ export default function Index({words, chosen, setChosen}) {
 
         </div>
 
-        <ul className="overflow-y-scroll flex-1">
+        <ul className="overflow-y-scroll no-scrollbar flex-1">
             {words
                 .map(({name, finding}, index) => {
                     let isNextSelected = index+1 < words.length ? (words[index + 1].name === chosen.prev || words[index + 1].name === chosen.current) : false

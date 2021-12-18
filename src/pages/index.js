@@ -394,7 +394,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
             <div className="fixed right-0 top-0 bottom-0 origin-top bg-light w-2 z-40" id="progress-bar"></div>
             <HomeSlide className={"bg-light text-black text-[6vw] grid-rows-6 z-50 select-none"}>
 
-                <Navbar absolute light/>
+                <Navbar absolute light allBlack/>
                 <Image image={front.nodes[2]} className={"absolute left-[8.3%] top-16 w-1/6"}/>
                 <Image image={front.nodes[0]} className={"absolute right-16 top-32 w-1/6"}/>
                 <Image image={front.nodes[3]} className={"absolute right-20 bottom-32 w-1/6"}/>

@@ -50,7 +50,7 @@ export default function Comment({
         id={id}
         className={classNames(
             className,
-            "comment grid grid-cols-8 w-full bg-white text-black boreder-2 normal-case",
+            "comment grid grid-cols-9 w-full bg-white text-black boreder-2 normal-case",
             large ? 'p-16 rounded-[3rem] gap-8' : 'p-4  gap-4 rounded-xl text-base ',
             origin === 'promask' && 'border-promask',
             origin === 'nomask' && 'border-nomask'
@@ -58,13 +58,13 @@ export default function Comment({
         <div className=" ">
             <div className={"rounded-full bg-" + origin} style={{aspectRatio: '1'}}/>
         </div>
-        <div className={"col-span-7"}>
-            <div className={"text-gray select-none " + (large ? 'text-2xl' : 'text-sm')}>
+        <div className={"col-span-8"}>
+            <div className={"text-gray select-none " + (large ? 'text-2xl' : 'text-xs')}>
                 <span>User{user}</span>
                 {' • '}
                 <span>{dateText || createdAt}</span>
             </div>
-            <p className={'comment-text ' + (large ? 'text-3xl leading-snug py-4' : 'py-1 text-base')}>
+            <p className={'comment-text ' + (large ? 'text-3xl leading-snug py-4' : 'py-2 text-base')}>
                 {typeof sentences !== 'undefined' ? sentences.map((sentence, i) => {
 
 
@@ -105,7 +105,7 @@ export default function Comment({
             <a href={petition.slug ? "https://www.change.org/p/" + petition.slug : undefined} title={petition.title}
                className={classNames("text-gray truncate underline block ",
                    petition.slug ? ' hover:text-light-darker' : 'cursor-default',
-                   large ? 'text-2xl' : 'text-sm')}
+                   large ? 'text-2xl' : 'text-xs')}
                target={'_blank'}>
                 {petition.title || "Petition title"}
             </a>

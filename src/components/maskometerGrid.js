@@ -21,7 +21,7 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
                         Promask
                     </p>
 
-                    <p className="bg-nomask text-white text-xl text-center h-full absolute top-0 bottom-0 right-0 p-1 z-10"
+                    <p className="bg-nomask text-white text-lg text-center h-full absolute top-0 bottom-0 right-0 p-1 z-10"
                        style={{writingMode: 'vertical-rl'}}>
                         Nomask
                     </p>

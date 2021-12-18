@@ -8,7 +8,6 @@ export function ArchiveButton({children, className, isSelected, isCurrent, check
         className={
             classNames(
                 "archive-button border-2 select-none",
-
                 checkbox ?
                     [
                         'checkbox ',
@@ -17,7 +16,6 @@ export function ArchiveButton({children, className, isSelected, isCurrent, check
                         isSelected && 'border-light'
                     ] :
                     [
-                        "text-sm 2xl:text-base",
                         (!isCurrent && !isSelected) &&
                         'text-white border-black hover:border-light',
                         isSelected && "bg-light text-black border-light",

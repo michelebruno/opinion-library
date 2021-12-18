@@ -16,7 +16,7 @@ export default function Accordion({onClick, isOpen, children, title, subtitle}) 
                     {title}
                 </h2>
                 <span
-                    className={classNames("ml-2 leading-none text-xl transition-[opacity] normal-case", isOpen ? "" : "hidden group-hover:inline-block group-hover:opacity-50 group-active:opacity-100")}>
+                    className={classNames("ml-2 leading-none text-xl transition-[opacity] normal-case", isOpen ? "" : "group-hover:inline-block group-active:opacity-100")}>
                     / {subtitle}
                 </span>
 

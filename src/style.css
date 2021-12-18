@@ -142,7 +142,7 @@
         background-color: var(--gradient-mix);
         border-color: var(--gradient-mix);
 
-        @apply block px-2 text-base uppercase text-center rounded-none border;
+        @apply block p-1 leading-snug uppercase text-center rounded-none border text-sm 2xl:text-base;
     }
 
     .highlighted-word {
