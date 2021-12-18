@@ -18,7 +18,6 @@ import * as Matter from "matter-js";
 import "matter-dom-plugin";
 
 
-
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(ScrollToPlugin)
 
@@ -195,13 +194,32 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                 }
             )
             // .to({}, {duration: .3})
-            .to('#change-data-bubbles > div', {
-                y: -2400,
-                stagger: 1,
-                duration: 10,
-                rotate:15,
-                ease: 'linear',
+            .from('#change-data-bubbles > div', {
+                y: 1200,
+                stagger: .3,
+                duration: 2,
+                rotate: 15,
+                ease: 'power4.out',
             })
+            .addLabel('bubbles-up')
+            .to('#change-data-bubbles > div', {
+                rotate: 15,
+                duration: 8,
+                stagger: .4,
+                repeat: -1,
+                ease: 'linear',
+                yoyo: true,
+                yoyoEase: 'linear'
+            }, 'bubbles-up')
+            .to('#change-data-bubbles > div', {
+                y: 20,
+                duration: 6,
+                stagger: .6,
+                repeat: -1,
+                ease: 'linear',
+                yoyo: true,
+                yoyoEase: 'linear'
+            }, 'bubbles-up')
 
 
         let petitionImagesTl = gsap
@@ -231,6 +249,14 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
         })
 
         // WHY YOU SIGNED
+        gsap.from('#fake-comment', {
+            scrollTrigger: {
+                trigger: '#fake-comment'
+            },
+            yPercent: 20,
+            opacity: 0,
+        })
+
 
         gsap.timeline({
             scrollTrigger: {
@@ -289,7 +315,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                 , r = Math.abs(n) > Math.abs(o) ? n : o;
             e && e.preventDefault()
 
-            canAdvance && (r < 0 ? triggerNext() : triggerPrev()) && ++lastAdvance
+            canAdvance && (r < 0 ? triggerNext() : triggerPrev())
 
         }
 
@@ -364,7 +390,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
 
     return (
         <Layout fixedHeader className={"text-[4.34vw] leading-tight"}>
-            <Helmet bodyAttributes={{'className': 'overflow-y-hidden'}}/>
+            <Helmet bodyAttributes={{'class': 'no-scrollbar bg-black text-white'}}/>
             <div className="fixed right-0 top-0 bottom-0 origin-top bg-light w-2 z-40" id="progress-bar"></div>
             <HomeSlide className={"bg-light text-black text-[6vw] grid-rows-6 z-50 select-none"}>
 
@@ -411,7 +437,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                                 "bg-light rounded-full ",
                                 "flex items-center justify-center ",
                                 "w-[60vmin] h-[60vmin] ",
-                                "absolute right-0 -bottom-3/4 "
+                                "absolute right-0  bottom-[15%] "
                             )}>
                         <div>
                             <p className={"text-3xl"}>+208,5%</p>
@@ -425,7 +451,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                                 "bg-light rounded-full px-2 ",
                                 "flex items-center justify-center ",
                                 "w-[16vmin] h-[16vmin] ",
-                                "absolute right-[66%] -bottom-3/4 "
+                                "absolute right-[66%]  bottom-[16%]"
                             )}>
                         <div>
                             <p className={"text-3xl"}>+33%</p>
@@ -439,7 +465,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                                 "bg-light rounded-full px-2 ",
                                 "flex items-center justify-center ",
                                 "w-[15vmin] h-[15vmin] ",
-                                "absolute left-[41%] -bottom-3/4 "
+                                "absolute left-[41%] bottom-[4%]"
                             )}>
                         <div>
                             <p className={"text-3xl"}>+46%</p>
@@ -457,7 +483,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                             As the platform grew,
                             so did the topics being discussed. One of the
                             most <mark>controversial
-                            themes</mark> has been that of
+                            themes</mark> has been
                             <br/>
                             <SlotMaschine words={words}/>
                         </h2>

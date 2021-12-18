@@ -7,6 +7,7 @@ module.exports = {
         title: "Phase 03",
     },
     plugins: [
+        "gatsby-plugin-svgr",
         "gatsby-plugin-postcss",
         "gatsby-plugin-image",
         "gatsby-plugin-react-helmet",

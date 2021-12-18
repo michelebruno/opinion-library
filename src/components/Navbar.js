@@ -2,7 +2,7 @@ import * as React from "react";
 import classNames from "classnames";
 import {graphql, Link, useStaticQuery} from "gatsby";
 import Image from "./Image";
-
+import {ReactComponent as Logo} from '../images/logo.svg'
 
 function MenuItem({children, to}) {
     return <li className={"first:border-current"}>
@@ -41,7 +41,7 @@ export default function Navbar({fixed, light, absolute}) {
     return <nav
         className={classNames(fixed ? 'fixed' : [absolute ? 'absolute' : 'sticky'], "top-0 z-40 py-4 px-8 flex w-full uppercase justify-between text-base items-center")}>
         <Link to={"/"} className={"w-1/12"}>
-            <Image image={logo}/>
+            <Logo height={"60px"} className={"fill-current"}/>
         </Link>
         <ul className={"flex gap-8"}>
             {
