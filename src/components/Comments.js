@@ -28,7 +28,7 @@ function GroupCommentList({comments, chosen, secondWord, origin}) {
             {filteredComments.length}{secondWord && " of " + totalComments + ` (${(100 * filteredComments.length / totalComments).toFixed(0)}%)`} {origin} opinions
         </p>
 
-        <div key={origin} className={"flex flex-col gap-4 pb-64 "}> {filteredComments
+        <div key={origin} className={"grid gap-4 pb-64 "}> {filteredComments
             .map(
                 (c) => <Comment key={c.id}
                                 highlightWords={true}

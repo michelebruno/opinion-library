@@ -30,7 +30,7 @@ export default function SlotMaschine({words}) {
                     [
                         ...words.nodes.map(i => i.name),
                         ...words.nodes.map(i => i.name),
-                        'mask mandate',
+                        'mask mandates',
                     ].map((w, i) => <span className="block w-auto" key={i}>{w}</span>)
                 }
             </div>

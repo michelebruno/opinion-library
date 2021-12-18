@@ -103,8 +103,8 @@ export default function Comment({
                 }) : children}
             </p>
             <a href={petition.slug ? "https://www.change.org/p/" + petition.slug : undefined} title={petition.title}
-               className={classNames("text-gray truncate underline block ",
-                   petition.slug ? ' hover:text-light-darker' : 'cursor-default',
+               className={classNames("text-gray truncate  block ",
+                   petition.slug ? ' hover:text-light-darker underline' : 'cursor-default',
                    large ? 'text-2xl' : 'text-xs')}
                target={'_blank'}>
                 {petition.title || "Petition title"}

@@ -509,14 +509,14 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
             </HomeSlide>
             <HomeSlide className={"auto-rows-min content-center pb-32 "} id={"why-you-signed"}
                        ref={whyYouSigned}>
-                <div className="col-span-9 col-start-4">
-                    <p className="pb-8 text-right">
+                <div className="col-span-9">
+                    <p className="pb-8 ">
                         <mark>Why</mark>
                         {" "}
                         they have signed
                     </p>
                     <Comment id={'fake-comment'} user="30200130" created_at={"1 minute ago"}
-                             petition={{title: "Mask mandate petition"}}
+                             petition={{title: "Petition title"}}
                              createdAt={"1 minute ago"}
                              large origin={'black'}>
                         Those who signed these petitions explained their reasons in comments.

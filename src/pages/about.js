@@ -19,7 +19,7 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
         ScrollTrigger.create({
             trigger: nav.current,
             start: 'top 10%',
-            end:'max',
+            end: 'max',
             pin: true
         })
 
@@ -27,20 +27,13 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
 
     return <Layout wrapperClassName={"bg-white text-black"} container footer light>
         <h2 className={"text-[4.34vw] leading-[1.15] uppercase"}>
-            The research presented in this website was carried out during the Final Synthesis Studio of the Master
-            Degree <span className="inline-block">in Communication</span> Design offered <span className="inline-block">by Politecnico</span> di
-            Milano.
+            Opinion library is a website built to explore the language and arguments used in comments to petitions regarding the mask mandate in the United States.
         </h2>
 
         <div className="mt-32 grid grid-cols-3 gap-x-8">
 
             <article className={"col-span-2 relative"}>
 
-                <p>
-                    Opinion library is a website built to explore the language and arguments used in comments to
-                    petitions regarding the mask mandate
-                    in the United States.
-                </p>
 
                 <p>
                     This research petitions published on <a href="https://www.change.org/">change.org</a> during the
@@ -154,7 +147,7 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
 
             </article>
 
-            <nav className={"relative uppercase"} id={'about-nav'} >
+            <nav className={"relative uppercase"} id={'about-nav'}>
                 <ul className={"flex flex-col gap-y-2"} ref={nav}>
                     <li>
                         <Button as={'a'} href={"#data"} light>

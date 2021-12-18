@@ -4,7 +4,7 @@ import React from "react";
 export default function Index({words, chosen, setChosen}) {
 
     return <div className={classNames(
-        "transition-all duration-1000 flex flex-col",
+        "duration-1000 flex flex-col",
         chosen.current ? "w-2/12 border-r-2 border-t2 border-r-white" : "w-full "
     )}>
         <div
