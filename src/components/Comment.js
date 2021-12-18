@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import classNames from "classnames";
-import {sentenceHasWord} from "../utils/sentences";
+import {matches, sentenceHasWord} from "../utils/sentences";
 
 export function HighlightedWord({children, className, isActive, promask, nomask, secondary}) {
     return <span
@@ -72,8 +72,8 @@ export default function Comment({
                         lastWasSkipped = false
                         return <React.Fragment key={i}>{
                             sentence.map((part, i) => {
-                                const isPrimaryWord = part.toLowerCase() === word
-                                const isSecondaryWord = part.toLowerCase() === secondWord
+                                const isPrimaryWord = matches(part, word)
+                                const isSecondaryWord = matches(part, secondWord)
 
                                 if (isPrimaryWord || isSecondaryWord) return <React.Fragment
                                     key={i}>{" "}
