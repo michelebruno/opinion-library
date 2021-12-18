@@ -151,6 +151,7 @@
     .home-petition-images img {
         @apply cursor-pointer grayscale hover:grayscale-0 transition-[filter];
     }
+
 }
 
 .overflow-scroll {
@@ -159,4 +160,19 @@
 
 .overflow-y-scroll {
     overflow-y: overlay;
+}
+
+
+.delta-svg > g > :nth-child(3) {
+    @apply transition-all duration-300;
+}
+.delta-svg > g > :nth-child(4) {
+    @apply opacity-0 transition-all duration-300 ;
+}
+
+.delta-svg > g:hover > :nth-child(3) {
+    @apply opacity-0 ;
+}
+.delta-svg > g:hover > :nth-child(4) {
+    @apply opacity-100;
 }

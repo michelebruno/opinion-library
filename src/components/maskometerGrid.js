@@ -37,22 +37,26 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
                 </div>
 
                 {(typeof chosen !== 'undefined' && chosen.current) ?
-                    words.nodes.map(({name}) => {
+                    words.nodes.map(({name, deltaNomask}) => {
 
                         let isCurrent = chosen.next ? chosen.next === name : chosen.current === name
 
+                        isCurrent && console.log(name, deltaNomask)
 
-                        let delta = distribution
-                            .find(({
-                                       word,
-                                       secondWord
-                                   }) => {
+                        let delta =
+                            isCurrent ?
+                                deltaNomask :
+                                distribution
+                                    .find(({
+                                               word,
+                                               secondWord
+                                           }) => {
 
-                                if (chosen.next) {
-                                    return chosen.next === word && secondWord === name
-                                }
-                                return (chosen.current && word === chosen.current) && secondWord === name
-                            })['nomaskDelta']
+                                        if (chosen.next) {
+                                            return chosen.next === word && secondWord === name
+                                        }
+                                        return (chosen.current && word === chosen.current) && secondWord === name
+                                    })['nomaskDelta']
 
                         delta = Math.round(delta * 100)
 

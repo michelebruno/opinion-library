@@ -76,10 +76,11 @@ export const query = graphql`query Glossary {
         nodes{
             name
             deltaPromask
+            deltaNomask
             finding
         }
     }
-    distribution: allSheetsDistribuzioneV2(sort: {order: ASC, fields: [secondWord]}) {
+    distribution: allSheetsDistribuzione(sort: {order: ASC, fields: [secondWord]}) {
         nodes {
             word
             secondWord

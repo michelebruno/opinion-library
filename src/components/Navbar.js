@@ -33,10 +33,10 @@ export default function Navbar({fixed, light, absolute, className, allBlack}) {
         <Link to={"/"} className={"w-1/12"}>
             <Logo height={"60px"} className={"fill-current"}/>
         </Link>
-        <ul className={"flex gap-8"}>
+        <ul className={"flex "}>
             {
                 menu.map(({path, text}) => {
-                    return <li key={path} className={"first:border-current"}>
+                    return <li key={path} className={"first:border-current ml-8"}>
                         <Link to={path} className={classNames(
                             "hover:underline",
                             !allBlack && "active:text-light-darker"

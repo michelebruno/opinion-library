@@ -3,15 +3,19 @@ import classNames from "classnames";
 import Comment from "./Comment";
 import {ArchiveButton} from "./Button";
 import {mix} from "../utils/mix";
-import {sentencesHaveWord} from "../utils/sentences";
+import {matches, sentencesHaveWord} from "../utils/sentences";
 
 
 function GroupCommentList({comments, chosen, secondWord, origin}) {
 
-    const {filteredComments, totalComments} = useMemo(() => {
+    const {filteredComments, totalComments, totalFiltered} = useMemo(() => {
         let thisOriginComments = comments
             .filter(({origin: o}) => origin === o)
 
+        const filteredComments = thisOriginComments
+            .filter(({sentences}) => {
+                return !secondWord || sentencesHaveWord(sentences, secondWord)
+            })
 
         return {
             totalComments: thisOriginComments.length,
@@ -28,7 +32,7 @@ function GroupCommentList({comments, chosen, secondWord, origin}) {
             {
                 secondWord ?
                     `${(100 * filteredComments.length / totalComments).toFixed(0)}% ${origin} opinions (${filteredComments.length} of ${totalComments})` :
-                    `${totalComments} ${origin} opinions`
+                    `Showing all ${origin} opinions`
             }
         </p>
 
@@ -60,7 +64,7 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
 
             <div className={"w-full sticky top-0 bg-black z-20"}>
                 <h2 className={"text-lg text-light my-4"}>Filter opinions by:</h2>
-                <div className="flex flex-wrap gap-x-2">
+                <div className="flex flex-wrap">
                     {distribution.map(({secondWord: word, nomaskDelta}) => {
                         const isSelected = secondWord === word
                         const isCurrent = chosen === word
@@ -69,7 +73,7 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
                             key={word}
                             checkbox
                             isCurrent={isCurrent}
-                            className={"mb-2"}
+                            className={"mb-2 mr-2"}
                             isSelected={isSelected}
                             onClick={() => onChangeSecondWord(isSelected ? undefined : word)}
                             style={{

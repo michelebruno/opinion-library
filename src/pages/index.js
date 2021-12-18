@@ -16,13 +16,14 @@ import Navbar from "../components/Navbar";
 import {Helmet} from "react-helmet";
 import * as Matter from "matter-js";
 import "matter-dom-plugin";
-
+import {ReactComponent as Rettangoli} from '../images/retatngoli.svg'
 
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(ScrollToPlugin)
 
 gsap.defaults({
-    duration: .8
+    duration: .8,
+    ease: 'power4.out'
 })
 
 const keys = {37: 1, 38: 1, 39: 1, 40: 1};
@@ -56,7 +57,7 @@ function goToSection(i) {
     gsap.to(window, {
         scrollTo: {y: i * window.innerHeight, autoKill: false},
         duration: .8,
-        overwrite: true
+        overwrite: true,
     })
 }
 
@@ -93,78 +94,6 @@ const commentsData = {
     822518213: 'health',
     817756846: 'vaccine',
     821382262: 'family'
-}
-
-
-function runMatterJs() {
-
-    //se lo sbatti dentro con npm/yarn credo vada usato Matter = require('matter.js')
-    //require dovrebbe essere roba di node.js, se non lo si usa js non capisce cosa volgia dire "matter" la mia curiosità non è giunta oltre
-    Matter.use('matter-dom-plugin');
-
-    /** Aliases **/
-    var Engine = Matter.Engine;
-    var Runner = Matter.Runner;
-    var RenderDom = Matter.RenderDom;
-    var DomBodies = Matter.DomBodies;
-    var MouseConstraint = Matter.MouseConstraint;
-    var DomMouseConstraint = Matter.DomMouseConstraint;
-    var Mouse = Matter.Mouse;
-    var World = Matter.World;
-
-    /** Set up engine and renderer **/
-    var engine = Engine.create();
-    var world = engine.world;
-    var runner = Runner.create();
-
-    Runner.run(runner, engine);
-
-    var render = RenderDom.create({
-        engine: engine
-    });
-
-    RenderDom.run(render);
-
-    /** Initialize physics bodies **/
-    var block = DomBodies.block(100, 0, {
-        Dom: {
-            render: render,
-            element: document.querySelector('#block')
-        }
-    });
-
-    //tutta sta roba in realtà non serve ma stavo cercando di capire se potesse tornare utile
-    var worldWidth = render.mapping.WORLD.width;
-    var worldHeight = render.mapping.WORLD.height;
-    var worldCenter = render.mapping.WORLD.center;
-    var viewHeight = render.mapping.VIEW.height;
-    var viewWidth = render.mapping.VIEW.width;
-    var viewCenter = render.mapping.VIEW.center;
-
-    var ground = Matter.DomBodies.block(viewCenter.x, viewHeight - 50, {
-        Dom: {
-            render: render,
-            element: document.querySelector('#ground')
-        },
-        isStatic: true
-    });
-
-    World.add(world, [ground, block]);
-
-    /** Mouse control **/
-    var mouse = Mouse.create(document.body);
-    var MouseConstraint = DomMouseConstraint.create(engine, {
-        mouse: mouse,
-        constraint: {
-            stiffness: 0.1,
-            render: {
-                visible: false
-            }
-        }
-    });
-
-    World.add(world, MouseConstraint);
-
 }
 
 
@@ -236,11 +165,11 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
         gsap.timeline({
             scrollTrigger: {
                 trigger: maskMandateSlide.current,
-                // scrub: 0.3,
                 start: 'top top',
+                end: 'bottom bottom',
                 pin: maskMandateSlide.current.querySelector('.pin-me'),
                 pinSpacer: maskMandateSlide.current.querySelector('.pin-spacer'),
-                end: 'bottom bottom',
+                anticipatePin: 1,
                 onUpdate: scroll => {
                     scroll.direction === 1 && scroll.progress > .49 && petitionImagesTl.play()
                     scroll.direction === -1 && petitionImagesTl.reverse()
@@ -263,9 +192,9 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                 trigger: '#some-words-frequent',
             }
         })
-            .from('#some-words-frequent .delta-word', {
+            .from('#some-words-frequent svg > g', {
                 y: -1200,
-                stagger: -.2
+                stagger: .2
             })
             .from('#view-library-button', {
                 yPercent: 100,
@@ -277,33 +206,43 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
             {
                 scrollTrigger: {
                     trigger: understandLanguage.current,
-                    // scrub: true,
+                    start:'top top',
                     end: 'bottom bottom',
+                    pin: understandLanguage.current.querySelector('.pin-me'),
+                    pinSpacer: understandLanguage.current.querySelector('.pin-spacer'),
                     // toggleActions: "play pause reverse reset",
-
                 },
             }
         )
-            .addLabel('comment-apper')
+
+
+        gsap.to('#recurring-words', {
+            scrollTrigger: {
+                trigger: '#recurring-words'
+            },
+            onComplete() {
+                setTimeout(() => setHighlightWords(true), 1000)
+            }
+        })
+
+        gsap.timeline(
+            {
+                scrollTrigger: {
+                    trigger: understandLanguage.current,
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    // toggleActions: "play pause reverse reset",
+                },
+            }
+        )
             .from(
                 gsap.utils.toArray(understandLanguage.current.querySelectorAll('.comment-container .comment')),
                 {
                     yPercent: 20,
                     opacity: 0,
                     stagger: .3,
-                }, 'comment-apper'
+                },
             )
-            .from('#recurring-words', {
-                y: 300,
-                opacity: 0,
-                delay: 1.6,
-            }, 'comment-apper')
-            .to({}, {
-                delay: 2,
-                onComplete() {
-                    setHighlightWords(true)
-                }
-            }, 'comment-apper')
 
 
         let panels = gsap.utils.toArray(".snapper")
@@ -319,16 +258,17 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
 
         }
 
+        function handleKeyUp(e) {
+
+            e.preventDefault()
+            canAdvance && ("ArrowDown" === e.key || "ArrowRight" === e.key ? goNext() : "ArrowUp" !== e.key && "ArrowLeft" !== e.key || goPrev())
+        }
+
         window.addEventListener(wheelEvent, handleScroll, wheelOpt);
 
-
+        document.addEventListener("keyup", handleKeyUp)
         let canAdvance = true,
             lastAdvance = 0;
-
-        document.addEventListener("keyup", (function (e) {
-            e.preventDefault()
-            canAdvance && ("ArrowDown" === e.key || "ArrowRight" === e.key ? triggerNext() : "ArrowUp" !== e.key && "ArrowLeft" !== e.key || triggerPrev())
-        }))
 
 
         // function swipeHandler(t) {
@@ -372,7 +312,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
         }
 
 
-        // just in case the user forces the scroll to an inbetween spot (like a momentum scroll on a Mac that ends AFTER the scrollTo tween finishes):
+        // just in case the user forces the scroll to an in between spot (like a momentum scroll on a Mac that ends AFTER the scrollTo tween finishes):
         gsap.timeline({
             scrollTrigger: {
                 start: 0,
@@ -382,10 +322,15 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
             }
         })
             .from('#progress-bar', {
-                scaleY: 0
+                scaleY: 0,
+                ease: 'linear'
+
             })
 
-        return () => window.removeEventListener(wheelEvent, handleScroll)
+        return () => {
+            window.removeEventListener(wheelEvent, handleScroll)
+            window.removeEventListener('keyup', handleKeyUp)
+        }
     }, [])
 
     return (
@@ -448,7 +393,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                         className={
                             classNames(
                                 "bg-light rotate-[18deg] ",
-                                "bg-light rounded-full px-2 ",
+                                "bg-light rounded-full px-4 ",
                                 "flex items-center justify-center ",
                                 "w-[16vmin] h-[16vmin] ",
                                 "absolute right-[66%]  bottom-[16%]"
@@ -462,7 +407,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                         className={
                             classNames(
                                 "bg-light rotate-[-30deg] ",
-                                "bg-light rounded-full px-2 ",
+                                "bg-light rounded-full px-4 ",
                                 "flex items-center justify-center ",
                                 "w-[15vmin] h-[15vmin] ",
                                 "absolute left-[41%] bottom-[4%]"
@@ -524,21 +469,9 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                 </div>
             </HomeSlide>
             <HomeSlide span={2} className={"auto-rows-min"} id={"understand-language"} ref={understandLanguage}>
-                <div className="col-span-12 pin-spacer ">
-                    <div className="pin-me w-full grid grid-cols-12 gap-16 relative">
-                        <div className={"col-span-8 relative "}>
-                            <p id={'this-allows'}>
-                                This allows us to understand the different points of view and
-                                the <mark>language</mark> used to
-                                express them
-                            </p>
-                            <p id={'recurring-words'} className={'absolute'}>
-                                We can find recurring
-                                <HighlightedWord isActive={highlightWords}
-                                                 className={highlightWords && 'text-black'}>words</HighlightedWord> in
-                                these comments
-                            </p>
-
+                <div className="col-span-12 pin-spacer -mt-32 pt-32">
+                    <div className="pin-me w-full h-full grid grid-cols-12 gap-16 relative">
+                        <div className={"col-span-8 "}>
                         </div>
                         <div className="col-span-4  normal-case overflow-hidden">
                             <div
@@ -560,8 +493,29 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                         </div>
                     </div>
                 </div>
+                <div className="absolute inset-0 px-8 grid grid-cols-12 gap-16">
+                    <div className="col-span-8">
+                        <div className="h-screen w-full pt-32">
+                            <p id={'this-allows'}>
+                                This allows us to understand the different points of view and
+                                the <mark>language</mark> used to
+                                express them
+                            </p>
+
+                        </div>
+                        <div className="h-screen w-full pt-32">
+                            <p id={'recurring-words'}>
+                                We can find recurring
+                                <HighlightedWord isActive={highlightWords}
+                                                 className={highlightWords && 'text-black'}>words</HighlightedWord> in
+                                these comments
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
             </HomeSlide>
-            <HomeSlide span={1} className={"pb-32"} id={"some-words-frequent"}>
+            <HomeSlide span={1} className={""} id={"some-words-frequent"}>
 
                 <div className={"col-span-6"}>
                     <h2 className={"mb-4"}>
@@ -572,15 +526,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                     </h2>
                 </div>
                 <div className="col-span-6 relative">
-                    <DeltaWord promask={55} bottom={78} left={45} rotate={9}>Health</DeltaWord>
-                    <DeltaWord promask={45} bottom={65} right={12} rotate={6}>Vaccine</DeltaWord>
-                    <DeltaWord promask={60} bottom={53} right={8} rotate={12}>Student</DeltaWord>
-                    <DeltaWord promask={55} bottom={40} right={20} rotate={2}>School</DeltaWord>
-                    <DeltaWord promask={51} bottom={25} right={10} rotate={11}>Science</DeltaWord>
-                    <DeltaWord promask={61} bottom={19} left={14} rotate={-39}>Family</DeltaWord>
-                    <DeltaWord promask={33} bottom={12} right={12} rotate={3}>Mandate</DeltaWord>
-                    <DeltaWord promask={54} bottom={0} rotate={-4}>Teacher</DeltaWord>
-                    <DeltaWord promask={32} bottom={0} right={0} rotate={4}>Children</DeltaWord>
+                    <Rettangoli className={"absolute bottom-0 left-0 right-0 h-full w-full delta-svg"}/>
                 </div>
             </HomeSlide>
             <HomeSlide>
