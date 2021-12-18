@@ -30,10 +30,6 @@ export default function Index({words, chosen, setChosen}) {
 
                     return <li
                         key={name}
-                        onMouseEnter={() => setChosen(
-                            c => ({current: c.current, next: name})
-                        )}
-                        onMouseLeave={() => setChosen(c => ({...c, next: undefined}))}
                         onClick={() => chosen.current !== name ? setChosen({current: name}) : setChosen({})}
                         className={classNames(
                             "border-y-[1px] cursor-pointer hover:border-t-light",

@@ -46,7 +46,7 @@ export default function Library({data: {words, allComments, ...data}}) {
                 'transition-[width] duration-1000 overflow-hidden flex flex-col',
                 chosen.current ? 'w-10/12' : 'w-0'
             )}>
-                <Accordion title={"Related words"} subtitle={<>usage of words when occurring with <span
+                <Accordion title={"Related words"} subtitle={<>usage of words mentioned with <span
                     className="uppercase">{chosen.current}</span></>}
                            isOpen={!showComments} onClick={() => setShowComments(!showComments)}>
                     <MaskometerGrid chosen={chosen} words={words} distribution={distribution}

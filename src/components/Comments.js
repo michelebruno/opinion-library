@@ -25,7 +25,7 @@ function GroupCommentList({comments, chosen, secondWord, origin}) {
 
     return <div>
         <p className="sticky top-0 bg-black z-30 text-center text-lg pt-3 pb-4">
-            {filteredComments.length}{secondWord && " of " + totalComments + ` (${(filteredComments.length/totalComments).toFixed(2)*100}%)`} {origin} opinions
+            {filteredComments.length}{secondWord && " of " + totalComments + ` (${(100 * filteredComments.length / totalComments).toFixed(0)}%)`} {origin} opinions
         </p>
 
         <div key={origin} className={"flex flex-col gap-4 pb-64 "}> {filteredComments
@@ -45,7 +45,7 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
     const scroller = useRef()
 
     useEffect(() => {
-        scroller.current?.scrollTo(0,0)
+        scroller.current?.scrollTo(0, 0)
     }, [chosen, secondWord])
 
 
