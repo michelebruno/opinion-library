@@ -8,15 +8,14 @@ import classNames from "classnames";
 import {graphql, Link} from "gatsby";
 import Image from "../components/Image";
 import Comment, {HighlightedWord} from "../components/Comment";
-import DeltaWord from "../components/DeltaWord";
 import Button from "../components/Button";
 import HomeSlide from "../components/HomeSlide";
 import SlotMaschine from "../components/SlotMaschine";
 import Navbar from "../components/Navbar";
 import {Helmet} from "react-helmet";
-import * as Matter from "matter-js";
-import "matter-dom-plugin";
 import {ReactComponent as Rettangoli} from '../images/retatngoli.svg'
+import useMatter from "../components/useMatter";
+
 
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(ScrollToPlugin)
@@ -98,15 +97,21 @@ const commentsData = {
 
 
 // markup
-const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, front}}) => {
+const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) => {
 
     const [highlightWords, setHighlightWords] = useState(false)
+    const landing = useRef()
     const changeDataSlide = useRef()
     const maskMandateSlide = useRef()
     const understandLanguage = useRef()
     const whyYouSigned = useRef()
 
+    useMatter(landing)
+
+
     useEffect(() => {
+
+
 
         gsap.timeline({
             scrollTrigger: {
@@ -206,7 +211,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
             {
                 scrollTrigger: {
                     trigger: understandLanguage.current,
-                    start:'top top',
+                    start: 'top top',
                     end: 'bottom bottom',
                     pin: understandLanguage.current.querySelector('.pin-me'),
                     pinSpacer: understandLanguage.current.querySelector('.pin-spacer'),
@@ -337,13 +342,9 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
         <Layout fixedHeader className={"text-[4.34vw] leading-tight"}>
             <Helmet bodyAttributes={{'class': 'no-scrollbar bg-black text-white'}}/>
             <div className="fixed right-0 top-0 bottom-0 origin-top bg-light w-2 z-40" id="progress-bar"></div>
-            <HomeSlide className={"bg-light text-black text-[6vw] grid-rows-6 z-50 select-none"}>
+            <HomeSlide className={"text-black text-[6vw] grid-rows-6 z-50 select-none relative z-1"} ref={landing}>
 
                 <Navbar absolute light allBlack/>
-                <Image image={front.nodes[2]} className={"absolute left-[8.3%] top-16 w-1/6"}/>
-                <Image image={front.nodes[0]} className={"absolute right-16 top-32 w-1/6"}/>
-                <Image image={front.nodes[3]} className={"absolute right-20 bottom-32 w-1/6"}/>
-                <Image image={front.nodes[1]} className={"absolute left-20 bottom-60 w-1/6"}/>
                 <div className="text-black text-center col-span-12 row-start-3 row-span-2 self-middle">
                     <h1 className={"text-9xl"}>Opinion Library</h1>
                     <h2 className={"text-[2.2rem] normal-case"}>What do change.org users think about mask mandates in
@@ -564,13 +565,6 @@ export const query = graphql`{
     comments: allCommentsJson(filter: {showInHome: {eq: true}}) {
         nodes {
             ...CommentJsonFragment
-        }
-    }
-    front: allFile(filter: {relativeDirectory: {eq: "landing"}}) {
-        nodes {
-            childImageSharp {
-                gatsbyImageData
-            }
         }
     }
 }`
