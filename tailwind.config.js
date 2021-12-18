@@ -13,7 +13,7 @@ module.exports = {
                 'gray': '#A2A2A2'
             },
             fontSize: {
-                base: ['0.9375rem', '1.0626rem'], // 15px
+                base: ['0.9375rem', 1.25], // 15px
                 lg: ['1.25rem', 1.15], // 20px
                 xl: ['1.5625rem', 1.15], // 25
                 '2xl': ['1.875rem' , 1.15], // 30px

@@ -426,7 +426,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                     {" "}
                     is the largest petition website, and in 2020 <span
                     className="inline-block">it only grew</span> larger,
-                    especially in the United States.
+                    especially in the United States
                 </h2>
                 <div id={'change-data-bubbles'}
                      className="text-black text-center normal-case absolute h-full w-full inset-0">
@@ -519,42 +519,45 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
                              petition={{title: "Petition title"}}
                              createdAt={"1 minute ago"}
                              large origin={'black'}>
-                        Those who signed these petitions explained their reasons in comments.
+                        Those who signed these petitions explained their reasons in comments
                     </Comment>
                 </div>
             </HomeSlide>
-            <HomeSlide span={1} className={"auto-rows-min"} id={"understand-language"} ref={understandLanguage}>
+            <HomeSlide span={2} className={"auto-rows-min"} id={"understand-language"} ref={understandLanguage}>
+                <div className="col-span-12 pin-spacer ">
+                    <div className="pin-me w-full grid grid-cols-12 gap-16 relative">
+                        <div className={"col-span-8 relative "}>
+                            <p id={'this-allows'}>
+                                This allows us to understand the different points of view and
+                                the <mark>language</mark> used to
+                                express them
+                            </p>
+                            <p id={'recurring-words'} className={'absolute'}>
+                                We can find recurring
+                                <HighlightedWord isActive={highlightWords}
+                                                 className={highlightWords && 'text-black'}>words</HighlightedWord> in
+                                these comments
+                            </p>
 
-                <div className={"col-span-8 relative "}>
-                    <p id={'this-allows'}>
-                        This allows us to understand the different points of view and
-                        the <mark>language</mark> used to
-                        express them.
-                    </p>
-                    <p id={'recurring-words'} className={''}>
-                        We can find recurring
-                        <HighlightedWord isActive={highlightWords}
-                                         className={highlightWords && 'text-black'}>words</HighlightedWord> in
-                        these comments.
-                    </p>
-
-                </div>
-                <div className="col-span-4  normal-case overflow-hidden">
-                    <div
-                        className="grid auto-rows-min gap-y-4 comment-container h-screen overflow-y-scroll no-scrollbar ">
-                        {
-                            Object.entries(commentsData).map(([id, word]) => {
+                        </div>
+                        <div className="col-span-4  normal-case overflow-hidden">
+                            <div
+                                className="grid auto-rows-min gap-y-4 comment-container h-screen overflow-y-scroll no-scrollbar ">
+                                {
+                                    Object.entries(commentsData).map(([id, word]) => {
 
 
-                                const comment = homeComments.find(({commentId}) => commentId == id)
+                                        const comment = homeComments.find(({commentId}) => commentId == id)
 
-                                return <Comment key={id}
-                                                highlightWords={highlightWords}
-                                                word={word}
-                                                {...comment}
-                                                origin={'black'}/>
-                            })
-                        }
+                                        return <Comment key={id}
+                                                        highlightWords={highlightWords}
+                                                        word={word}
+                                                        {...comment}
+                                                        origin={'black'}/>
+                                    })
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
             </HomeSlide>
@@ -583,7 +586,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}, fron
             <HomeSlide>
                 <div className="col-span-9" style={{letterSpacing: -1}}>This is an opinion library
                     collecting comments and showing relations among the most used words in pro mask and no mask
-                    comments.
+                    comments
                 </div>
                 <div className="absolute left-0 right-0 bottom-8 text-center">
                     <div className="mx-auto inline-block">

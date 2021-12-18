@@ -25,7 +25,11 @@ function GroupCommentList({comments, chosen, secondWord, origin}) {
 
     return <div>
         <p className="sticky top-[8.05rem] bg-black z-30 text-center text-lg pt-3 pb-4">
-            {filteredComments.length}{secondWord && " of " + totalComments + ` (${(100 * filteredComments.length / totalComments).toFixed(0)}%)`} {origin} opinions
+            {
+                secondWord ?
+                    `${(100 * filteredComments.length / totalComments).toFixed(0)}% ${origin} opinions (${filteredComments.length} of ${totalComments})` :
+                    `${totalComments} ${origin} opinions`
+            }
         </p>
 
         <div key={origin} className={"grid gap-4 pb-64 "}> {filteredComments
