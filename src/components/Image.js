@@ -12,7 +12,7 @@ const Image = forwardRef(function (props, ref) {
     if (!image) return null;
 
     const {
-        alt, className, pictureClassName, loading, preload, id,
+        alt, className, pictureClassName, loading, preload, id,onClick
     } = props;
 
     const {height, width, images} = image;
@@ -53,6 +53,7 @@ const Image = forwardRef(function (props, ref) {
                 width={width}
                 height={height}
                 loading={loading}
+                onClick={onClick}
             />
         </picture>
     );
