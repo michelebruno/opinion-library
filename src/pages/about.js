@@ -3,8 +3,8 @@ import Layout from "../components/Layout";
 import Button from "../components/Button";
 import {graphql} from "gatsby";
 import Image from "../components/Image";
-import petitionJson from '../images/petition.json'
-import commentJson from '../images/comments.json'
+import petitionJson from '../data/petition.json'
+import commentJson from '../data/sample-comments.json'
 import {useEffect, useRef} from "react";
 
 import gsap from 'gsap'

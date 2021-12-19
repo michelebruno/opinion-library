@@ -96,16 +96,16 @@ const commentsData = {
 }
 
 const links = {
-    'broken.png':'https://www.change.org/p/broken-arrow-city-council-broken-arrow-mask-mandate-rejection',
+    'broken.png': 'https://www.change.org/p/broken-arrow-city-council-broken-arrow-mask-mandate-rejection',
     'elkhorn.png': 'https://www.change.org/p/superintendent-of-elkhorn-public-school-elkhorn-public-school-ne-mask-mandate-for-under-12-years-old',
     'masks-optional.png': 'https://www.change.org/p/parents-masks-optional-for-hall-county-schools',
     'make-masks-mandatory.png': 'https://www.change.org/p/allen-isd-school-board-make-masks-mandatory-in-allen-isd-schools',
-    'unmask.png' : 'https://www.change.org/p/roy-cooper-unmask-our-children-at-school',
+    'unmask.png': 'https://www.change.org/p/roy-cooper-unmask-our-children-at-school',
     'mask-choice.png': 'https://www.change.org/p/center-grove-school-board-mask-choice-center-grove-2021-22',
-    'make-face-mask.png':'https://www.change.org/p/duluth-mayor-emily-larson-make-masks-mandatory-in-public-in-duluth-mn-during-the-covid-19-pandemic',
-    'keep-texas.png':'https://www.change.org/p/texas-a-m-university-office-of-the-provost-keep-texas-a-m-s-current-face-covering-policy-in-place-after-march-10',
-    'demand.png':'https://www.change.org/p/parents-of-leander-isd-demand-an-emergency-mask-mandate-meeting-from-leander-independent-school-district-board',
-    'kenston.png':'https://www.change.org/p/the-kenston-local-school-board-kenston-local-schools-petition-to-make-masks-optional',
+    'make-face-mask.png': 'https://www.change.org/p/duluth-mayor-emily-larson-make-masks-mandatory-in-public-in-duluth-mn-during-the-covid-19-pandemic',
+    'keep-texas.png': 'https://www.change.org/p/texas-a-m-university-office-of-the-provost-keep-texas-a-m-s-current-face-covering-policy-in-place-after-march-10',
+    'demand.png': 'https://www.change.org/p/parents-of-leander-isd-demand-an-emergency-mask-mandate-meeting-from-leander-independent-school-district-board',
+    'kenston.png': 'https://www.change.org/p/the-kenston-local-school-board-kenston-local-schools-petition-to-make-masks-optional',
 }
 
 
@@ -124,12 +124,11 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
     function openPetitionLink(index) {
         let fn = allFile.nodes[index].relativePath.slice(5)
 
-        return () => window.open(links[fn],'_blank')
+        return () => window.open(links[fn], '_blank')
 
     }
 
     useEffect(() => {
-
 
 
         gsap.timeline({
@@ -140,13 +139,6 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
             },
             toggleActions: "play pause reverse reset",
         })
-            .from(
-                changeDataSlide.current.querySelector('h2'), {
-                    opacity: 0,
-                    duration: .7
-                }
-            )
-            // .to({}, {duration: .3})
             .from('#change-data-bubbles > div', {
                 y: 1200,
                 stagger: .3,
@@ -214,6 +206,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
         gsap.timeline({
             scrollTrigger: {
                 trigger: '#some-words-frequent',
+                toggleActions: "play pause pause reverse",
             }
         })
             .from('#some-words-frequent svg > g', {
@@ -242,18 +235,23 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
 
         gsap.to('#recurring-words', {
             scrollTrigger: {
-                trigger: '#recurring-words'
+                trigger: '#recurring-words',
+                onLeaveBack() {
+                    setHighlightWords(false)
+                },
+                onEnterBack() {
+                    setHighlightWords(true)
+                },
+                onEnter() {
+                    setHighlightWords(true)
+                }
             },
-            onComplete() {
-                setTimeout(() => setHighlightWords(true), 1000)
-            }
         })
 
         gsap.timeline(
             {
                 scrollTrigger: {
                     trigger: understandLanguage.current,
-                    start: 'top top',
                     end: 'bottom bottom',
                     // toggleActions: "play pause reverse reset",
                 },
@@ -458,16 +456,25 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
                 </div>
                 <div className={"absolute h-screen w-full bottom-0 left-0 right-0 p-8"}>
                     <div className="relative h-full w-full z-40 home-petition-images ">
-                        <Image image={allFile.nodes[7]} className={"w-1/3 absolute -top-16 right-8"} onClick={openPetitionLink(7)}/>
-                        <Image image={allFile.nodes[0]} className={"w-1/3 absolute top-0 left-0"} onClick={openPetitionLink(0)}/>
-                        <Image image={allFile.nodes[8]} className={"w-1/3 absolute top-[16%] left-[41%]"} onClick={openPetitionLink(8)}/>
-                        <Image image={allFile.nodes[2]} className={"w-1/3 absolute top-1/3 mt-8 -right-16"} onClick={openPetitionLink(2)}/>
+                        <Image image={allFile.nodes[7]} className={"w-1/3 absolute -top-16 right-8"}
+                               onClick={openPetitionLink(7)}/>
+                        <Image image={allFile.nodes[0]} className={"w-1/3 absolute top-0 left-0"}
+                               onClick={openPetitionLink(0)}/>
+                        <Image image={allFile.nodes[8]} className={"w-1/3 absolute top-[16%] left-[41%]"}
+                               onClick={openPetitionLink(8)}/>
+                        <Image image={allFile.nodes[2]} className={"w-1/3 absolute top-1/3 mt-8 -right-16"}
+                               onClick={openPetitionLink(2)}/>
                         <Image image={allFile.nodes[1]}
-                               className={"w-1/3 absolute top-1/2 -translate-y-1/2 left-[8.3%]"} onClick={openPetitionLink(1)}/>
-                        <Image image={allFile.nodes[3]} className={"w-1/3 absolute bottom-[16%] right-[16%]"} onClick={openPetitionLink(3)}/>
-                        <Image image={allFile.nodes[4]} className={"w-1/3 absolute bottom-4 left-[16%]"} onClick={openPetitionLink(4)}/>
-                        <Image image={allFile.nodes[5]} className={"w-1/3 absolute top-[90%] -left-1/4 "} onClick={openPetitionLink(5)}/>
-                        <Image image={allFile.nodes[6]} className={"w-1/3 absolute top-[90%] right-0"} onClick={openPetitionLink(6)}/>
+                               className={"w-1/3 absolute top-1/2 -translate-y-1/2 left-[8.3%]"}
+                               onClick={openPetitionLink(1)}/>
+                        <Image image={allFile.nodes[3]} className={"w-1/3 absolute bottom-[16%] right-[16%]"}
+                               onClick={openPetitionLink(3)}/>
+                        <Image image={allFile.nodes[4]} className={"w-1/3 absolute bottom-4 left-[16%]"}
+                               onClick={openPetitionLink(4)}/>
+                        <Image image={allFile.nodes[5]} className={"w-1/3 absolute top-[90%] -left-1/4 "}
+                               onClick={openPetitionLink(5)}/>
+                        <Image image={allFile.nodes[6]} className={"w-1/3 absolute top-[90%] right-0"}
+                               onClick={openPetitionLink(6)}/>
 
                     </div>
                 </div>
@@ -550,9 +557,9 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
                 </div>
             </HomeSlide>
             <HomeSlide>
-                <div className="col-span-9" style={{letterSpacing: -1}}>This is an opinion library
-                    collecting comments and showing relations among the most used words in pro mask and no mask
-                    comments
+                <div className="col-span-9" style={{letterSpacing: -1}}>
+                    The opinion library is a tool that collects comments and shows relations among the most used words
+                    in pro mask and no mask comments
                 </div>
                 <div className="absolute left-0 right-0 bottom-8 text-center">
                     <div className="mx-auto inline-block">
