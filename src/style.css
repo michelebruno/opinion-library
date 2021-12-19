@@ -79,7 +79,7 @@
     }
 
     article {
-        @apply text-3xl;
+        @apply text-2xl;
     }
 
     article > p, article > div {
@@ -90,8 +90,11 @@
         @apply text-white bg-black mt-8 inline-block uppercase;
     }
 
+    footer {
+        @apply bg-black text-white;
+    }
     footer h3 {
-        @apply bg-black text-white inline-block uppercase;
+        @apply bg-white text-black inline-block uppercase;
     }
 
     footer [href] {

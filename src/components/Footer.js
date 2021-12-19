@@ -37,8 +37,8 @@ export default function Footer() {
         </div>
 
         <div id="contacts">
-            <div className="logo">
-                <img src="/assets/Logo_DensityDesign.svg" alt="DensityDesign Lab"/>
+            <div className="flex mb-4">
+                <img src="/assets/Logo_DensityDesign.svg" alt="DensityDesign Lab" className={"mr-8"}/>
                 <img src="/assets/Logo_Polimi.svg" alt="Politecnico di Milano"/>
             </div>
             <p><a href="https://densitydesign.github.io/teaching-dd17/" target="_blank">Mediazioni Algoritmiche.

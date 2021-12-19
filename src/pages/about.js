@@ -27,7 +27,8 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
 
     return <Layout wrapperClassName={"bg-white text-black"} container footer light>
         <h2 className={"text-[4.34vw] leading-[1.15] uppercase"}>
-            Opinion library is a website built to explore the language and arguments used in comments to petitions regarding the mask mandate in the United States.
+            Opinion library is a website built to explore the language and arguments used in comments to petitions
+            regarding the mask mandate in the United States.
         </h2>
 
         <div className="mt-32 grid grid-cols-3 gap-x-8">
@@ -36,11 +37,15 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
 
 
                 <p>
-                    This research petitions published on <a href="https://www.change.org/">change.org</a> during the
-                    pandemic. Starting from an analysis of
-                    the main petition themes across different countries, the focus of the research narrowed down to the
-                    images and language used on the platform.
-                    <br/>
+                    The research presented in this website was carried out during the Final Synthesis Studio of the
+                    Master Degree in Communication Design offered by Politecnico di Milano.
+                </p>
+                <p>
+                    The research examined petitions published on change.org during the pandemic. Starting from an
+                    analysis of the main petition themes across different countries, the focus of the research narrowed
+                    down to the images and language used on the platform.
+                </p>
+                <p>
                     The aim of this website is to make the dataset used in this research available to researchers and
                     potential activists interested in the subject. To do this, we set ourselves the objective of
                     realising a tool to explore the language and arguments used in comments to petitions regarding the
@@ -61,8 +66,10 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
                     Finding this interesting, we decided to collect all the petitions that used these tags.
                 </p>
                 <p>
+
                     The first step was compiling a list of all the tags related to mask mandates and group them
-                    according to their position: in favour
+                    according to
+                    their position: in favour
                     or against.
                 </p>
                 <div>
@@ -75,10 +82,11 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
                     asked for — this includes the title, body, image, signature count, etc.
                 </p>
                 <div
-                    className="h-96 text-base w-full overflow-scroll no-scrollbar border-2 border-black rounded-3xl w-7/12 mx-auto">
-                    <h3 className="bg-black text-white px-8 rounded-t-3xl py-4 sticky top-0 left-0 select-none">
-                        <code>petition.json</code></h3>
-                    <pre className={"px-8 py-4"}>
+                    className="text-base w-full overflow-hidden no-scrollbar border-2 border-black rounded-3xl w-7/12 mx-auto">
+                    <h3 className="bg-black text-white px-8 py-4 sticky top-0 left-0 select-none">
+                        <code>petition.json</code>
+                    </h3>
+                    <pre className={"px-8 py-4 h-96  overflow-scroll"}>
                             {JSON.stringify(petitionJson.items[0].petition, null, 2)}
                         </pre>
                 </div>
@@ -88,11 +96,11 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
                     back with a *.json file containing all the comments for each petition.
                 </p>
                 <div
-                    className="h-96 text-base w-full overflow-scroll no-scrollbar border-2 border-black rounded-3xl w-7/12 mx-auto">
-                    <h3 className="bg-black text-white px-8 py-4 sticky rounded-t-3xl top-0 left-0 select-none">
+                    className="text-base w-full overflow-hidden no-scrollbar border-2 border-black rounded-3xl w-7/12 mx-auto">
+                    <h3 className="bg-black text-white px-8 py-4 sticky top-0 left-0 select-none">
                         <code>comments.json</code>
                     </h3>
-                    <pre className={"px-8 py-4"}>
+                    <pre className={"px-8 py-4 h-96  overflow-scroll"}>
                             {JSON.stringify(commentJson.items, null, 2)}
                         </pre>
                 </div>
@@ -107,7 +115,8 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
                            className={"mx-auto w-7/12"}/>
                 </div>
 
-                <p>At this point, we counted how many times each word appeared and converted the absolute number to
+                <p>
+                    At this point, we counted how many times each word appeared and converted the absolute number to
                     percentage values for both groups.
                 </p>
                 <div>
@@ -122,16 +131,19 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
                 </p>
 
                 <h2 id={"interactions"}>Interactions</h2>
-                <p>The archive presents two kinds of information: how often a word is used by a certain group and which
+                <p>
+                    The archive presents two kinds of information: how often a word is used by a certain group and which
                     are the comments mentioning that word. Presenting both information to the same panel would result in
                     an overcrowded interface, confusing the user.
                 </p>
                 <p>
-                    For this reason we decided to present the information in two different screens: maskometer and
-                    comments. Such a division also allowed us to give sequentiality to the navigation, forcing the user
-                    to see how a word is used before reading the comments. This offers prelimary information to the user
-                    while they’re deciding which comments to read while allso allowing them to understand the context of
-                    the comments they’re reading.
+                    For this reason we decided to present the information in two different screens: related words and
+                    opinions. Such a division also allowed us to give sequentiality to the navigation, forcing the user
+                    to see how a word is used before reading the comments.
+                    This offers preliminary information to the user while they’re deciding which comments to read while
+                    also allowing them to understand the context of the comments they’re reading of one and the other
+                    side.
+
                 </p>
                 <h2 id={"team"}>The team</h2>
                 <p>This project was created by:</p>
@@ -139,11 +151,6 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
                 <div className="grid grid-cols-4 gap-4">
                     {team.map(t => <Image image={t} key={t.publicURL}/>)}
                 </div>
-                <p className="text-lg">
-                    If you want to follow our real profiles, click on the images!
-                    <br/>
-                    And rememeber, wear masks!
-                </p>
 
             </article>
 

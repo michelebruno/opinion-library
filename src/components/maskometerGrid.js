@@ -37,52 +37,55 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
                 </div>
 
                 {(typeof chosen !== 'undefined' && chosen.current) &&
-                    words.nodes.map(({name, deltaNomask}) => {
+                words.nodes.map(({name, deltaNomask}) => {
 
-                        let isCurrent = chosen.next ? chosen.next === name : chosen.current === name
+                    let isCurrent = chosen.next ? chosen.next === name : chosen.current === name
 
-                        isCurrent && console.log(name, deltaNomask)
+                    isCurrent && console.log(name, deltaNomask)
 
-                        let delta =
-                            isCurrent ?
-                                deltaNomask :
-                                distribution
-                                    .find(({
-                                               word,
-                                               secondWord
-                                           }) => {
+                    let delta =
+                        isCurrent ?
+                            deltaNomask :
+                            distribution
+                                .find(({
+                                           word,
+                                           secondWord
+                                       }) => {
 
-                                        if (chosen.next) {
-                                            return chosen.next === word && secondWord === name
-                                        }
-                                        return (chosen.current && word === chosen.current) && secondWord === name
-                                    })['nomaskDelta']
+                                    if (chosen.next) {
+                                        return chosen.next === word && secondWord === name
+                                    }
+                                    return (chosen.current && word === chosen.current) && secondWord === name
+                                })['nomaskDelta']
 
-                        delta = Math.round(delta * 100)
+                    delta = Math.round(delta * 100)
 
-                        return <div key={name}
-                                    className={
-                                        classNames(
-                                            "w-full flex items-center relative",
-                                            "before:absolute before:left-0 before:right-0 ",
-                                            "before:border-b-[1px] before:block before:top-1/2 before:transition-all",
-                                            "before:w-full transition-[margin,background-color] duration-500",
-                                            isCurrent ? 'before:border-b-gray  opacity-30' : 'before:border-b-current  before:opacity-20'
-                                        )
-                                    }>
-                            <ArchiveButton
-                                isCurrent={isCurrent}
-                                style={{
-                                    marginLeft: delta + "%",
-                                    '--gradient-mix': isCurrent ? undefined : mix('EA3C9A', '3514FF', delta)
-                                }}
-                                className={"transition-[margin] duration-1000 rounded-[0px] -translate-x-1/2 absolute z-20"}
-                                onClick={() => onClickSecondWord(name)}
-                            >
-                                {name}
-                            </ArchiveButton>
-                        </div>
-                    })
+                    delta = 3 + ((97- 3) / (100)) * (delta)
+
+
+                    return <div key={name}
+                                className={
+                                    classNames(
+                                        "w-full flex items-center relative",
+                                        "before:absolute before:left-0 before:right-0 ",
+                                        "before:border-b-[1px] before:block before:top-1/2 before:transition-all",
+                                        "before:w-full transition-[margin,background-color] duration-500",
+                                        isCurrent ? 'before:border-b-gray  opacity-30' : 'before:border-b-current  before:opacity-20'
+                                    )
+                                }>
+                        <ArchiveButton
+                            isCurrent={isCurrent}
+                            style={{
+                                marginLeft: delta + "%",
+                                '--gradient-mix': isCurrent ? undefined : mix('EA3C9A', '3514FF', delta)
+                            }}
+                            className={"transition-[margin] duration-1000 rounded-[0px] -translate-x-1/2 absolute z-20"}
+                            onClick={() => onClickSecondWord(name)}
+                        >
+                            {name}
+                        </ArchiveButton>
+                    </div>
+                })
                 }
             </div>
 

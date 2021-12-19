@@ -48,11 +48,21 @@ export default function useMatter(containerRef) {
         const friction = 0.0001;
         const angularVelocity = 0.3;
         const maskSize = 100;
-        const spriteScale = 1.3; // il bounding box è definito da maskSize
+        let spriteScale = 1.3; // il bounding box è definito da maskSize
+
+
+        //This is needed to fix mask scale in safari
+        let sBrowser, sUsrAg = navigator.userAgent;
+
+        if  (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+            console.log("You're on safari", sUsrAg)
+            sBrowser = "Apple Safari";
+            spriteScale = 0.5
+        }
 
         const masks = []
 
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 6; i++) {
 
             let imgIndex = i % 4
 

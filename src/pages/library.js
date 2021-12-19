@@ -81,7 +81,7 @@ export const query = graphql`query Glossary {
             finding
         }
     }
-    distribution: allSheetsDistribuzione(sort: {order: ASC, fields: [secondWord]}) {
+    distribution: allSheetsCopiaDiDistribuzione(sort: {order: ASC, fields: [secondWord]}) {
         nodes {
             word
             secondWord
