@@ -4,11 +4,13 @@ import {Helmet} from "react-helmet";
 import classNames from "classnames";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import Seo from "./Seo";
 
 
-export default function Layout({children, className, container, wrapperClassName, fixedHeader, footer, light, tutorial}) {
+export default function Layout({children, className, container, wrapperClassName, fixedHeader, footer, light, tutorial, title}) {
 
     return <div className={classNames("antialiased",wrapperClassName)}>
+        <Seo title={title} />
         <Helmet bodyAttributes={{'class': 'bg-black text-white'}}/>
         <Navbar fixed={fixedHeader} light={light} tutorial={tutorial}/>
         <div className={classNames('relative ', container && 'mx-8', className)}>

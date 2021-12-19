@@ -1,10 +1,15 @@
 require('dotenv').config()
 const googleCredentials = require('./credentials.json');
 
+const siteUrl = 'https://dd-phase03.mbruno.it/'
+const description = "An opinion library"
 module.exports = {
     siteMetadata: {
-        siteUrl: "https://www.yourdomain.tld",
-        title: "Phase 03",
+        title: 'Opinion Library',
+        titleTemplate: '%s • Opinion Library',
+        description,
+        siteUrl, // No trailing slash allowed!
+        image: '/ident-bumper.jpg', // Path to your image you placed in the 'static' folder
     },
     plugins: [
         "gatsby-plugin-svgr",
@@ -15,7 +20,7 @@ module.exports = {
         {
             resolve: "gatsby-plugin-manifest",
             options: {
-                icon: "src/images/icon.png",
+                icon: "src/images/favicon.png",
             },
         },
         "gatsby-plugin-mdx",

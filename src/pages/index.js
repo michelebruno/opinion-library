@@ -226,7 +226,8 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
                     start: 'top top',
                     end: 'bottom bottom',
                     pin: understandLanguage.current.querySelector('.pin-me'),
-                    pinSpacer: understandLanguage.current.querySelector('.pin-spacer'),
+                    anticipatePin:1
+                    // pinSpacer: understandLanguage.current.querySelector('.pin-spacer'),
                     // toggleActions: "play pause reverse reset",
                 },
             }
@@ -469,11 +470,11 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
                                onClick={openPetitionLink(1)}/>
                         <Image image={allFile.nodes[3]} className={"w-1/3 absolute bottom-[16%] right-[16%]"}
                                onClick={openPetitionLink(3)}/>
-                        <Image image={allFile.nodes[4]} className={"w-1/3 absolute bottom-4 left-[16%]"}
+                        <Image image={allFile.nodes[4]} className={"w-1/3 absolute bottom-32 left-[16%]"}
                                onClick={openPetitionLink(4)}/>
-                        <Image image={allFile.nodes[5]} className={"w-1/3 absolute top-[90%] -left-1/4 "}
+                        <Image image={allFile.nodes[5]} className={"w-1/3 absolute top-[83%] -left-[10%] "}
                                onClick={openPetitionLink(5)}/>
-                        <Image image={allFile.nodes[6]} className={"w-1/3 absolute top-[90%] right-0"}
+                        <Image image={allFile.nodes[6]} className={"w-1/3 absolute top-[85%] right-0"}
                                onClick={openPetitionLink(6)}/>
 
                     </div>
@@ -496,11 +497,11 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
                 </div>
             </HomeSlide>
             <HomeSlide span={2} className={"auto-rows-min"} id={"understand-language"} ref={understandLanguage}>
-                <div className="col-span-12 pin-spacer -mt-32 pt-32">
-                    <div className="pin-me w-full h-full grid grid-cols-12 gap-16 relative">
+                <div className="col-span-12 -mt-32 pt-32">
+                    <div className=" w-full h-full grid grid-cols-12 gap-16 relative">
                         <div className={"col-span-8 "}>
                         </div>
-                        <div className="col-span-4  normal-case overflow-hidden">
+                        <div className="col-span-4  normal-case overflow-hidden pin-me">
                             <div
                                 className="grid auto-rows-min gap-y-4 comment-container h-screen overflow-y-scroll no-scrollbar ">
                                 {
