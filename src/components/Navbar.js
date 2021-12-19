@@ -43,42 +43,36 @@ const tutorialSlides = [
 function Tutoria({tutorial, onChangeTutorial}) {
 
 
-
     return <div className={"fixed inset-0 z-50"}>
         <div className="w-full h-full relative">
             <div className="bg-gray absolute inset-0 opacity-70"></div>
             <div className="absolute inset-0 flex items-center justify-center">
                 <div
-                    className="mx-16 bg-[#ECECEC] w-full md:w-8/12 2xl:w-6/12 rounded-3xl text-black">
-                    <div className="text-right">
+                    className="mx-16 bg-[#ECECEC] w-full md:w-8/12 2xl:w-6/12 rounded-3xl text-black relative">
+                    <div className="absolute top-0 right-0">
                         <button className="px-8 py-6 cursor-pointer inline-block "
                                 onClick={() => onChangeTutorial(false)}>
 
                             <svg width="1rem" height="1rem" viewBox="0 0 14 14" fill="none"
                                  xmlns="http://www.w3.org/2000/svg"
-                                 className={" inline-block"}>
-                                <path d="M1 0.999999L13 13" stroke="black" strokeWidth="1"/>
-                                <path d="M13 1L0.999999 13" stroke="black" strokeWidth="1"/>
+                                 className={"stroke-black inline-block"}>
+                                <path d="M1 0.999999L13 13" strokeWidth="2"/>
+                                <path d="M13 1L0.999999 13" strokeWidth="2"/>
                             </svg>
                         </button>
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex items-center h-full ">
                         <div className="">
-
                             <button
-                                className={"rotate-90 cursor-pointer pl-8 py-6"}
+                                className={"cursor-pointer pl-8 pr-4 py-6  text-xl " + (tutorial === 0 && 'invisible')}
                                 onClick={() => onChangeTutorial(i => i <= 0 ? false : i - 1)}>
-
-                                <svg viewBox="0 0 63 26" width={"1.5rem"} fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M61.5 2L32 23.5L1 2" stroke="black" strokeWidth="3"/>
-                                </svg>
+                                {"<-"}
                             </button>
                         </div>
-                        <div className={"overflow-hidden "}>
+                        <div className={"overflow-hidden pt-20 pb-16"}>
                             <div className="w-full flex flex-nowrap transition-all duration-500"
-                                 style={{transform: "translateX(" + tutorial  * -100 + "%)"}}>
-                                {tutorialSlides.map(t => <div className={"w-full flex-shrink-0 px-8 box-border"}
+                                 style={{transform: "translateX(" + tutorial * -100 + "%)"}}>
+                                {tutorialSlides.map(t => <div className={"w-full flex-shrink-0 px-4 box-border"}
                                                               key={t.video}>
                                     <video src={t.video}
                                            className={"aspect-[16/10]"}
@@ -86,20 +80,16 @@ function Tutoria({tutorial, onChangeTutorial}) {
                                            playsInline
                                            autoPlay
                                            loop></video>
-                                    <p className="pt-6 pb-12 text-lg">
+                                    <p className="pt-6 text-lg">
                                         {t.text}
                                     </p></div>)}
                             </div>
                         </div>
-                        <div className="pr-8">
+                        <div className="">
                             <button
-                                className={"-rotate-90 cursor-pointer"}
+                                className={"cursor-pointer pl-8 pr-4 py-6 rotate-180 block text-xl " + (tutorial === 4 && 'invisible')}
                                 onClick={() => onChangeTutorial(i => i >= (tutorialSlides.length - 1) ? false : i + 1)}>
-
-                                <svg viewBox="0 0 63 26" width={"1.5rem"} fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M61.5 2L32 23.5L1 2" stroke="black" strokeWidth="3"/>
-                                </svg>
+                                {"<-"}
                             </button>
                         </div>
                     </div>
@@ -162,6 +152,6 @@ export default function Navbar({fixed, light, absolute, className, allBlack, tut
                 }
             </ul>
         </nav>
-        {typeof showTutorial === "number" && <Tutoria tutorial={showTutorial} onChangeTutorial={setTutorial} /> }
+        {typeof showTutorial === "number" && <Tutoria tutorial={showTutorial} onChangeTutorial={setTutorial}/>}
     </>
 }
