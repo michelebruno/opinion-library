@@ -40,8 +40,9 @@ export default function Library({data: {words, allComments, ...data}}) {
 
     return <Layout wrapperClassName={"max-h-screen h-screen flex flex-col"}
                    navClassName={"!text-black"}
-                   className={"flex-1 min-h-0 "}>
-        <div className="w-full h-full overflow-hidden flex flex-nowrap  border-y-white border-t-2 ">
+                   className={"flex-1 min-h-0 "}
+                   tutorial>
+        <div className="w-full h-full overflow-hidden flex flex-nowrap border-y-white border-t-2 ">
             <WordsIndex words={words.nodes} chosen={chosen} setChosen={setChosen}/>
             <div className={classNames(
                 ' overflow-hidden flex flex-col',
