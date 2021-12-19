@@ -35,7 +35,7 @@ function GroupCommentList({comments, chosen, secondWord, origin}) {
             {
                 secondWord ?
                     `${perc.toFixed(round)}% of ${origin} opinions (${filteredComments.length} of ${totalComments})` :
-                    `Showing all ${origin} opinions`
+                    `All ${origin} opinions (${filteredComments.length})`
             }
         </p>
 

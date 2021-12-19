@@ -4,6 +4,7 @@ import Layout from "../components/Layout";
 import gsap from 'gsap'
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {ScrollToPlugin} from "gsap/ScrollToPlugin"
+import {TextPlugin} from "gsap/TextPlugin"
 import classNames from "classnames";
 import {graphql, Link} from "gatsby";
 import Image from "../components/Image";
@@ -17,8 +18,7 @@ import {ReactComponent as Rettangoli} from '../images/retatngoli.svg'
 import useMatter from "../components/useMatter";
 
 
-gsap.registerPlugin(ScrollTrigger)
-gsap.registerPlugin(ScrollToPlugin)
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, TextPlugin)
 
 gsap.defaults({
     duration: .8,
@@ -92,7 +92,8 @@ const commentsData = {
     814486694: 'vaccine',
     822518213: 'health',
     817756846: 'vaccine',
-    821382262: 'family'
+    821382262: 'family',
+    814480242: 'vaccine'
 }
 
 const links = {
@@ -193,13 +194,28 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
             }
         })
 
+
+
+
         // WHY YOU SIGNED
-        gsap.from('#fake-comment', {
+        gsap.from('#fake-comment ', {
             scrollTrigger: {
                 trigger: '#fake-comment'
             },
             yPercent: 20,
             opacity: 0,
+        })
+
+        // WHY YOU SIGNED
+        gsap.to('#fake-comment .comment-text', {
+            text: {
+                value: 'Those who signed these petitions explained their reasons in comments.'
+            },
+            scrollTrigger: {
+                trigger: '#fake-comment',
+            },
+            duration: 2,
+            delay: .8
         })
 
 
@@ -213,21 +229,15 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
                 y: -1200,
                 stagger: .2
             })
-            .from('#view-library-button', {
-                yPercent: 100,
-                opacity: 0
-            })
 
         // THIS LETS US UNDERSTAND
         gsap.timeline(
             {
                 scrollTrigger: {
                     trigger: understandLanguage.current,
-                    start: 'top top',
                     end: 'bottom bottom',
                     pin: understandLanguage.current.querySelector('.pin-me'),
-                    anticipatePin:1
-                    // pinSpacer: understandLanguage.current.querySelector('.pin-spacer'),
+                    pinSpacer: understandLanguage.current.querySelector('.pin-spacer'),
                     // toggleActions: "play pause reverse reset",
                 },
             }
@@ -482,7 +492,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
             </HomeSlide>
             <HomeSlide className={"auto-rows-min content-center pb-32 "} id={"why-you-signed"}
                        ref={whyYouSigned}>
-                <div className="col-span-9">
+                <div className="col-span-9 min-h-[30rem]">
                     <p className="pb-8 ">
                         <mark>Why</mark>
                         {" "}
@@ -491,9 +501,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
                     <Comment id={'fake-comment'} user="30200130" created_at={"1 minute ago"}
                              petition={{title: "Petition title"}}
                              createdAt={"1 minute ago"}
-                             large origin={'black'}>
-                        Those who signed these petitions explained their reasons in comments
-                    </Comment>
+                             large origin={'black'} />
                 </div>
             </HomeSlide>
             <HomeSlide span={2} className={"auto-rows-min"} id={"understand-language"} ref={understandLanguage}>
@@ -501,9 +509,9 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
                     <div className=" w-full h-full grid grid-cols-12 gap-16 relative">
                         <div className={"col-span-8 "}>
                         </div>
-                        <div className="col-span-4  normal-case overflow-hidden pin-me">
+                        <div className="col-span-4  normal-case overflow-hidden pin-spacer">
                             <div
-                                className="grid auto-rows-min gap-y-4 comment-container h-screen overflow-y-scroll no-scrollbar ">
+                                className="pin-me grid auto-rows-min gap-y-4 comment-container h-screen overflow-y-scroll no-scrollbar ">
                                 {
                                     Object.entries(commentsData).map(([id, word]) => {
 
@@ -559,11 +567,11 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
             </HomeSlide>
             <HomeSlide>
                 <div className="col-span-9" style={{letterSpacing: -1}}>
-                    The opinion library is a tool that collects comments and shows relations among the most used words
-                    in pro mask and no mask comments
+                    The opinion library is a tool that collects comments and shows relations among the <mark>most used words</mark>
+                    {' '}in pro mask and no mask comments
                 </div>
-                <div className="absolute left-0 right-0 bottom-8 text-center">
-                    <div className="mx-auto inline-block">
+                <div className="absolute left-8 right-8 bottom-16">
+                    <div className=" inline-block">
                         <Button id="view-library-button" as={Link} to={"/library/"} large>View the library</Button>
                     </div>
                 </div>
