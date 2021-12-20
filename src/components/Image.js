@@ -12,7 +12,7 @@ const Image = forwardRef(function (props, ref) {
     if (!image) return null;
 
     const {
-        alt, className, pictureClassName, loading, preload, id,onClick
+        alt, className, pictureClassName, loading, preload, id,onClick, style
     } = props;
 
     const {height, width, images} = image;
@@ -48,6 +48,7 @@ const Image = forwardRef(function (props, ref) {
                 ref={ref}
                 alt={alt}
                 className={className}
+                style={style}
                 src={getSrc(image)}
                 srcSet={getSrcSet(image)}
                 width={width}

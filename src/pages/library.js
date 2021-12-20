@@ -18,7 +18,7 @@ export default function Library({data: {words, allComments, ...data}}) {
             .filter(({sentences}) => {
                 return sentencesHaveWord(sentences, chosen.current)
             }),
-        [chosen.current])
+        [chosen])
 
     useEffect(() => {
         !showComments && secondWord && setShowComments(true)

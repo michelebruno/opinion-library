@@ -5,7 +5,7 @@ import {graphql} from "gatsby";
 import Image from "../components/Image";
 import petitionJson from '../data/petition.json'
 import commentJson from '../data/sample-comments.json'
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 
 import gsap from 'gsap'
 import {ScrollTrigger} from "gsap/ScrollTrigger";
@@ -14,13 +14,15 @@ gsap.registerPlugin(ScrollTrigger)
 
 function HoverImage({children, component: Component, image, imageUrl, ...props}) {
 
-    let imgClassName = "hidden group-hover:block absolute top-2 right-2 translate-x-100"
+    let imgClassName = "  absolute top-2 right-6 translate-x-full z-[-1] opacity-0 group-hover:opacity-50 transition-all"
+
+
     return <span className="relative group">
-        <Component {...props}>
+        <span className={"underline"} {...props}>
             {children}
-        </Component>
-        {image && <Image image={image} className={imgClassName}/>}
-        {imageUrl && <img src={imageUrl} className={imgClassName}/>}
+        </span>
+        {image && <Image image={image} className={imgClassName} style={{minWidth: '20vw'}}/>}
+        {imageUrl && <img src={imageUrl} className={imgClassName} style={{minWidth: '20vw'}}/>}
 
     </span>
 }
@@ -29,8 +31,10 @@ HoverImage.defaultProps = {
     components: 'span'
 }
 
-export default function About({data: {images: {nodes: images}, team: {nodes: team}}}) {
+export default function About({data: {images: {nodes: images}, meme, team: {nodes: team}}}) {
     const nav = useRef()
+
+    const [active, setActive] = useState()
 
     useEffect(() => {
         ScrollTrigger.create({
@@ -40,9 +44,23 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
             pin: true
         })
 
+        const headings = gsap.utils.toArray('h2')
+
+        headings.forEach(t => {
+            ScrollTrigger.create({
+                trigger: t,
+                start: 'top 30%',
+                onEnter: () => {
+                    console.log("Entered", t)
+                    setActive(t.id)
+                },
+                onLeaveBack: () => setActive(t.id)
+            })
+        })
     }, [])
 
-    return <Layout wrapperClassName={"bg-white text-black"} container footer light>
+
+    return <Layout wrapperClassName={"bg-white text-black about-page scroll-p-32"} container footer light>
         <h2 className={"text-[4.34vw] leading-[1.15] uppercase"}>
             Opinion library is a website built to explore the language and arguments used in comments to petitions
             regarding the mask mandate in the United States.
@@ -50,7 +68,7 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
 
         <div className="mt-32 grid grid-cols-3 gap-x-8">
 
-            <article className={"col-span-2 relative"}>
+            <article className={"col-span-2 relative z-10"}>
                 <p>
                     The research presented in this website was carried out during the Final Synthesis Studio of the
                     Master Degree in Communication Design offered by Politecnico di Milano.
@@ -106,7 +124,7 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
                     <h3 className="bg-black text-white px-8 py-4 sticky top-0 left-0 select-none">
                         <code>petition.json</code>
                     </h3>
-                    <pre className={"px-8 py-4 h-96  overflow-scroll"}>
+                    <pre className={"px-8 py-4 h-96 bg-white overflow-scroll"}>
                             {JSON.stringify(petitionJson.items[0].petition, null, 2)}
                         </pre>
                 </div>
@@ -120,7 +138,7 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
                     <h3 className="bg-black text-white px-8 py-4 sticky top-0 left-0 select-none">
                         <code>comments.json</code>
                     </h3>
-                    <pre className={"px-8 py-4 h-96  overflow-scroll"}>
+                    <pre className={"px-8 py-4 h-96 bg-white overflow-scroll"}>
                             {JSON.stringify(commentJson.items, null, 2)}
                         </pre>
                 </div>
@@ -141,6 +159,7 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
                 </p>
                 <div>
                     <Image image={images.find(i => i.relativePath === 'about/sheets.png')}
+                           onClick={() => window.open('https://docs.google.com/spreadsheets/d/1XJLmkWSeTswgk32Ap1tPVyqcX_qy__h7pV7zGfd067Y/edit?usp=sharing', '_blank')}
                            className={"mx-auto w-7/12"}/>
                 </div>
 
@@ -173,25 +192,34 @@ export default function About({data: {images: {nodes: images}, team: {nodes: tea
                 <p>This project was created by:</p>
 
                 <div className="grid grid-cols-4 gap-4">
-                    {team.map(t => <Image image={t} key={t.publicURL}/>)}
+                    {team.map((t, i) => <div className="relative group" key={t.publicURL}>
+                        <Image image={meme.nodes[i]}
+                               className={"absolute opacity-0  group-hover:opacity-90 z-[-1] group-hover:z-20 right-4 translate-x-1/2 "}
+                               style={{minWidth: '20vw'}}/>
+
+                        <Image image={t}/>
+                    </div>)}
                 </div>
 
             </article>
 
             <nav className={"relative uppercase"} id={'about-nav'}>
-                <ul className={"flex flex-col gap-y-2"} ref={nav}>
+                <ul className={"flex flex-col gap-y-2 z-10"} ref={nav}>
                     <li>
-                        <Button as={'a'} href={"#data"} light>
+                        <Button as={'a'} href={"#data"} light
+                                className={active === 'data' && '!bg-light-darker !text-black'}>
                             Data
                         </Button>
                     </li>
                     <li>
-                        <Button as={'a'} href={"#interactions"} light>
+                        <Button as={'a'} href={"#interactions"} light
+                                className={active === 'interactions' && '!bg-light-darker !text-black'}>
                             Interactions
                         </Button>
                     </li>
                     <li>
-                        <Button as={'a'} href={"#team"} light>
+                        <Button as={'a'} href={"#team"} light
+                                className={active === 'team' && '!bg-light-darker !text-black'}>
                             The team
                         </Button>
                     </li>
@@ -212,7 +240,17 @@ export const query = graphql`{
             publicURL
         }
     }
-    team : allFile(filter: {relativeDirectory: {eq: "team"}}) {
+    team : allFile(filter: {relativeDirectory: {eq: "team"}}, sort: {fields: [name], order: ASC}) {
+        nodes {
+            childImageSharp {
+                gatsbyImageData
+            }
+            id
+            relativePath
+            publicURL
+        }
+    }
+    meme : allFile(filter: {relativeDirectory: {eq: "meme"}}, sort: {fields: [name], order: ASC}) {
         nodes {
             childImageSharp {
                 gatsbyImageData

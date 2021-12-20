@@ -1,7 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
 import {Link} from "gatsby";
-import {ReactComponent as Logo} from '../images/logo.svg'
+import Logo from '../images/logo.component.svg'
 import Button from "./Button";
 import {useState} from "react";
 
@@ -128,7 +128,12 @@ export default function Navbar({fixed, light, absolute, className, allBlack, tut
 
     return <>
         <nav
-            className={classNames(fixed ? 'fixed' : [absolute ? 'absolute' : 'sticky'], "top-0 z-40 py-4 px-8 flex w-full uppercase justify-between text-base items-center", className)}>
+            className={classNames(
+                fixed ? 'fixed' : [absolute ? 'absolute' : 'sticky'],
+                "top-0 z-40 py-4 px-8 flex w-full uppercase justify-between text-base items-center",
+                light && 'navbar-light',
+                className
+            )}>
             <Link to={"/"} className={"w-1/12"}>
                 <Logo height={"60px"} className={"fill-current"}/>
             </Link>

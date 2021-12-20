@@ -12,16 +12,6 @@ module.exports = {
         image: '/ident-bumper.jpg', // Path to your image you placed in the 'static' folder
     },
     plugins: [
-        {
-            resolve: 'gatsby-plugin-svgr',
-            options: {
-                svgoConfig: {
-                    plugins: [
-                        { cleanupIDs: false },    // remove unused IDs and minify remaining IDs (default)
-                    ],
-                },
-            },
-        },
         "gatsby-plugin-postcss",
         "gatsby-plugin-image",
         "gatsby-plugin-react-helmet",
@@ -66,5 +56,13 @@ module.exports = {
                 credentials: googleCredentials,
             },
         },
+        {
+            resolve: "gatsby-plugin-react-svg",
+            options: {
+                rule: {
+                    include: /\.component\.svg$/ // See below to configure properly
+                }
+            }
+        }
     ],
 };

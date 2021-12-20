@@ -14,7 +14,7 @@ import HomeSlide from "../components/HomeSlide";
 import SlotMaschine from "../components/SlotMaschine";
 import Navbar from "../components/Navbar";
 import {Helmet} from "react-helmet";
-import {ReactComponent as Rettangoli} from '../images/retatngoli.svg'
+import Rettangoli from '../images/rettangoli.component.svg'
 import useMatter from "../components/useMatter";
 
 
@@ -195,8 +195,6 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
         })
 
 
-
-
         // WHY YOU SIGNED
         gsap.from('#fake-comment ', {
             scrollTrigger: {
@@ -370,10 +368,10 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
         <Layout fixedHeader className={"text-[4.34vw] leading-tight"}>
             <Helmet bodyAttributes={{'class': 'no-scrollbar bg-black text-white'}}/>
             <div className="fixed right-0 top-0 bottom-0 origin-top bg-light w-2 z-40" id="progress-bar"></div>
-            <HomeSlide className={"text-black text-[6vw] grid-rows-6 z-50 select-none relative z-1"} ref={landing}>
+            <HomeSlide className={"text-black text-[6vw] grid-rows-6 z-50  pb-32 select-none relative z-1"} ref={landing}>
 
                 <Navbar absolute light allBlack/>
-                <div className="text-black text-center col-span-12 row-start-3 row-span-2 self-middle">
+                <div className="text-black text-center col-span-12 row-start-3 row-span-2 flex flex-col justify-center self-middle">
                     <h1 className={"text-9xl"}>Opinion Library</h1>
                     <h2 className={"text-[2.2rem] normal-case"}>What do change.org users think about mask mandates in
                         the
@@ -501,7 +499,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
                     <Comment id={'fake-comment'} user="30200130" created_at={"1 minute ago"}
                              petition={{title: "Petition title"}}
                              createdAt={"1 minute ago"}
-                             large origin={'black'} />
+                             large origin={'black'}/>
                 </div>
             </HomeSlide>
             <HomeSlide span={2} className={"auto-rows-min"} id={"understand-language"} ref={understandLanguage}>
@@ -567,12 +565,14 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
             </HomeSlide>
             <HomeSlide>
                 <div className="col-span-9" style={{letterSpacing: -1}}>
-                    The opinion library is a tool that collects comments and shows relations among the <mark>most used words</mark>
+                    The opinion library is a tool that collects comments and shows relations among the <mark>most used
+                    words</mark>
                     {' '}in pro mask and no mask comments
                 </div>
                 <div className="absolute left-8 right-8 bottom-16">
                     <div className=" inline-block">
-                        <Button id="view-library-button" as={Link} to={"/library/"} large>View the library</Button>
+                        <Button id="view-library-button" as={Link} to={"/library/"} large
+                                activeClassName={classNames("border-light text-light")}>View the library</Button>
                     </div>
                 </div>
             </HomeSlide>

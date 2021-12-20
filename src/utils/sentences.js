@@ -1,7 +1,6 @@
 import replacer from '../data/replace.json'
 
 
-console.log(replacer)
 
 export function matches(part, word) {
     if (!part)
@@ -12,12 +11,10 @@ export function matches(part, word) {
     }
 
     if (part.toLocaleString() === replacer[word]) {
-        console.log("replacer found")
         return true
     }
 
     return false;
-    return part && (part.toLowerCase() === word || part.toLowerCase() === replacer[word])
 }
 
 export function sentenceHasWord(sentence, word) {

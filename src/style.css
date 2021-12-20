@@ -166,8 +166,9 @@
     }
 
 }
-body {
-    cursor: url("./images/cursor.png");
+html {
+    cursor: url("./images/cursor.png"), auto;
+    @apply scroll-p-32;
 }
 
 .overflow-scroll {
@@ -178,36 +179,29 @@ body {
     overflow-y: overlay;
 }
 
-#logo_svg__Livello_1 path {
-    position: relative;
-    z-index: 1;
+svg .background {
+    fill: theme('colors.black');
 }
 
-.bg-white #logo_svg__Livello_1 > path:nth-last-child(2) {
-    fill: white;
-    z-index: 0;
-
+.navbar-light svg .background {
+    fill: theme('colors.light') !important;
+}
+.bg-white svg .background {
+    fill: theme('colors.white') !important;
 }
 
-.bg-light #logo_svg__Livello_1 > path:nth-last-child(2) {
-    @apply fill-light relative;
-    z-index: 0;
-
-}
-
-
-.delta-svg > g > :nth-child(3) {
+.delta-svg > g > :nth-child(2) {
     @apply transition-all duration-300;
 }
 
-.delta-svg > g > :nth-child(4) {
+.delta-svg > g > :nth-child(3) {
     @apply opacity-0 transition-all duration-300 ;
 }
 
-.delta-svg > g:hover > :nth-child(3) {
+.delta-svg > g:hover > :nth-child(2) {
     @apply opacity-0 ;
 }
 
-.delta-svg > g:hover > :nth-child(4) {
+.delta-svg > g:hover > :nth-child(3) {
     @apply opacity-100;
 }
