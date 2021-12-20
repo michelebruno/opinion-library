@@ -1,7 +1,7 @@
 require('dotenv').config()
 const googleCredentials = require('./credentials.json');
 
-const siteUrl = 'https://dd-phase03.mbruno.it/'
+const siteUrl = 'https://michelebruno.github.io/opinion-library/'
 const description = "What do change.org users think about mask mandates? A website that allows to understand the language used to express different positions on the mask mandate issue in the United States"
 module.exports = {
     siteMetadata: {

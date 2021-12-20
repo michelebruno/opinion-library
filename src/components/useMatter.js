@@ -64,7 +64,7 @@ export default function useMatter(containerRef) {
 
         for (let i = 0; i < 6; i++) {
 
-            let imgIndex = i % 4
+            let imgIndex = i % 2
 
             masks.push(Bodies.circle(Math.random() * sizeX, Math.random() * sizeY, maskSize, {
                 friction: 0,

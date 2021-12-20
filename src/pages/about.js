@@ -194,8 +194,8 @@ export default function About({data: {images: {nodes: images}, meme, team: {node
                 <div className="grid grid-cols-4 gap-4">
                     {team.map((t, i) => <div className="relative group" key={t.publicURL}>
                         <Image image={meme.nodes[i]}
-                               className={"absolute opacity-0  group-hover:opacity-90 z-[-1] group-hover:z-20 right-4 translate-x-1/2 "}
-                               style={{minWidth: '20vw'}}/>
+                               className={"absolute opacity-0  group-hover:opacity-100 z-[-1] group-hover:z-20 right-1/2 top-1/2 -translate-y-1/2 translate-x-2LI/3"}
+                               style={{minWidth: '15vw'}}/>
 
                         <Image image={t}/>
                     </div>)}
