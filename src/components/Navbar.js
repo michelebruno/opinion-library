@@ -1,7 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
-import {graphql, Link, useStaticQuery} from "gatsby";
-import Image from "./Image";
+import {Link} from "gatsby";
 import {ReactComponent as Logo} from '../images/logo.svg'
 import Button from "./Button";
 import {useState} from "react";

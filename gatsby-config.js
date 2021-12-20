@@ -2,7 +2,7 @@ require('dotenv').config()
 const googleCredentials = require('./credentials.json');
 
 const siteUrl = 'https://dd-phase03.mbruno.it/'
-const description = "An opinion library"
+const description = "What do change.org users think about mask mandates? A website that allows to understand the language used to express different positions on the mask mandate issue in the United States"
 module.exports = {
     siteMetadata: {
         title: 'Opinion Library',
@@ -12,7 +12,16 @@ module.exports = {
         image: '/ident-bumper.jpg', // Path to your image you placed in the 'static' folder
     },
     plugins: [
-        "gatsby-plugin-svgr",
+        {
+            resolve: 'gatsby-plugin-svgr',
+            options: {
+                svgoConfig: {
+                    plugins: [
+                        { cleanupIDs: false },    // remove unused IDs and minify remaining IDs (default)
+                    ],
+                },
+            },
+        },
         "gatsby-plugin-postcss",
         "gatsby-plugin-image",
         "gatsby-plugin-react-helmet",
