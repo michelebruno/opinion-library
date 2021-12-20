@@ -30,8 +30,11 @@ export default function Index({words, chosen, setChosen}) {
         <ul className="overflow-y-scroll no-scrollbar flex-1">
             {words
                 .map(({name, finding}, index) => {
-                    let isNextSelected = index + 1 < words.length ? (words[index + 1].name === chosen.prev || words[index + 1].name === chosen.current) : false
+                    let isNextSelected = index + 1 < words.length ? (words[index + 1].name === chosen.next || words[index + 1].name === chosen.current) : false
 
+                    if (isNextSelected) {
+                        console.log()
+                    }
                     return <li
                         key={name}
                         onClick={() => chosen.current !== name ? setChosen({current: name}) : setChosen({})}

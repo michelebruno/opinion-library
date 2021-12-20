@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useRef} from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import classNames from "classnames";
 import Comment from "./Comment";
 import {ArchiveButton} from "./Button";
@@ -8,27 +8,56 @@ import {matches, sentencesHaveWord} from "../utils/sentences";
 
 function GroupCommentList({comments, chosen, secondWord, origin}) {
 
+    const [limit, setLimit] = useState(100)
+
+
     const {filteredComments, totalComments, totalFiltered} = useMemo(() => {
         let thisOriginComments = comments
             .filter(({origin: o}) => origin === o)
-
+        console.time('memo')
         const filteredComments = thisOriginComments
             .filter(({sentences}) => {
                 return !secondWord || sentencesHaveWord(sentences, secondWord)
             })
 
+        console.timeEnd('memo')
+
         return {
             totalComments: thisOriginComments.length,
-            filteredComments: thisOriginComments
-                .filter(({sentences}) => {
-                    return !secondWord || sentencesHaveWord(sentences, secondWord)
-                })
+            filteredComments
         }
     }, [secondWord, origin, chosen])
+
+
+    useEffect(() => {
+
+        setLimit(200)
+
+        const id = setInterval(add, 800);
+
+        function add() {
+
+            if (limit > filteredComments.length) {
+                return clearInterval(id)
+            }
+
+            setLimit(l => {
+                console.log("updateing limit from ", l, filteredComments.length)
+                return l <= filteredComments.length? l + 400 : l
+            })
+
+        }
+
+        return () => clearInterval(id)
+
+    }, [chosen])
 
     let perc = (100 * filteredComments.length / totalComments)
 
     let round = perc > 1 ? 0 : 1
+
+    console.log("Limit is ", limit)
+
 
     return <div>
         <p className="sticky top-0 bg-black z-30 text-center text-lg pt-3 pb-4">
@@ -41,10 +70,10 @@ function GroupCommentList({comments, chosen, secondWord, origin}) {
 
         <div key={origin} className={"grid gap-4 pb-64 "}> {filteredComments
             .map(
-                (c) => <Comment key={c.id}
-                                highlightWords={true}
-                                word={chosen}
-                                secondWord={secondWord} {...c} />
+                (c, i) => i < limit && <Comment key={c.id}
+                                                highlightWords={true}
+                                                word={chosen}
+                                                secondWord={secondWord} {...c} />
             )}
 
         </div>
@@ -63,7 +92,7 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
     return <div className={"flex h-full px-8 flex-wrap "}>
         <p className="mb-4 w-full text-lg">Here you can read the reasons to sign the 100 most popular promask and nomask
             petition</p>
-        <div className="flex flex-col h-full w-full" >
+        <div className="flex flex-col h-full w-full">
 
             <div className={"w-full sticky top-0 bg-black z-20"}>
                 <h2 className={"text-lg text-light my-4"}>Filter opinions by:</h2>
