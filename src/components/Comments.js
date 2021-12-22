@@ -3,7 +3,7 @@ import classNames from "classnames";
 import Comment from "./Comment";
 import {ArchiveButton} from "./Button";
 import {mix} from "../utils/mix";
-import {matches, sentencesHaveWord} from "../utils/sentences";
+import {sentencesHaveWord} from "../utils/sentences";
 
 
 function GroupCommentList({comments, chosen, secondWord, origin}) {
@@ -11,7 +11,7 @@ function GroupCommentList({comments, chosen, secondWord, origin}) {
     const [limit, setLimit] = useState(100)
 
 
-    const {filteredComments, totalComments, totalFiltered} = useMemo(() => {
+    const {filteredComments, totalComments} = useMemo(() => {
         let thisOriginComments = comments
             .filter(({origin: o}) => origin === o)
         console.time('memo')
@@ -26,7 +26,7 @@ function GroupCommentList({comments, chosen, secondWord, origin}) {
             totalComments: thisOriginComments.length,
             filteredComments
         }
-    }, [secondWord, origin, chosen])
+    }, [secondWord, origin, chosen, comments])
 
 
     useEffect(() => {
@@ -42,7 +42,6 @@ function GroupCommentList({comments, chosen, secondWord, origin}) {
             }
 
             setLimit(l => {
-                console.log("updateing limit from ", l, filteredComments.length)
                 return l <= filteredComments.length? l + 200 : l
             })
 
@@ -50,7 +49,7 @@ function GroupCommentList({comments, chosen, secondWord, origin}) {
 
         return () => clearInterval(id)
 
-    }, [chosen])
+    }, [chosen, filteredComments.length])
 
     let perc = (100 * filteredComments.length / totalComments)
 

@@ -20,21 +20,20 @@ const tutorialSlides = [
 
     {
         video: video2,
-        text: "Once a word is selected, a central panel will appear to display how the other words are used by the two groups in comments mentioning it. In the example above we see which groups use wich words in comments mentioning to “body”."
+        text: "Once a word is selected, a central panel will appear to display how the other words are used by the two groups in comments mentioning it."
     },
 
     {
         video: video3,
-        text: "Related words will be positioned horizontally according to their usage by the two groups. Words most frequently used by promasks will be found on the right, while nomask words will be positioned to the left. The vertical disposition follows alphabetic order."
+        text: "Related words will be positioned horizontally according to their usage by the two groups. Words most frequently used by promasks will be found on the left, while nomask words will be positioned to the right. The vertical disposition follows alphabetic order."
     },
     {
         video: video4,
-        text: "You can read the comments mentioning the selected word by clicking on the Comments tab.\n" +
-            "An additional filter can be added by selecting one of the words from the list inside the Comments tab. This will add a filter and display only comments using both words."
+        text: "You can read the comments mentioning the selected word by clicking on the Opinions tab."
     },
     {
         video: video5,
-        text: "You can read the comments mentioning the selected word by clicking on the Comments tab. An additional filter can be added by selecting one of the words from the list inside the Comments tab. This will add a filter and display only comments using both words."
+        text: "An additional filter can be added by selecting one of the words from the list inside the Opinions tab. This will add a filter and display only comments using both words."
     },
 
 ]
@@ -44,10 +43,10 @@ function Tutoria({tutorial, onChangeTutorial}) {
 
     return <div className={"fixed inset-0 z-50"}>
         <div className="w-full h-full relative">
-            <div className="bg-gray absolute inset-0 opacity-70"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="bg-gray absolute inset-0 opacity-70" onClick={() => onChangeTutorial(false)}></div>
+            <div className="absolute inset-0 flex items-center w-full 2xl:w-6/12 md:w-8/12 mx-auto justify-center">
                 <div
-                    className="mx-16 bg-[#ECECEC] w-full md:w-8/12 2xl:w-6/12 rounded-3xl text-black relative">
+                    className="mx-16 bg-[#ECECEC]   rounded-3xl text-black relative">
                     <div className="absolute top-0 right-0">
                         <button className="px-8 py-6 cursor-pointer inline-block "
                                 onClick={() => onChangeTutorial(false)}>

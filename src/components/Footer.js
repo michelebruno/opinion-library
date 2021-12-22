@@ -41,7 +41,7 @@ export default function Footer() {
                 <img src="/assets/Logo_DensityDesign.svg" alt="DensityDesign Lab" className={"mr-8"}/>
                 <img src="/assets/Logo_Polimi.svg" alt="Politecnico di Milano"/>
             </div>
-            <p><a href="https://densitydesign.github.io/teaching-dd17/" target="_blank">Mediazioni Algoritmiche.
+            <p><a href="https://densitydesign.github.io/teaching-dd17/" target="_blank" rel="noreferrer">Mediazioni Algoritmiche.
                 Designing in a data intensive society.</a></p>
             <p>The Final Synthesis Design Studio is a course at Politecnico di Milano for the Master's Degree in
                 Communication Design.</p>

@@ -7,14 +7,14 @@ import Accordion from "../components/Accordion";
 import {MaskometerGrid} from "../components/maskometerGrid";
 import Comments from "../components/Comments";
 import {sentencesHaveWord} from "../utils/sentences";
+import allComments from '../unsourced/comments.json'
 
-export default function Library({data: {words, allComments, ...data}}) {
+export default function Library({data: {words, ...data}}) {
     const [chosen, setChosen] = useState({})
     const [secondWord, setSecondWord] = useState()
     const [showComments, setShowComments] = useState(false)
 
     const filteredComments = useMemo(() => allComments
-            .nodes
             .filter(({sentences}) => {
                 return sentencesHaveWord(sentences, chosen.current)
             }),
@@ -87,11 +87,6 @@ export const query = graphql`query Glossary {
             secondWord
             nomaskDelta
             promaskDelta
-        }
-    }
-    allComments: allCommentsJson(sort: {fields: [createdAt], order: DESC}) {
-        nodes {
-            ...CommentJsonFragment
         }
     }
 }`

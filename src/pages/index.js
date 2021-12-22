@@ -60,32 +60,6 @@ function goToSection(i) {
     })
 }
 
-function disableScroll() {
-    return;
-    if (typeof window === 'undefined') return
-    window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
-    window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
-    window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
-    window.addEventListener('keydown', preventDefaultForScrollKeys, false);
-
-    // console.log("scroll disabled")
-}
-
-// call this to Enable
-function enableScroll() {
-    return;
-    if (typeof window === 'undefined') return
-
-    window.removeEventListener('DOMMouseScroll', preventDefault, false);
-    window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
-    window.removeEventListener('touchmove', preventDefault, wheelOpt);
-    window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
-
-    // console.log("scroll enabled")
-}
-
-const methods = {}
-
 const commentsData = {
     812047727: 'vaccine',
     811710031: 'health',

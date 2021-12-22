@@ -35,18 +35,15 @@ export function ArchiveButton({children, className, isSelected, isCurrent, check
 
 export default function Button({children, className, id, as: As, large, light, ...props}) {
     return <As id={id}
-               className={classNames("group inline-block", light ? 'hover:text-light-darker' : ' ')}
+               className={classNames(
+                   " inline-block", light ? 'hover:text-light-darker' : ' ',
+                   (large ? 'py-4 px-8 text-2xl ' : ' text-base py-1 px-4'),
+                   " border-current active:bg-light active:text-black border rounded-full hover:text-black",
+                   light? "hover:text-light-darker" :"hover:text-light ",
+                   className
+               )}
                {...props}>
-        <span
-            className={classNames(
-                (large ? 'py-4 px-8 text-2xl ' : ' text-base py-1 px-4'),
-                " border-current group-active:bg-light group-active:text-black border rounded-full hover:text-black",
-                light? "group-hover:text-light-darker" :"group-hover:text-light ",
-                className
-            )
-            }>
                     {children}
-        </span>
     </As>
 
 }
