@@ -33,12 +33,10 @@ export default function Comment({
                                     sentences,
                                     user,
                                     createdAt,
-                                    dateText,
                                     word,
                                     secondWord,
                                     petition,
-                                    splitted,
-                                    petitionTitle,
+                                    from_now,
                                     highlightWords,
                                     large
                                 }) {
@@ -56,13 +54,13 @@ export default function Comment({
             origin === 'nomask' && 'border-nomask'
         )}>
         <div className=" ">
-            <div className={"rounded-full avatar bg-" + origin} />
+            <div className={"rounded-full avatar bg-" + origin}/>
         </div>
         <div className={"col-span-11"}>
             <div className={"text-gray select-none " + (large ? 'text-2xl' : 'text-xs')}>
                 <span>User{user}</span>
                 {' • '}
-                <span>{dateText || createdAt}</span>
+                <span>{from_now || createdAt}</span>
             </div>
             <p className={'comment-text ' + (large ? 'text-3xl leading-snug py-4' : 'py-2 text-base')}>
                 {typeof sentences !== 'undefined' ? sentences.map((sentence, i) => {

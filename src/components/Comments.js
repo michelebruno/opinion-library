@@ -43,7 +43,7 @@ function GroupCommentList({comments, chosen, secondWord, origin}) {
 
             setLimit(l => {
                 console.log("updateing limit from ", l, filteredComments.length)
-                return l <= filteredComments.length? l + 400 : l
+                return l <= filteredComments.length? l + 200 : l
             })
 
         }

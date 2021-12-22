@@ -168,6 +168,11 @@ export default function About({data: {images: {nodes: images}, meme, team: {node
                     both groups or if one used it more than the other. We used the following proportion to transform the
                     two percentages into a single, more readable metric.
                 </p>
+                <div>
+                    <Image image={images.find(i => i.relativePath === 'about/normalize.png')}
+                           onClick={() => window.open('https://docs.google.com/spreadsheets/d/1XJLmkWSeTswgk32Ap1tPVyqcX_qy__h7pV7zGfd067Y/edit?usp=sharing', '_blank')}
+                           className={"mx-auto w-full"}/>
+                </div>
 
                 <h2 id={"interactions"}>Interactions</h2>
                 <p>
