@@ -14,13 +14,11 @@ function GroupCommentList({comments, chosen, secondWord, origin}) {
     const {filteredComments, totalComments} = useMemo(() => {
         let thisOriginComments = comments
             .filter(({origin: o}) => origin === o)
-        console.time('memo')
         const filteredComments = thisOriginComments
             .filter(({sentences}) => {
                 return !secondWord || sentencesHaveWord(sentences, secondWord)
             })
 
-        console.timeEnd('memo')
 
         return {
             totalComments: thisOriginComments.length,
@@ -42,14 +40,14 @@ function GroupCommentList({comments, chosen, secondWord, origin}) {
             }
 
             setLimit(l => {
-                return l <= filteredComments.length? l + 200 : l
+                return l <= filteredComments.length ? l + 200 : l
             })
 
         }
 
         return () => clearInterval(id)
 
-    }, [chosen, filteredComments.length])
+    }, [chosen])
 
     let perc = (100 * filteredComments.length / totalComments)
 

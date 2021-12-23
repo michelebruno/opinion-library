@@ -48,8 +48,8 @@ export default function Comment({
         id={id}
         className={classNames(
             className,
-            "comment grid grid-cols-12 w-full bg-white text-black boreder-2 normal-case",
-            large ? 'p-16 rounded-[3rem] gap-8' : 'p-4  gap-4 rounded-xl text-base ',
+            "comment",
+            large && 'large',
             origin === 'promask' && 'border-promask',
             origin === 'nomask' && 'border-nomask'
         )}>

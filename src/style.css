@@ -53,8 +53,36 @@
         display: none;
     }
 
+    ul.words-list li.word-item {
+        @apply border-y cursor-pointer hover:border-y-current px-8 py-4;
+        @apply hover:text-light;
+    }
+
+    ul.words-list li.word-item:not(:first) {
+        @apply border-t-current;
+    }
+
+    ul.words-list li.word-item:hover+li.word-item:not(.active) {
+
+        @apply border-t-black;
+    }
+    ul.words-list li.word-item.active {
+        @apply bg-light text-black border-y-light;
+    }
+
+    .comment {
+        @apply grid grid-cols-12 w-full bg-white text-black normal-case;
+        @apply p-4 gap-4 rounded-xl text-base;
+    }
+
+    .comment.large {
+        @apply p-16 rounded-[3rem] gap-8;
+    }
+
     .comment .avatar {
         aspect-ratio: 1;
+        min-height: 1rem;
+        min-width: 1rem;
     }
 
     mark {
@@ -81,7 +109,7 @@
         @apply text-2xl;
     }
 
-    article > p, article > div {
+    article > section > p, article > section > div {
         @apply mb-12;
     }
 
@@ -186,6 +214,7 @@ svg .background {
 .navbar-light svg .background {
     fill: theme('colors.light') !important;
 }
+
 .bg-white svg .background {
     fill: theme('colors.white') !important;
 }

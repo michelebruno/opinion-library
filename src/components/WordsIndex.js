@@ -27,7 +27,7 @@ export default function Index({words, chosen, setChosen}) {
 
         </div>
 
-        <ul className="overflow-y-scroll no-scrollbar flex-1">
+        <ul className="overflow-y-scroll no-scrollbar flex-1 words-list">
             {words
                 .map(({name, finding}, index) => {
                     let isNextSelected = index + 1 < words.length ? (words[index + 1].name === chosen.next || words[index + 1].name === chosen.current) : false
@@ -39,10 +39,9 @@ export default function Index({words, chosen, setChosen}) {
                         key={name}
                         onClick={() => chosen.current !== name ? setChosen({current: name}) : setChosen({})}
                         className={classNames(
-                            "border-y-[1px] cursor-pointer hover:border-t-light",
-                            "px-8 pt-4 pb-4",
-                            !isNextSelected && "border-b-current",
-                            chosen.current === name ? "bg-light text-black border-t-light" : "hover:text-light border-t-black",
+                            "word-item last:border-b-current",
+                            !isNextSelected && "border-b-black ",
+                            chosen.current === name ? "active" : "",
                         )}
                     >
                         <h2 className={classNames(

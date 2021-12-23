@@ -1,0 +1,1 @@
+exports.shouldUpdateScroll = () => false
