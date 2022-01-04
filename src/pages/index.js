@@ -363,7 +363,7 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
 
                 </div>
             </HomeSlide>
-            <HomeSlide span={1} ref={changeDataSlide}>
+            <HomeSlide className={"overflow-hidden"} span={1} ref={changeDataSlide}>
                 <h2 className={"col-span-9"}>
                     <mark>Change.org</mark>
                     {" "}
@@ -434,9 +434,9 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
 
                 <div className={"absolute h-screen w-full bottom-0 left-0 right-0 p-8 overflow-hidden"}>
                     <div className="relative h-full w-full z-40 home-petition-images ">
-                        <Image image={allFile.nodes[7]} className={"w-1/3 absolute -top-16 right-8"}
+                        <Image image={allFile.nodes[7]} className={"w-1/3 absolute top-0 right-8"}
                                onClick={openPetitionLink(7)}/>
-                        <Image image={allFile.nodes[0]} className={"w-1/3 absolute top-0 left-0"}
+                        <Image image={allFile.nodes[0]} className={"w-1/3 absolute top-8 left-0"}
                                onClick={openPetitionLink(0)}/>
                         <Image image={allFile.nodes[8]} className={"w-1/3 absolute top-[16%] left-[41%]"}
                                onClick={openPetitionLink(8)}/>
