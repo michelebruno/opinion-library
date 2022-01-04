@@ -9,13 +9,16 @@ let heightClasses = [
     'h-[400vh]',
 ]
 
-const HomeSlide = forwardRef(({children, className, id, span, uppercase}, ref) => {
+const HomeSlide = forwardRef(({children, className, id, span, uppercase, padding}, ref) => {
     return <div className={classNames(
-        "section px-10 pt-32 overflow-hidden box-border",
+        "section px-10 box-border",
+        'relative',
         heightClasses[span],
         uppercase && 'uppercase',
+        padding === 'top' && 'pt-32',
+        padding === 'both' && 'py-32',
+        padding === 'bottom' && 'pb-32',
         'grid grid-cols-12 gap-16',
-        'relative',
         className
     )}
                 style={{height: `${span}00 vh`}}
@@ -34,7 +37,8 @@ const HomeSlide = forwardRef(({children, className, id, span, uppercase}, ref) =
 })
 HomeSlide.defaultProps = {
     span: 1,
-    uppercase: true
+    uppercase: true,
+    padding: 'top'
 }
 
 export default HomeSlide

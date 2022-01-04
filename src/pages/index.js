@@ -158,9 +158,6 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
                 trigger: maskMandateSlide.current,
                 start: 'top top',
                 end: 'bottom bottom',
-                pin: maskMandateSlide.current.querySelector('.pin-me'),
-                pinSpacer: maskMandateSlide.current.querySelector('.pin-spacer'),
-                anticipatePin: 1,
                 onUpdate: scroll => {
                     scroll.direction === 1 && scroll.progress > .49 && petitionImagesTl.play()
                     scroll.direction === -1 && petitionImagesTl.reverse()
@@ -208,8 +205,6 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
                 scrollTrigger: {
                     trigger: understandLanguage.current,
                     end: 'bottom bottom',
-                    pin: understandLanguage.current.querySelector('.pin-me'),
-                    pinSpacer: understandLanguage.current.querySelector('.pin-spacer'),
                     // toggleActions: "play pause reverse reset",
                 },
             }
@@ -340,12 +335,14 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
 
     return (
         <Layout fixedHeader className={"text-[4.34vw] leading-tight"}>
-            <Helmet bodyAttributes={{'class': 'no-scrollbar bg-black text-white'}}/>
+            <Helmet bodyAttributes={{'class': 'no-scrollbar bg-black text-white snap-y'}}/>
             <div className="fixed right-0 top-0 bottom-0 origin-top bg-light w-2 z-40" id="progress-bar"></div>
-            <HomeSlide className={"text-black text-[6vw] grid-rows-6 z-50  pb-32 select-none relative z-1"} ref={landing}>
+            <HomeSlide className={"text-black text-[6vw] grid-rows-6 z-50  pb-32 select-none relative z-1"}
+                       ref={landing}>
 
                 <Navbar absolute light allBlack/>
-                <div className="text-black text-center col-span-12 row-start-3 row-span-2 flex flex-col justify-center self-middle">
+                <div
+                    className="text-black text-center col-span-12 row-start-3 row-span-2 flex flex-col justify-center self-middle">
                     <h1 className={"text-9xl"}>Opinion Library</h1>
                     <h2 className={"text-[2.2rem] normal-case"}>What do change.org users think about mask mandates in
                         the
@@ -422,22 +419,20 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
                 </div>
 
             </HomeSlide>
-            <HomeSlide span={2} ref={maskMandateSlide}>
-                <div className="col-span-12 pin-spacer ">
-                    <div className="pin-me w-full grid grid-cols-12 gap-16 relative">
-                        <h2 className={"col-span-8"} style={{letterSpacing: -1}}>
-                            As the platform grew,
-                            so did the topics being discussed. One of the
-                            most <mark>controversial
-                            themes</mark> has been
-                            <br/>
-                            <SlotMaschine words={words}/>
-                        </h2>
-
-                    </div>
-
+            <HomeSlide span={2} padding={false} ref={maskMandateSlide}>
+                <div className="col-span-8 ">
+                    <h2 className={"sticky top-0 h-screen pt-32"} style={{letterSpacing: -1}}>
+                        As the platform grew,
+                        so did the topics being discussed. One of the
+                        most <mark>controversial
+                        themes</mark> has been
+                        <br/>
+                        <SlotMaschine words={words}/>
+                    </h2>
                 </div>
-                <div className={"absolute h-screen w-full bottom-0 left-0 right-0 p-8"}>
+
+
+                <div className={"absolute h-screen w-full bottom-0 left-0 right-0 p-8 overflow-hidden"}>
                     <div className="relative h-full w-full z-40 home-petition-images ">
                         <Image image={allFile.nodes[7]} className={"w-1/3 absolute -top-16 right-8"}
                                onClick={openPetitionLink(7)}/>
@@ -450,13 +445,13 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
                         <Image image={allFile.nodes[1]}
                                className={"w-1/3 absolute top-1/2 -translate-y-1/2 left-[8.3%]"}
                                onClick={openPetitionLink(1)}/>
+                        <Image image={allFile.nodes[4]} className={"w-1/3 absolute bottom-[20%] left-[16%]"}
+                               onClick={openPetitionLink(4)}/>
                         <Image image={allFile.nodes[3]} className={"w-1/3 absolute bottom-[16%] right-[16%]"}
                                onClick={openPetitionLink(3)}/>
-                        <Image image={allFile.nodes[4]} className={"w-1/3 absolute bottom-32 left-[16%]"}
-                               onClick={openPetitionLink(4)}/>
-                        <Image image={allFile.nodes[5]} className={"w-1/3 absolute top-[83%] -left-[10%] "}
+                        <Image image={allFile.nodes[5]} className={"w-1/3 absolute top-[83%] -left-[5%] "}
                                onClick={openPetitionLink(5)}/>
-                        <Image image={allFile.nodes[6]} className={"w-1/3 absolute top-[85%] right-0"}
+                        <Image image={allFile.nodes[6]} className={"w-1/3 absolute bottom-0 right-0"}
                                onClick={openPetitionLink(6)}/>
 
                     </div>
@@ -476,50 +471,42 @@ const IndexPage = ({data: {allFile, words, comments: {nodes: homeComments}}}) =>
                              large origin={'black'}/>
                 </div>
             </HomeSlide>
-            <HomeSlide span={2} className={"auto-rows-min"} id={"understand-language"} ref={understandLanguage}>
-                <div className="col-span-12 -mt-32 pt-32">
-                    <div className=" w-full h-full grid grid-cols-12 gap-16 relative">
-                        <div className={"col-span-8 "}>
-                        </div>
-                        <div className="col-span-4  normal-case overflow-hidden pin-spacer">
-                            <div
-                                className="pin-me grid auto-rows-min gap-y-4 comment-container h-screen overflow-y-scroll no-scrollbar ">
-                                {
-                                    Object.entries(commentsData).map(([id, word]) => {
+            <HomeSlide span={2} className={"auto-rows-min"} id={"understand-language"} padding={false} ref={understandLanguage}>
+                <div className="col-span-8">
+                    <div className="h-screen w-full pt-32">
+                        <p id={'this-allows'}>
+                            This allows us to understand the different points of view and
+                            the <mark>language</mark> used to
+                            express them
+                        </p>
 
+                    </div>
+                    <div className="h-screen w-full pt-32">
+                        <p id={'recurring-words'}>
+                            We can find recurring
+                            <HighlightedWord isActive={highlightWords}
+                                             className={highlightWords && 'text-black'}>words</HighlightedWord> in
+                            these comments
+                        </p>
 
-                                        const comment = homeComments.find(({commentId}) => commentId == id)
-
-                                        return <Comment key={id}
-                                                        highlightWords={highlightWords}
-                                                        word={word}
-                                                        {...comment}
-                                                        origin={'black'}/>
-                                    })
-                                }
-                            </div>
-                        </div>
                     </div>
                 </div>
-                <div className="absolute inset-0 px-8 grid grid-cols-12 gap-16">
-                    <div className="col-span-8">
-                        <div className="h-screen w-full pt-32">
-                            <p id={'this-allows'}>
-                                This allows us to understand the different points of view and
-                                the <mark>language</mark> used to
-                                express them
-                            </p>
+                <div className="col-span-4 normal-case overflow-">
+                    <div
+                        className="sticky top-0 pt-32 h-screen grid auto-rows-min gap-y-4 comment-container h-screen overflow-y-scroll no-scrollbar ">
+                        {
+                            Object.entries(commentsData).map(([id, word]) => {
 
-                        </div>
-                        <div className="h-screen w-full pt-32">
-                            <p id={'recurring-words'}>
-                                We can find recurring
-                                <HighlightedWord isActive={highlightWords}
-                                                 className={highlightWords && 'text-black'}>words</HighlightedWord> in
-                                these comments
-                            </p>
 
-                        </div>
+                                const comment = homeComments.find(({commentId}) => commentId == id)
+
+                                return <Comment key={id}
+                                                highlightWords={highlightWords}
+                                                word={word}
+                                                {...comment}
+                                                origin={'black'}/>
+                            })
+                        }
                     </div>
                 </div>
             </HomeSlide>

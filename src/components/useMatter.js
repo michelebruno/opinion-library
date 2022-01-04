@@ -17,6 +17,10 @@ export default function useMatter(containerRef) {
 
     useEffect(() => {
 
+
+        if (containerRef?.current?.querySelector('.snapper canvas')) {
+            return; // There is already a canvas
+        }
         function random() {
             if (Math.random() < 0.5) {
                 return -1 * Math.random()
@@ -127,12 +131,12 @@ export default function useMatter(containerRef) {
         engine.world.gravity.y = gravity;
         engine.world.gravity.x = gravity;
 
-        World.add(engine.world, [...masks, wall_top, wall_down, wall_left, wall_right, textBox, scrollDownBox,MouseBody, mouseConstraint]);
+        World.add(engine.world, [...masks, wall_top, wall_down, wall_left, wall_right, textBox, scrollDownBox, mouseConstraint]);
 
         Matter.Runner.run(engine);
         Render.run(render);
 
-    },)
+    },[])
 
 
 }
