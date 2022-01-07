@@ -172,10 +172,13 @@ export default function Navbar({fixed, light, absolute, className, allBlack, tut
             Tutorial
           </Button>
           {menu.map(({path, text}) => (
-            <li key={path} className="first:border-current ml-8">
+            <li key={path} className="first:border-current ml-8 ">
               <Link
                 to={path}
-                className={classNames('hover:underline', !allBlack && 'active:text-light-darker')}
+                className={classNames(
+                  'hover:underline py-3',
+                  !allBlack && 'active:text-light-darker '
+                )}
                 activeClassName={classNames(
                   'underline',
                   !allBlack && [

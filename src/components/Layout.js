@@ -20,7 +20,13 @@ export default function Layout({
   return (
     <div className={classNames('antialiased', wrapperClassName)}>
       <Seo title={title} />
-      <Helmet bodyAttributes={{class: 'bg-black text-white'}} />
+      <Helmet
+        bodyAttributes={{
+          class: classNames(
+            footer ? 'bg-white text-black overflow-y-scroll' : 'bg-black text-white '
+          ),
+        }}
+      />
       <Navbar fixed={fixedHeader} light={light} tutorial={tutorial} />
       <div className={classNames('relative ', container && 'mx-8', className)}>{children}</div>
       {footer && <Footer />}

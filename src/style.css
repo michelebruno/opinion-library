@@ -1,13 +1,13 @@
 @font-face {
-    font-family: Everett;
-    src: local(Everett), local(TWKEverett), url("fonts/TWKEverett-Regular-web.woff");
-    font-weight: normal;
+  font-family: Everett;
+  src: local(Everett), local(TWKEverett), url("fonts/TWKEverett-Regular-web.woff");
+  font-weight: normal;
 }
 
 @font-face {
-    font-family: Everett Mono;
-    src: local(Everett Mono), local(TWKEverett Mono), url("fonts/TWKEverettMono-Regular-web.woff");
-    font-weight: normal;
+  font-family: Everett Mono;
+  src: local(Everett Mono), local(TWKEverett Mono), url("fonts/TWKEverettMono-Regular-web.woff");
+  font-weight: normal;
 }
 
 
@@ -19,225 +19,230 @@
 @tailwind utilities;
 
 @layer base {
-  @media (min-width: theme('screens.lg')) and (max-width: theme('screens.2xl')){
-    :root, html,body {
+  @media (min-width: theme('screens.lg')) and (max-width: theme('screens.2xl')) {
+    :root, html, body {
       font-size: 14px;
     }
   }
 }
 .no-scrollbar::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 @layer base {
 
-    /* total width */
-    ::-webkit-scrollbar {
-        background-color: transparent;
-        width: 8px;
-    }
+  /* total width */
+  ::-webkit-scrollbar {
+    background-color: transparent;
+    width: 8px;
+  }
 
-    /* background of the scrollbar except button or resizer */
-    ::-webkit-scrollbar-track {
-        background-color: transparent;
-    }
+  /* background of the scrollbar except button or resizer */
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
 
-    /* scrollbar itself */
-    ::-webkit-scrollbar-thumb {
-        background-color: rgba(162, 162, 162, 0.5);
-        border-radius: 8px;
-        border: 4px solid transparent;
-    }
+  /* scrollbar itself */
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(162, 162, 162, 0.5);
+    border-radius: 8px;
+    border: 4px solid transparent;
+  }
 
-    /* set button(top and bottom of the scrollbar) */
-    ::-webkit-scrollbar-button {
-        display: none;
-    }
+  /* set button(top and bottom of the scrollbar) */
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
 
-    ul.words-list li.word-item {
-        @apply border-y cursor-pointer hover:border-y-current px-8 py-4;
-        @apply hover:text-light;
-    }
+  ul.words-list li.word-item {
+    @apply border-y cursor-pointer hover:border-y-current px-8 py-4;
+    @apply hover:text-light;
+  }
 
-    ul.words-list li.word-item:not(:first) {
-        @apply border-t-current;
-    }
+  ul.words-list li.word-item:not(:first) {
+    @apply border-t-current;
+  }
 
-    ul.words-list li.word-item:hover+li.word-item:not(.active) {
+  ul.words-list li.word-item:hover + li.word-item:not(.active) {
 
-        @apply border-t-black;
-    }
-    ul.words-list li.word-item.active {
-        @apply bg-light text-black border-y-light;
-    }
+    @apply border-t-black;
+  }
 
-    .comment {
-        @apply grid grid-cols-12 w-full bg-white text-black normal-case;
-        @apply p-4 gap-4 rounded-xl text-base;
-    }
+  ul.words-list li.word-item.active {
+    @apply bg-light text-black border-y-light;
+  }
 
-    .comment.large {
-        @apply p-16 rounded-[3rem] gap-8;
-    }
+  .comment {
+    @apply grid grid-cols-12 w-full bg-white text-black normal-case;
+    @apply p-4 gap-4 rounded-xl text-base;
+  }
 
-    .comment .avatar {
-        aspect-ratio: 1;
-        min-height: 1rem;
-        min-width: 1rem;
-    }
+  .comment.large {
+    @apply p-16 rounded-[3rem] gap-8;
+  }
 
-    mark {
-        @apply text-light bg-transparent;
-    }
+  .comment .avatar {
+    aspect-ratio: 1;
+    min-height: 1rem;
+    min-width: 1rem;
+  }
 
-    ::selection {
-        @apply bg-none text-light;
-    }
+  mark {
+    @apply text-light bg-transparent;
+  }
 
-    mark::selection {
-        @apply text-white;
-    }
+  ::selection {
+    @apply bg-none text-light;
+  }
 
-    .bg-white mark::selection {
-        @apply text-black;
-    }
+  mark::selection {
+    @apply text-white;
+  }
 
-    .bg-white ::selection {
-        @apply bg-none text-light-darker;
-    }
+  .bg-white mark::selection {
+    @apply text-black;
+  }
 
-    article {
-        @apply text-2xl;
-    }
+  .bg-white ::selection {
+    @apply bg-none text-light-darker;
+  }
 
-    article > section > p, article > section > div {
-        @apply mb-12;
-    }
+  article {
+    @apply text-2xl;
+  }
 
-    article h2 {
-        @apply text-white bg-black mt-8 inline-block uppercase;
-    }
+  article section {
+    @apply pb-12;
+  }
 
-    footer {
-        @apply bg-black text-white;
-    }
+  article > section > p:not(:last-child), article > section > div:not(:last-child) {
+    @apply mb-12;
+  }
 
-    footer h3 {
-        @apply bg-white text-black inline-block uppercase;
-    }
+  article h2 {
+    @apply text-white bg-black mt-8 inline-block uppercase;
+  }
 
-    footer [href] {
-        @apply underline;
-    }
+  footer {
+    @apply bg-black text-white;
+  }
 
-    footer .bi {
-        @apply inline-block mr-2;
-    }
+  footer h3 {
+    @apply bg-white text-black inline-block uppercase;
+  }
 
-    footer * {
-        grid-column: span 1;
-    }
+  footer [href] {
+    @apply underline;
+  }
 
-    footer .logo {
-        display: grid;
-        grid-template-columns: repeat(2, 65px);
-        column-gap: 0.5rem;
-    }
+  footer .bi {
+    @apply inline-block mr-2;
+  }
 
-    footer p {
-        @apply my-2;
-    }
+  footer * {
+    grid-column: span 1;
+  }
 
-    footer .logo * {
-        grid-column: span 1;
-    }
+  footer .logo {
+    display: grid;
+    grid-template-columns: repeat(2, 65px);
+    column-gap: 0.5rem;
+  }
 
-    footer .icon {
-        vertical-align: bottom;
-        padding-bottom: 0.6rem;
-    }
+  footer p {
+    @apply my-2;
+  }
 
-    footer img {
-        height: 50px;
-        width: auto;
-    }
+  footer .logo * {
+    grid-column: span 1;
+  }
 
-    footer h1 {
-        margin: 0 0 1rem 0;
-        font-size: 0.8rem;
-        text-transform: uppercase;
-    }
+  footer .icon {
+    vertical-align: bottom;
+    padding-bottom: 0.6rem;
+  }
 
-    footer ul {
-        padding: 0;
-    }
+  footer img {
+    height: 50px;
+    width: auto;
+  }
 
-    footer li {
-        list-style: none;
-        margin: 0;
-        line-height: 1.5;
-    }
+  footer h1 {
+    margin: 0 0 1rem 0;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
 
-    .archive-button {
-        --gradient-mix: '#FFF';
-        background-color: var(--gradient-mix);
-        border-color: var(--gradient-mix);
+  footer ul {
+    padding: 0;
+  }
 
-        @apply block p-1 2xl:p-1 uppercase text-center rounded-none border leading-none text-base;
-    }
+  footer li {
+    list-style: none;
+    margin: 0;
+    line-height: 1.5;
+  }
 
-    .highlighted-word {
-        @apply relative inline-block z-[0] transition-colors duration-1000 before:z-[-1] before:absolute before:transition-all before:duration-1000 before:origin-left before:h-full before:w-full before:scale-y-90;
-    }
+  .archive-button {
+    --gradient-mix: '#FFF';
+    background-color: var(--gradient-mix);
+    border-color: var(--gradient-mix);
 
-    .home-petition-images img {
-        @apply cursor-pointer grayscale hover:grayscale-0 transition-[filter];
-    }
+    @apply block p-1 2xl:p-1 uppercase text-center rounded-none border leading-none text-base;
+  }
+
+  .highlighted-word {
+    @apply relative inline-block z-[0] transition-colors duration-1000 before:z-[-1] before:absolute before:transition-all before:duration-1000 before:origin-left before:h-full before:w-full before:scale-y-90;
+  }
+
+  .home-petition-images img {
+    @apply cursor-pointer grayscale hover:grayscale-0 transition-[filter];
+  }
 
 }
 html {
-    cursor: url("./images/cursor.png"), auto;
-    @apply scroll-p-32;
+  cursor: url("./images/cursor.png"), auto;
+  @apply scroll-p-32;
 }
 
 .overflow-scroll {
-    overflow: overlay;
+  overflow: overlay;
 }
 
 .overflow-y-scroll {
-    overflow-y: overlay;
+  overflow-y: overlay;
 }
 
 svg .background {
-    fill: theme('colors.black');
+  fill: theme('colors.black');
 }
 
 .navbar-light svg .background {
-    fill: theme('colors.light') !important;
+  fill: theme('colors.light') !important;
 }
 
 .bg-white svg .background {
-    fill: theme('colors.white') !important;
+  fill: theme('colors.white') !important;
 }
 
 .delta-svg > g > :nth-child(2) {
-    @apply transition-all duration-300;
+  @apply transition-all duration-300;
 }
 
 .delta-svg > g > :nth-child(3) {
-    @apply opacity-0 transition-all duration-300 ;
+  @apply opacity-0 transition-all duration-300 ;
 }
 
 .delta-svg > g:hover > :nth-child(2) {
-    @apply opacity-0 ;
+  @apply opacity-0 ;
 }
 
 .delta-svg > g:hover > :nth-child(3) {
-    @apply opacity-100;
+  @apply opacity-100;
 }

@@ -52,14 +52,6 @@ export default function About({
   const [active, setActive] = useState();
 
   useEffect(() => {
-    ScrollTrigger.create({
-      trigger: nav.current,
-      start: 'top 10%',
-      endTrigger: 'article',
-      end: 'bottom 10%',
-      pin: true,
-    });
-
     const headings = gsap.utils.toArray('article section');
 
     headings.forEach(t => {
@@ -77,7 +69,7 @@ export default function About({
   }, []);
 
   return (
-    <Layout wrapperClassName="bg-white text-black about-page scroll-p-16" container footer light>
+    <Layout wrapperClassName="about-page scroll-p-16" container footer light>
       <h2 className="text-[4.34vw] leading-[1.15] uppercase">
         Opinion library is a website built to explore the language and arguments used in comments to
         petitions regarding the mask mandate in the United States.
@@ -261,7 +253,7 @@ export default function About({
         </article>
 
         <nav className="relative uppercase" id="about-nav">
-          <ul className="flex flex-col gap-y-2 z-10" ref={nav}>
+          <ul className="flex flex-col gap-y-2 z-10 sticky top-24">
             <li>
               <Button
                 as="a"
