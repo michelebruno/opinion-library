@@ -12,25 +12,46 @@ import commentJson from '../data/sample-comments.json';
 gsap.registerPlugin(ScrollTrigger);
 
 function HoverImage({children, component: Component, image, imageUrl, ...props}) {
-  const [showImage, setShow] = useState(false);
-
-  const imgClassName = '  absolute top-2 right-6 translate-x-full z-[-1] opacity-50 transition-all';
+  const imgClassName = 'transition-transform fixed z-[-1] hidden opacity-50 top-0 left-0';
 
   return (
-    <span className="relative group">
+    <span className="relative ">
       <span
         className="underline"
         {...props}
-        onMouseEnter={() => setShow(true)}
-        onMouseLeave={() => setShow(false)}
+        onMouseMove={e => {
+          e.target.parentNode.querySelector('img').style.display = 'block';
+          e.target.parentNode.querySelector(
+            'img'
+          ).style.transform = `translateX(calc(${e.clientX}px - 50%)) translateY(calc(${e.clientY}px - 50%))`;
+        }}
+        onMouseLeave={e => {
+          e.target.parentNode.querySelector('img').style.display = 'none';
+        }}
       >
         {children}
       </span>
-      {showImage && image && (
-        <Image image={image} className={imgClassName} style={{minWidth: '20vw'}} />
+      {image && (
+        <Image
+          image={image}
+          className={imgClassName}
+          style={{
+            minWidth: '20vw',
+            transitionDuration: '100ms',
+            transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+          }}
+        />
       )}
-      {showImage && imageUrl && (
-        <img src={imageUrl} className={imgClassName} style={{minWidth: '20vw'}} />
+      {imageUrl && (
+        <img
+          src={imageUrl}
+          className={imgClassName}
+          style={{
+            minWidth: '20vw',
+            transitionDuration: '100ms',
+            transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+          }}
+        />
       )}
     </span>
   );

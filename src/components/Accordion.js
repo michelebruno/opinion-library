@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 export default function Accordion({onClick, isOpen, children, title, subtitle}) {
+  const panelId = `${title.replace(' ', '-').toLowerCase()}-tabpanel`;
   return (
     <div
       className={`flex flex-col last:border-t-white last:border-t-2 ${
@@ -11,6 +12,7 @@ export default function Accordion({onClick, isOpen, children, title, subtitle}) 
       <div
         className="pt-4 pb-4 px-8 border-y-white box-border flex justify-between group select-none cursor-pointer text-light "
         onClick={onClick}
+        aria-controls={`#${panelId}`}
         role="tab"
       >
         <div className="whitespace-nowrap ">
@@ -42,7 +44,9 @@ export default function Accordion({onClick, isOpen, children, title, subtitle}) 
       </div>
 
       <div
+        id={panelId}
         role="tabpanel"
+        aria-expanded={isOpen}
         className={classNames('', isOpen ? 'min-h-0 flex-1' : 'h-0 overflow-hidden')}
       >
         {children}

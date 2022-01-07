@@ -22,9 +22,15 @@ export function ArchiveButton({children, className, isSelected, isCurrent, check
             ],
         className
       )}
+      aria-hidden={isCurrent}
+      aria-checked={isSelected}
       {...props}
     >
-      {checkbox && isSelected && <span className="leading-[0] text-lg mr-1">{'\u00D7'}</span>}
+      {checkbox && isSelected && (
+        <span aria-hidden className="leading-[0] text-lg mr-1">
+          {'\u00D7'}
+        </span>
+      )}
       {children}
     </button>
   );
