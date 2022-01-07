@@ -4,8 +4,8 @@ import classNames from 'classnames';
 export default function Accordion({onClick, isOpen, children, title, subtitle}) {
   return (
     <div
-      className={`flex-grow flex flex-col last:border-t-white last:border-t-2 ${
-        isOpen ? 'h-full' : ''
+      className={`flex flex-col last:border-t-white last:border-t-2 ${
+        isOpen ? 'min-h-0 flex-1' : ''
       }`}
     >
       <div
@@ -41,7 +41,10 @@ export default function Accordion({onClick, isOpen, children, title, subtitle}) 
         </div>
       </div>
 
-      <div role="tabpanel" className={classNames('', isOpen ? 'h-full' : 'h-0 overflow-hidden')}>
+      <div
+        role="tabpanel"
+        className={classNames('', isOpen ? 'min-h-0 flex-1' : 'h-0 overflow-hidden')}
+      >
         {children}
       </div>
     </div>

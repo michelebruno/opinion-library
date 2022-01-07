@@ -6,7 +6,7 @@ import {mix} from '../utils/mix';
 export function MaskometerGrid({chosen, words, distribution, onClickSecondWord}) {
   return (
     <div className="h-full flex flex-col justify-between relative gap-4  ">
-      <p className="mx-8 mb-4 text-lg">
+      <p className="mx-8 2xl:mb-4 text-lg">
         Horizontal position corresponds to usage by the two groups in the selcted corpus of reasons
         to sign
       </p>
@@ -76,7 +76,7 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
                       marginLeft: `${delta}%`,
                       '--gradient-mix': isCurrent ? undefined : mix('EA3C9A', '3514FF', delta),
                     }}
-                    className="transition-[margin] duration-1000 rounded-[0px] -translate-x-1/2 absolute z-20"
+                    className="transition-[margin] duration-1000 -translate-x-1/2 absolute z-20"
                     onClick={() => onClickSecondWord(name)}
                   >
                     {name}

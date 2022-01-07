@@ -25,7 +25,7 @@ export function ArchiveButton({children, className, isSelected, isCurrent, check
       {...props}
     >
       {checkbox && isSelected && <span className="leading-[0] text-lg mr-1">{'\u00D7'}</span>}
-      <span>{children}</span>
+      {children}
     </button>
   );
 }

@@ -18,6 +18,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @media (min-width: theme('screens.lg')) and (max-width: theme('screens.2xl')){
+    :root, html,body {
+      font-size: 14px;
+    }
+  }
+}
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }
@@ -182,7 +189,7 @@
         background-color: var(--gradient-mix);
         border-color: var(--gradient-mix);
 
-        @apply block p-1 leading-snug uppercase text-center rounded-none border text-sm 2xl:text-base;
+        @apply block p-1 2xl:p-1 uppercase text-center rounded-none border leading-none text-base;
     }
 
     .highlighted-word {

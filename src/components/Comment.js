@@ -55,7 +55,7 @@ export default function Comment({
         <div className={`rounded-full avatar bg-${origin}`} />
       </div>
       <div className="col-span-11">
-        <div className={`text-gray select-none ${large ? 'text-2xl' : 'text-xs'}`}>
+        <div className={`text-gray select-none ${large ? 'text-2xl' : 'text-sm 2xl:text-xs'}`}>
           <span>User{user}</span>
           {' • '}
           <span>{createdAt}</span>
@@ -114,7 +114,7 @@ export default function Comment({
           className={classNames(
             'text-gray truncate  block ',
             petition.slug ? ' hover:text-light-darker underline' : 'cursor-default',
-            large ? 'text-2xl' : 'text-xs'
+            large ? 'text-2xl' : 'text-sm 2xl:'
           )}
           target="_blank"
           rel="noreferrer"
