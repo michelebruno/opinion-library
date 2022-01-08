@@ -14,7 +14,7 @@ import video5 from '../video/tutorial_5 MENO.mp4';
 const tutorialSlides = [
   {
     video: video1,
-    text: 'When first opening the archive you’ll be presented a list of the twenty most used words in both promask and nomask comments. Select a word to discover which other words are most commonly used together with it.',
+    text: 'When first opening the library you’ll be presented a list of the twenty most used words in both promask and nomask comments. Select a word to discover which other words are most commonly used together with it.',
   },
 
   {
@@ -24,15 +24,15 @@ const tutorialSlides = [
 
   {
     video: video3,
-    text: 'Related words will be positioned horizontally according to their usage by the two groups. Words most frequently used by promasks will be found on the left, while nomask words will be positioned to the right. The vertical disposition follows alphabetic order.',
+    text: 'Related words will be positioned horizontally according to their usage by the two groups. Words most frequently used to comment promask petitions will be found on the right, while words used to comment nomask ones will be positioned to the left. The vertical disposition follows alphabetic order.',
   },
   {
     video: video4,
-    text: 'You can read the comments mentioning the selected word by clicking on the Opinions tab.',
+    text: 'You can read the comments mentioning the selected word by clicking on the Comments tab.',
   },
   {
     video: video5,
-    text: 'An additional filter can be added by selecting one of the words from the list inside the Opinions tab. This will add a filter and display only comments using both words.',
+    text: 'An additional filter can be added by selecting one of the words from the list inside the Comments tab. This will add a filter and display only comments using both words.',
   },
 ];
 

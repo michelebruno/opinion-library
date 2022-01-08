@@ -78,8 +78,8 @@ export default function About({
     headings.forEach(t => {
       ScrollTrigger.create({
         trigger: t,
-        start: 'top 10%',
-        end: 'bottom 10%',
+        start: 'top 4rem',
+        end: 'bottom 4rem',
         onEnter: () => {
           setActive(t.id);
         },
@@ -90,7 +90,7 @@ export default function About({
   }, []);
 
   return (
-    <Layout wrapperClassName="about-page scroll-p-16" container footer light>
+    <Layout container footer light>
       <h2 className="text-[4.34vw] leading-[1.15] uppercase">
         Opinion library is a website built to explore the language and arguments used in comments to
         petitions regarding the mask mandate in the United States.
@@ -205,7 +205,7 @@ export default function About({
                     '_blank'
                   )
                 }
-                className="mx-auto w-7/12"
+                className="mx-auto w-7/12 cursor-pointer"
               />
             </div>
 

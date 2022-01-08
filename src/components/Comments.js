@@ -52,7 +52,7 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
   return (
     <div className="px-8 h-full max-h-full flex flex-col">
       <p className="2xl:mb-4 w-full text-lg">
-        Here you can read the reasons to sign the 100 most popular promask and nomask petition
+        Here you can read the comments on the 100 most liked promask and nomask petition
       </p>
       <div className="w-full sticky top-0 bg-black z-20">
         <h2 className="text-lg text-light my-4">Filter opinions by:</h2>

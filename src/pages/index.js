@@ -552,9 +552,9 @@ const IndexPage = ({
       <HomeSlide span={1} className="" id="some-words-frequent">
         <div className="col-span-6">
           <h2 className="mb-4">
-            these words are common, but are used in different ways by{' '}
-            <span className="bg-promask inline-block">pro mask</span> or{' '}
-            <span className="bg-nomask inline-block">no mask</span> users
+            these words are common, but are used in different ways to comment{' '}
+            <span className="bg-promask inline-block">pro mask</span> and
+            <span className="bg-nomask inline-block">no mask</span> petitions
           </h2>
         </div>
         <div className="col-span-6 relative">

@@ -66,7 +66,7 @@ export default function Library({data: {words, ...data}}) {
             />
           </Accordion>
           <Accordion
-            title="Opinions"
+            title="Comments"
             subtitle={
               <>
                 containing <span className="uppercase">{chosen.current}</span>{' '}

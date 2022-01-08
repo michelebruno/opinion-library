@@ -23,7 +23,9 @@ export default function Layout({
       <Helmet
         bodyAttributes={{
           class: classNames(
-            footer ? 'bg-white text-black overflow-y-scroll' : 'bg-black text-white '
+            footer
+              ? 'bg-white text-black overflow-y-scroll about-page scroll-p-16'
+              : 'bg-black text-white '
           ),
         }}
       />
