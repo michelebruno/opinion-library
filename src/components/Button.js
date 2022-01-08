@@ -41,10 +41,10 @@ export default function Button({children, className, id, as: As, large, light, .
     <As
       id={id}
       className={classNames(
-        ' inline-block',
+        'button inline-block',
         light ? 'hover:text-light-darker' : ' ',
         large ? 'py-4 px-8 text-2xl ' : ' text-base py-1 px-4',
-        ' border-current active:bg-light active:text-black border rounded-full hover:text-black',
+        'border-current active:bg-light active:text-black border rounded-full hover:text-black',
         light ? 'hover:text-light-darker' : 'hover:text-light ',
         className
       )}

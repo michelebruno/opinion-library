@@ -84,7 +84,7 @@
   }
 
   .comment.large {
-    @apply p-16 rounded-[3rem] gap-8;
+    @apply p-12 rounded-[3rem] gap-8;
   }
 
   .comment .avatar {
@@ -187,6 +187,10 @@
     list-style: none;
     margin: 0;
     line-height: 1.5;
+  }
+
+  .button.active {
+    @apply bg-light-darker text-black;
   }
 
   .archive-button {

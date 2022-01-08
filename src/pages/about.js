@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {graphql} from 'gatsby';
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import gsap from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
+import {ScrollSpy} from 'bootstrap';
 import Layout from '../components/Layout';
 import Button from '../components/Button';
 import Image from '../components/Image';
@@ -70,23 +71,13 @@ export default function About({
 }) {
   const nav = useRef();
 
-  const [active, setActive] = useState();
-
-  useEffect(() => {
-    const headings = gsap.utils.toArray('article section');
-
-    headings.forEach(t => {
-      ScrollTrigger.create({
-        trigger: t,
-        start: 'top 4rem',
-        end: 'bottom 4rem',
-        onEnter: () => {
-          setActive(t.id);
-        },
-        onEnterBack: () => setActive(t.id),
-        onLeaveBack: () => setActive(),
-      });
+  useLayoutEffect(() => {
+    const scrollSpy = new ScrollSpy(document.body, {
+      target: '#about-nav',
+      offset: 80,
     });
+
+    return () => ScrollSpy.getOrCreateInstance(document.body).dispose();
   }, []);
 
   return (
@@ -246,7 +237,7 @@ export default function About({
               comments. This offers preliminary information to the user while they’re deciding which
               comments to read while also allowing them to understand the context of the comments
               they’re reading of one and the{' '}
-              <HoverImage imageUrl="https://www.google.com/url?sa=i&url=https%3A%2F%2Faptly.de%2Fblog%2Fthe-15-best-gif-reactions%2F&psig=AOvVaw0ZXHX-M2RMs-uLH_bMrbg9&ust=1639756440706000&source=images&cd=vfe&ved=0CAsQjRxqEAoMCA8VAAAAAB0AAAAAEA8">
+              <HoverImage imageUrl="https://aptly.de/wp-content/uploads/2016/03/When-I-send-requirements-to-another-scrum-team.gif">
                 other side
               </HoverImage>
               .
@@ -274,34 +265,19 @@ export default function About({
         </article>
 
         <nav className="relative uppercase" id="about-nav">
-          <ul className="flex flex-col gap-y-2 z-10 sticky top-24">
-            <li>
-              <Button
-                as="a"
-                href="#data"
-                light
-                className={active === 'data' && '!bg-light-darker !text-black'}
-              >
+          <ul className="nav flex flex-col gap-y-2 z-10 sticky top-24">
+            <li className="nav-item">
+              <Button className="nav-link" as="a" href="#data" light>
                 Data
               </Button>
             </li>
-            <li>
-              <Button
-                as="a"
-                href="#interactions"
-                light
-                className={active === 'interactions' && '!bg-light-darker !text-black'}
-              >
+            <li className="nav-item">
+              <Button as="a" href="#interactions" className="nav-link" light>
                 Interactions
               </Button>
             </li>
-            <li>
-              <Button
-                as="a"
-                href="#team"
-                light
-                className={active === 'team' && '!bg-light-darker !text-black'}
-              >
+            <li className="nav-item">
+              <Button as="a" href="#team" className="nav-link" light>
                 The team
               </Button>
             </li>

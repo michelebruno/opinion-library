@@ -5,3 +5,4 @@ public
 credentials.json
 .env
 
+.DS_Store

@@ -22,11 +22,7 @@ export default function Layout({
       <Seo title={title} />
       <Helmet
         bodyAttributes={{
-          class: classNames(
-            footer
-              ? 'bg-white text-black overflow-y-scroll about-page scroll-p-16'
-              : 'bg-black text-white '
-          ),
+          class: classNames(footer ? 'bg-white text-black about-page' : 'bg-black text-white '),
         }}
       />
       <Navbar fixed={fixedHeader} light={light} tutorial={tutorial} />

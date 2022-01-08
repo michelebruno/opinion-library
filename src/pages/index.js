@@ -358,8 +358,8 @@ const IndexPage = ({
       >
         <Navbar absolute light allBlack />
         <div className="text-black text-center col-span-12 row-start-3 row-span-2 flex flex-col justify-center self-middle">
-          <h1 className="text-9xl">Opinion Library</h1>
-          <h2 className="text-[2.2rem] normal-case">
+          <h1 className="text-8xl 2xl:text-9xl">Opinion Library</h1>
+          <h2 className="text-[1.8rem] 2xl:text-[2.2rem] normal-case">
             What do change.org users think about mask mandates in the U.S.?
           </h2>
         </div>
@@ -501,7 +501,6 @@ const IndexPage = ({
             user="30200130"
             created_at="1 minute ago"
             petition={{title: 'Petition title'}}
-            createdAt="1 minute ago"
             large
             origin="black"
           />

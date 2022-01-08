@@ -55,12 +55,12 @@ export default function Comment({
         <div className={`rounded-full avatar bg-${origin}`} />
       </div>
       <div className="col-span-11">
-        <div className={`text-gray select-none ${large ? 'text-2xl' : 'text-sm 2xl:text-xs'}`}>
+        <div className={`text-gray select-none ${large ? 'text-xl' : 'text-sm 2xl:text-xs'}`}>
           <span>User{user}</span>
           {' • '}
           <span>{createdAt}</span>
         </div>
-        <p className={`comment-text ${large ? 'text-3xl leading-snug py-4' : 'py-2 text-base'}`}>
+        <p className={`comment-text ${large ? 'text-3xl leading-snug py-3' : 'py-2 text-base'}`}>
           {typeof sentences !== 'undefined'
             ? sentences.map((sentence, i) => {
                 if (sentenceHasWord(sentence, word) || sentenceHasWord(sentence, secondWord)) {
@@ -114,7 +114,7 @@ export default function Comment({
           className={classNames(
             'text-gray truncate  block ',
             petition.slug ? ' hover:text-light-darker underline' : 'cursor-default',
-            large ? 'text-2xl' : 'text-sm 2xl:'
+            large ? 'text-xl' : 'text-sm 2xl:text-xs'
           )}
           target="_blank"
           rel="noreferrer"
