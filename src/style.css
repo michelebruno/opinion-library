@@ -89,8 +89,12 @@
 
   .comment .avatar {
     aspect-ratio: 1;
-    min-height: 1rem;
-    min-width: 1rem;
+    min-width: 100%;
+  }
+  .comment .avatar:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
   }
 
   mark {

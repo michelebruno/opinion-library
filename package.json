@@ -63,5 +63,11 @@
     "prettier-airbnb-config": "^1.0.0",
     "prop-types": "^15.7.2",
     "tailwindcss": "^3.0.1"
-  }
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not dead",
+    "last 3 Safari versions",
+    "> 0.2%"
+  ]
 }
