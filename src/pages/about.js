@@ -82,13 +82,13 @@ export default function About({
 
   return (
     <Layout container footer light>
-      <h2 className="text-[4.34vw] leading-[1.15] uppercase">
+      <h2 className="text-xl lg:text-[4.34vw] leading-[1.15] uppercase">
         Opinion library is a website built to explore the language and arguments used in comments to
         petitions regarding the mask mandate in the United States.
       </h2>
 
-      <div className="mt-32 grid grid-cols-3 gap-x-8">
-        <article className="col-span-2 relative z-10">
+      <div className="mt-32 grid lg:grid-cols-3 gap-x-8">
+        <article className="lg:col-span-2 relative z-10 overflow-hidden">
           <p>
             The research presented in this website was carried out during the Final Synthesis Studio
             of the Master Degree in Communication Design offered by Politecnico di Milano.
@@ -133,7 +133,7 @@ export default function About({
             <div>
               <Image
                 image={images.find(i => i.relativePath === 'about/tags.png')}
-                className="mx-auto w-7/12"
+                className="mx-auto w-flg:w-7/12"
               />
             </div>
             <p>
@@ -147,7 +147,7 @@ export default function About({
               file containing all the petitions we asked for — this includes the title, body, image,
               signature count, etc.
             </p>
-            <div className="text-base w-full overflow-hidden no-scrollbar border-2 border-black rounded-3xl w-7/12 mx-auto">
+            <div className="text-base w-full overflow-hidden no-scrollbar border-2 border-black rounded-3xl w-flg:w-7/12 mx-auto">
               <h3 className="bg-black text-white px-8 py-4 sticky top-0 left-0 select-none">
                 <code>petition.json</code>
               </h3>
@@ -162,7 +162,7 @@ export default function About({
               each petition.
             </p>
 
-            <div className="text-base w-full overflow-hidden border-2 border-black rounded-3xl w-7/12 mx-auto">
+            <div className="text-base w-full overflow-hidden border-2 border-black rounded-3xl w-flg:w-7/12 mx-auto">
               <h3 className="bg-black text-white px-8 py-4 sticky top-0 left-0 select-none">
                 <code>comments.json</code>
               </h3>
@@ -179,7 +179,7 @@ export default function About({
             <div>
               <Image
                 image={images.find(i => i.relativePath === 'about/google-nl.png')}
-                className="mx-auto w-7/12"
+                className="mx-auto w-flg:w-7/12"
               />
             </div>
 
@@ -196,7 +196,7 @@ export default function About({
                     '_blank'
                   )
                 }
-                className="mx-auto w-7/12 cursor-pointer"
+                className="mx-auto w-flg:w-7/12 cursor-pointer"
               />
             </div>
 
@@ -214,7 +214,7 @@ export default function About({
                     '_blank'
                   )
                 }
-                className="mx-auto w-7/12"
+                className="mx-auto w-flg:w-7/12"
               />
             </div>
           </section>
@@ -248,7 +248,7 @@ export default function About({
             <h2 id="team">The team</h2>
             <p>This project was created by:</p>
 
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {team.map((t, i) => (
                 <div className="relative group" key={t.publicURL}>
                   <Image
@@ -264,7 +264,7 @@ export default function About({
           </section>
         </article>
 
-        <nav className="relative uppercase" id="about-nav">
+        <nav className="relative uppercase hidden lg:block" id="about-nav">
           <ul className="nav flex flex-col gap-y-2 z-10 sticky top-24">
             <li className="nav-item">
               <Button className="nav-link" as="a" href="#data" light>

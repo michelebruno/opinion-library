@@ -3,7 +3,7 @@ import {withPrefix} from 'gatsby';
 
 export default function Footer() {
   return (
-    <footer className="grid grid-cols-4 gap-8 p-8 text-base">
+    <footer className="grid lg:grid-cols-4 gap-8 p-8 text-base">
       <div id="students">
         <h3>Authors</h3>
         <ul>

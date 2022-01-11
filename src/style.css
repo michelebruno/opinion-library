@@ -124,7 +124,7 @@
   }
 
   article {
-    @apply text-2xl;
+    @apply text-lg lg:text-2xl;
   }
 
   article section {
