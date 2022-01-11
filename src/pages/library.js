@@ -40,12 +40,12 @@ export default function Library({data: {words, ...data}}) {
       className="flex-1 min-h-0 "
       tutorial
     >
-      <div className="w-full h-full overflow-hidden flex flex-nowrap border-y-white border-t-2 ">
+      <div className="w-full h-full overflow-hidden flex flex-nowrap border-y-white lg:border-t-2 ">
         <WordsIndex words={words.nodes} chosen={chosen} setChosen={setChosen} />
         <div
           className={classNames(
             ' overflow-hidden flex flex-col',
-            chosen.current ? 'w-10/12' : 'w-0'
+            chosen.current ? 'w-full lg:w-10/12' : 'w-0'
           )}
         >
           <Accordion

@@ -46,7 +46,7 @@ export default function Comment({
       className={classNames(
         className,
         'comment',
-        large && 'large',
+        large ? 'large' : 'mr-4 lg:mr-0',
         origin === 'promask' && 'border-promask',
         origin === 'nomask' && 'border-nomask'
       )}

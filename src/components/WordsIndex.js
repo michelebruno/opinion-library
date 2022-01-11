@@ -1,34 +1,33 @@
 import classNames from 'classnames';
 import React from 'react';
 
-export default function Index({words, chosen, setChosen}) {
+export default function WordsIndex({words, chosen, setChosen}) {
   return (
     <div
       className={classNames(
-        'duration-500 flex flex-col',
-        chosen.current ? 'w-2/12 border-r-2 border-t2 border-r-white' : 'w-full '
+        'duration-500 flex flex-col text-center lg:text-left',
+        chosen.current
+          ? 'hidden lg:block  lg:w-2/12 border-r-2 lg:border-t border-r-white'
+          : 'w-full '
       )}
     >
       <div
-        className={`sticky top-0 text-light px-8 pt-4 pb-4 border-white border-b-2 duration-1000 bg-black select-none  whitespace-nowrap ${
+        className={`sticky top-0 text-light text-lg lg:text-2xl px-8 pt-4 pb-4 border-white border-b lg:border-b-2 duration-1000 bg-black select-none lg:whitespace-nowrap ${
           !chosen.current && 'w-full cursor-pointer'
         }`}
         onClick={() => setChosen({})}
       >
-        <h2 className={classNames('inline-block text-2xl uppercase ')}>Words</h2>
+        <h2 className={classNames('inline-block uppercase ')}>Words</h2>
         <span
-          className={classNames(
-            'ml-2 text-light text-2xl overflow-hidden',
-            chosen.current ? 'hidden' : ''
-          )}
+          className={classNames('ml-2 text-light overflow-hidden', chosen.current ? 'hidden' : '')}
         >
-          <span className="animate__animated animate__fadeInLeft">
-            / 20 most used in promask and nomask comments
+          <span className="block lg:inline animate__animated animate__fadeInLeft">
+            <span className="hidden lg:inline">/</span> 20 most used in promask and nomask comments
           </span>
         </span>
       </div>
 
-      <ul className="overflow-y-scroll no-scrollbar flex-1 words-list">
+      <ul className="overflow-y-scroll no-scrollbar flex-1 words-list ">
         {words.map(({name, finding}, index) => {
           const isNextSelected =
             index + 1 < words.length

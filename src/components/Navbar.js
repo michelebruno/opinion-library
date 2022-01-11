@@ -161,9 +161,9 @@ export default function Navbar({fixed, light, absolute, className, allBlack, tut
         )}
       >
         <Link to="/" className="w-1/12">
-          <Logo height="60px" className="fill-current" />
+          <Logo className="fill-current h-8 lg:h-[60px]" />
         </Link>
-        <ul className="flex items-center ">
+        <ul className="hidden lg:flex items-center  ">
           <Button
             as="button"
             className={tutorial ? 'uppercase' : 'invisible'}

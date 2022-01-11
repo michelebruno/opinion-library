@@ -79,8 +79,7 @@
   }
 
   .comment {
-    @apply grid grid-cols-12 w-full bg-white text-black normal-case;
-    @apply p-4 gap-4 rounded-xl text-base;
+    @apply grid grid-cols-12 h-auto w-[90vw] lg:w-full bg-white text-black normal-case p-4 gap-4 rounded-xl text-base;
   }
 
   .comment.large {
@@ -91,12 +90,19 @@
     aspect-ratio: 1;
     min-width: 100%;
   }
+
   .comment .avatar:after {
     content: "";
     display: block;
     padding-bottom: 100%;
   }
 
+  @media screen and (min-width: theme('screens.lg')) {
+
+    .maskometer-label {
+      writing-mode: vertical-rl;
+    }
+  }
   mark {
     @apply text-light bg-transparent;
   }

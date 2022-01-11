@@ -6,35 +6,29 @@ import {mix} from '../utils/mix';
 export function MaskometerGrid({chosen, words, distribution, onClickSecondWord}) {
   return (
     <div className="h-full flex flex-col justify-between relative gap-4  ">
-      <p className="mx-8 2xl:mb-4 text-lg">
+      <p className="hidden lg:block mx-8 2xl:mb-4 text-lg">
         Horizontal position corresponds to usage by the two groups in the selcted corpus of reasons
         to sign
       </p>
       <div className="flex-1 ">
         <div
           className={classNames(
-            ' h-full px-8 py-4 flex flex-col justify-between relative',
+            ' h-full lg:px-8 py-4 flex flex-col justify-between relative',
             'overflow-hidden'
           )}
         >
           <div className="z-1 uppercase">
-            <p
-              className="bg-promask text-white text-lg text-center h-full absolute top-0 bottom-0 left-0 rotate-180 p-1 z-10"
-              style={{writingMode: 'vertical-lr'}}
-            >
+            <p className="bg-promask text-white text-lg text-center lg:h-full lg:absolute top-0 bottom-0 left-0 lg:rotate-180 lg:p-1 z-10 maskometer-label">
               Promask
             </p>
 
-            <p
-              className="bg-nomask text-white text-lg text-center h-full absolute top-0 bottom-0 right-0 p-1 z-10"
-              style={{writingMode: 'vertical-rl'}}
-            >
+            <p className="bg-nomask text-white text-lg text-center lg:h-full lg:absolute top-0 bottom-0 right-0 lg:p-1 z-10 maskometer-label">
               Nomask
             </p>
 
-            <div className="absolute top-0 bottom-0 right-1/2 translate-x-1/2 border-r-[1px] boreder-r-white border-dashed opacity-50" />
+            <div className="hidden lg:block absolute top-0 bottom-0 right-1/2 translate-x-1/2 border-r-[1px] boreder-r-white border-dashed opacity-50" />
 
-            <p className="text-lg text-sm 2xl:text-base text-center text-gray select-none absolute top-0 left-0 right-0 w-full normal-case bg-black pb-2">
+            <p className="hidden lg:block text-lg text-sm 2xl:text-base text-center text-gray select-none absolute top-0 left-0 right-0 w-full normal-case bg-black pb-2">
               equally used
             </p>
           </div>

@@ -6,20 +6,20 @@ export default function Accordion({onClick, isOpen, children, title, subtitle}) 
   return (
     <div
       className={`flex flex-col last:border-t-white last:border-t-2 ${
-        isOpen ? 'min-h-0 flex-1' : ''
+        isOpen ? 'min-h-0 flex-1 ' : 'first:hidden'
       }`}
     >
       <div
-        className="pt-4 pb-4 px-8 border-y-white box-border flex justify-between group select-none cursor-pointer text-light "
+        className="pt-4 pb-4 px-8 border-y-white box-border  justify-between group select-none cursor-pointer text-light flex first:lg:flex"
         onClick={onClick}
         aria-controls={`#${panelId}`}
         role="tab"
       >
         <div className="whitespace-nowrap ">
-          <h2 className="text-2xl uppercase inline-block">{title}</h2>
+          <h2 className="text-lg lg:text-2xl uppercase inline-block">{title}</h2>
           <span
             className={classNames(
-              'ml-2 leading-none text-xl normal-case',
+              'ml-2 leading-none lg:text-xl normal-case inline lg:block',
               isOpen ? '' : 'group-hover:inline-block group-active:opacity-100'
             )}
           >
