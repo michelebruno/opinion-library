@@ -1,9 +1,8 @@
 import * as React from 'react';
 import {graphql} from 'gatsby';
-import {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import {useLayoutEffect} from 'react';
 import gsap from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
-import {ScrollSpy} from 'bootstrap';
 import Layout from '../components/Layout';
 import Button from '../components/Button';
 import Image from '../components/Image';
@@ -69,15 +68,16 @@ export default function About({
     team: {nodes: team},
   },
 }) {
-  const nav = useRef();
-
   useLayoutEffect(() => {
-    const scrollSpy = new ScrollSpy(document.body, {
-      target: '#about-nav',
-      offset: 80,
+    let scrollSpy;
+    import('bootstrap').then(({ScrollSpy}) => {
+      scrollSpy = new ScrollSpy(document.body, {
+        target: '#about-nav',
+        offset: 80,
+      });
     });
 
-    return () => ScrollSpy.getOrCreateInstance(document.body).dispose();
+    return () => scrollSpy?.dispose();
   }, []);
 
   return (
@@ -214,7 +214,7 @@ export default function About({
                     '_blank'
                   )
                 }
-                className="mx-auto w-full"
+                className="mx-auto w-7/12"
               />
             </div>
           </section>

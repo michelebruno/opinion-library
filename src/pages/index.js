@@ -549,7 +549,7 @@ const IndexPage = ({
         </div>
       </HomeSlide>
       <HomeSlide span={1} className="" id="some-words-frequent">
-        <div className="col-span-6">
+        <div className="col-span-6 !gap-0">
           <h2 className="mb-4">
             these words are common, but are used in different ways to comment{' '}
             <span className="bg-promask inline-block">pro mask</span> and
@@ -563,7 +563,7 @@ const IndexPage = ({
       <HomeSlide>
         <div className="col-span-9" style={{letterSpacing: -1}}>
           The opinion library is a tool that collects comments and shows relations among the{' '}
-          <mark>most used words</mark> in pro mask and no mask comments
+          <mark>words most commoly used</mark> to comment pro mask and no mask petitions
         </div>
         <div className="absolute left-8 right-8 bottom-16">
           <div className=" inline-block">

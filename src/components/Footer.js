@@ -1,4 +1,5 @@
 import React from 'react';
+import {withPrefix} from 'gatsby';
 
 export default function Footer() {
   return (
@@ -38,8 +39,12 @@ export default function Footer() {
 
       <div id="contacts">
         <div className="flex mb-4">
-          <img src="/assets/Logo_DensityDesign.svg" alt="DensityDesign Lab" className="mr-8" />
-          <img src="/assets/Logo_Polimi.svg" alt="Politecnico di Milano" />
+          <img
+            src={withPrefix('/assets/Logo_DensityDesign.svg')}
+            alt="DensityDesign Lab"
+            className="mr-8"
+          />
+          <img src={withPrefix('/assets/Logo_Polimi.svg')} alt="Politecnico di Milano" />
         </div>
         <p>
           <a href="https://densitydesign.github.io/teaching-dd17/" target="_blank" rel="noreferrer">
