@@ -79,9 +79,21 @@
   }
 
   .comment {
-    @apply grid grid-cols-12 h-auto w-[90vw] lg:w-full bg-white text-black normal-case p-4 gap-4 rounded-xl text-base;
+    @apply grid grid-cols-12 h-auto overflow-scroll lg:w-full bg-white text-black normal-case p-4 gap-4 rounded-xl text-base;
   }
 
+  @media screen and (max-width: theme('screens.lg')) {
+    .comment {
+      min-width: 90%;
+
+    }
+    .comment p {
+      max-height: 20vh;
+      overflow-y: scroll;
+
+    }
+
+  }
   .comment.large {
     @apply p-12 rounded-[3rem] gap-8;
   }

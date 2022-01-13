@@ -5,12 +5,15 @@ export default function Accordion({onClick, isOpen, children, title, subtitle}) 
   const panelId = `${title.replace(' ', '-').toLowerCase()}-tabpanel`;
   return (
     <div
-      className={`flex flex-col last:border-t-white last:border-t-2 ${
-        isOpen ? 'min-h-0 flex-1 ' : 'first:hidden'
+      className={`group flex flex-col last:border-t-white last:border-t-2 ${
+        isOpen ? 'min-h-0 flex-1 ' : ''
       }`}
     >
       <div
-        className="pt-4 pb-4 px-8 border-y-white box-border  justify-between group select-none cursor-pointer text-light flex first:lg:flex"
+        className={classNames(
+          'py-4 px-8 border-y-white box-border justify-between group select-none cursor-pointer text-light flex',
+          title === 'Related words' && 'hidden lg:flex'
+        )}
         onClick={onClick}
         aria-controls={`#${panelId}`}
         role="tab"
@@ -19,7 +22,7 @@ export default function Accordion({onClick, isOpen, children, title, subtitle}) 
           <h2 className="text-lg lg:text-2xl uppercase inline-block">{title}</h2>
           <span
             className={classNames(
-              'ml-2 leading-none lg:text-xl normal-case inline lg:block',
+              'ml-2 leading-none lg:text-xl normal-case inline lg:inline',
               isOpen ? '' : 'group-hover:inline-block group-active:opacity-100'
             )}
           >

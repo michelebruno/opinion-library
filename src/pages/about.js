@@ -247,7 +247,6 @@ export default function About({
           <section id="team">
             <h2 id="team">The team</h2>
             <p>This project was created by:</p>
-
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {team.map((t, i) => (
                 <div className="relative group" key={t.publicURL}>

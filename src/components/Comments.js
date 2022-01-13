@@ -8,12 +8,12 @@ import {sentencesHaveWord} from '../utils/sentences';
 function GroupCommentList({comments, chosen, secondWord, origin, limit}) {
   return (
     <div>
-      <div className="lg:hidden pb-2">
+      <div className="lg:hidden py-4 px-8">
         <h4 className="uppercase text-lg text-light">{origin}</h4>
       </div>
       <div
         key={origin}
-        className="flex flex-nowrap items-start overflow-x-scroll lg:overflow-auto lg:grid lg:gap-4"
+        className="flex flex-nowrap items-start overflow-x-scroll lg:overflow-auto lg:grid lg:gap-4 px-8 "
       >
         {comments.map(
           (c, i) =>
@@ -30,9 +30,10 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
   const scroller = useRef();
 
   const [limit, setLimit] = useState(100);
-
+  const [filterOverlay, setFilterOverlay] = useState(false);
   useEffect(() => {
     setLimit(100);
+    setFilterOverlay(false);
     scroller.current?.scrollTo(0, 0);
   }, [chosen, secondWord]);
 
@@ -45,60 +46,77 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
         ({sentences}) => !secondWord || sentencesHaveWord(sentences, secondWord)
       );
 
+      const count = f.length;
+      const percentage = (100 * count) / thisOriginComments.length;
+      const round = percentage > 1 ? 0 : 1;
+      const sentence = secondWord
+        ? `${percentage.toFixed(round)}% of ${origin} opinions (${count} of ${totalCount})`
+        : `All ${origin} opinions (${count})`;
+
       result[origin] = {
         totalCount: thisOriginComments.length,
-        count: f.length,
+        count,
+        sentence,
         comments: f,
-        percentage: (100 * f.length) / thisOriginComments.length,
+        percentage,
       };
     }
     return result;
   }, [secondWord, chosen, comments]);
 
   return (
-    <div className="px-8 h-full max-h-full flex flex-col">
-      <p className="2xl:mb-4 w-full text-sm lg:text-lg">
+    <div className="h-full max-h-full flex flex-col">
+      <p className="2xl:mb-4 w-full text-sm lg:text-lg px-8">
         Here you can read the comments on the 100 most liked promask and nomask petition
       </p>
-      <div className="w-full sticky top-0 bg-black z-20">
-        <h2 className="text-lg text-light my-4">Filter opinions by:</h2>
-        <div className="hidden lg:flex flex-wrap">
-          {distribution.map(({secondWord: word, nomaskDelta}) => {
-            const isSelected = secondWord === word;
-            const isCurrent = chosen === word;
+      <div className="w-full top-0 bg-black z-20">
+        <h2 className="text-lg text-light my-4 hidden lg:block px-8">Filter opinions by:</h2>
+        <button
+          className="text-light border-light border px-2 py-1 my-4 mx-8 lg:hidden"
+          onClick={() => setFilterOverlay(true)}
+        >
+          Filter opinions by {secondWord && `(${secondWord})`}
+        </button>
+        <div
+          className={classNames(
+            'absolute top-10 inset-0 lg:static',
+            '',
+            !filterOverlay && 'hidden lg:block'
+          )}
+        >
+          <div className="ml-12 lg:ml-0 bg-black border-l border-light p-8 lg:py-0 lg:static lg:border-l-0 h-full">
+            <div className="pb-8 text-light text-xl lg:hidden">{'\u2715'}</div>
+            <div className=" flex flex-wrap">
+              {distribution.map(({secondWord: word, nomaskDelta}) => {
+                const isSelected = secondWord === word;
+                const isCurrent = chosen === word;
 
-            return (
-              <ArchiveButton
-                key={word}
-                checkbox
-                isCurrent={isCurrent}
-                className="mb-2 mr-2"
-                isSelected={isSelected}
-                onClick={() => onChangeSecondWord(isSelected ? undefined : word)}
-                style={{
-                  '--gradient-mix': mix('EA3C9A', '3514FF', nomaskDelta * 100),
-                }}
-              >
-                {word}
-              </ArchiveButton>
-            );
-          })}
+                return (
+                  <ArchiveButton
+                    key={word}
+                    checkbox
+                    isCurrent={isCurrent}
+                    className="mb-2 mr-2"
+                    isSelected={isSelected}
+                    onClick={() => onChangeSecondWord(isSelected ? undefined : word)}
+                    style={{
+                      '--gradient-mix': mix('EA3C9A', '3514FF', nomaskDelta * 100),
+                    }}
+                  >
+                    {word}
+                  </ArchiveButton>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
       <div className="">
         <div className="hidden lg:flex justify-around md:w-11/12 3xl:w-10/12 mx-auto">
           {['promask', 'nomask'].map(origin => {
-            const {percentage, totalCount, count} = memoized[origin];
-            const round = percentage > 1 ? 0 : 1;
-
+            const {sentence} = memoized[origin];
             return (
-              <p className="sticky top-0 bg-black z-30 text-center text-lg pt-3 pb-4">
-                {secondWord
-                  ? `${percentage.toFixed(
-                      round
-                    )}% of ${origin} opinions (${count} of ${totalCount})`
-                  : `All ${origin} opinions (${count})`}
-              </p>
+              <p className="sticky top-0 bg-black z-30 text-center text-lg pt-3 pb-4">{sentence}</p>
             );
           })}
         </div>

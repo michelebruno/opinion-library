@@ -12,6 +12,7 @@ import allComments from '../unsourced/comments.json';
 export default function Library({data: {words, ...data}}) {
   const [chosen, setChosen] = useState({});
   const [secondWord, setSecondWord] = useState();
+  const [mobileList, setMobileList] = useState(false);
   const [showComments, setShowComments] = useState(false);
 
   const filteredComments = useMemo(
@@ -25,6 +26,8 @@ export default function Library({data: {words, ...data}}) {
 
   useEffect(() => {
     if (!chosen.next) setSecondWord();
+
+    setMobileList(false);
   }, [chosen]);
 
   const listOfChosenWords = words.nodes.map(x => x.name);
@@ -37,17 +40,63 @@ export default function Library({data: {words, ...data}}) {
     <Layout
       wrapperClassName="max-h-screen h-screen flex flex-col"
       navClassName="!text-black"
-      className="flex-1 min-h-0 "
+      className="flex-1 min-h-0"
       tutorial
     >
       <div className="w-full h-full overflow-hidden flex flex-nowrap border-y-white lg:border-t-2 ">
         <WordsIndex words={words.nodes} chosen={chosen} setChosen={setChosen} />
         <div
           className={classNames(
-            ' overflow-hidden flex flex-col',
+            'overflow-hidden flex flex-col',
             chosen.current ? 'w-full lg:w-10/12' : 'w-0'
           )}
         >
+          <div className="relative lg:hidden bg-light text-black uppercase text-center p-1 text-xl">
+            <h3 onClick={() => setMobileList(!mobileList)}>
+              {chosen.current}{' '}
+              <svg
+                viewBox="0 0 63 26"
+                width=".5em"
+                fill="none"
+                className={classNames('inline transition', mobileList && 'rotate-180')}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M61.5 2L32 23.5L1 2" stroke="black" strokeWidth="6" />
+              </svg>
+            </h3>
+            <ul
+              className={classNames(
+                'overflow-y-scroll no-scrollbar flex-1 words-list absolute left-0 right-0 z-30 top-full bg-black text-white max-h-screen pb-32',
+                !mobileList && 'hidden'
+              )}
+            >
+              {words.nodes.map(({name, finding}, index) => {
+                const isNextSelected =
+                  index + 1 < words.length
+                    ? words[index + 1].name === chosen.next ||
+                      words[index + 1].name === chosen.current
+                    : false;
+
+                return (
+                  chosen.current !== name && (
+                    <li
+                      role="listitem"
+                      key={name}
+                      onClick={() =>
+                        chosen.current !== name ? setChosen({current: name}) : setChosen({})
+                      }
+                      className={classNames(
+                        'word-item last:border-b-current',
+                        !isNextSelected && 'border-b-black '
+                      )}
+                    >
+                      <h2 className={classNames('text-lg uppercase')}>{name}</h2>
+                    </li>
+                  )
+                );
+              })}
+            </ul>
+          </div>
           <Accordion
             title="Related words"
             subtitle={

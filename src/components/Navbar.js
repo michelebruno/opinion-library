@@ -14,7 +14,7 @@ import video5 from '../video/tutorial_5 MENO.mp4';
 const tutorialSlides = [
   {
     video: video1,
-    text: 'When first opening the library you’ll be presented a list of the twenty most used words in both promask and nomask comments. Select a word to discover which other words are most commonly used together with it.',
+    text: 'When first opening the library you’ll be presented a list of the twenty words most used to comment both promask and nomask petitions. Select a word to discover which other words are most commonly used together with it.',
   },
 
   {

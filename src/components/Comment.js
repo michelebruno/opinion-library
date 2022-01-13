@@ -33,6 +33,7 @@ export default function Comment({
   user,
   createdAt,
   word,
+  from_now: fromNow,
   secondWord,
   petition,
   highlightWords,
@@ -58,9 +59,13 @@ export default function Comment({
         <div className={`text-gray select-none ${large ? 'text-xl' : 'text-sm 2xl:text-xs'}`}>
           <span>User{user}</span>
           {' • '}
-          <span>{createdAt}</span>
+          <span>{fromNow || createdAt}</span>
         </div>
-        <p className={`comment-text ${large ? 'text-3xl leading-snug py-3' : 'py-2 text-base'}`}>
+        <p
+          className={`comment-text no-scrollbar ${
+            large ? 'text-3xl leading-snug py-3' : 'py-2 text-base'
+          }`}
+        >
           {typeof sentences !== 'undefined'
             ? sentences.map((sentence, i) => {
                 if (sentenceHasWord(sentence, word) || sentenceHasWord(sentence, secondWord)) {
