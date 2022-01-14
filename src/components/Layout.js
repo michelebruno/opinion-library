@@ -20,21 +20,31 @@ export default function Layout({
   scrollWrapRef,
 }) {
   return (
-    <div
-      className={
-        scrollWrap && 'scroll-wrapper fixed inset-0 overflow-auto overflow-y-scroll no-scrollbar'
-      }
-      ref={scrollWrapRef}
-    >
+    <div>
       <div className={classNames('antialiased', wrapperClassName)}>
         <Seo title={title} />
         <Helmet
           bodyAttributes={{
-            class: classNames(footer ? 'bg-white text-black about-page' : 'bg-black text-white '),
+            class: classNames(
+              footer ? 'bg-white text-black about-page scroll-smooth' : 'bg-black text-white '
+            ),
           }}
         />
-        <Navbar fixed={fixedHeader} light={light} tutorial={tutorial} />
-        <div className={classNames('relative ', container && 'mx-8', className)}>{children}</div>
+        {!scrollWrap && <Navbar fixed={fixedHeader} light={light} tutorial={tutorial} />}
+        <div
+          className={classNames(
+            container && 'mx-8',
+            scrollWrap
+              ? 'fixed z-10 inset-0 overflow-y-scroll no-scrollbar scroll-wrapper'
+              : 'relative',
+            className
+          )}
+          ref={scrollWrapRef}
+        >
+          {scrollWrap && <Navbar fixed={fixedHeader} light={light} tutorial={tutorial} />}
+          {children}
+        </div>
+
         {footer && <Footer />}
       </div>
     </div>

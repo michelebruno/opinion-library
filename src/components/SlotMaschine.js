@@ -17,6 +17,7 @@ export default function SlotMaschine({words}) {
       scrollTrigger: {
         trigger: el.current.parentElement,
         once: true,
+        scroller: '.scroll-wrapper',
         // start: 'top center'
       },
     });

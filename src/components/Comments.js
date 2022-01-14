@@ -54,7 +54,7 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
 
       const count = f.length;
       const percentage = (100 * count) / thisOriginComments.length;
-      const round = percentage > 1 ? 0 : 1;
+      const round = percentage > 0.94 ? 0 : 1;
       const sentence = secondWord
         ? `${percentage.toFixed(round)}% of comments in ${origin} (${count} of ${
             thisOriginComments.length

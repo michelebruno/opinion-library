@@ -397,9 +397,9 @@ const IndexPage = ({
       });
 
     return () => {
-      scroller.current.removeEventListener('touchstart', touchHandler);
-      scroller.current.removeEventListener('touchmove', touchHandler);
-      scroller.current.removeEventListener('touchend', touchHandler);
+      scroller.current?.removeEventListener('touchstart', touchHandler);
+      scroller.current?.removeEventListener('touchmove', touchHandler);
+      scroller.current?.removeEventListener('touchend', touchHandler);
       window.removeEventListener(wheelEvent, handleScroll);
       window.removeEventListener('keyup', handleKeyUp);
     };
@@ -418,18 +418,18 @@ const IndexPage = ({
         id="progress-bar"
       />
       <HomeSlide
-        className="text-black lg:text-[6vw] grid-rows-6 z-50 select-none relative z-1"
+        className="text-black lg:text-[6vw] grid-rows-6 z-50 select-none relative z-20"
         ref={landing}
         padding="both"
       >
-        <Navbar absolute light allBlack />
-        <div className="text-black text-center col-span-2 lg:col-span-12 row-start-3 row-span-2 flex flex-col justify-center self-middle">
+        <Navbar absolute light allBlack className="!z-20" />
+        <div className="text-black text-center col-span-2 lg:col-span-12 row-start-3 row-span-2 flex flex-col justify-center self-middle relative z-20">
           <h1 className="font-medium text-5xl lg:text-8xl 2xl:text-9xl mb-2">Opinion Library</h1>
           <h2 className="text-lg lg:text-[1.8rem] 2xl:text-[2.2rem] normal-case">
             What do change.org users think about mask mandates in the U.S.?
           </h2>
         </div>
-        <div className="absolute left-0 right-0 bottom-0 py-8 text-center text-base lg:text-xl normal-case text-black">
+        <div className="absolute left-0 right-0 bottom-0 py-8 z-20 text-center text-base lg:text-xl normal-case text-black">
           <p onClick={() => goToSection(1)} className="cursor-pointer">
             Scroll down to discover more
             <span className="mx-auto w-10 lg:w-12 pt-4 block">
@@ -447,7 +447,7 @@ const IndexPage = ({
         </h2>
         <div
           id="change-data-bubbles"
-          className="text-black text-center normal-case absolute h-full w-full inset-0"
+          className="text-black text-center normal-case absolute h-[90%] bottom-0 w-full right-0 left-0"
         >
           <div
             className={classNames(
@@ -455,7 +455,7 @@ const IndexPage = ({
               'bg-light rounded-full ',
               'flex items-center justify-center ',
               'w-[60vmin] h-[60vmin] ',
-              'absolute right-0  bottom-[15%] '
+              'absolute right-0 bottom-[15%] '
             )}
           >
             <div>
@@ -495,14 +495,14 @@ const IndexPage = ({
       </HomeSlide>
       <HomeSlide span={2} padding={false} ref={maskMandateSlide}>
         <div className="col-span-2 lg:col-span-8 ">
-          <h2 className="sticky top-0 h-screen pt-32" style={{letterSpacing: -1}}>
+          <h2 className="sticky top-0 full pt-16 lg:pt-32" style={{letterSpacing: -1}}>
             As the platform grew, so did the topics being discussed. One of the most{' '}
             <mark>controversial themes</mark> has been <br />
             <SlotMaschine words={words} />
           </h2>
         </div>
 
-        <div className="absolute h-screen bottom-0 left-0 right-0 p-8 overflow-hidden">
+        <div className="absolute h-1/2 bottom-0 left-0 right-0 p-8 overflow-hidden">
           <div className="relative h-full w-full z-40 home-petition-images ">
             <Image
               image={allFile.nodes[7]}
@@ -565,7 +565,7 @@ const IndexPage = ({
           <Comment
             id="fake-comment"
             user="30200130"
-            created_at="1 minute ago"
+            from_now="1 minute ago"
             petition={{title: 'Petition title'}}
             large
             origin="black"
@@ -574,19 +574,19 @@ const IndexPage = ({
       </HomeSlide>
       <HomeSlide
         span={2}
-        className="auto-rows-min"
+        className="grid-rows-2"
         id="understand-language"
         padding={false}
         ref={understandLanguage}
       >
         <div className="col-span-2 lg:col-span-8">
-          <div className="h-screen w-full pt-16 lg:pt-32">
+          <div className="lg:h-screen w-full pt-16 lg:pt-32">
             <p id="this-allows">
               This allows us to understand the different points of view and the{' '}
               <mark>language</mark> used to express them
             </p>
           </div>
-          <div className="lg:h-screen lg:w-full pt-16 lg:pt-32">
+          <div className="lg:h-screen lg:w-full pt-4 lg:pt-32">
             <p id="recurring-words">
               We can find recurring{' '}
               <HighlightedWord isActive={highlightWords} className={highlightWords && 'text-black'}>
@@ -596,8 +596,8 @@ const IndexPage = ({
             </p>
           </div>
         </div>
-        <div className="lg:col-span-4 normal-case overflow-">
-          <div className="sticky top-0 pt-16 lg:pt-32 h-screen grid auto-rows-min gap-y-4 comment-container h-screen overflow-y-scroll no-scrollbar ">
+        <div className=" col-span-2 lg:row-span-2 lg:col-span-4 normal-case">
+          <div className="lg:sticky h-full lg:h-screen top-0 pt-16 lg:pt-32 grid auto-rows-min gap-y-4 comment-container overflow-hidden lg:overflow-y-scroll no-scrollbar ">
             {Object.entries(commentsData).map(([id, word]) => {
               const comment = homeComments.find(({commentId}) => commentId == id);
               return (
@@ -613,24 +613,28 @@ const IndexPage = ({
           </div>
         </div>
       </HomeSlide>
-      <HomeSlide span={1} className="grid-rows-3 lg:grid-rows-none" id="some-words-frequent">
-        <div className="col-span-2 lg:col-span-6 !gap-0">
+      <HomeSlide
+        span={1}
+        className="grid-rows-2  auto-rows-max lg:auto-rows-auto lg:grid-rows-none"
+        id="some-words-frequent"
+      >
+        <div className="col-span-2 lg:col-span-6">
           <h2 className="mb-4">
             These words are common, but are used in different ways to comment{' '}
             <span className="bg-promask inline-block">pro mask</span> and
             <span className="bg-nomask inline-block">no mask</span> petitions
           </h2>
         </div>
-        <div className="row-span-2 lg:row-span-auto col-span-2 lg:col-span-6 relative">
+        <div className="col-span-2 lg:col-span-6 relative">
           <Rettangoli className="absolute bottom-0 left-0 right-0 h-full w-full delta-svg" />
         </div>
       </HomeSlide>
-      <HomeSlide>
+      <HomeSlide className=" ">
         <div className="col-span-2 lg:col-span-9" style={{letterSpacing: -1}}>
           The opinion library is a tool that collects comments and shows relations among the{' '}
           <mark>words most commoly used</mark> to comment pro mask and no mask petitions
         </div>
-        <div className="lg:absolute col-span-2 left-8 right-8 bottom-16">
+        <div className="absolute col-span-2 left-8 right-8 bottom-16">
           <div className=" inline-block">
             <Button
               id="view-library-button"

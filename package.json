@@ -12,7 +12,8 @@
     "start": "gatsby develop",
     "build": "gatsby build --prefix-paths",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "publish": "yarn clean && yarn build && gh-pages -d public"
   },
   "dependencies": {
     "@fullpage/react-fullpage": "^0.1.19",
