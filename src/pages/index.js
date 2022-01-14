@@ -297,6 +297,7 @@ const IndexPage = ({
         }, 1500);
       }
     }
+
     function handleScroll(e) {
       e.preventDefault();
 
@@ -315,6 +316,58 @@ const IndexPage = ({
           ? goNext()
           : (e.key !== 'ArrowUp' && e.key !== 'ArrowLeft') || goPrev());
     }
+
+    function handleTouchMove(e) {
+      e.preventDefault();
+
+      console.log(e);
+
+      const n = -e.wheelDeltaX || -e.deltaX;
+      const o = e.wheelDeltaY || -e.deltaY;
+      const r = Math.abs(n) > Math.abs(o) ? n : o;
+      e && e.preventDefault();
+
+      canAdvance && (r < 0 ? triggerNext() : triggerPrev());
+    }
+
+    const touches = {
+      touchstart: {x: -1, y: -1},
+      touchmove: {x: -1, y: -1},
+      touchend: false,
+      direction: 'undetermined',
+    };
+
+    function touchHandler(event) {
+      let touch;
+      if (typeof event !== 'undefined') {
+        event.preventDefault();
+        if (typeof event.touches !== 'undefined') {
+          [touch] = event.touches;
+          switch (event.type) {
+            case 'touchstart':
+            case 'touchmove':
+              touches[event.type].x = touch.pageX;
+              touches[event.type].y = touch.pageY;
+              break;
+            case 'touchend':
+              touches[event.type] = true;
+              if (touches.touchstart.y > -1 && touches.touchmove.y > -1) {
+                touches.direction = touches.touchstart.y < touches.touchmove.y ? 'top' : 'bottom';
+
+                // DO STUFF HERE
+
+                canAdvance && (touches.direction === 'bottom' ? triggerNext() : triggerPrev());
+              }
+            default:
+              break;
+          }
+        }
+      }
+    }
+
+    document.addEventListener('touchstart', touchHandler, wheelOpt);
+    document.addEventListener('touchmove', touchHandler, wheelOpt);
+    document.addEventListener('touchend', touchHandler, wheelOpt);
 
     window.addEventListener(wheelEvent, handleScroll, wheelOpt);
 
@@ -340,33 +393,37 @@ const IndexPage = ({
       });
 
     return () => {
+      document.removeEventListener('touchstart', touchHandler);
+      document.removeEventListener('touchmove', touchHandler);
+      document.removeEventListener('touchend', touchHandler);
       window.removeEventListener(wheelEvent, handleScroll);
       window.removeEventListener('keyup', handleKeyUp);
     };
   }, []);
 
   return (
-    <Layout fixedHeader className="text-[4.34vw] leading-tight">
+    <Layout fixedHeader className="text-[7.485vw] lg:text-[4.34vw] leading-tight">
       <Helmet bodyAttributes={{class: 'no-scrollbar bg-black text-white snap-y'}} />
       <div
         className="fixed right-0 top-0 bottom-0 origin-top bg-light w-2 z-40"
         id="progress-bar"
       />
       <HomeSlide
-        className="text-black text-[6vw] grid-rows-6 z-50  pb-32 select-none relative z-1"
+        className="text-black lg:text-[6vw] grid-rows-6 z-50 select-none relative z-1"
         ref={landing}
+        padding="both"
       >
         <Navbar absolute light allBlack />
-        <div className="text-black text-center col-span-12 row-start-3 row-span-2 flex flex-col justify-center self-middle">
-          <h1 className="text-8xl 2xl:text-9xl">Opinion Library</h1>
-          <h2 className="text-[1.8rem] 2xl:text-[2.2rem] normal-case">
+        <div className="text-black text-center col-span-2 lg:col-span-12 row-start-3 row-span-2 flex flex-col justify-center self-middle">
+          <h1 className="font-medium text-5xl lg:text-8xl 2xl:text-9xl mb-2">Opinion Library</h1>
+          <h2 className="text-lg lg:text-[1.8rem] 2xl:text-[2.2rem] normal-case">
             What do change.org users think about mask mandates in the U.S.?
           </h2>
         </div>
-        <div className="absolute left-0 right-0 bottom-0 py-8 text-center text-xl normal-case text-black">
+        <div className="absolute left-0 right-0 bottom-0 py-8 text-center text-base lg:text-xl normal-case text-black">
           <p onClick={() => goToSection(1)} className="cursor-pointer">
             Scroll down to discover more
-            <span className="mx-auto w-12 pt-4 block">
+            <span className="mx-auto w-10 lg:w-12 pt-4 block">
               <svg viewBox="0 0 63 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M61.5 2L32 23.5L1 2" stroke="black" strokeWidth="3" />
               </svg>
@@ -375,7 +432,7 @@ const IndexPage = ({
         </div>
       </HomeSlide>
       <HomeSlide className="overflow-hidden" span={1} ref={changeDataSlide}>
-        <h2 className="col-span-9">
+        <h2 className="col-span-2 lg:col-span-9">
           <mark>Change.org</mark> is the largest petition website, and in 2020{' '}
           <span className="inline-block">it only grew</span> larger, especially in the United States
         </h2>
@@ -428,16 +485,15 @@ const IndexPage = ({
         </div>
       </HomeSlide>
       <HomeSlide span={2} padding={false} ref={maskMandateSlide}>
-        <div className="col-span-8 ">
+        <div className="col-span-2 lg:col-span-8 ">
           <h2 className="sticky top-0 h-screen pt-32" style={{letterSpacing: -1}}>
             As the platform grew, so did the topics being discussed. One of the most{' '}
-            <mark>controversial themes</mark> has been
-            <br />
+            <mark>controversial themes</mark> has been <br />
             <SlotMaschine words={words} />
           </h2>
         </div>
 
-        <div className="absolute h-screen w-full bottom-0 left-0 right-0 p-8 overflow-hidden">
+        <div className="absolute h-screen bottom-0 left-0 right-0 p-8 overflow-hidden">
           <div className="relative h-full w-full z-40 home-petition-images ">
             <Image
               image={allFile.nodes[7]}
@@ -488,11 +544,12 @@ const IndexPage = ({
         </div>
       </HomeSlide>
       <HomeSlide
-        className="auto-rows-min content-center pb-32 "
+        className="auto-rows-min content-center"
+        padding="both"
         id="why-you-signed"
         ref={whyYouSigned}
       >
-        <div className="col-span-9 min-h-[30rem]">
+        <div className="col-span-2 lg:col-span-9 min-h-[30rem]">
           <p className="pb-8 ">
             <mark>Why</mark> they have signed
           </p>
@@ -513,16 +570,16 @@ const IndexPage = ({
         padding={false}
         ref={understandLanguage}
       >
-        <div className="col-span-8">
-          <div className="h-screen w-full pt-32">
+        <div className="col-span-2 lg:col-span-8">
+          <div className="h-screen w-full pt-16 lg:pt-32">
             <p id="this-allows">
               This allows us to understand the different points of view and the{' '}
               <mark>language</mark> used to express them
             </p>
           </div>
-          <div className="h-screen w-full pt-32">
+          <div className="lg:h-screen lg:w-full pt-16 lg:pt-32">
             <p id="recurring-words">
-              We can find recurring
+              We can find recurring{' '}
               <HighlightedWord isActive={highlightWords} className={highlightWords && 'text-black'}>
                 words
               </HighlightedWord>{' '}
@@ -530,11 +587,10 @@ const IndexPage = ({
             </p>
           </div>
         </div>
-        <div className="col-span-4 normal-case overflow-">
-          <div className="sticky top-0 pt-32 h-screen grid auto-rows-min gap-y-4 comment-container h-screen overflow-y-scroll no-scrollbar ">
+        <div className="lg:col-span-4 normal-case overflow-">
+          <div className="sticky top-0 pt-16 lg:pt-32 h-screen grid auto-rows-min gap-y-4 comment-container h-screen overflow-y-scroll no-scrollbar ">
             {Object.entries(commentsData).map(([id, word]) => {
               const comment = homeComments.find(({commentId}) => commentId == id);
-
               return (
                 <Comment
                   key={id}
@@ -548,24 +604,24 @@ const IndexPage = ({
           </div>
         </div>
       </HomeSlide>
-      <HomeSlide span={1} className="" id="some-words-frequent">
-        <div className="col-span-6 !gap-0">
+      <HomeSlide span={1} className="grid-rows-3 lg:grid-rows-none" id="some-words-frequent">
+        <div className="col-span-2 lg:col-span-6 !gap-0">
           <h2 className="mb-4">
-            these words are common, but are used in different ways to comment{' '}
+            These words are common, but are used in different ways to comment{' '}
             <span className="bg-promask inline-block">pro mask</span> and
             <span className="bg-nomask inline-block">no mask</span> petitions
           </h2>
         </div>
-        <div className="col-span-6 relative">
+        <div className="row-span-2 lg:row-span-auto col-span-2 lg:col-span-6 relative">
           <Rettangoli className="absolute bottom-0 left-0 right-0 h-full w-full delta-svg" />
         </div>
       </HomeSlide>
       <HomeSlide>
-        <div className="col-span-9" style={{letterSpacing: -1}}>
+        <div className="col-span-2 lg:col-span-9" style={{letterSpacing: -1}}>
           The opinion library is a tool that collects comments and shows relations among the{' '}
           <mark>words most commoly used</mark> to comment pro mask and no mask petitions
         </div>
-        <div className="absolute left-8 right-8 bottom-16">
+        <div className="lg:absolute col-span-2 left-8 right-8 bottom-16">
           <div className=" inline-block">
             <Button
               id="view-library-button"

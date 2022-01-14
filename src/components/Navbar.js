@@ -118,20 +118,6 @@ function Tutoria({tutorial, onChangeTutorial}) {
   );
 }
 
-function MenuItem({children, to}) {
-  return (
-    <li className="first:border-current">
-      <Link
-        to={to}
-        className="hover:underline active:text-light-darker"
-        activeClassName="border-light text-light underline "
-      >
-        {children}
-      </Link>
-    </li>
-  );
-}
-
 const menu = [
   {
     path: '/',

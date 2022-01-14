@@ -1,5 +1,6 @@
 import React, {forwardRef} from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 const heightClasses = ['h-0', 'h-screen', 'h-[200vh]', 'h-[300vh]', 'h-[400vh]'];
 
@@ -10,10 +11,10 @@ const HomeSlide = forwardRef(({children, className, id, span, uppercase, padding
       'relative',
       heightClasses[span],
       uppercase && 'uppercase',
-      padding === 'top' && 'pt-32',
-      padding === 'both' && 'py-32',
-      padding === 'bottom' && 'pb-32',
-      'grid grid-cols-12 gap-16',
+      padding === 'top' && 'pt-16 lg:pt-32',
+      padding === 'both' && 'py-16 lg:py-32',
+      padding === 'bottom' && 'pb-16 lg:pb-32',
+      'grid grid-cols-2 lg:grid-cols-12 gap-16',
       className
     )}
     style={{height: `${span}00 vh`}}
@@ -35,6 +36,10 @@ HomeSlide.defaultProps = {
   span: 1,
   uppercase: true,
   padding: 'top',
+};
+
+HomeSlide.propTypes = {
+  padding: PropTypes.oneOf(['top', 'bottom', 'both', false]),
 };
 
 export default HomeSlide;

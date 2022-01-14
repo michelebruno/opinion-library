@@ -3,11 +3,16 @@
   src: local(Everett), local(TWKEverett), url("fonts/TWKEverett-Regular-web.woff");
   font-weight: normal;
 }
+@font-face {
+  font-family: Everett;
+  src: local(Everett), local(TWKEverett), url("fonts/TWKEverett-Regular-web.woff");
+  font-weight: normal;
+}
 
 @font-face {
-  font-family: Everett Mono;
-  src: local(Everett Mono), local(TWKEverett Mono), url("fonts/TWKEverettMono-Regular-web.woff");
-  font-weight: normal;
+  font-family: Everett;
+  src: local(Everett Mono), local(TWKEverett Mono), url("fonts/TWKEverett-Medium-web.woff");
+  font-weight: 500;
 }
 
 
@@ -79,7 +84,7 @@
   }
 
   .comment {
-    @apply grid grid-cols-12 h-auto overflow-scroll lg:w-full bg-white text-black normal-case p-4 gap-4 rounded-xl text-base;
+    @apply grid grid-cols-12 gap-2 lg:gap-4 h-auto lg:w-full bg-white text-black normal-case  rounded-xl p-4;
   }
 
   @media screen and (max-width: theme('screens.lg')) {
@@ -95,7 +100,7 @@
 
   }
   .comment.large {
-    @apply p-12 rounded-[3rem] gap-8;
+    @apply  lg:p-12 rounded-[3rem] lg:gap-8;
   }
 
   .comment .avatar {

@@ -13,12 +13,18 @@ function GroupCommentList({comments, chosen, secondWord, origin, limit}) {
       </div>
       <div
         key={origin}
-        className="flex flex-nowrap items-start overflow-x-scroll lg:overflow-auto lg:grid lg:gap-4 px-8 "
+        className="flex flex-nowrap items-start overflow-x-scroll lg:overflow-auto no-scrollbar lg:grid lg:gap-4 px-8 "
       >
         {comments.map(
           (c, i) =>
             i < limit && (
-              <Comment key={c.id} highlightWords word={chosen} secondWord={secondWord} {...c} />
+              <Comment
+                key={c.commentId}
+                highlightWords
+                word={chosen}
+                secondWord={secondWord}
+                {...c}
+              />
             )
         )}
       </div>
@@ -50,7 +56,9 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
       const percentage = (100 * count) / thisOriginComments.length;
       const round = percentage > 1 ? 0 : 1;
       const sentence = secondWord
-        ? `${percentage.toFixed(round)}% of ${origin} opinions (${count} of ${totalCount})`
+        ? `${percentage.toFixed(round)}% of ${origin} opinions (${count} of ${
+            thisOriginComments.length
+          })`
         : `All ${origin} opinions (${count})`;
 
       result[origin] = {
@@ -116,7 +124,9 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
           {['promask', 'nomask'].map(origin => {
             const {sentence} = memoized[origin];
             return (
-              <p className="sticky top-0 bg-black z-30 text-center text-lg pt-3 pb-4">{sentence}</p>
+              <p key={origin} className="sticky top-0 bg-black z-30 text-center text-lg pt-3 pb-4">
+                {sentence}
+              </p>
             );
           })}
         </div>

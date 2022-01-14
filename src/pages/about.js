@@ -133,7 +133,7 @@ export default function About({
             <div>
               <Image
                 image={images.find(i => i.relativePath === 'about/tags.png')}
-                className="mx-auto w-flg:w-7/12"
+                className="mx-auto w-full lg:w-7/12"
               />
             </div>
             <p>
@@ -147,7 +147,7 @@ export default function About({
               file containing all the petitions we asked for — this includes the title, body, image,
               signature count, etc.
             </p>
-            <div className="text-base w-full overflow-hidden no-scrollbar border-2 border-black rounded-3xl w-flg:w-7/12 mx-auto">
+            <div className="text-base w-full overflow-hidden no-scrollbar border-2 border-black rounded-3xl w-full lg:w-7/12 mx-auto">
               <h3 className="bg-black text-white px-8 py-4 sticky top-0 left-0 select-none">
                 <code>petition.json</code>
               </h3>
@@ -162,7 +162,7 @@ export default function About({
               each petition.
             </p>
 
-            <div className="text-base w-full overflow-hidden border-2 border-black rounded-3xl w-flg:w-7/12 mx-auto">
+            <div className="text-base w-full overflow-hidden border-2 border-black rounded-3xl w-full lg:w-7/12 mx-auto">
               <h3 className="bg-black text-white px-8 py-4 sticky top-0 left-0 select-none">
                 <code>comments.json</code>
               </h3>
@@ -179,7 +179,7 @@ export default function About({
             <div>
               <Image
                 image={images.find(i => i.relativePath === 'about/google-nl.png')}
-                className="mx-auto w-flg:w-7/12"
+                className="mx-auto w-full lg:w-7/12"
               />
             </div>
 
@@ -196,7 +196,7 @@ export default function About({
                     '_blank'
                   )
                 }
-                className="mx-auto w-flg:w-7/12 cursor-pointer"
+                className="mx-auto w-full lg:w-7/12 cursor-pointer"
               />
             </div>
 
@@ -214,7 +214,7 @@ export default function About({
                     '_blank'
                   )
                 }
-                className="mx-auto w-flg:w-7/12"
+                className="mx-auto w-full lg:w-7/12"
               />
             </div>
           </section>
