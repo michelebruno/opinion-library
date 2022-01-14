@@ -57,14 +57,6 @@ const wheelEvent =
     ? 'wheel'
     : 'mousewheel';
 
-function goToSection(i) {
-  gsap.to(window, {
-    scrollTo: {y: i * window.innerHeight, autoKill: false},
-    duration: 0.8,
-    overwrite: true,
-  });
-}
-
 const commentsData = {
   812047727: 'vaccine',
   811710031: 'health',
@@ -105,11 +97,20 @@ const IndexPage = ({
   },
 }) => {
   const [highlightWords, setHighlightWords] = useState(false);
+  const scroller = useRef();
   const landing = useRef();
   const changeDataSlide = useRef();
   const maskMandateSlide = useRef();
   const understandLanguage = useRef();
   const whyYouSigned = useRef();
+
+  function goToSection(i) {
+    gsap.to(scroller.current, {
+      scrollTo: {y: i * window.innerHeight, autoKill: false},
+      duration: 0.8,
+      overwrite: true,
+    });
+  }
 
   useMatter(landing);
 
@@ -120,6 +121,9 @@ const IndexPage = ({
   }
 
   useEffect(() => {
+    ScrollTrigger.defaults({
+      scroller: scroller.current,
+    });
     gsap
       .timeline({
         scrollTrigger: {
@@ -365,13 +369,13 @@ const IndexPage = ({
       }
     }
 
-    document.addEventListener('touchstart', touchHandler, wheelOpt);
-    document.addEventListener('touchmove', touchHandler, wheelOpt);
-    document.addEventListener('touchend', touchHandler, wheelOpt);
+    scroller.current.addEventListener('touchstart', touchHandler, wheelOpt);
+    scroller.current.addEventListener('touchmove', touchHandler, wheelOpt);
+    scroller.current.addEventListener('touchend', touchHandler, wheelOpt);
 
     window.addEventListener(wheelEvent, handleScroll, wheelOpt);
 
-    document.addEventListener('keyup', handleKeyUp);
+    scroller.current.addEventListener('keyup', handleKeyUp);
 
     // function swipeHandler(t) {
     //     t.deltaY < -30 ? triggerNext() : t.deltaY > 30 && triggerPrev()
@@ -393,16 +397,21 @@ const IndexPage = ({
       });
 
     return () => {
-      document.removeEventListener('touchstart', touchHandler);
-      document.removeEventListener('touchmove', touchHandler);
-      document.removeEventListener('touchend', touchHandler);
+      scroller.current.removeEventListener('touchstart', touchHandler);
+      scroller.current.removeEventListener('touchmove', touchHandler);
+      scroller.current.removeEventListener('touchend', touchHandler);
       window.removeEventListener(wheelEvent, handleScroll);
       window.removeEventListener('keyup', handleKeyUp);
     };
   }, []);
 
   return (
-    <Layout fixedHeader className="text-[7.485vw] lg:text-[4.34vw] leading-tight">
+    <Layout
+      scrollWrap
+      scrollWrapRef={scroller}
+      fixedHeader
+      className="text-[7.485vw] lg:text-[4.34vw] leading-tight"
+    >
       <Helmet bodyAttributes={{class: 'no-scrollbar bg-black text-white snap-y'}} />
       <div
         className="fixed right-0 top-0 bottom-0 origin-top bg-light w-2 z-40"

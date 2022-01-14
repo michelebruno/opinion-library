@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {graphql} from 'gatsby';
+import {graphql, Link} from 'gatsby';
 import {useLayoutEffect} from 'react';
 import gsap from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
@@ -73,7 +73,7 @@ export default function About({
     import('bootstrap').then(({ScrollSpy}) => {
       scrollSpy = new ScrollSpy(document.body, {
         target: '#about-nav',
-        offset: 80,
+        offset: 120,
       });
     });
 
@@ -266,17 +266,17 @@ export default function About({
         <nav className="relative uppercase hidden lg:block" id="about-nav">
           <ul className="nav flex flex-col gap-y-2 z-10 sticky top-24">
             <li className="nav-item">
-              <Button className="nav-link" as="a" href="#data" light>
+              <Button className="nav-link" as={Link} href="#data" light>
                 Data
               </Button>
             </li>
             <li className="nav-item">
-              <Button as="a" href="#interactions" className="nav-link" light>
+              <Button as={Link} href="#interactions" className="nav-link" light>
                 Interactions
               </Button>
             </li>
             <li className="nav-item">
-              <Button as="a" href="#team" className="nav-link" light>
+              <Button as={Link} href="#team" className="nav-link" light>
                 The team
               </Button>
             </li>

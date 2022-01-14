@@ -56,10 +56,10 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
       const percentage = (100 * count) / thisOriginComments.length;
       const round = percentage > 1 ? 0 : 1;
       const sentence = secondWord
-        ? `${percentage.toFixed(round)}% of ${origin} opinions (${count} of ${
+        ? `${percentage.toFixed(round)}% of comments in ${origin} (${count} of ${
             thisOriginComments.length
           })`
-        : `All ${origin} opinions (${count})`;
+        : `All comments in ${origin} petitions (${count})`;
 
       result[origin] = {
         totalCount: thisOriginComments.length,
