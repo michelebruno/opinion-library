@@ -100,7 +100,7 @@
 
   }
   .comment.large {
-    @apply  lg:p-12 rounded-[3rem] lg:gap-8;
+    @apply  lg:p-12 rounded-2xl lg:rounded-[3rem] lg:gap-8;
   }
 
   .comment .avatar {

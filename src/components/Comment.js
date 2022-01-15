@@ -55,7 +55,7 @@ export default function Comment({
       <div className=" ">
         <div className={`rounded-full avatar bg-${origin}`} />
       </div>
-      <div className="col-span-11">
+      <div className="col-span-10 lg:col-span-11">
         <div
           className={`text-gray select-none ${
             large ? 'text-base lg:text-xl' : 'text-sm 2xl:text-xs'

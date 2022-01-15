@@ -21,11 +21,11 @@ const HomeSlide = forwardRef(({children, className, id, span, uppercase, padding
     id={id}
     ref={ref}
   >
-    <div className="snappers-container absolute inset-0 -z-10">
+    <div className="snappers-container overflow-hidden absolute inset-0 -z-10">
       {Array(span)
         .fill(0)
         .map((_zero, index) => (
-          <div className="h-screen snapper" key={index} />
+          <div className="h-full snapper" key={index} />
         ))}
     </div>
     {children}

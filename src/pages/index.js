@@ -124,6 +124,7 @@ const IndexPage = ({
     ScrollTrigger.defaults({
       scroller: scroller.current,
     });
+
     gsap
       .timeline({
         scrollTrigger: {
@@ -137,36 +138,17 @@ const IndexPage = ({
         y: 1200,
         stagger: 0.3,
         duration: 2,
-        rotate: 15,
+        rotate: '-=15deg',
         ease: 'power4.out',
-      })
-      .addLabel('bubbles-up')
-      .to(
-        '#change-data-bubbles > div',
-        {
-          rotate: 15,
-          duration: 8,
-          stagger: 0.4,
-          repeat: -1,
-          ease: 'linear',
-          yoyo: true,
-          yoyoEase: 'linear',
-        },
-        'bubbles-up'
-      )
-      .to(
-        '#change-data-bubbles > div',
-        {
-          y: 20,
-          duration: 6,
-          stagger: 0.6,
-          repeat: -1,
-          ease: 'linear',
-          yoyo: true,
-          yoyoEase: 'linear',
-        },
-        'bubbles-up'
-      );
+      });
+    /* .to('#change-data-bubbles > div', {
+        y: '+=20',
+        rotate: '+=10deg',
+        duration: 6,
+        stagger: 1,
+        repeat: -1,
+        yoyo: true,
+      }); */
 
     const petitionImagesTl = gsap.from(
       gsap.utils.toArray(maskMandateSlide.current.querySelectorAll('img')),
@@ -344,16 +326,19 @@ const IndexPage = ({
     function touchHandler(event) {
       let touch;
       if (typeof event !== 'undefined') {
-        event.preventDefault();
         if (typeof event.touches !== 'undefined') {
           [touch] = event.touches;
           switch (event.type) {
             case 'touchstart':
             case 'touchmove':
+              // event.preventDefault();
+
               touches[event.type].x = touch.pageX;
               touches[event.type].y = touch.pageY;
               break;
             case 'touchend':
+              // event.preventDefault();
+
               touches[event.type] = true;
               if (touches.touchstart.y > -1 && touches.touchmove.y > -1) {
                 touches.direction = touches.touchstart.y < touches.touchmove.y ? 'top' : 'bottom';
@@ -442,7 +427,8 @@ const IndexPage = ({
       </HomeSlide>
       <HomeSlide className="overflow-hidden" span={1} ref={changeDataSlide}>
         <h2 className="col-span-2 lg:col-span-9">
-          <mark>Change.org</mark> is the largest petition website, and in 2020{' '}
+          <mark>Change.org</mark>
+          is the largest petition website, and in 2020{' '}
           <span className="inline-block">it only grew</span> larger, especially in the United States
         </h2>
         <div
@@ -454,12 +440,12 @@ const IndexPage = ({
               'bg-light rotate-[-30deg] ',
               'bg-light rounded-full ',
               'flex items-center justify-center ',
-              'w-[60vmin] h-[60vmin] ',
+              'w-[50vmin] lg:w-[60vmin] h-[50vmin] lg:h-[60vmin] ',
               'absolute right-0 bottom-[15%] '
             )}
           >
             <div>
-              <p className="text-3xl">+208,5%</p>
+              <p className="text-xl lg:text-3xl">+208,5%</p>
               <p className="text-base">Signatures</p>
             </div>
           </div>
@@ -468,12 +454,12 @@ const IndexPage = ({
               'bg-light rotate-[18deg] ',
               'bg-light rounded-full px-4 ',
               'flex items-center justify-center ',
-              'w-[16vmin] h-[16vmin] ',
-              'absolute right-[66%]  bottom-[16%]'
+              'w-[25vmin] lg:w-[16vmin] h-[25vmin] lg:h-[16vmin] ',
+              'absolute right-[66%] bottom-[30%] lg:bottom-[16%]'
             )}
           >
             <div>
-              <p className="text-3xl">+33%</p>
+              <p className="text-xl lg:text-3xl">+33%</p>
               <p className="text-base">Global Users</p>
             </div>
           </div>
@@ -482,12 +468,12 @@ const IndexPage = ({
               'bg-light rotate-[-30deg] ',
               'bg-light rounded-full px-4 ',
               'flex items-center justify-center ',
-              'w-[15vmin] h-[15vmin] ',
-              'absolute left-[41%] bottom-[4%]'
+              'w-[25vmin] lg:w-[15vmin] h-[25vmin] lg:h-[15vmin] ',
+              'absolute left-[30%] lg:left-[41%] bottom-[4%]'
             )}
           >
             <div>
-              <p className="text-3xl">+46%</p>
+              <p className="text-xl lg:text-3xl">+46%</p>
               <p className="text-base">Published Petitions</p>
             </div>
           </div>
@@ -497,7 +483,8 @@ const IndexPage = ({
         <div className="col-span-2 lg:col-span-8 ">
           <h2 className="sticky top-0 full pt-16 lg:pt-32" style={{letterSpacing: -1}}>
             As the platform grew, so did the topics being discussed. One of the most{' '}
-            <mark>controversial themes</mark> has been <br />
+            <mark>controversial themes</mark>
+            has been <br />
             <SlotMaschine words={words} />
           </h2>
         </div>
@@ -506,47 +493,47 @@ const IndexPage = ({
           <div className="relative h-full w-full z-40 home-petition-images ">
             <Image
               image={allFile.nodes[7]}
-              className="w-1/3 absolute top-0 right-8"
+              className="lg:w-1/3 absolute top-[23%] lg:top-0 right-2 lg:right-8"
               onClick={openPetitionLink(7)}
             />
             <Image
               image={allFile.nodes[0]}
-              className="w-1/3 absolute top-8 left-0"
+              className="w-1/3 absolute top-8 left-0 hidden lg:block"
               onClick={openPetitionLink(0)}
             />
             <Image
               image={allFile.nodes[8]}
-              className="w-1/3 absolute top-[16%] left-[41%]"
+              className="lg:w-1/3 absolute top-[5%] lg:top-[16%] left-8 lg:left-[41%]"
               onClick={openPetitionLink(8)}
             />
             <Image
               image={allFile.nodes[2]}
-              className="w-1/3 absolute top-1/3 mt-8 -right-16"
+              className="lg:w-1/3 absolute top-1/4 lg:top-1/3 lg:mt-8 -right-4 lg:-right-16 hidden lg:block "
               onClick={openPetitionLink(2)}
             />
             <Image
               image={allFile.nodes[1]}
-              className="w-1/3 absolute top-1/2 -translate-y-1/2 left-[8.3%]"
+              className="lg:w-1/3 absolute bottom-[30%] lg:bottom-[unset] lg:top-1/2 -translate-y-1/2 lg:left-[8.3%]"
               onClick={openPetitionLink(1)}
             />
             <Image
               image={allFile.nodes[4]}
-              className="w-1/3 absolute bottom-[20%] left-[16%]"
+              className="lg:w-1/3 absolute bottom-[22%] lg:bottom-[20%] left-[16%]"
               onClick={openPetitionLink(4)}
             />
             <Image
               image={allFile.nodes[3]}
-              className="w-1/3 absolute bottom-[16%] right-[16%]"
+              className="lg:w-1/3 absolute bottom-12 lg:bottom-[16%] right-[16%]"
               onClick={openPetitionLink(3)}
             />
             <Image
               image={allFile.nodes[5]}
-              className="w-1/3 absolute top-[83%] -left-[5%] "
+              className="lg:w-1/3 absolute top-full lg:top-[83%] -left-[5%] hidden lg:block"
               onClick={openPetitionLink(5)}
             />
             <Image
               image={allFile.nodes[6]}
-              className="w-1/3 absolute bottom-0 right-0"
+              className="lg:w-1/3 absolute bottom-0 right-0"
               onClick={openPetitionLink(6)}
             />
           </div>
@@ -560,7 +547,8 @@ const IndexPage = ({
       >
         <div className="col-span-2 lg:col-span-9 min-h-[30rem]">
           <p className="pb-8 ">
-            <mark>Why</mark> they have signed
+            <mark>Why</mark>
+            they have signed
           </p>
           <Comment
             id="fake-comment"
@@ -583,7 +571,8 @@ const IndexPage = ({
           <div className="lg:h-screen w-full pt-16 lg:pt-32">
             <p id="this-allows">
               This allows us to understand the different points of view and the{' '}
-              <mark>language</mark> used to express them
+              <mark>language</mark>
+              used to express them
             </p>
           </div>
           <div className="lg:h-screen lg:w-full pt-4 lg:pt-32">
@@ -629,18 +618,22 @@ const IndexPage = ({
           <Rettangoli className="absolute bottom-0 left-0 right-0 h-full w-full delta-svg" />
         </div>
       </HomeSlide>
-      <HomeSlide className=" ">
+      <HomeSlide className=" auto-rows-min" padding="both">
         <div className="col-span-2 lg:col-span-9" style={{letterSpacing: -1}}>
           The opinion library is a tool that collects comments and shows relations among the{' '}
-          <mark>words most commoly used</mark> to comment pro mask and no mask petitions
+          <mark>words most commonly used</mark> to comment pro mask and no mask petitions
         </div>
-        <div className="absolute col-span-2 left-8 right-8 bottom-16">
+        <div className="absolute col-span-2 left-8 right-8 bottom-16 z-20">
           <div className=" inline-block">
             <Button
               id="view-library-button"
               as={Link}
               to="/library/"
               large
+              onTouchStart={e => e.stopPropagation()}
+              onTouchMove={e => e.stopPropagation()}
+              onTouchEnd={e => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
               activeClassName={classNames('border-light text-light')}
             >
               View the library

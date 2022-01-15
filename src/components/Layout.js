@@ -35,7 +35,7 @@ export default function Layout({
           className={classNames(
             container && 'mx-8',
             scrollWrap
-              ? 'fixed z-10 inset-0 overflow-y-scroll no-scrollbar scroll-wrapper'
+              ? 'fixed z-10 inset-0 overflow-y-scroll no-scrollbar scroll-wrapper touch-none'
               : 'relative',
             className
           )}
