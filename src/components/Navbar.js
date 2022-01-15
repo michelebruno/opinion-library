@@ -141,7 +141,7 @@ export default function Navbar({fixed, light, absolute, className, allBlack, tut
       <nav
         className={classNames(
           fixed ? 'fixed' : [absolute ? 'absolute' : 'sticky'],
-          'top-0 z-[15] py-4 px-8 flex w-full uppercase justify-between text-base items-center',
+          'top-0 z-[15] py-4 px-6 lg:px-8 flex w-full uppercase justify-between text-base items-center',
           light && 'navbar-light',
           className
         )}

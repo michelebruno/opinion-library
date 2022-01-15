@@ -33,7 +33,7 @@ export default function Layout({
         {!scrollWrap && <Navbar fixed={fixedHeader} light={light} tutorial={tutorial} />}
         <div
           className={classNames(
-            container && 'mx-8',
+            container && 'mx-6 lg:mx-8',
             scrollWrap
               ? 'fixed z-10 inset-0 overflow-y-scroll no-scrollbar scroll-wrapper touch-none'
               : 'relative',

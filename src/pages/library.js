@@ -66,7 +66,7 @@ export default function Library({data: {words, ...data}}) {
             </h3>
             <ul
               className={classNames(
-                'overflow-y-scroll no-scrollbar flex-1 words-list absolute left-0 right-0 z-30 top-full bg-black text-white max-h-screen pb-32',
+                'overflow-y-scroll no-scrollbar flex-1 words-list absolute left-0 right-0 z-40 top-full bg-black text-white max-h-screen pb-28',
                 !mobileList && 'hidden'
               )}
             >

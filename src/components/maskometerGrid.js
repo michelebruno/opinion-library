@@ -14,15 +14,15 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
         <div
           className={classNames(
             ' h-full lg:px-8 py-4 flex flex-col justify-between relative',
-            'overflow-hidden'
+            'overflow-hidden uppercase'
           )}
         >
-          <div className="z-1 uppercase">
-            <p className="bg-promask text-white text-lg text-center lg:h-full lg:absolute top-0 bottom-0 left-0 lg:rotate-180 lg:p-1 z-10 maskometer-label">
+          <div className="z-1 ">
+            <p className="bg-promask text-white text-sm lg:text-lg text-center h-full absolute top-0 bottom-0 left-0 rotate-180 p-0.5 lg:p-1 z-10 maskometer-label">
               Promask
             </p>
 
-            <p className="bg-nomask text-white text-lg text-center lg:h-full lg:absolute top-0 bottom-0 right-0 lg:p-1 z-10 maskometer-label">
+            <p className="bg-nomask text-white text-sm lg:text-lg text-center h-full absolute top-0 bottom-0 right-0 p-0.5 lg:p-1 z-10 maskometer-label">
               Nomask
             </p>
 
@@ -55,7 +55,7 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
                 <div
                   key={name}
                   className={classNames(
-                    'w-full flex items-center relative',
+                    'mx-5 lg:mx-0 flex items-center relative min-h-[1rem]',
                     'before:absolute before:left-0 before:right-0 ',
                     'before:border-b-[1px] before:block before:top-1/2 before:transition-all',
                     'before:w-full transition-[margin,background-color] duration-500',
@@ -70,11 +70,12 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
                       marginLeft: `${delta}%`,
                       '--gradient-mix': isCurrent ? undefined : mix('EA3C9A', '3514FF', delta),
                     }}
-                    className="transition-[margin] duration-1000 -translate-x-1/2 absolute z-20"
+                    className="transition-[margin] duration-1000 -translate-x-1/2 absolute z-20  "
                     onClick={() => onClickSecondWord(name)}
                   >
-                    {name}
+                    <span className="hidden lg:inline">{name}</span>
                   </ArchiveButton>
+                  <span className="absolute w-full text-center z-30 text-sm lg:hidden">{name}</span>
                 </div>
               );
             })}

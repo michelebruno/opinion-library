@@ -594,6 +594,7 @@ const IndexPage = ({
                   key={id}
                   highlightWords={highlightWords}
                   word={word}
+                  className="!mr-0"
                   {...comment}
                   origin="black"
                 />

@@ -5,15 +5,17 @@ import {ArchiveButton} from './Button';
 import {mix} from '../utils/mix';
 import {sentencesHaveWord} from '../utils/sentences';
 
-function GroupCommentList({comments, chosen, secondWord, origin, limit}) {
+function GroupCommentList({comments, chosen, secondWord, origin, limit, sentence, onScroll}) {
   return (
     <div>
-      <div className="lg:hidden py-4 px-8">
+      <div className="flex justify-between lg:hidden py-4 px-6">
         <h4 className="uppercase text-lg text-light">{origin}</h4>
+        <p className="ml-4 text-xs flex-shrink-1 truncate align-middle self-center">{sentence}</p>
       </div>
       <div
         key={origin}
-        className="flex flex-nowrap items-start overflow-x-scroll lg:overflow-auto no-scrollbar lg:grid lg:gap-4 px-8 "
+        className="flex flex-nowrap items-start overflow-x-scroll lg:overflow-auto no-scrollbar lg:grid lg:gap-4 px-6 lg:px-8 "
+        onScroll={onScroll}
       >
         {comments.map(
           (c, i) =>
@@ -72,15 +74,28 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
     return result;
   }, [secondWord, chosen, comments]);
 
+  function scrolled(e) {
+    if (e.currentTarget.offsetHeight + e.currentTarget.scrollTop >= e.currentTarget.scrollHeight) {
+      setLimit(l => {
+        if (l <= Math.max(memoized.nomask.comments.length, memoized.promask.comments.length))
+          return l + 200;
+
+        return l;
+      });
+    }
+  }
+
   return (
-    <div className="h-full max-h-full flex flex-col">
-      <p className="2xl:mb-4 w-full text-sm lg:text-lg px-8">
+    <div className="h-full max-h-full flex flex-col  overflow-y-scroll lg:overflow-y-visible">
+      <p className="2xl:mb-4 w-full text-sm lg:text-lg px-6 lg:px-8">
         Here you can read the comments on the 100 most liked promask and nomask petition
       </p>
       <div className="w-full top-0 bg-black z-20">
-        <h2 className="text-lg text-light my-4 hidden lg:block px-8">Filter opinions by:</h2>
+        <h2 className="text-lg text-light my-4 hidden lg:block px-6 lg:px-8">
+          Filter opinions by:
+        </h2>
         <button
-          className="text-light border-light border px-2 py-1 my-4 mx-8 lg:hidden"
+          className="text-light border-light border px-2 py-1 my-4 mx-6 lg:hidden"
           onClick={() => setFilterOverlay(true)}
         >
           Filter opinions by {secondWord && `(${secondWord})`}
@@ -93,7 +108,12 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
           )}
         >
           <div className="ml-12 lg:ml-0 bg-black border-l border-light p-8 lg:py-0 lg:static lg:border-l-0 h-full">
-            <div className="pb-8 text-light text-xl lg:hidden">{'\u2715'}</div>
+            <div
+              className="pb-8 text-light text-xl lg:hidden"
+              onClick={() => setFilterOverlay(false)}
+            >
+              {'\u2715'}
+            </div>
             <div className=" flex flex-wrap">
               {distribution.map(({secondWord: word, nomaskDelta}) => {
                 const isSelected = secondWord === word;
@@ -132,22 +152,10 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
         </div>
       </div>
       <div
-        className={classNames('w-full overflow-y-scroll flex-1 pb-8')}
+        className={classNames('w-full lg:overflow-y-scroll flex-1 pb-8')}
         id="comments-container"
         ref={scroller}
-        onScroll={function scrolled(e) {
-          if (
-            e.currentTarget.offsetHeight + e.currentTarget.scrollTop >=
-            e.currentTarget.scrollHeight
-          ) {
-            setLimit(l => {
-              if (l <= Math.max(memoized.nomask.comments.length, memoized.promask.comments.length))
-                return l + 200;
-
-              return l;
-            });
-          }
-        }}
+        onScroll={scrolled}
       >
         <div className="lg:grid lg:grid-cols-2 lg:gap-8 justify-around w-full md:w-11/12 3xl:w-10/12 mx-auto ">
           {chosen &&

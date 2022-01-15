@@ -11,7 +11,7 @@ export default function Accordion({onClick, isOpen, children, title, subtitle}) 
     >
       <div
         className={classNames(
-          'py-4 px-8 border-y-white box-border justify-between group select-none cursor-pointer text-light flex',
+          'py-4 px-6 lg:px-8 border-y-white box-border justify-between group select-none cursor-pointer text-light flex',
           title === 'Related words' && 'hidden lg:flex'
         )}
         onClick={onClick}
@@ -22,8 +22,8 @@ export default function Accordion({onClick, isOpen, children, title, subtitle}) 
           <h2 className="text-lg lg:text-2xl uppercase inline-block">{title}</h2>
           <span
             className={classNames(
-              'ml-2 leading-none lg:text-xl normal-case inline lg:inline',
-              isOpen ? '' : 'group-hover:inline-block group-active:opacity-100'
+              'mx-2 leading-none lg:text-xl normal-case inline lg:inline truncate',
+              isOpen ? '' : ' group-active:opacity-100'
             )}
           >
             / {subtitle}

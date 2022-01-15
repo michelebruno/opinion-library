@@ -12,17 +12,15 @@ export default function WordsIndex({words, chosen, setChosen}) {
       )}
     >
       <div
-        className={`sticky top-0 text-light text-lg lg:text-2xl px-8 pt-4 pb-4 border-white border-b lg:border-b-2 duration-1000 bg-black select-none lg:whitespace-nowrap ${
+        className={`sticky  overflow-hidden top-0 text-light text-lg lg:text-2xl px-8 pt-4 pb-4 border-white border-b lg:border-b-2 duration-1000 bg-black select-none lg:whitespace-nowrap ${
           !chosen.current && 'w-full cursor-pointer'
         }`}
         onClick={() => setChosen({})}
       >
         <h2 className={classNames('inline-block uppercase ')}>Words</h2>
-        <span
-          className={classNames('ml-2 text-light overflow-hidden', chosen.current ? 'hidden' : '')}
-        >
-          <span className="block lg:inline animate__animated animate__fadeInLeft">
-            <span className="hidden lg:inline">/</span> 20 most used in promask and nomask comments
+        <span className={classNames('ml-2 text-light', chosen.current ? 'hidden' : '')}>
+          <span className="">
+            <span className="inline lg:hidden">/</span>/ 20 most used in promask and nomask comments
           </span>
         </span>
       </div>

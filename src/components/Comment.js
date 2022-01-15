@@ -52,7 +52,7 @@ export default function Comment({
         origin === 'nomask' && 'border-nomask'
       )}
     >
-      <div className=" ">
+      <div className="col-span-2 lg:col-span-1 ">
         <div className={`rounded-full avatar bg-${origin}`} />
       </div>
       <div className="col-span-10 lg:col-span-11">

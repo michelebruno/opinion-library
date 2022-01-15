@@ -73,7 +73,7 @@ export default function About({
     import('bootstrap').then(({ScrollSpy}) => {
       scrollSpy = new ScrollSpy(document.body, {
         target: '#about-nav',
-        offset: 120,
+        offset: 140,
       });
     });
 

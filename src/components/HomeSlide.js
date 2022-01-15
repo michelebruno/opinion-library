@@ -7,14 +7,14 @@ const heightClasses = ['h-0', 'h-full', 'h-[200%]', 'h-[300%]', 'h-[400%]'];
 const HomeSlide = forwardRef(({children, className, id, span, uppercase, padding}, ref) => (
   <div
     className={classNames(
-      'section px-10 box-border',
+      'section px-6 lg:px-8 box-border',
       'relative',
       heightClasses[span],
       uppercase && 'uppercase',
       padding === 'top' && 'pt-16 lg:pt-32',
       padding === 'both' && 'py-16 lg:py-32',
       padding === 'bottom' && 'pb-16 lg:pb-32',
-      'grid grid-cols-2 lg:grid-cols-12',
+      'grid grid-cols-2 lg:grid-cols-12 lg:gap-8',
       className
     )}
     style={{height: `${span}00%`}}

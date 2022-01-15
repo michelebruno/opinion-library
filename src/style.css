@@ -114,11 +114,8 @@
     padding-bottom: 100%;
   }
 
-  @media screen and (min-width: theme('screens.lg')) {
-
-    .maskometer-label {
-      writing-mode: vertical-rl;
-    }
+  .maskometer-label {
+    writing-mode: vertical-rl;
   }
   mark {
     @apply text-light bg-transparent;
