@@ -55,7 +55,7 @@ export function MaskometerGrid({chosen, words, distribution, onClickSecondWord})
                 <div
                   key={name}
                   className={classNames(
-                    'mx-5 lg:mx-0 flex items-center relative min-h-[1rem]',
+                    'mx-5 lg:mx-0 flex items-center relative',
                     'before:absolute before:left-0 before:right-0 ',
                     'before:border-b-[1px] before:block before:top-1/2 before:transition-all',
                     'before:w-full transition-[margin,background-color] duration-500',

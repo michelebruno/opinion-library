@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-export default function Accordion({onClick, isOpen, children, title, subtitle}) {
+export default function Accordion({onClick, isOpen, children, title, subtitle, tabpanelStyle}) {
   const panelId = `${title.replace(' ', '-').toLowerCase()}-tabpanel`;
   return (
     <div
@@ -51,6 +51,7 @@ export default function Accordion({onClick, isOpen, children, title, subtitle}) 
         role="tabpanel"
         aria-expanded={isOpen}
         className={classNames('', isOpen ? 'min-h-0 flex-1' : 'h-0 overflow-hidden')}
+        style={tabpanelStyle}
       >
         {children}
       </div>

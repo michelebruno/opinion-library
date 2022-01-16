@@ -25,7 +25,7 @@ export default function SlotMaschine({words}) {
   return (
     <div className="px-4 sm:px-8 lg:px-16 py-4 overflow-hidden h-[1.75em] rounded-full border-2 border-white inline-block">
       <div className="inline-block h-[1em]" id="slot-machine">
-        <div className="slot-content w-auto pb-2 lg:pb-0 " ref={el}>
+        <div className="slot-content w-auto pb-3 lg:pb-0 " ref={el}>
           {[...words.nodes.map(i => i.name), ...words.nodes.map(i => i.name), 'mask mandates'].map(
             (w, i) => (
               <span className="block w-auto" key={i}>

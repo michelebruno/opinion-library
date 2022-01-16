@@ -3,6 +3,10 @@ module.exports = {
   mode: 'jit',
   theme: {
     extend: {
+      screens: {
+        reallyshort: {raw: '(max-height: 550px)'},
+        short: {raw: '(max-height: 650px)'},
+      },
       colors: {
         promask: '#3514FF',
         nomask: '#EA3C9A',

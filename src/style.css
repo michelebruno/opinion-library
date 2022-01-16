@@ -93,7 +93,7 @@
       min-width: calc(100% - .5rem);
 
     }
-    .comment p {
+    .comment:not(.large) p {
       max-height: 20vh;
       overflow-y: scroll;
 

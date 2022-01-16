@@ -98,7 +98,7 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
           className="text-light border-light border px-2 py-1 my-4 mx-6 lg:hidden"
           onClick={() => setFilterOverlay(true)}
         >
-          Filter opinions by {secondWord && `(${secondWord})`}
+          Filter opinions by {secondWord && <span className="underline">{secondWord}</span>}
         </button>
         <div
           className={classNames(

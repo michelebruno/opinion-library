@@ -428,7 +428,7 @@ const IndexPage = ({
       <HomeSlide className="overflow-hidden" span={1} ref={changeDataSlide}>
         <div
           id="change-data-bubbles"
-          className="text-black text-center normal-case absolute h-[90%] bottom-0 w-full right-0 left-0 select-none"
+          className="text-black text-center normal-case absolute h-[70%] bottom-0 w-full right-0 left-0 select-none"
         >
           <div
             className={classNames(
@@ -491,7 +491,7 @@ const IndexPage = ({
           <div className="relative h-full w-full z-40 home-petition-images ">
             <Image
               image={allFile.nodes[7]}
-              className="lg:w-1/3 absolute top-[23%] lg:top-0 right-2 lg:right-8"
+              className="lg:w-1/3 absolute top-[23%] lg:top-0 right-2 lg:right-8 reallyshort:hidden"
               onClick={openPetitionLink(7)}
             />
             <Image
@@ -511,7 +511,7 @@ const IndexPage = ({
             />
             <Image
               image={allFile.nodes[1]}
-              className="lg:w-1/3 absolute bottom-[30%] lg:bottom-[unset] lg:top-1/2 -translate-y-1/2 lg:left-[8.3%]"
+              className="lg:w-1/3 absolute bottom-[30%] lg:bottom-[unset] lg:top-1/2 -translate-y-1/2 lg:left-[8.3%] reallyshort:bottom-[35%]"
               onClick={openPetitionLink(1)}
             />
             <Image
@@ -521,7 +521,7 @@ const IndexPage = ({
             />
             <Image
               image={allFile.nodes[3]}
-              className="lg:w-1/3 absolute bottom-12 lg:bottom-[16%] right-[16%]"
+              className="hidden lg:block lg:w-1/3 absolute bottom-12 lg:bottom-[16%] right-[16%] "
               onClick={openPetitionLink(3)}
             />
             <Image
@@ -585,7 +585,11 @@ const IndexPage = ({
                   key={id}
                   highlightWords={highlightWords}
                   word={word}
-                  className={classNames('!mr-0', index > 4 && 'hidden lg:grid')}
+                  className={classNames(
+                    '!mr-0',
+                    index > 3 && 'hidden lg:grid',
+                    index > 2 && 'short:hidden'
+                  )}
                   {...comment}
                   origin="black"
                 />
@@ -610,22 +614,18 @@ const IndexPage = ({
           <Rettangoli className="absolute bottom-0 left-0 right-0 h-full w-full delta-svg" />
         </div>
       </HomeSlide>
-      <HomeSlide className=" auto-rows-min" padding="both">
+      <HomeSlide className="" padding="both">
         <div className="col-span-2 lg:col-span-9" style={{letterSpacing: -1}}>
           The opinion library is a tool that collects comments and shows relations among the{' '}
           <mark>words most commonly used</mark> to comment pro mask and no mask petitions
         </div>
-        <div className="absolute col-span-2 left-8 right-8 bottom-16 z-10">
+        <div className="col-span-2 lg:col-span-12 flex items-end z-10">
           <div className=" inline-block">
             <Button
               id="view-library-button"
               as={Link}
               to="/library/"
               large
-              onTouchStart={e => e.stopPropagation()}
-              onTouchMove={e => e.stopPropagation()}
-              onTouchEnd={e => e.stopPropagation()}
-              onClick={e => e.stopPropagation()}
               activeClassName={classNames('border-light text-light')}
             >
               View the library

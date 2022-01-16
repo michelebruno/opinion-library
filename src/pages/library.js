@@ -106,6 +106,7 @@ export default function Library({data: {words, ...data}}) {
             }
             isOpen={!showComments}
             onClick={() => setShowComments(!showComments)}
+            tabpanelStyle={{minHeight: !showComments ? `${words.nodes.length}rem` : undefined}}
           >
             <MaskometerGrid
               chosen={chosen}
@@ -120,9 +121,9 @@ export default function Library({data: {words, ...data}}) {
               <>
                 containing <span className="uppercase">{chosen.current}</span>{' '}
                 {secondWord && (
-                  <>
+                  <span className="hidden lg:inline">
                     and <span className="uppercase">{secondWord}</span>
-                  </>
+                  </span>
                 )}{' '}
               </>
             }

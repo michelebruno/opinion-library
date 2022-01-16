@@ -54,18 +54,19 @@ export default function useMatter(containerRef) {
     const isMobile = sizeX < 600;
 
     const friction = 0.0001;
-    const angularVelocity = 0.01;
+    const angularVelocity = 0.001;
     let spriteScale = isMobile ? 0.7 : 1.3; // il bounding box è definito da maskSize
     const maskSize = Math.round(Math.min(sizeY, sizeX) / (isMobile ? 20 : 10));
 
-    if (browser.name === 'safari') {
+    console.log(browser);
+    if (browser.name === 'safari' || browser.name === 'ios' || browser.name === 'ios-webview') {
       console.log("You're on safari", browser);
       spriteScale /= 2.5;
     }
 
     const masks = [];
 
-    for (let i = 0; i < (isMobile ? 8 : 6); i++) {
+    for (let i = 0; i < 6; i++) {
       const imgIndex = i % 2;
 
       masks.push(

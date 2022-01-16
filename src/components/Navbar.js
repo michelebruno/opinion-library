@@ -46,7 +46,7 @@ function Tutoria({tutorial, onChangeTutorial}) {
           onClick={() => onChangeTutorial(false)}
         />
         <div className="absolute inset-0 flex items-center w-full 2xl:w-6/12 md:w-8/12 mx-auto justify-center">
-          <div className="mx-16 bg-[#ECECEC]   rounded-3xl text-black relative">
+          <div className="mx-16 bg-[#ECECEC] rounded-3xl text-black relative w-full">
             <div className="absolute top-0 right-0">
               <button
                 role="button"
@@ -174,12 +174,13 @@ export default function Navbar({fixed, light, absolute, className, allBlack, tut
           <div>
             <button
               className={classNames(
-                'button inline w-auto',
+                'button  w-auto',
                 light ? 'hover:text-light-darker' : ' ',
                 'lg:py-1 px-8 lg:px-4',
+                'hidden lg:inline',
                 'border-current active:bg-light active:text-black border rounded-full hover:text-black',
                 light ? 'hover:text-light-darker' : 'hover:text-light ',
-                tutorial ? 'uppercase' : 'invisible'
+                tutorial ? 'uppercase ' : 'invisible'
               )}
               onClick={() => {
                 setMenu(false);
