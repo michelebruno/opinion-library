@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import {Link} from 'gatsby';
 import {useState} from 'react';
 import Logo from '../images/logo.component.svg';
+import Burger from '../images/burger.component.svg';
 import Button from './Button';
 
 import video1 from '../video/tutorial_1 MENO.mp4';
@@ -38,7 +39,7 @@ const tutorialSlides = [
 
 function Tutoria({tutorial, onChangeTutorial}) {
   return (
-    <div className="fixed inset-0 z-50">
+    <div className="fixed inset-0 z-[100] lg:z-50">
       <div className="w-full h-full relative">
         <div
           className="bg-gray absolute inset-0 opacity-70"
@@ -135,6 +136,7 @@ const menu = [
 
 export default function Navbar({fixed, light, absolute, className, allBlack, tutorial}) {
   const [showTutorial, setTutorial] = useState(false);
+  const [openMenu, setMenu] = useState(false);
 
   return (
     <>
@@ -143,22 +145,52 @@ export default function Navbar({fixed, light, absolute, className, allBlack, tut
           fixed ? 'fixed' : [absolute ? 'absolute' : 'sticky'],
           'top-0 z-[15] py-4 px-6 lg:px-8 flex w-full uppercase justify-between text-base items-center',
           light && 'navbar-light',
+          tutorial && ' !z-[100] ',
           className
         )}
       >
         <Link to="/" className="w-1/12">
           <Logo className="fill-current h-8 lg:h-[60px]" />
         </Link>
-        <ul className="hidden lg:flex items-center  ">
-          <Button
-            as="button"
-            className={tutorial ? 'uppercase' : 'invisible'}
-            onClick={() => setTutorial(0)}
-          >
-            Tutorial
-          </Button>
+        <button
+          className={classNames(
+            'font-icon text-xl p-1 relative z-[110] lg:hidden',
+            openMenu && 'active text-white'
+          )}
+          onClick={() => setMenu(!openMenu)}
+        >
+          A
+        </button>
+        <ul
+          className={classNames(
+            'lg:flex lg:items-center',
+            openMenu
+              ? 'fixed inset-0 flex flex-col text-left justify-end !bg-black text-3xl gap-y-4 p-8 z-[100] text-white'
+              : 'hidden'
+          )}
+          onTouchMove={e => e.preventDefault()}
+          onScroll={e => e.preventDefault()}
+        >
+          <div>
+            <button
+              className={classNames(
+                'button inline w-auto',
+                light ? 'hover:text-light-darker' : ' ',
+                'lg:py-1 px-8 lg:px-4',
+                'border-current active:bg-light active:text-black border rounded-full hover:text-black',
+                light ? 'hover:text-light-darker' : 'hover:text-light ',
+                tutorial ? 'uppercase' : 'invisible'
+              )}
+              onClick={() => {
+                setMenu(false);
+                setTutorial(0);
+              }}
+            >
+              Tutorial
+            </button>
+          </div>
           {menu.map(({path, text}) => (
-            <li key={path} className="first:border-current ml-8 ">
+            <li key={path} className="first:border-current lg:ml-8 ">
               <Link
                 to={path}
                 className={classNames(
@@ -167,8 +199,11 @@ export default function Navbar({fixed, light, absolute, className, allBlack, tut
                 )}
                 activeClassName={classNames(
                   'underline',
+                  allBlack && 'text-light lg:text-current',
                   !allBlack && [
-                    light ? 'border-light-darker text-light-darker' : 'border-light text-light',
+                    light
+                      ? 'border-light-darker lg:text-light-darker'
+                      : 'lg:border-light lg:text-light',
                   ]
                 )}
               >

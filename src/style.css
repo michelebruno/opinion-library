@@ -1,3 +1,5 @@
+@import "https://res.cloudinary.com/dr6lvwubh/raw/upload/v1581441981/Anicons/anicons-regular.css";
+
 @font-face {
   font-family: Everett;
   src: local(Everett), local(TWKEverett), url("fonts/TWKEverett-Regular-web.woff");
@@ -14,7 +16,6 @@
   src: local(Everett Mono), local(TWKEverett Mono), url("fonts/TWKEverett-Medium-web.woff");
   font-weight: 500;
 }
-
 
 @tailwind base;
 
@@ -66,7 +67,7 @@
   }
 
   ul.words-list li.word-item {
-    @apply border-y cursor-pointer hover:border-y-current px-8 py-4;
+    @apply border-y cursor-pointer hover:border-y-current px-6 lg:px-8 py-4;
     @apply hover:text-light;
   }
 
@@ -100,12 +101,15 @@
 
   }
   .comment.large {
-    @apply  lg:p-12 rounded-2xl lg:rounded-[3rem] lg:gap-8;
+    @apply  lg:p-8 rounded-2xl lg:rounded-[3rem] lg:gap-8;
   }
 
   .comment .avatar {
     aspect-ratio: 1;
     min-width: 100%;
+  }
+  .comment.large .avatar {
+    @apply lg:w-10/12 min-w-0;
   }
 
   .comment .avatar:after {
@@ -233,7 +237,17 @@
     @apply cursor-pointer grayscale hover:grayscale-0 transition-[filter];
   }
 
+  .font-icon {
+    font-variation-settings: "TIME" 1;
+    transition: font-variation-settings 0.4s ease;
+  }
+  .font-icon.hover\:active:hover,.font-icon.active {
+    font-variation-settings: "TIME" 100;
+  }
 }
+
+
+
 html {
   cursor: url("./images/cursor.png"), auto;
   @apply scroll-p-32;

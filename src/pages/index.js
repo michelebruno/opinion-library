@@ -426,14 +426,9 @@ const IndexPage = ({
         </div>
       </HomeSlide>
       <HomeSlide className="overflow-hidden" span={1} ref={changeDataSlide}>
-        <h2 className="col-span-2 lg:col-span-9">
-          <mark>Change.org</mark>
-          is the largest petition website, and in 2020{' '}
-          <span className="inline-block">it only grew</span> larger, especially in the United States
-        </h2>
         <div
           id="change-data-bubbles"
-          className="text-black text-center normal-case absolute h-[90%] bottom-0 w-full right-0 left-0"
+          className="text-black text-center normal-case absolute h-[90%] bottom-0 w-full right-0 left-0 select-none"
         >
           <div
             className={classNames(
@@ -478,6 +473,11 @@ const IndexPage = ({
             </div>
           </div>
         </div>
+        <h2 className="col-span-2 lg:col-span-9 relative">
+          <mark>Change.org</mark>
+          is the largest petition website, and in 2020{' '}
+          <span className="inline-block">it only grew</span> larger, especially in the United States
+        </h2>
       </HomeSlide>
       <HomeSlide span={2} padding={false} ref={maskMandateSlide}>
         <div className="col-span-2 lg:col-span-8 ">
@@ -539,16 +539,10 @@ const IndexPage = ({
           </div>
         </div>
       </HomeSlide>
-      <HomeSlide
-        className="auto-rows-min content-center"
-        padding="both"
-        id="why-you-signed"
-        ref={whyYouSigned}
-      >
+      <HomeSlide className="auto-rows-min " padding="both" id="why-you-signed" ref={whyYouSigned}>
         <div className="col-span-2 lg:col-span-9 min-h-[30rem]">
           <p className="pb-8 ">
-            <mark>Why</mark>
-            they have signed
+            <mark>Why</mark> they have signed
           </p>
           <Comment
             id="fake-comment"
@@ -571,8 +565,7 @@ const IndexPage = ({
           <div className="lg:h-screen w-full pt-16 lg:pt-32">
             <p id="this-allows">
               This allows us to understand the different points of view and the{' '}
-              <mark>language</mark>
-              used to express them
+              <mark>language</mark> used to express them
             </p>
           </div>
           <div className="lg:h-screen lg:w-full pt-4 lg:pt-32">

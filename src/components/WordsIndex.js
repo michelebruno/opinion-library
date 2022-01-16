@@ -5,14 +5,14 @@ export default function WordsIndex({words, chosen, setChosen}) {
   return (
     <div
       className={classNames(
-        'duration-500 flex flex-col text-center lg:text-left',
+        'duration-500 flex flex-col text-left',
         chosen.current
           ? 'hidden lg:block  lg:w-2/12 border-r-2 lg:border-t border-r-white'
           : 'w-full '
       )}
     >
       <div
-        className={`sticky  overflow-hidden top-0 text-light text-lg lg:text-2xl px-8 pt-4 pb-4 border-white border-b lg:border-b-2 duration-1000 bg-black select-none lg:whitespace-nowrap ${
+        className={`sticky  overflow-hidden top-0 text-light text-lg lg:text-2xl px-6 lg:px-8 pt-4 pb-4 border-white border-b lg:border-b-2 duration-1000 bg-black select-none lg:whitespace-nowrap ${
           !chosen.current && 'w-full cursor-pointer'
         }`}
         onClick={() => setChosen({})}
