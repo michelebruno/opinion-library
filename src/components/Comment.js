@@ -58,7 +58,7 @@ export default function Comment({
       <div className="col-span-10 lg:col-span-11">
         <div
           className={`text-gray select-none ${
-            large ? 'text-base lg:text-xl' : 'text-sm 2xl:text-xs'
+            large ? 'text-sm lg:text-xl' : 'text-sm 2xl:text-xs'
           }`}
         >
           <span>User{user}</span>
@@ -67,7 +67,7 @@ export default function Comment({
         </div>
         <p
           className={`comment-text no-scrollbar ${
-            large ? 'text-lg lg:text-3xl leading-snug py-3' : 'py-2 text-base'
+            large ? 'text-lg lg:text-3xl leading-snug py-3' : 'py-2 text-sm lg:text-base'
           }`}
         >
           {typeof sentences !== 'undefined'
@@ -123,7 +123,7 @@ export default function Comment({
           className={classNames(
             'text-gray truncate  block ',
             petition.slug ? ' hover:text-light-darker underline' : 'cursor-default',
-            large ? 'text-base lg:text-xl' : 'text-sm 2xl:text-xs'
+            large ? 'text-sm lg:text-xl' : 'text-sm 2xl:text-xs'
           )}
           target="_blank"
           rel="noreferrer"

@@ -86,7 +86,7 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
   }
 
   return (
-    <div className="h-full max-h-full flex flex-col  overflow-y-scroll lg:overflow-y-visible">
+    <div className="h-full max-h-full flex flex-col  overflow-y-scroll no-scrollbar lg:overflow-y-visible">
       <p className="2xl:mb-4 w-full text-sm lg:text-lg px-6 lg:px-8">
         Here you can read the comments on the 100 most liked promask and nomask petition
       </p>

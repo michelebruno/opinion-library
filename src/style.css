@@ -90,7 +90,7 @@
 
   @media screen and (max-width: theme('screens.lg')) {
     .comment {
-      min-width: 90%;
+      min-width: calc(100% - .5rem);
 
     }
     .comment p {
@@ -106,7 +106,7 @@
 
   .comment .avatar {
     aspect-ratio: 1;
-    min-width: 100%;
+    min-width: 80%;
   }
   .comment.large .avatar {
     @apply lg:w-10/12 min-w-0;

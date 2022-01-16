@@ -106,7 +106,7 @@ const IndexPage = ({
 
   function goToSection(i) {
     gsap.to(scroller.current, {
-      scrollTo: {y: i * window.innerHeight, autoKill: false},
+      scrollTo: {y: i * scroller.current.offsetHeight, autoKill: false},
       duration: 0.8,
       overwrite: true,
     });
@@ -397,7 +397,7 @@ const IndexPage = ({
       fixedHeader
       className="text-[7.485vw] lg:text-[4.34vw] leading-tight"
     >
-      <Helmet bodyAttributes={{class: 'no-scrollbar bg-black text-white snap-y'}} />
+      <Helmet bodyAttributes={{class: 'no-scrollbar bg-black text-white'}} />
       <div
         className="fixed right-0 top-0 bottom-0 origin-top bg-light w-2 z-40"
         id="progress-bar"
@@ -474,17 +474,15 @@ const IndexPage = ({
           </div>
         </div>
         <h2 className="col-span-2 lg:col-span-9 relative">
-          <mark>Change.org</mark>
-          is the largest petition website, and in 2020{' '}
+          <mark>Change.org</mark> is the largest petition website, and in 2020{' '}
           <span className="inline-block">it only grew</span> larger, especially in the United States
         </h2>
       </HomeSlide>
       <HomeSlide span={2} padding={false} ref={maskMandateSlide}>
         <div className="col-span-2 lg:col-span-8 ">
-          <h2 className="sticky top-0 full pt-16 lg:pt-32" style={{letterSpacing: -1}}>
+          <h2 className="sticky top-0 full pt-24 lg:pt-32" style={{letterSpacing: -1}}>
             As the platform grew, so did the topics being discussed. One of the most{' '}
-            <mark>controversial themes</mark>
-            has been <br />
+            <mark>controversial themes</mark> has been <br />
             <SlotMaschine words={words} />
           </h2>
         </div>
@@ -562,7 +560,7 @@ const IndexPage = ({
         ref={understandLanguage}
       >
         <div className="col-span-2 lg:col-span-8">
-          <div className="lg:h-screen w-full pt-16 lg:pt-32">
+          <div className="lg:h-screen w-full pt-24 lg:pt-32">
             <p id="this-allows">
               This allows us to understand the different points of view and the{' '}
               <mark>language</mark> used to express them
@@ -579,15 +577,15 @@ const IndexPage = ({
           </div>
         </div>
         <div className=" col-span-2 lg:row-span-2 lg:col-span-4 normal-case">
-          <div className="lg:sticky h-full lg:h-screen top-0 pt-16 lg:pt-32 grid auto-rows-min gap-y-4 comment-container overflow-hidden lg:overflow-y-scroll no-scrollbar ">
-            {Object.entries(commentsData).map(([id, word]) => {
+          <div className="lg:sticky h-full lg:h-screen top-0 pt-24 lg:pt-32 grid auto-rows-min gap-y-4 comment-container overflow-hidden lg:overflow-y-scroll no-scrollbar ">
+            {Object.entries(commentsData).map(([id, word], index) => {
               const comment = homeComments.find(({commentId}) => commentId == id);
               return (
                 <Comment
                   key={id}
                   highlightWords={highlightWords}
                   word={word}
-                  className="!mr-0"
+                  className={classNames('!mr-0', index > 4 && 'hidden lg:grid')}
                   {...comment}
                   origin="black"
                 />
@@ -604,7 +602,7 @@ const IndexPage = ({
         <div className="col-span-2 lg:col-span-6">
           <h2 className="mb-4">
             These words are common, but are used in different ways to comment{' '}
-            <span className="bg-promask inline-block">pro mask</span> and
+            <span className="bg-promask inline-block">pro mask</span> and{' '}
             <span className="bg-nomask inline-block">no mask</span> petitions
           </h2>
         </div>
@@ -617,7 +615,7 @@ const IndexPage = ({
           The opinion library is a tool that collects comments and shows relations among the{' '}
           <mark>words most commonly used</mark> to comment pro mask and no mask petitions
         </div>
-        <div className="absolute col-span-2 left-8 right-8 bottom-16 z-20">
+        <div className="absolute col-span-2 left-8 right-8 bottom-16 z-10">
           <div className=" inline-block">
             <Button
               id="view-library-button"

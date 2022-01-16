@@ -11,8 +11,8 @@ const HomeSlide = forwardRef(({children, className, id, span, uppercase, padding
       'relative',
       heightClasses[span],
       uppercase && 'uppercase',
-      padding === 'top' && 'pt-16 lg:pt-32',
-      padding === 'both' && 'py-16 lg:py-32',
+      padding === 'top' && 'pt-24 lg:pt-32',
+      padding === 'both' && 'pb-16 pt-24 lg:py-32',
       padding === 'bottom' && 'pb-16 lg:pb-32',
       'grid grid-cols-2 lg:grid-cols-12 lg:gap-8',
       className
