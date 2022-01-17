@@ -16,7 +16,7 @@ export function ArchiveButton({children, className, isSelected, isCurrent, check
               isSelected && 'border-light',
             ]
           : [
-              'p-1.5 lg:p-1',
+              'p-2 lg:p-1',
               !isCurrent && !isSelected && 'text-white border-black hover:border-light',
               isSelected && 'bg-light text-black border-light',
               isCurrent && 'bg-gray text-white border-none',
@@ -44,7 +44,7 @@ export default function Button({children, className, id, as: As, large, light, .
       className={classNames(
         'button inline-block',
         light ? 'hover:text-light-darker' : ' ',
-        large ? 'py-4 px-8 text-lg lg:text-2xl ' : ' text-base py-1 px-4',
+        large ? 'px-4 py-2 lg:py-4 lg:px-8 text-lg lg:text-2xl ' : ' text-base py-1 px-4',
         'border-current active:bg-light active:text-black border rounded-full hover:text-black',
         light ? 'hover:text-light-darker' : 'hover:text-light ',
         className

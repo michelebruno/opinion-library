@@ -407,7 +407,7 @@ const IndexPage = ({
         ref={landing}
         padding="both"
       >
-        <Navbar absolute light allBlack className="!z-20" />
+        <Navbar absolute light allBlack className="!z-30" />
         <div className="text-black text-center col-span-2 lg:col-span-12 row-start-3 row-span-2 flex flex-col justify-center self-middle relative z-20">
           <h1 className="text-5xl lg:text-8xl 2xl:text-9xl mb-2">Opinion Library</h1>
           <h2 className="text-lg lg:text-[1.8rem] 2xl:text-[2.2rem] normal-case">

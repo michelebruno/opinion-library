@@ -165,7 +165,7 @@ export default function Navbar({fixed, light, absolute, className, allBlack, tut
           className={classNames(
             'lg:flex lg:items-center',
             openMenu
-              ? 'fixed inset-0 flex flex-col text-left justify-end !bg-black text-3xl gap-y-4 p-8 z-[100] text-white'
+              ? 'fixed inset-0 flex flex-col text-left justify-end !bg-black text-3xl gap-y-4 p-6 pb-16 z-[100] text-white'
               : 'hidden'
           )}
           onTouchMove={e => e.preventDefault()}

@@ -56,7 +56,7 @@ export default function Library({data: {words, ...data}}) {
               {chosen.current}{' '}
               <svg
                 viewBox="0 0 63 26"
-                width=".5em"
+                width=".8em"
                 fill="none"
                 className={classNames('inline transition', mobileList && 'rotate-180')}
                 xmlns="http://www.w3.org/2000/svg"

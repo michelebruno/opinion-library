@@ -14,7 +14,7 @@ function GroupCommentList({comments, chosen, secondWord, origin, limit, sentence
       </div>
       <div
         key={origin}
-        className="flex flex-nowrap items-start overflow-x-scroll lg:overflow-auto no-scrollbar lg:grid lg:gap-4 px-6 lg:px-8 "
+        className="flex flex-nowrap items-start overflow-x-scroll snap-x snap-proximity lg:overflow-auto no-scrollbar lg:grid lg:gap-4 px-6 lg:px-8 "
         onScroll={onScroll}
       >
         {comments.map(
@@ -24,6 +24,7 @@ function GroupCommentList({comments, chosen, secondWord, origin, limit, sentence
                 key={c.commentId}
                 highlightWords
                 word={chosen}
+                className="snap-center snap-always"
                 secondWord={secondWord}
                 {...c}
               />
@@ -57,11 +58,15 @@ export default function Comments({comments, chosen, secondWord, onChangeSecondWo
       const count = f.length;
       const percentage = (100 * count) / thisOriginComments.length;
       const round = percentage > 0.94 ? 0 : 1;
-      const sentence = secondWord
-        ? `${percentage.toFixed(round)}% of comments in ${origin} (${count} of ${
-            thisOriginComments.length
-          })`
-        : `All comments in ${origin} petitions (${count})`;
+      const sentence = secondWord ? (
+        `${percentage.toFixed(round)}% of comments in ${origin} (${count} of ${
+          thisOriginComments.length
+        })`
+      ) : (
+        <span>
+          All comments in {origin} <span className="hidden md:inline">petitions</span> ({count})
+        </span>
+      );
 
       result[origin] = {
         totalCount: thisOriginComments.length,
