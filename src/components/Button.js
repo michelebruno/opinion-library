@@ -28,7 +28,7 @@ export function ArchiveButton({children, className, isSelected, isCurrent, check
       {...props}
     >
       {checkbox && isSelected && (
-        <span aria-hidden className="leading-[0] text-lg mr-1">
+        <span aria-hidden className="leading-[0] mr-1">
           {'\u2715'}
         </span>
       )}

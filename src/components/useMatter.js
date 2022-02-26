@@ -69,6 +69,7 @@ export default function useMatter(containerRef) {
     for (let i = 0; i < 6; i++) {
       const imgIndex = i % 2;
 
+      const startForce = isMobile ? 0.003 : 0.03;
       masks.push(
         Bodies.circle(Math.random() * sizeX, Math.random() * sizeY, maskSize, {
           friction: 0,
@@ -77,8 +78,8 @@ export default function useMatter(containerRef) {
           angularVelocity, // = quanto rimbalzano
           restitution: 1,
           force: {
-            x: 0.003 + random() / (isMobile ? 50 : 10),
-            y: 0.003 + random() / (isMobile ? 50 : 10),
+            x: startForce + random() / (isMobile ? 50 : 6),
+            y: startForce + random() / (isMobile ? 50 : 6),
           },
           render: {
             sprite: {

@@ -6,6 +6,10 @@ import Footer from './Footer';
 import Navbar from './Navbar';
 import Seo from './Seo';
 
+console.log(
+  'Developed by Michele Bruno.',
+  'Check out my portfolio https://michelebruno.github.io/'
+);
 export default function Layout({
   children,
   className,

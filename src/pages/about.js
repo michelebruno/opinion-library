@@ -147,11 +147,11 @@ export default function About({
               file containing all the petitions we asked for — this includes the title, body, image,
               signature count, etc.
             </p>
-            <div className="text-base w-full overflow-hidden no-scrollbar border-2 border-black rounded-3xl w-full lg:w-7/12 mx-auto">
+            <div className="text-base w-full overflow-hidden border-2 border-black rounded-3xl w-full lg:w-7/12 mx-auto">
               <h3 className="bg-black text-white px-8 py-4 sticky top-0 left-0 select-none">
                 <code>petition.json</code>
               </h3>
-              <pre className="px-8 py-4 h-96 bg-white overflow-scroll">
+              <pre className="px-8 py-4 h-96 bg-white overflow-scroll no-scrollbar rounded-b-3xl">
                 {JSON.stringify(petitionJson.items[0].petition, null, 2)}
               </pre>
             </div>
@@ -166,7 +166,7 @@ export default function About({
               <h3 className="bg-black text-white px-8 py-4 sticky top-0 left-0 select-none">
                 <code>comments.json</code>
               </h3>
-              <pre className="px-8 py-4 h-96 bg-white overflow-scroll no-scrollbar">
+              <pre className="px-8 py-4 h-96 bg-white overflow-scroll  rounded-b-3xl no-scrollbar">
                 {JSON.stringify(commentJson.items, null, 2)}
               </pre>
             </div>
@@ -255,8 +255,18 @@ export default function About({
                     className="absolute opacity-0  group-hover:opacity-100 z-[-1] group-hover:z-20 right-1/2 top-1/2 -translate-y-1/2 translate-x-2/3"
                     style={{minWidth: '15vw'}}
                   />
-
-                  <Image image={t} />
+                  {i === 1 ? (
+                    <a
+                      href="https://michelebruno.github.io/"
+                      target="_blank"
+                      className="inline-block"
+                      rel="noreferrer"
+                    >
+                      <Image image={t} />
+                    </a>
+                  ) : (
+                    <Image image={t} />
+                  )}
                 </div>
               ))}
             </div>
@@ -266,17 +276,17 @@ export default function About({
         <nav className="relative uppercase hidden lg:block" id="about-nav">
           <ul className="nav flex flex-col gap-y-2 z-10 sticky top-24">
             <li className="nav-item">
-              <Button className="nav-link" as={Link} href="#data" light>
+              <Button className="nav-link" href="#data" light>
                 Data
               </Button>
             </li>
             <li className="nav-item">
-              <Button as={Link} href="#interactions" className="nav-link" light>
+              <Button href="#interactions" className="nav-link" light>
                 Interactions
               </Button>
             </li>
             <li className="nav-item">
-              <Button as={Link} href="#team" className="nav-link" light>
+              <Button href="#team" className="nav-link" light>
                 The team
               </Button>
             </li>
